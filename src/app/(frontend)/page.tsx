@@ -44,6 +44,9 @@ export default async function HomePage() {
           <Link href="/start">
             <Button className="mb-4 mr-4">Take STarT Back Assessment</Button>
           </Link>
+          <Link href="/gad7">
+            <Button className="mb-4 mr-4">Take GAD-7 Anxiety Assessment</Button>
+          </Link>
           <a
             className="admin"
             href={payloadConfig.routes.admin}

@@ -1,0 +1,258 @@
+{
+  "id": "gad7",
+  "name": "GAD-7 Anxiety Assessment",
+  "description": "7-item self-report questionnaire to screen for and assess severity of generalized anxiety disorder",
+  "version": "1.0.0",
+  "category": "mental_health",
+  "questions": [
+    {
+      "id": "feeling_nervous",
+      "type": "select",
+      "label": "Feeling Nervous or Anxious",
+      "description": "Over the last 2 weeks, how often have you been bothered by feeling nervous, anxious, or on edge?",
+      "required": true,
+      "options": [
+        {
+          "value": "not",
+          "label": "Not at all"
+        },
+        {
+          "value": "several",
+          "label": "Several days"
+        },
+        {
+          "value": "more_than_half",
+          "label": "More than half the days"
+        },
+        {
+          "value": "nearly_every",
+          "label": "Nearly every day"
+        }
+      ]
+    },
+    {
+      "id": "uncontrollable_worrying",
+      "type": "select",
+      "label": "Uncontrollable Worrying",
+      "description": "Over the last 2 weeks, how often have you been bothered by not being able to stop or control worrying?",
+      "required": true,
+      "options": [
+        {
+          "value": "not",
+          "label": "Not at all"
+        },
+        {
+          "value": "several",
+          "label": "Several days"
+        },
+        {
+          "value": "more_than_half",
+          "label": "More than half the days"
+        },
+        {
+          "value": "nearly_every",
+          "label": "Nearly every day"
+        }
+      ]
+    },
+    {
+      "id": "worrying_too_much",
+      "type": "select",
+      "label": "Excessive Worrying",
+      "description": "Over the last 2 weeks, how often have you been bothered by worrying too much about different things?",
+      "required": true,
+      "options": [
+        {
+          "value": "not",
+          "label": "Not at all"
+        },
+        {
+          "value": "several",
+          "label": "Several days"
+        },
+        {
+          "value": "more_than_half",
+          "label": "More than half the days"
+        },
+        {
+          "value": "nearly_every",
+          "label": "Nearly every day"
+        }
+      ]
+    },
+    {
+      "id": "trouble_relaxing",
+      "type": "select",
+      "label": "Trouble Relaxing",
+      "description": "Over the last 2 weeks, how often have you been bothered by trouble relaxing?",
+      "required": true,
+      "options": [
+        {
+          "value": "not",
+          "label": "Not at all"
+        },
+        {
+          "value": "several",
+          "label": "Several days"
+        },
+        {
+          "value": "more_than_half",
+          "label": "More than half the days"
+        },
+        {
+          "value": "nearly_every",
+          "label": "Nearly every day"
+        }
+      ]
+    },
+    {
+      "id": "restlessness",
+      "type": "select",
+      "label": "Restlessness",
+      "description": "Over the last 2 weeks, how often have you been bothered by being so restless that it's hard to sit still?",
+      "required": true,
+      "options": [
+        {
+          "value": "not",
+          "label": "Not at all"
+        },
+        {
+          "value": "several",
+          "label": "Several days"
+        },
+        {
+          "value": "more_than_half",
+          "label": "More than half the days"
+        },
+        {
+          "value": "nearly_every",
+          "label": "Nearly every day"
+        }
+      ]
+    },
+    {
+      "id": "easily_annoyed",
+      "type": "select",
+      "label": "Irritability",
+      "description": "Over the last 2 weeks, how often have you been bothered by becoming easily annoyed or irritable?",
+      "required": true,
+      "options": [
+        {
+          "value": "not",
+          "label": "Not at all"
+        },
+        {
+          "value": "several",
+          "label": "Several days"
+        },
+        {
+          "value": "more_than_half",
+          "label": "More than half the days"
+        },
+        {
+          "value": "nearly_every",
+          "label": "Nearly every day"
+        }
+      ]
+    },
+    {
+      "id": "feeling_afraid",
+      "type": "select",
+      "label": "Anticipatory Anxiety",
+      "description": "Over the last 2 weeks, how often have you been bothered by feeling afraid as if something awful might happen?",
+      "required": true,
+      "options": [
+        {
+          "value": "not",
+          "label": "Not at all"
+        },
+        {
+          "value": "several",
+          "label": "Several days"
+        },
+        {
+          "value": "more_than_half",
+          "label": "More than half the days"
+        },
+        {
+          "value": "nearly_every",
+          "label": "Nearly every day"
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "algorithm": "gad7_severity",
+    "output": {
+      "type": "severity_with_score",
+      "label": "GAD-7 Anxiety Severity",
+      "unit": "points",
+      "precision": 0,
+      "primary": "Severity Category",
+      "secondary": "Total Score"
+    },
+    "riskCategories": [
+      {
+        "name": "Minimal Anxiety",
+        "range": {
+          "min": 0,
+          "max": 4
+        },
+        "color": "#10b981",
+        "description": "Minimal anxiety symptoms - No clinically significant anxiety disorder"
+      },
+      {
+        "name": "Mild Anxiety",
+        "range": {
+          "min": 5,
+          "max": 9
+        },
+        "color": "#84cc16",
+        "description": "Mild anxiety symptoms - May indicate mild GAD or adjustment disorder"
+      },
+      {
+        "name": "Moderate Anxiety",
+        "range": {
+          "min": 10,
+          "max": 14
+        },
+        "color": "#f59e0b",
+        "description": "Moderate anxiety symptoms - Likely indicates GAD or other anxiety disorder"
+      },
+      {
+        "name": "Severe Anxiety",
+        "range": {
+          "min": 15,
+          "max": 21
+        },
+        "color": "#ef4444",
+        "description": "Severe anxiety symptoms - Strong indication of GAD requiring immediate attention"
+      }
+    ]
+  },
+  "references": [
+    {
+      "title": "Spitzer RL, et al. A brief measure for assessing generalized anxiety disorder: the GAD-7",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16717171/"
+    },
+    {
+      "title": "Löwe B, et al. Validation and standardization of the Generalized Anxiety Disorder Screener (GAD-7) in the general population",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18388841/"
+    },
+    {
+      "title": "GAD-7 - Patient Health Questionnaire",
+      "url": "https://www.phqscreeners.com/select-screener"
+    },
+    {
+      "title": "Johnson SU, et al. Psychometric properties of the General Anxiety Disorder 7-item (GAD-7) scale in a heterogeneous psychiatric sample",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30914003/"
+    }
+  ],
+  "metadata": {
+    "createdAt": "2025-09-18",
+    "estimatedCompletionTime": "2-3 minutes",
+    "targetPopulation": "Adults (18+ years) in primary care and mental health settings",
+    "clinicalUse": "Screening and severity assessment for generalized anxiety disorder; monitoring treatment response",
+    "disclaimer": "This tool is for screening and educational purposes. A score ≥10 suggests probable GAD and warrants further clinical evaluation. Not a substitute for professional clinical assessment."
+  }
+}
