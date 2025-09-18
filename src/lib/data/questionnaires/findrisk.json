@@ -2,6 +2,8 @@
   "id": "findrisk",
   "name": "FINDRISK Diabetes Risk Calculator",
   "description": "Finnish Diabetes Risk Score - Predicts 10-year risk of developing Type 2 diabetes",
+  "patientFriendlyName": "Diabetes Risk Check",
+  "patientFriendlyDescription": "Find out your risk of developing diabetes in the next 10 years",
   "version": "1.0.0",
   "category": "diabetes",
   "questions": [

@@ -51,6 +51,8 @@ export interface QuestionnaireSchema {
   id: string
   name: string
   description: string
+  patientFriendlyName?: string
+  patientFriendlyDescription?: string
   version: string
   category: string
   questions: QuestionnaireQuestion[]

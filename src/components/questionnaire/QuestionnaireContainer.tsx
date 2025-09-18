@@ -37,7 +37,6 @@ export function QuestionnaireContainer({
     setResults(null)
   }
 
-  // If we have results, show them
   if (results) {
     return (
       <QuestionnaireResults
@@ -50,7 +49,6 @@ export function QuestionnaireContainer({
     )
   }
 
-  // Otherwise, show the form
   return (
     <QuestionnaireForm
       questionnaire={questionnaire}

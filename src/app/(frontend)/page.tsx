@@ -33,19 +33,19 @@ export default async function HomePage() {
         {user && <h1>Welcome back, {user.email}</h1>}
         <div className="links">
           <Link href="/ascvd">
-            <Button className="mb-4 mr-4">Take ASCVD Risk Assessment</Button>
+            <Button className="mb-4 mr-4">Take Heart Health Check</Button>
           </Link>
           <Link href="/findrisk">
-            <Button className="mb-4 mr-4">Take FINDRISK Risk Assessment</Button>
+            <Button className="mb-4 mr-4">Take Diabetes Risk Check</Button>
           </Link>
           <Link href="/frax">
-            <Button className="mb-4 mr-4">Take FRAX Risk Assessment</Button>
+            <Button className="mb-4 mr-4">Take Bone Health Check</Button>
           </Link>
           <Link href="/start">
-            <Button className="mb-4 mr-4">Take STarT Back Assessment</Button>
+            <Button className="mb-4 mr-4">Take Back Pain Assessment</Button>
           </Link>
           <Link href="/gad7">
-            <Button className="mb-4 mr-4">Take GAD-7 Anxiety Assessment</Button>
+            <Button className="mb-4 mr-4">Take Anxiety Check</Button>
           </Link>
           <a
             className="admin"

@@ -2,6 +2,8 @@
   "id": "start",
   "name": "STarT Back Tool",
   "description": "9-question prognostic tool for low back pain, stratifying patients into risk groups for persistent disabling pain",
+  "patientFriendlyName": "Back Pain Assessment",
+  "patientFriendlyDescription": "Help us understand your back pain and find the best way to help you recover",
   "version": "1.0.0",
   "category": "musculoskeletal",
   "questions": [

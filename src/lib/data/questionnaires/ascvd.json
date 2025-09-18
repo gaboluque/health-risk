@@ -2,6 +2,8 @@
   "id": "ascvd",
   "name": "ASCVD Risk Calculator",
   "description": "Estimates 10-year risk of atherosclerotic cardiovascular disease using Pooled Cohort Equations",
+  "patientFriendlyName": "Heart Health Check",
+  "patientFriendlyDescription": "Find out your risk of heart disease and stroke in the next 10 years",
   "version": "1.0.0",
   "category": "cardiovascular",
   "questions": [

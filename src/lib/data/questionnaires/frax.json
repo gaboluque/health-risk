@@ -2,6 +2,8 @@
   "id": "frax",
   "name": "FRAX Fracture Risk Assessment",
   "description": "10-year probability calculator for major osteoporotic fracture and hip fracture",
+  "patientFriendlyName": "Bone Health Check",
+  "patientFriendlyDescription": "Assess your risk of bone fractures in the next 10 years",
   "version": "1.0.0",
   "category": "bone_health",
   "questions": [

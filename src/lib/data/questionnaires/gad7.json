@@ -2,6 +2,8 @@
   "id": "gad7",
   "name": "GAD-7 Anxiety Assessment",
   "description": "7-item self-report questionnaire to screen for and assess severity of generalized anxiety disorder",
+  "patientFriendlyName": "Anxiety Check",
+  "patientFriendlyDescription": "Help us understand how anxiety may be affecting your daily life",
   "version": "1.0.0",
   "category": "mental_health",
   "questions": [
