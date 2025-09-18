@@ -78,11 +78,8 @@ export function createQuestionnaireTemplate(
         },
       ],
     },
-    references: [],
     metadata: {
       createdAt: new Date().toISOString().split('T')[0],
-      estimatedCompletionTime: '5-10 minutes',
-      targetPopulation: 'General population',
       clinicalUse: 'Risk assessment',
     },
   }

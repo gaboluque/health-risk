@@ -272,20 +272,8 @@
       }
     ]
   },
-  "references": [
-    {
-      "title": "2013 ACC/AHA Guideline on the Treatment of Blood Cholesterol",
-      "url": "https://www.ahajournals.org/doi/10.1161/01.cir.0000437738.63853.7a"
-    },
-    {
-      "title": "Pooled Cohort Equations for 10-Year ASCVD Risk",
-      "url": "https://tools.acc.org/ASCVD-Risk-Estimator-Plus/"
-    }
-  ],
   "metadata": {
     "createdAt": "2025-09-17",
-    "estimatedCompletionTime": "3-5 minutes",
-    "targetPopulation": "Adults aged 40-79 years",
     "clinicalUse": "Primary prevention of atherosclerotic cardiovascular disease"
   }
 }

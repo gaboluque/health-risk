@@ -72,16 +72,8 @@ Create a JSON file in `src/lib/data/questionnaires/` with your questionnaire def
       }
     ]
   },
-  "references": [
-    {
-      "title": "Reference title",
-      "url": "https://example.com"
-    }
-  ],
   "metadata": {
     "createdAt": "2025-09-18",
-    "estimatedCompletionTime": "3-5 minutes",
-    "targetPopulation": "Adults aged 18+",
     "clinicalUse": "Risk assessment"
   }
 }
@@ -253,7 +245,6 @@ The results component automatically:
 - Shows risk category based on the questionnaire's risk categories
 - Includes clinical interpretation from the scorer
 - Lists all risk categories for reference
-- Shows clinical references if provided
 - Includes medical disclaimer
 
 ## Type Safety
@@ -286,6 +277,5 @@ See the ASCVD implementation as a reference:
 The ASCVD questionnaire demonstrates:
 - Complex risk calculation algorithms
 - Multiple risk categories with color coding
-- Clinical references and metadata
 - Professional medical disclaimer
 - Comprehensive form validation

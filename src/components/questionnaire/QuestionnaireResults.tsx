@@ -1,24 +1,17 @@
 'use client'
 
 import React from 'react'
-import { Button } from '@/components/ui/button'
 import type { QuestionnaireSchema, SubmissionResult, RiskCategory } from '@/lib/types/questionnaire'
 
 interface QuestionnaireResultsProps {
   questionnaire: QuestionnaireSchema
   results: SubmissionResult
-  onStartOver: () => void
+  onStartOver?: () => void
   showPrintButton?: boolean
   customActions?: React.ReactNode
 }
 
-export function QuestionnaireResults({
-  questionnaire,
-  results,
-  onStartOver,
-  showPrintButton = true,
-  customActions,
-}: QuestionnaireResultsProps) {
+export function QuestionnaireResults({ questionnaire, results }: QuestionnaireResultsProps) {
   const { riskResult } = results
 
   const getRiskCategoryDetails = (riskScore: number): RiskCategory => {
@@ -59,12 +52,6 @@ export function QuestionnaireResults({
           </h3>
           <p className="text-gray-600">{categoryDetails.description}</p>
         </div>
-      </div>
-
-      {/* Interpretation */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h4 className="text-lg font-semibold text-blue-900 mb-3">Clinical Interpretation</h4>
-        <p className="text-blue-800 leading-relaxed">{riskResult.interpretation}</p>
       </div>
 
       {/* Important Disclaimer */}

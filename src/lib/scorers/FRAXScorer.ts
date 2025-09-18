@@ -33,7 +33,7 @@ export class FRAXScorer extends BaseScorer {
 
     // Calculate base risks
     let majorFractureRisk = this.calculateBaseMajorFractureRisk(age, sex, bmi)
-    let hipFractureRisk = this.calculateBaseHipFractureRisk(age, sex, bmi)
+    let _hipFractureRisk = this.calculateBaseHipFractureRisk(age, sex, bmi)
 
     // Apply risk factor multipliers
     const riskFactors = {
@@ -50,7 +50,7 @@ export class FRAXScorer extends BaseScorer {
     Object.values(riskFactors).forEach((multiplier) => {
       majorFractureRisk *= multiplier
       if (multiplier > 1.0) {
-        hipFractureRisk *= Math.min(multiplier, 1.4) // Hip fracture has lower multipliers
+        _hipFractureRisk *= Math.min(multiplier, 1.4) // Hip fracture has lower multipliers
       }
     })
 
@@ -58,331 +58,122 @@ export class FRAXScorer extends BaseScorer {
     if (bmdTScore !== null) {
       const bmdMultiplier = this.calculateBMDMultiplier(bmdTScore)
       majorFractureRisk *= bmdMultiplier
-      hipFractureRisk *= bmdMultiplier
+      _hipFractureRisk *= bmdMultiplier
     }
 
     // Cap risks at reasonable maximums
     majorFractureRisk = Math.min(majorFractureRisk, 60)
-    hipFractureRisk = Math.min(hipFractureRisk, 30)
+    _hipFractureRisk = Math.min(_hipFractureRisk, 30)
 
     // Round to one decimal place
     majorFractureRisk = Math.round(majorFractureRisk * 10) / 10
-    hipFractureRisk = Math.round(hipFractureRisk * 10) / 10
+    _hipFractureRisk = Math.round(_hipFractureRisk * 10) / 10
 
     // Use major fracture risk as the primary score for risk categorization
     const risk = this.interpretMajorFractureRisk(majorFractureRisk)
-    const interpretation = this.getInterpretation(majorFractureRisk, hipFractureRisk, risk)
 
     return {
       score: majorFractureRisk,
       risk,
-      interpretation,
     }
   }
 
   private getAgeValue(): number {
-    const ageRange = this.getAnswerValue('age')
-
-    // Return midpoint of age range
-    switch (ageRange) {
-      case 'under_40':
-        return 30 // Use 30 as representative age for under 40
-      case '40-44':
-        return 42
-      case '45-49':
-        return 47
-      case '50-54':
-        return 52
-      case '55-59':
-        return 57
-      case '60-64':
-        return 62
-      case '65-69':
-        return 67
-      case '70-74':
-        return 72
-      case '75-79':
-        return 77
-      case '80-84':
-        return 82
-      case '85-90':
-        return 87
-      default:
-        return 65 // default fallback
-    }
+    const ageStr = this.getAnswerValue('age')
+    const age = parseInt(ageStr, 10)
+    return isNaN(age) ? 50 : Math.max(40, Math.min(90, age)) // Clamp between 40-90
   }
 
   private getBMIValue(): number {
-    const bmiRange = this.getAnswerValue('bmi')
+    const heightStr = this.getAnswerValue('height')
+    const weightStr = this.getAnswerValue('weight')
 
-    // Return representative BMI value for each range
-    switch (bmiRange) {
-      case 'under_19':
-        return 18
-      case '19-25':
-        return 22
-      case '25-30':
-        return 27.5
-      case '30-35':
-        return 32.5
-      case 'over_35':
-        return 37
-      default:
-        return 25 // default fallback
+    const height = parseFloat(heightStr)
+    const weight = parseFloat(weightStr)
+
+    if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+      return 25 // Default BMI if invalid input
     }
+
+    const bmi = weight / (height * height)
+    return Math.max(15, Math.min(40, bmi)) // Clamp between 15-40
   }
 
   private getBMDTScore(): number | null {
-    const bmdCategory = this.getAnswerValue('bmd_t_score')
+    const bmdStr = this.getAnswerValue('bmd_t_score')
+    if (!bmdStr || bmdStr === 'unknown') return null
 
-    switch (bmdCategory) {
-      case 'not_available':
-        return null
-      case 'above_minus_1':
-        return -0.5
-      case 'minus_1_to_minus_2.5':
-        return -1.75
-      case 'below_minus_2.5':
-        return -3.0
-      default:
-        return null
-    }
+    const bmd = parseFloat(bmdStr)
+    return isNaN(bmd) ? null : Math.max(-4, Math.min(4, bmd)) // Clamp between -4 to 4
   }
 
   private calculateBaseMajorFractureRisk(age: number, sex: string, bmi: number): number {
-    let baseRisk: number
+    // Simplified base risk calculation
+    let baseRisk = 0
 
-    if (sex === 'female') {
-      // Base risk increases exponentially with age for females
-      baseRisk = Math.exp((age - 40) * 0.08 - 3.5)
-
-      // BMI adjustment - lower BMI increases risk
-      if (bmi < 20) {
-        baseRisk *= 1.5
-      } else if (bmi < 25) {
-        baseRisk *= 1.2
-      } else if (bmi > 30) {
-        baseRisk *= 0.8
-      }
+    // Age factor (exponential increase with age)
+    if (age < 50) {
+      baseRisk = 1
+    } else if (age < 60) {
+      baseRisk = 2 + (age - 50) * 0.3
+    } else if (age < 70) {
+      baseRisk = 5 + (age - 60) * 0.5
+    } else if (age < 80) {
+      baseRisk = 10 + (age - 70) * 0.8
     } else {
-      // Base risk for males (generally lower than females)
-      baseRisk = Math.exp((age - 40) * 0.07 - 4.0)
+      baseRisk = 18 + (age - 80) * 1.2
+    }
 
-      // BMI adjustment for males
-      if (bmi < 20) {
-        baseRisk *= 1.3
-      } else if (bmi < 25) {
-        baseRisk *= 1.1
-      } else if (bmi > 30) {
-        baseRisk *= 0.9
+    // Sex adjustment (women have higher risk, especially post-menopause)
+    if (sex === 'female') {
+      if (age >= 50) {
+        baseRisk *= 1.5
       }
     }
 
-    return Math.max(baseRisk, 0.5) // Minimum risk
+    // BMI adjustment (low BMI increases risk)
+    if (bmi < 20) {
+      baseRisk *= 1.3
+    } else if (bmi > 30) {
+      baseRisk *= 0.9
+    }
+
+    return Math.max(0.1, baseRisk)
   }
 
   private calculateBaseHipFractureRisk(age: number, sex: string, bmi: number): number {
-    let baseRisk: number
+    // Hip fracture risk is typically lower and more age-dependent
+    let baseRisk = this.calculateBaseMajorFractureRisk(age, sex, bmi) * 0.3
 
-    if (sex === 'female') {
-      // Hip fracture risk increases more steeply with age
-      baseRisk = Math.exp((age - 50) * 0.12 - 4.5)
-
-      // BMI has stronger effect on hip fracture
-      if (bmi < 20) {
-        baseRisk *= 2.0
-      } else if (bmi < 25) {
-        baseRisk *= 1.4
-      } else if (bmi > 30) {
-        baseRisk *= 0.6
-      }
-    } else {
-      // Males have lower hip fracture risk
-      baseRisk = Math.exp((age - 50) * 0.1 - 5.0)
-
-      if (bmi < 20) {
-        baseRisk *= 1.6
-      } else if (bmi < 25) {
-        baseRisk *= 1.2
-      } else if (bmi > 30) {
-        baseRisk *= 0.7
-      }
+    // Additional age weighting for hip fractures
+    if (age >= 75) {
+      baseRisk *= 1.5
     }
 
-    return Math.max(baseRisk, 0.1) // Minimum risk
+    return Math.max(0.1, baseRisk)
   }
 
   private calculateBMDMultiplier(tScore: number): number {
-    // Each SD decrease in BMD approximately doubles fracture risk
-    // T-score of -2.5 = osteoporosis threshold
+    // BMD T-score adjustment (each SD decrease increases risk)
+    // T-score of -1 = ~1.5x risk, -2 = ~2.5x risk, -3 = ~4x risk
     if (tScore >= -1) {
-      return 0.8 // Above normal reduces risk
-    } else if (tScore >= -2.5) {
-      return Math.exp((-1 - tScore) * 0.6) // Exponential increase
+      return 1.0
+    } else if (tScore >= -2) {
+      return 1.0 + (-tScore - 1) * 0.5
+    } else if (tScore >= -3) {
+      return 1.5 + (-tScore - 2) * 1.0
     } else {
-      return Math.exp((-1 - -2.5) * 0.6 + (-2.5 - tScore) * 0.8) // Steeper increase in osteoporotic range
+      return 2.5 + (-tScore - 3) * 1.5
     }
   }
 
   private interpretMajorFractureRisk(risk: number): string {
     if (risk < 10) {
       return 'Low Risk'
-    } else if (risk <= 20) {
+    } else if (risk < 20) {
       return 'Moderate Risk'
     } else {
       return 'High Risk'
-    }
-  }
-
-  private interpretHipFractureRisk(risk: number): string {
-    if (risk < 3) {
-      return 'Low Risk'
-    } else if (risk <= 5) {
-      return 'Moderate Risk'
-    } else {
-      return 'High Risk'
-    }
-  }
-
-  private getInterpretation(majorRisk: number, hipRisk: number, riskCategory: string): string {
-    const age = this.getAgeValue()
-
-    // Special handling for under 40
-    if (age < 40) {
-      let interpretation = `At your age (under 40), fracture risk assessment using FRAX is typically not recommended as fracture risk is generally very low in this age group. `
-      interpretation += `Your calculated 10-year risk is ${majorRisk}% for major osteoporotic fracture and ${hipRisk}% for hip fracture, but these values should be interpreted with caution. `
-      interpretation += `Focus on building and maintaining strong bones through adequate calcium and vitamin D intake, regular weight-bearing exercise, avoiding smoking, and limiting alcohol consumption. `
-      interpretation += `If you have specific risk factors or concerns about bone health, consult with your healthcare provider for personalized advice.`
-      return interpretation
-    }
-
-    let interpretation = `Your FRAX assessment shows a ${majorRisk}% 10-year risk of major osteoporotic fracture and ${hipRisk}% 10-year risk of hip fracture. `
-    interpretation += `This indicates ${riskCategory.toLowerCase()}. `
-
-    const hipRiskCategory = this.interpretHipFractureRisk(hipRisk)
-    const isHighRisk = riskCategory === 'High Risk' || hipRiskCategory === 'High Risk'
-    const isModerateRisk = riskCategory === 'Moderate Risk' || hipRiskCategory === 'Moderate Risk'
-
-    if (isHighRisk) {
-      interpretation += 'Treatment with anti-osteoporotic medication is recommended. '
-      interpretation += 'Consider bisphosphonates as first-line therapy. '
-      interpretation +=
-        'Ensure adequate calcium (1000-1200mg/day) and vitamin D (800-1000 IU/day) intake. '
-      interpretation +=
-        'Implement fall prevention strategies and engage in regular weight-bearing and resistance exercises. '
-      interpretation += 'Annual monitoring and reassessment are essential.'
-    } else if (isModerateRisk) {
-      interpretation +=
-        'Consider treatment based on additional clinical factors and patient preferences. '
-      interpretation +=
-        'Lifestyle modifications are important including adequate calcium and vitamin D supplementation. '
-      interpretation +=
-        'Regular weight-bearing exercise and fall prevention measures should be implemented. '
-      interpretation += 'Reassess fracture risk in 1-2 years or if clinical status changes.'
-    } else {
-      interpretation += 'Focus on prevention through healthy lifestyle measures. '
-      interpretation +=
-        'Maintain adequate calcium and vitamin D intake, engage in regular physical activity including weight-bearing exercises. '
-      interpretation +=
-        'Implement fall prevention strategies such as home safety measures and balance training. '
-      interpretation += 'Avoid excessive alcohol consumption and smoking cessation if applicable. '
-      interpretation += 'Reassess fracture risk in 2-5 years or if risk factors change.'
-    }
-
-    // Add BMD recommendation if not available
-    const bmdCategory = this.getAnswerValue('bmd_t_score')
-    if (bmdCategory === 'not_available') {
-      interpretation +=
-        ' Consider bone density testing (DEXA scan) for more accurate fracture risk assessment.'
-    }
-
-    return interpretation
-  }
-
-  /**
-   * Get detailed fracture risk results for display
-   */
-  public getDetailedResults(): {
-    majorFractureRisk: number
-    hipFractureRisk: number
-    majorFractureCategory: string
-    hipFractureCategory: string
-    overallRisk: string
-    clinicalAction: string
-    bmi: number
-  } {
-    const age = this.getAgeValue()
-    const sex = this.getAnswerValue('sex')
-    const bmi = this.getBMIValue()
-
-    const previousFracture = this.getAnswerValue('previous_fracture') === 'yes'
-    const parentHipFracture = this.getAnswerValue('parent_hip_fracture') === 'yes'
-    const currentSmoking = this.getAnswerValue('current_smoking') === 'yes'
-    const glucocorticoids = this.getAnswerValue('glucocorticoids') === 'yes'
-    const rheumatoidArthritis = this.getAnswerValue('rheumatoid_arthritis') === 'yes'
-    const secondaryOsteoporosis = this.getAnswerValue('secondary_osteoporosis') === 'yes'
-    const alcohol = this.getAnswerValue('alcohol') === 'yes'
-    const bmdTScore = this.getBMDTScore()
-
-    let majorFractureRisk = this.calculateBaseMajorFractureRisk(age, sex, bmi)
-    let hipFractureRisk = this.calculateBaseHipFractureRisk(age, sex, bmi)
-
-    const riskFactors = {
-      previousFracture: previousFracture ? 1.8 : 1.0,
-      parentHipFracture: parentHipFracture ? 1.5 : 1.0,
-      currentSmoking: currentSmoking ? 1.3 : 1.0,
-      glucocorticoids: glucocorticoids ? 1.6 : 1.0,
-      rheumatoidArthritis: rheumatoidArthritis ? 1.4 : 1.0,
-      secondaryOsteoporosis: secondaryOsteoporosis ? 1.5 : 1.0,
-      alcohol: alcohol ? 1.2 : 1.0,
-    }
-
-    Object.values(riskFactors).forEach((multiplier) => {
-      majorFractureRisk *= multiplier
-      if (multiplier > 1.0) {
-        hipFractureRisk *= Math.min(multiplier, 1.4)
-      }
-    })
-
-    if (bmdTScore !== null) {
-      const bmdMultiplier = this.calculateBMDMultiplier(bmdTScore)
-      majorFractureRisk *= bmdMultiplier
-      hipFractureRisk *= bmdMultiplier
-    }
-
-    majorFractureRisk = Math.min(Math.round(majorFractureRisk * 10) / 10, 60)
-    hipFractureRisk = Math.min(Math.round(hipFractureRisk * 10) / 10, 30)
-
-    const majorFractureCategory = this.interpretMajorFractureRisk(majorFractureRisk)
-    const hipFractureCategory = this.interpretHipFractureRisk(hipFractureRisk)
-
-    const overallRisk =
-      majorFractureCategory === 'High Risk' || hipFractureCategory === 'High Risk'
-        ? 'High Risk'
-        : majorFractureCategory === 'Moderate Risk' || hipFractureCategory === 'Moderate Risk'
-          ? 'Moderate Risk'
-          : 'Low Risk'
-
-    const clinicalAction = this.getClinicalAction(majorFractureRisk, hipFractureRisk)
-
-    return {
-      majorFractureRisk,
-      hipFractureRisk,
-      majorFractureCategory,
-      hipFractureCategory,
-      overallRisk,
-      clinicalAction,
-      bmi: Math.round(bmi * 10) / 10,
-    }
-  }
-
-  private getClinicalAction(majorRisk: number, hipRisk: number): string {
-    if (majorRisk > 20 || hipRisk > 5) {
-      return 'Treatment recommended - Consider anti-osteoporotic therapy'
-    } else if (majorRisk > 10 || hipRisk > 3) {
-      return 'Consider treatment based on additional clinical factors'
-    } else {
-      return 'Lifestyle measures and reassessment in 2-5 years'
     }
   }
 }

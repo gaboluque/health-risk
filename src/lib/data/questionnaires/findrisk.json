@@ -232,24 +232,8 @@
       }
     ]
   },
-  "references": [
-    {
-      "title": "FINDRISK: A practical tool to identify individuals at high risk for type 2 diabetes",
-      "url": "https://www.diabetes.fi/en/finnish_diabetes_association/for_professionals/type_2_diabetes_risk_test"
-    },
-    {
-      "title": "Finnish Diabetes Risk Score for screening of undiagnosed type 2 diabetes",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/12610029/"
-    },
-    {
-      "title": "Prevention of type 2 diabetes mellitus by changes in lifestyle among subjects with impaired glucose tolerance",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/11333990/"
-    }
-  ],
   "metadata": {
     "createdAt": "2025-09-18",
-    "estimatedCompletionTime": "2-3 minutes",
-    "targetPopulation": "Adults aged 18 years and older without known diabetes",
     "clinicalUse": "Screening tool for identifying individuals at high risk of developing Type 2 diabetes within 10 years"
   }
 }

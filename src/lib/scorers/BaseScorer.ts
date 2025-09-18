@@ -4,7 +4,6 @@ import type { FormData } from '@/lib/types/questionnaire'
 export interface RiskResult {
   score: number
   risk: string
-  interpretation: string
 }
 
 export class BaseScorer {

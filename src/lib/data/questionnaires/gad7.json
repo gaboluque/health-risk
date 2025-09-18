@@ -232,29 +232,8 @@
       }
     ]
   },
-  "references": [
-    {
-      "title": "Spitzer RL, et al. A brief measure for assessing generalized anxiety disorder: the GAD-7",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/16717171/"
-    },
-    {
-      "title": "Löwe B, et al. Validation and standardization of the Generalized Anxiety Disorder Screener (GAD-7) in the general population",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/18388841/"
-    },
-    {
-      "title": "GAD-7 - Patient Health Questionnaire",
-      "url": "https://www.phqscreeners.com/select-screener"
-    },
-    {
-      "title": "Johnson SU, et al. Psychometric properties of the General Anxiety Disorder 7-item (GAD-7) scale in a heterogeneous psychiatric sample",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/30914003/"
-    }
-  ],
   "metadata": {
     "createdAt": "2025-09-18",
-    "estimatedCompletionTime": "2-3 minutes",
-    "targetPopulation": "Adults (18+ years) in primary care and mental health settings",
-    "clinicalUse": "Screening and severity assessment for generalized anxiety disorder; monitoring treatment response",
-    "disclaimer": "This tool is for screening and educational purposes. A score ≥10 suggests probable GAD and warrants further clinical evaluation. Not a substitute for professional clinical assessment."
+    "clinicalUse": "Screening and severity assessment for generalized anxiety disorder; monitoring treatment response"
   }
 }

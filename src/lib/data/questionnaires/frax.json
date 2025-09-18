@@ -291,29 +291,8 @@
       }
     ]
   },
-  "references": [
-    {
-      "title": "FRAX WHO Fracture Risk Assessment Tool",
-      "url": "https://frax.shef.ac.uk/"
-    },
-    {
-      "title": "Kanis JA, et al. FRAX and the assessment of fracture probability in men and women from the UK",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/18525909/"
-    },
-    {
-      "title": "WHO Technical Report: Assessment of fracture risk and its application to screening for postmenopausal osteoporosis",
-      "url": "https://apps.who.int/iris/handle/10665/39142"
-    },
-    {
-      "title": "Clinical Guidelines: Osteoporosis prevention, diagnosis, and therapy",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/11346808/"
-    }
-  ],
   "metadata": {
     "createdAt": "2025-09-18",
-    "estimatedCompletionTime": "3-5 minutes",
-    "targetPopulation": "Adults aged 40-90 years at risk for osteoporotic fractures",
-    "clinicalUse": "Assessment of 10-year probability of major osteoporotic fracture and hip fracture to guide treatment decisions",
-    "disclaimer": "This is a simplified implementation for educational purposes. For clinical use, please use the official FRAX calculator at frax.shef.ac.uk which includes country-specific mortality data and more precise algorithms."
+    "clinicalUse": "Assessment of 10-year probability of major osteoporotic fracture and hip fracture to guide treatment decisions"
   }
 }

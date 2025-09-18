@@ -42,8 +42,6 @@ export interface QuestionnaireScoring {
 
 export interface QuestionnaireMetadata {
   createdAt: string
-  estimatedCompletionTime: string
-  targetPopulation: string
   clinicalUse: string
 }
 
@@ -57,7 +55,6 @@ export interface QuestionnaireSchema {
   category: string
   questions: QuestionnaireQuestion[]
   scoring: QuestionnaireScoring
-  references: QuestionnaireReference[]
   metadata: QuestionnaireMetadata
 }
 
@@ -71,7 +68,6 @@ export interface FormData {
 export interface RiskResult {
   score: number
   risk: string
-  interpretation: string
 }
 
 export interface SubmissionResult {

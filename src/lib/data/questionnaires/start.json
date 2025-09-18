@@ -213,29 +213,8 @@
       }
     ]
   },
-  "references": [
-    {
-      "title": "Hill JC, et al. A primary care back pain screening tool: identifying patient subgroups for initial treatment",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/18538265/"
-    },
-    {
-      "title": "Hill JC, et al. Comparison of stratified primary care management for low back pain with current best practice (STarT Back): a randomised controlled trial",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/21889790/"
-    },
-    {
-      "title": "STarT Back Screening Tool - Keele University",
-      "url": "https://www.keele.ac.uk/sbst/"
-    },
-    {
-      "title": "Foster NE, et al. Stratified models of care for low back pain",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/23746674/"
-    }
-  ],
   "metadata": {
     "createdAt": "2025-09-18",
-    "estimatedCompletionTime": "2-3 minutes",
-    "targetPopulation": "Adults with low back pain in primary care settings",
-    "clinicalUse": "Risk stratification for low back pain to guide treatment decisions and predict prognosis for persistent disabling pain",
-    "disclaimer": "This tool is for educational purposes and clinical decision support. It should be used in conjunction with clinical judgment and not as a replacement for professional medical assessment."
+    "clinicalUse": "Risk stratification for low back pain to guide treatment decisions and predict prognosis for persistent disabling pain"
   }
 }
