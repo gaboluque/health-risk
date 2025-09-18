@@ -7,21 +7,35 @@ export const Users: CollectionConfig = {
     defaultColumns: ['email', 'role', 'createdAt'],
   },
   auth: true,
+  hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        console.log('beforeValidate', data)
+      },
+    ],
+    beforeChange: [
+      ({ data }) => {
+        console.log('beforeChange', data)
+      },
+    ],
+    afterChange: [
+      ({ data }) => {
+        console.log('afterChange', data)
+      },
+    ],
+  },
   fields: [
     // Email added by default
     {
       name: 'role',
       type: 'select',
       required: true,
-      defaultValue: 'user',
+      defaultValue: 'admin',
       options: [
         { label: 'Super Admin', value: 'superadmin' },
         { label: 'Admin', value: 'admin' },
         { label: 'User', value: 'user' },
       ],
-      admin: {
-        position: 'sidebar',
-      },
     },
     // Patient profile (only for users with role 'user')
     {
@@ -32,6 +46,7 @@ export const Users: CollectionConfig = {
         condition: (data) => data?.role === 'user',
         description: 'Patient profile information (only for regular users)',
       },
+      defaultValue: undefined,
       fields: [
         {
           name: 'firstName',
@@ -89,8 +104,8 @@ export const Users: CollectionConfig = {
           name: 'idNumber',
           type: 'text',
           required: true,
-          label: 'ID Number',
           unique: true,
+          label: 'ID Number',
           admin: {
             description: 'National identification number',
           },
@@ -107,6 +122,7 @@ export const Users: CollectionConfig = {
           name: 'cellphoneNumber',
           type: 'text',
           required: true,
+          unique: true,
           label: 'Cellphone Number',
         },
         {

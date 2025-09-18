@@ -27,6 +27,18 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
 
+  if (user?.role === 'admin') {
+    return (
+      <html lang="en">
+        <body>
+          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
+            <main className="p-2 md:p-4">{children}</main>
+          </div>
+        </body>
+      </html>
+    )
+  }
+
   return (
     <html lang="en">
       <body>

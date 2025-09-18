@@ -7,4 +7,4 @@ alwaysApply: true
 
 - This project uses NextJS, PayloadCMS, Tailwind and shadcn/ui.
 - Always check documentation for these libraries and apply best practices in the project.
-- 
+- This project has a latin america audience, all of the copys should be in spanish, everything else in english (code stuff)
