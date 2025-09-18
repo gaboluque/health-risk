@@ -91,6 +91,12 @@ export function mapProfileToAnswers(
       }
       continue
     }
+
+    // Map current smoking status
+    if (question.id === 'current_smoking' && profile.currentSmoking !== undefined) {
+      answers[question.id] = profile.currentSmoking ? 'yes' : 'no'
+      continue
+    }
   }
 
   return answers
@@ -125,6 +131,11 @@ export function getProfileAnsweredQuestions(
       if (bmiRange) {
         answeredQuestions.add(question.id)
       }
+    }
+
+    // Hide current smoking question if profile has smoking status
+    if (question.id === 'current_smoking' && profile.currentSmoking !== undefined) {
+      answeredQuestions.add(question.id)
     }
   }
 

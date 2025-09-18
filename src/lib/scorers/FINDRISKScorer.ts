@@ -82,31 +82,23 @@ export class FINDRISKScorer extends BaseScorer {
 
   private getWaistScore(): number {
     const waist = this.getAnswerValue('waist_circumference')
-    const sex = this.getAnswerValue('sex') || 'male'
 
-    // Different thresholds for men and women
-    if (sex === 'male') {
-      switch (waist) {
-        case 'under_94':
-          return 0
-        case '94_102':
-          return 3
-        case 'over_102':
-          return 4
-        default:
-          return 0
-      }
-    } else {
-      switch (waist) {
-        case 'under_80':
-          return 0
-        case '80_88':
-          return 3
-        case 'over_88':
-          return 4
-        default:
-          return 0
-      }
+    // The waist circumference options in FINDRISK already include sex-specific values
+    switch (waist) {
+      case 'male_under_94':
+        return 0
+      case 'male_94_102':
+        return 3
+      case 'male_over_102':
+        return 4
+      case 'female_under_80':
+        return 0
+      case 'female_80_88':
+        return 3
+      case 'female_over_88':
+        return 4
+      default:
+        return 0
     }
   }
 
@@ -127,9 +119,9 @@ export class FINDRISKScorer extends BaseScorer {
     const vegetables = this.getAnswerValue('vegetables_fruits')
 
     switch (vegetables) {
-      case 'daily':
+      case 'yes':
         return 0
-      case 'not_daily':
+      case 'no':
         return 1
       default:
         return 0
@@ -150,7 +142,7 @@ export class FINDRISKScorer extends BaseScorer {
   }
 
   private getHighGlucoseScore(): number {
-    const glucose = this.getAnswerValue('high_glucose')
+    const glucose = this.getAnswerValue('high_glucose_history')
 
     switch (glucose) {
       case 'no':
@@ -163,12 +155,12 @@ export class FINDRISKScorer extends BaseScorer {
   }
 
   private getFamilyHistoryScore(): number {
-    const familyHistory = this.getAnswerValue('family_history')
+    const familyHistory = this.getAnswerValue('family_diabetes_history')
 
     switch (familyHistory) {
       case 'no':
         return 0
-      case 'grandparent_aunt_uncle_cousin':
+      case 'grandparent_relative':
         return 3
       case 'parent_sibling_child':
         return 5

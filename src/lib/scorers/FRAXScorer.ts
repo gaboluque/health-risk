@@ -79,32 +79,72 @@ export class FRAXScorer extends BaseScorer {
   }
 
   private getAgeValue(): number {
-    const ageStr = this.getAnswerValue('age')
-    const age = parseInt(ageStr, 10)
-    return isNaN(age) ? 50 : Math.max(40, Math.min(90, age)) // Clamp between 40-90
+    const ageRange = this.getAnswerValue('age')
+
+    // Map age ranges to midpoint values
+    switch (ageRange) {
+      case 'under_40':
+        return 35
+      case '40-44':
+        return 42
+      case '45-49':
+        return 47
+      case '50-54':
+        return 52
+      case '55-59':
+        return 57
+      case '60-64':
+        return 62
+      case '65-69':
+        return 67
+      case '70-74':
+        return 72
+      case '75-79':
+        return 77
+      case '80-84':
+        return 82
+      case '85-90':
+        return 87
+      default:
+        return 50 // Default age if invalid input
+    }
   }
 
   private getBMIValue(): number {
-    const heightStr = this.getAnswerValue('height')
-    const weightStr = this.getAnswerValue('weight')
+    const bmiRange = this.getAnswerValue('bmi')
 
-    const height = parseFloat(heightStr)
-    const weight = parseFloat(weightStr)
-
-    if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
-      return 25 // Default BMI if invalid input
+    // Map BMI ranges to midpoint values
+    switch (bmiRange) {
+      case 'under_19':
+        return 18
+      case '19-25':
+        return 22
+      case '25-30':
+        return 27.5
+      case '30-35':
+        return 32.5
+      case 'over_35':
+        return 37
+      default:
+        return 25 // Default BMI if invalid input
     }
-
-    const bmi = weight / (height * height)
-    return Math.max(15, Math.min(40, bmi)) // Clamp between 15-40
   }
 
   private getBMDTScore(): number | null {
-    const bmdStr = this.getAnswerValue('bmd_t_score')
-    if (!bmdStr || bmdStr === 'unknown') return null
+    const bmdRange = this.getAnswerValue('bmd_t_score')
 
-    const bmd = parseFloat(bmdStr)
-    return isNaN(bmd) ? null : Math.max(-4, Math.min(4, bmd)) // Clamp between -4 to 4
+    switch (bmdRange) {
+      case 'not_available':
+        return null
+      case 'above_minus_1':
+        return -0.5
+      case 'minus_1_to_minus_2.5':
+        return -1.75
+      case 'below_minus_2.5':
+        return -3.0
+      default:
+        return null
+    }
   }
 
   private calculateBaseMajorFractureRisk(age: number, sex: string, bmi: number): number {

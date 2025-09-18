@@ -6,6 +6,7 @@ export interface UserProfile {
   height: number // in cm
   weight: number // in kg
   sex: string
+  currentSmoking?: boolean // Added for autofilling questionnaires
   createdAt: string
   // Calculated fields (computed from the above)
   age?: number

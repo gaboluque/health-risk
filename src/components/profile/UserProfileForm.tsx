@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { User, Mail, Calendar, Scale, Users, Ruler } from 'lucide-react'
+import { User, Mail, Calendar, Scale, Users, Ruler, Cigarette } from 'lucide-react'
 import { enrichProfileWithCalculations } from '@/lib/utils/health-calculations'
 import type { UserProfile } from '@/lib/types/user-profile'
 
@@ -23,10 +23,11 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
     height: initialProfile?.height,
     weight: initialProfile?.weight,
     sex: initialProfile?.sex || '',
+    currentSmoking: initialProfile?.currentSmoking,
   })
   const [error, setError] = useState<string | null>(null)
 
-  const handleInputChange = (name: keyof UserProfile, value: string | number) => {
+  const handleInputChange = (name: keyof UserProfile, value: string | number | boolean) => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -80,6 +81,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
       height: formData.height,
       weight: formData.weight,
       sex: formData.sex,
+      currentSmoking: formData.currentSmoking,
       createdAt: new Date().toISOString(),
     })
 
@@ -89,6 +91,11 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
   const sexOptions = [
     { value: 'male', label: 'Male' },
     { value: 'female', label: 'Female' },
+  ]
+
+  const smokingOptions = [
+    { value: 'no', label: "No, I don't smoke" },
+    { value: 'yes', label: 'Yes, I currently smoke' },
   ]
 
   return (
@@ -270,6 +277,44 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
                     className="flex-1 justify-center text-center p-3 h-auto transition-all duration-200 data-[state=on]:bg-blue-50 data-[state=on]:border-blue-500 data-[state=on]:text-blue-900"
                   >
                     <Users className="h-4 w-4 mr-2" />
+                    <span className="text-sm font-medium">{option.label}</span>
+                  </ToggleGroupItem>
+                ))}
+              </ToggleGroup>
+            </div>
+
+            {/* Current Smoking */}
+            <div>
+              <Label className="text-sm font-medium text-slate-700 mb-3 block">
+                Current Smoking Status
+              </Label>
+              <p className="text-xs text-slate-500 mb-3">
+                This helps us provide more accurate health risk assessments
+              </p>
+              <ToggleGroup
+                type="single"
+                value={
+                  formData.currentSmoking === true
+                    ? 'yes'
+                    : formData.currentSmoking === false
+                      ? 'no'
+                      : ''
+                }
+                onValueChange={(value) => {
+                  if (value) {
+                    handleInputChange('currentSmoking', value === 'yes')
+                  }
+                }}
+                className="flex"
+                variant="outline"
+              >
+                {smokingOptions.map((option) => (
+                  <ToggleGroupItem
+                    key={option.value}
+                    value={option.value}
+                    className="flex-1 justify-center text-center p-3 h-auto transition-all duration-200 data-[state=on]:bg-blue-50 data-[state=on]:border-blue-500 data-[state=on]:text-blue-900"
+                  >
+                    <Cigarette className="h-4 w-4 mr-2" />
                     <span className="text-sm font-medium">{option.label}</span>
                   </ToggleGroupItem>
                 ))}
