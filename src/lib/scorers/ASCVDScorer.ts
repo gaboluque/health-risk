@@ -68,16 +68,75 @@ export class ASCVDScorer extends BaseScorer {
    */
   private mapSubmissionToInputs(): ASCVDInputs {
     return {
-      age: parseInt(this.getAnswerValue('age')) || 50,
+      age: this.mapAgeToNumber(this.getAnswerValue('age')),
       sex: this.getAnswerValue('sex') as 'male' | 'female',
       race: this.getAnswerValue('race') as 'white' | 'african_american' | 'other',
-      totalCholesterol: parseFloat(this.getAnswerValue('total_cholesterol')) || 200,
-      hdlCholesterol: parseFloat(this.getAnswerValue('hdl_cholesterol')) || 50,
-      systolicBP: parseFloat(this.getAnswerValue('systolic_bp')) || 120,
-      onBPMeds: this.getAnswerValue('bp_meds') === 'yes',
+      totalCholesterol: this.mapCholesterolToNumber(this.getAnswerValue('total_cholesterol')),
+      hdlCholesterol: this.mapHDLToNumber(this.getAnswerValue('hdl_cholesterol')),
+      systolicBP: this.mapBPToNumber(this.getAnswerValue('systolic_bp')),
+      onBPMeds: this.getAnswerValue('bp_treatment') === 'yes',
       diabetes: this.getAnswerValue('diabetes') === 'yes',
-      smoker: this.getAnswerValue('smoker') === 'yes',
+      smoker: this.getAnswerValue('current_smoking') === 'yes',
     }
+  }
+
+  /**
+   * Map age range to midpoint number
+   */
+  private mapAgeToNumber(ageRange: string): number {
+    const ageMap: Record<string, number> = {
+      '40-44': 42,
+      '45-49': 47,
+      '50-54': 52,
+      '55-59': 57,
+      '60-64': 62,
+      '65-69': 67,
+      '70-74': 72,
+      '75-79': 77,
+    }
+    return ageMap[ageRange] || 50
+  }
+
+  /**
+   * Map total cholesterol range to midpoint number
+   */
+  private mapCholesterolToNumber(cholRange: string): number {
+    const cholMap: Record<string, number> = {
+      '<160': 150,
+      '160-199': 180,
+      '200-239': 220,
+      '240-279': 260,
+      '≥280': 300,
+    }
+    return cholMap[cholRange] || 200
+  }
+
+  /**
+   * Map HDL cholesterol range to midpoint number
+   */
+  private mapHDLToNumber(hdlRange: string): number {
+    const hdlMap: Record<string, number> = {
+      '<40': 35,
+      '40-49': 45,
+      '50-59': 55,
+      '≥60': 65,
+    }
+    return hdlMap[hdlRange] || 50
+  }
+
+  /**
+   * Map systolic BP range to midpoint number
+   */
+  private mapBPToNumber(bpRange: string): number {
+    const bpMap: Record<string, number> = {
+      '<120': 110,
+      '120-129': 125,
+      '130-139': 135,
+      '140-159': 150,
+      '160-179': 170,
+      '≥180': 190,
+    }
+    return bpMap[bpRange] || 120
   }
 
   /**

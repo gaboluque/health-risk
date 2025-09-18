@@ -15,7 +15,6 @@ interface QuestionnaireContainerProps {
   onSubmit: (formData: FormData) => Promise<SubmissionResponse>
   submitButtonText?: string
   loadingText?: string
-  showPrintButton?: boolean
   customActions?: React.ReactNode
 }
 
@@ -24,7 +23,6 @@ export function QuestionnaireContainer({
   onSubmit,
   submitButtonText,
   loadingText,
-  showPrintButton,
   customActions,
 }: QuestionnaireContainerProps) {
   const [results, setResults] = useState<SubmissionResult | null>(null)
@@ -43,7 +41,6 @@ export function QuestionnaireContainer({
         questionnaire={questionnaire}
         results={results}
         onStartOver={handleStartOver}
-        showPrintButton={showPrintButton}
         customActions={customActions}
       />
     )

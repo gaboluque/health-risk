@@ -1,77 +1,125 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
 import Link from 'next/link'
-import { getPayload } from 'payload'
 import React from 'react'
-import { fileURLToPath } from 'url'
+import { Heart, Activity, Bone, Brain, Shield, ArrowRight } from 'lucide-react'
 
-import config from '@/payload.config'
 import './styles.css'
-import { Button } from '@/components/ui/button'
+
+const healthAssessments = [
+  {
+    id: 'ascvd',
+    title: 'Heart Health Check',
+    description: 'Assess your 10-year risk of heart disease and stroke',
+    icon: Heart,
+    category: 'Cardiovascular',
+    color: 'from-red-500 to-pink-600',
+    bgColor: 'bg-red-50',
+    textColor: 'text-red-700',
+  },
+  {
+    id: 'findrisk',
+    title: 'Diabetes Risk Check',
+    description: 'Evaluate your risk of developing Type 2 diabetes',
+    icon: Activity,
+    category: 'Metabolic',
+    color: 'from-blue-500 to-cyan-600',
+    bgColor: 'bg-blue-50',
+    textColor: 'text-blue-700',
+  },
+  {
+    id: 'frax',
+    title: 'Bone Health Check',
+    description: 'Calculate your risk of osteoporotic fractures',
+    icon: Bone,
+    category: 'Musculoskeletal',
+    color: 'from-amber-500 to-orange-600',
+    bgColor: 'bg-amber-50',
+    textColor: 'text-amber-700',
+  },
+  {
+    id: 'gad7',
+    title: 'Anxiety Assessment',
+    description: 'Screen for generalized anxiety disorder symptoms',
+    icon: Brain,
+    category: 'Mental Health',
+    color: 'from-purple-500 to-indigo-600',
+    bgColor: 'bg-purple-50',
+    textColor: 'text-purple-700',
+  },
+  {
+    id: 'start',
+    title: 'Back Pain Assessment',
+    description: 'Evaluate your back pain and treatment options',
+    icon: Shield,
+    category: 'Pain Management',
+    color: 'from-green-500 to-emerald-600',
+    bgColor: 'bg-green-50',
+    textColor: 'text-green-700',
+  },
+]
 
 export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
-
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <Link href="/ascvd">
-            <Button className="mb-4 mr-4">Take Heart Health Check</Button>
-          </Link>
-          <Link href="/findrisk">
-            <Button className="mb-4 mr-4">Take Diabetes Risk Check</Button>
-          </Link>
-          <Link href="/frax">
-            <Button className="mb-4 mr-4">Take Bone Health Check</Button>
-          </Link>
-          <Link href="/start">
-            <Button className="mb-4 mr-4">Take Back Pain Assessment</Button>
-          </Link>
-          <Link href="/gad7">
-            <Button className="mb-4 mr-4">Take Anxiety Check</Button>
-          </Link>
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
+    <div className="flex flex-col min-h-full">
+      {/* Content wrapper */}
+
+      {/* Health Assessments Grid */}
+      <section className="pb-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="my-20">
+              <h1 className="text-4xl sm:text-6xl font-bold text-slate-900 mb-6">
+                Take Control of Your{' '}
+                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  Health
+                </span>
+              </h1>
+            </div>
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">
+              Choose Your Health Assessment
+            </h2>
+            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+              Select from our comprehensive range of validated health risk calculators and screening
+              tools designed by healthcare professionals.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {healthAssessments.map((assessment) => {
+              const IconComponent = assessment.icon
+              return (
+                <Link key={assessment.id} href={`/${assessment.id}`} className="group">
+                  <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300 transform hover:-translate-y-1">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`p-3 rounded-xl ${assessment.bgColor}`}>
+                        <IconComponent className={`h-6 w-6 ${assessment.textColor}`} />
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-lg font-semibold text-slate-900 group-hover:text-slate-700 transition-colors">
+                          {assessment.title}
+                        </h3>
+                        <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-600 transition-colors" />
+                      </div>
+                      <p className="text-sm text-slate-600 mb-3">{assessment.description}</p>
+                      <span
+                        className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${assessment.bgColor} ${assessment.textColor}`}
+                      >
+                        {assessment.category}
+                      </span>
+                    </div>
+
+                    <div
+                      className={`w-full h-1 bg-gradient-to-r ${assessment.color} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    />
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
         </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
-      <Button>Click me</Button>
+      </section>
     </div>
   )
 }

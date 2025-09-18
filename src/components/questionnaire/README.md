@@ -235,7 +235,6 @@ The `QuestionnaireContainer` accepts these props for customization:
 
 - `submitButtonText` - Custom text for submit button
 - `loadingText` - Text shown while processing
-- `showPrintButton` - Whether to show print button in results
 - `customActions` - Additional action buttons for results page
 
 ### Results Customization
