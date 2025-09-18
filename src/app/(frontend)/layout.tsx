@@ -16,7 +16,6 @@ export const metadata = {
   keywords:
     'health assessment, risk calculator, ASCVD, diabetes risk, anxiety screening, FRAX, GAD-7, health screening',
   authors: [{ name: 'Auditare Health' }],
-  viewport: 'width=device-width, initial-scale=1',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
@@ -34,7 +33,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <UserProfileProvider>
           <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
             <ClientHeader user={user} />
-            <main className="flex-grow">{children}</main>
+            <main className="p-2 md:p-4">{children}</main>
             <Footer />
           </div>
         </UserProfileProvider>

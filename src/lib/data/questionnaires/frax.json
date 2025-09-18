@@ -11,7 +11,7 @@
       "id": "age",
       "type": "select",
       "label": "Age",
-      "description": "Your current age in years",
+      "description": "What is your current age?",
       "required": true,
       "options": [
         {
@@ -64,7 +64,7 @@
       "id": "sex",
       "type": "select",
       "label": "Sex",
-      "description": "Biological sex",
+      "description": "What is your biological sex?",
       "required": true,
       "options": [
         {
@@ -81,7 +81,7 @@
       "id": "bmi",
       "type": "select",
       "label": "Body Mass Index (BMI)",
-      "description": "Your BMI in kg/m². If you don't know your BMI, you can calculate it: weight (kg) ÷ [height (m)]²",
+      "description": "What is your BMI in kg/m²? If you don't know your BMI, you can calculate it: weight (kg) ÷ [height (m)]²",
       "required": true,
       "options": [
         {

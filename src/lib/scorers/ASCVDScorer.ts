@@ -22,8 +22,13 @@ export interface ASCVDInputs {
 export class ASCVDScorer extends BaseScorer {
   private readonly riskCategories = [
     {
+      name: 'Very Low',
+      range: { min: 0, max: 1.9 },
+      description: 'Very low 10-year risk of ASCVD',
+    },
+    {
       name: 'Low',
-      range: { min: 0, max: 4.9 },
+      range: { min: 2.0, max: 4.9 },
       description: 'Low 10-year risk of ASCVD',
     },
     {
@@ -85,6 +90,7 @@ export class ASCVDScorer extends BaseScorer {
    */
   private mapAgeToNumber(ageRange: string): number {
     const ageMap: Record<string, number> = {
+      under_40: 35, // Use 35 as representative age for under 40
       '40-44': 42,
       '45-49': 47,
       '50-54': 52,
@@ -143,8 +149,8 @@ export class ASCVDScorer extends BaseScorer {
    * Validate ASCVD inputs
    */
   private validateInputs(inputs: ASCVDInputs): void {
-    if (inputs.age < 20 || inputs.age > 79) {
-      throw new Error('Age must be between 20-79 years')
+    if (inputs.age < 18 || inputs.age > 79) {
+      throw new Error('Age must be between 18-79 years')
     }
     if (inputs.totalCholesterol < 130 || inputs.totalCholesterol > 320) {
       throw new Error('Total cholesterol must be between 130-320 mg/dL')

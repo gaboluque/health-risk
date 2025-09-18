@@ -11,9 +11,13 @@
       "id": "age",
       "type": "select",
       "label": "Age",
-      "description": "Your current age in years",
+      "description": "What is your current age?",
       "required": true,
       "options": [
+        {
+          "value": "under_40",
+          "label": "Under 40 years"
+        },
         {
           "value": "40-44",
           "label": "40-44 years"
@@ -52,7 +56,7 @@
       "id": "sex",
       "type": "select",
       "label": "Sex",
-      "description": "Your biological sex",
+      "description": "What is your biological sex?",
       "required": true,
       "options": [
         {
@@ -69,7 +73,7 @@
       "id": "race",
       "type": "select",
       "label": "Race/Ethnicity",
-      "description": "Your race/ethnicity",
+      "description": "What is your race/ethnicity?",
       "required": true,
       "options": [
         {
@@ -90,7 +94,7 @@
       "id": "total_cholesterol",
       "type": "select",
       "label": "Total Cholesterol",
-      "description": "Your total cholesterol level (mg/dL)",
+      "description": "What is your total cholesterol level (mg/dL)?",
       "required": true,
       "options": [
         {
@@ -119,7 +123,7 @@
       "id": "hdl_cholesterol",
       "type": "select",
       "label": "HDL Cholesterol (Good Cholesterol)",
-      "description": "Your HDL (good) cholesterol level (mg/dL)",
+      "description": "What is your HDL (good) cholesterol level (mg/dL)?",
       "required": true,
       "options": [
         {
@@ -144,7 +148,7 @@
       "id": "systolic_bp",
       "type": "select",
       "label": "Systolic Blood Pressure (Top Number)",
-      "description": "Your systolic blood pressure - the top number (mmHg)",
+      "description": "What is your systolic blood pressure - the top number (mmHg)?",
       "required": true,
       "options": [
         {
@@ -235,9 +239,26 @@
     },
     "riskCategories": [
       {
-        "name": "Low Risk",
+        "name": "Very Low Risk",
         "range": {
           "min": 0,
+          "max": 1.9
+        },
+        "color": "#22c55e",
+        "description": "Very low 10-year risk of ASCVD (typically under 40 years)",
+        "recommendations": [
+          "Continue healthy lifestyle habits",
+          "Regular exercise (at least 150 minutes moderate activity per week)",
+          "Maintain heart-healthy diet (Mediterranean or DASH diet)",
+          "Regular health screenings every 5 years",
+          "Avoid smoking and limit alcohol consumption",
+          "Focus on establishing long-term healthy habits"
+        ]
+      },
+      {
+        "name": "Low Risk",
+        "range": {
+          "min": 2.0,
           "max": 4.9
         },
         "color": "#10b981",

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { Mail, Calendar, Scale, Users, Ruler, Cigarette } from 'lucide-react'
+import { Mail, Calendar, Scale, Users, Ruler, Cigarette, Check, X } from 'lucide-react'
 import { enrichProfileWithCalculations } from '@/lib/utils/health-calculations'
 import type { UserProfile } from '@/lib/types/user-profile'
 
@@ -94,12 +94,12 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
   ]
 
   const smokingOptions = [
-    { value: 'no', label: "No, I don't smoke" },
-    { value: 'yes', label: 'Yes, I currently smoke' },
+    { value: 'no', label: 'No' },
+    { value: 'yes', label: 'Yes' },
   ]
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-lg py-8">
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Personal Information */}
         <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
@@ -260,16 +260,15 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
                     handleInputChange('sex', value)
                   }
                 }}
-                className="flex"
+                className="columns-2 w-full"
                 variant="outline"
               >
                 {sexOptions.map((option) => (
                   <ToggleGroupItem
                     key={option.value}
                     value={option.value}
-                    className="flex-1 justify-center text-center p-3 h-auto transition-all duration-200 data-[state=on]:bg-blue-50 data-[state=on]:border-blue-500 data-[state=on]:text-blue-900"
+                    className="justify-center text-center p-3 h-auto transition-all duration-200 data-[state=on]:bg-blue-50 data-[state=on]:border-blue-500 data-[state=on]:text-blue-900"
                   >
-                    <Users className="h-4 w-4 mr-2" />
                     <span className="text-sm font-medium">{option.label}</span>
                   </ToggleGroupItem>
                 ))}
@@ -286,6 +285,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
               </p>
               <ToggleGroup
                 type="single"
+                data-orientation="vertical"
                 value={
                   formData.currentSmoking === true
                     ? 'yes'
@@ -298,16 +298,15 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
                     handleInputChange('currentSmoking', value === 'yes')
                   }
                 }}
-                className="flex"
+                className="columns-2 w-full"
                 variant="outline"
               >
                 {smokingOptions.map((option) => (
                   <ToggleGroupItem
                     key={option.value}
                     value={option.value}
-                    className="flex-1 justify-center text-center p-3 h-auto transition-all duration-200 data-[state=on]:bg-blue-50 data-[state=on]:border-blue-500 data-[state=on]:text-blue-900"
+                    className="justify-center text-center p-3 h-auto transition-all duration-200 data-[state=on]:bg-blue-50 data-[state=on]:border-blue-500 data-[state=on]:text-blue-900"
                   >
-                    <Cigarette className="h-4 w-4 mr-2" />
                     <span className="text-sm font-medium">{option.label}</span>
                   </ToggleGroupItem>
                 ))}

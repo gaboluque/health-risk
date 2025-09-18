@@ -130,7 +130,7 @@ export function QuestionnaireForm({
       const missingAnswers = requiredQuestions.filter((q) => !formData.answers[q.id])
 
       if (missingAnswers.length > 0) {
-        missingFields.push(...missingAnswers.map((q) => q.label))
+        missingFields.push(...missingAnswers.map((q) => q.description || q.label))
       }
 
       if (missingFields.length > 0) {
@@ -138,9 +138,7 @@ export function QuestionnaireForm({
         return
       }
 
-      console.log('Submitting form data:', formData)
       const result = await onSubmit(formData)
-      console.log('Submit result:', result)
 
       if (result.success && result.data) {
         onResults(result.data)
@@ -160,53 +158,11 @@ export function QuestionnaireForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Progress Indicator */}
-      <div
-        id="progress-indicator"
-        className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-6"
-      >
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center">
-            <div className="p-2 bg-blue-100 rounded-lg mr-3">
-              <svg
-                className="w-5 h-5 text-blue-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <div>
-              <h4 className="text-sm font-semibold text-blue-900">Assessment Progress</h4>
-              <p className="text-xs text-blue-700">Complete all questions for accurate results</p>
-            </div>
-          </div>
-          <div className="text-right">
-            <div className="text-lg font-bold text-blue-900">
-              {displayedQuestions.filter((q) => formData.answers[q.id]).length}/
-              {displayedQuestions.length}
-            </div>
-            <div className="text-xs text-blue-700">questions answered</div>
-          </div>
-        </div>
-        <div className="w-full bg-blue-200 rounded-full h-3 overflow-hidden">
-          <div
-            className="bg-gradient-to-r from-blue-500 to-indigo-600 h-full rounded-full transition-all duration-500 ease-out"
-            style={{
-              width: `${displayedQuestions.length > 0 ? (displayedQuestions.filter((q) => formData.answers[q.id]).length / displayedQuestions.length) * 100 : 100}%`,
-            }}
-          />
-        </div>
-      </div>
+      <div id="progress-indicator"></div>
 
       {/* Sticky Progress Bar */}
       <div
-        className="fixed top-[96px] left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300 transform -translate-y-full opacity-0"
+        className="fixed top-[70px] left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300 transform -translate-y-full opacity-0"
         id="sticky-progress"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
@@ -260,30 +216,6 @@ export function QuestionnaireForm({
 
       {/* Questions Section */}
       <div className="space-y-6">
-        <div className="flex items-center mb-6">
-          <div className="p-2 bg-green-100 rounded-lg mr-3">
-            <svg
-              className="w-5 h-5 text-green-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-              />
-            </svg>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold text-slate-900">Health Assessment Questions</h3>
-            <p className="text-sm text-slate-600">
-              Please answer all questions as accurately as possible
-            </p>
-          </div>
-        </div>
-
         {displayedQuestions.length === 0 ? (
           <div className="bg-green-50 border border-green-200 rounded-xl p-6">
             <div className="flex items-center">
@@ -315,7 +247,7 @@ export function QuestionnaireForm({
           displayedQuestions.map((question, index) => (
             <div
               key={question.id}
-              className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
+              className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow duration-200"
             >
               <div className="mb-6">
                 <div className="flex items-start justify-between mb-3">
@@ -326,22 +258,16 @@ export function QuestionnaireForm({
                     <div className="flex-1">
                       <Label
                         htmlFor={question.id}
-                        className="text-base font-semibold text-slate-900 block"
+                        className="text-base font-semibold text-slate-700 block"
                       >
-                        {question.label}
-                        {question.required && <span className="text-red-500 ml-1">*</span>}
+                        {question.description || question.label}
                       </Label>
                     </div>
                   </div>
                 </div>
-                {question.description && (
-                  <p className="text-sm text-slate-600 ml-11 leading-relaxed">
-                    {question.description}
-                  </p>
-                )}
               </div>
 
-              <div className="ml-11">
+              <div>
                 <ToggleGroup
                   type="single"
                   value={formData.answers[question.id] || ''}

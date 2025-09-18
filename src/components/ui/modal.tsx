@@ -64,7 +64,7 @@ export function Modal({
 
   return (
     <div
-      className="modal h-full w-full fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-100 p-4 animate-in fade-in-0 duration-200"
+      className="modal h-full w-full fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-100 p-0 sm:p-2 lg:p-4 animate-in fade-in-0 duration-200"
       onClick={handleBackdropClick}
       style={{ height: '100vh', width: '100vw' }}
     >

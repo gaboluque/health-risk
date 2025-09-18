@@ -79,21 +79,21 @@ export function QuestionnairePage({ questionnaire, children }: QuestionnairePage
 
   return (
     <div className="flex flex-col min-h-full">
-      <section className="mt-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="mt-6">
+        <div className="max-w-4xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="flex space-x-4 items-center">
             <div
-              className={`inline-flex p-4 rounded-2xl ${colors.bg} ${colors.border} border-2 mb-6`}
+              className={`inline-flex p-2 rounded-2xl ${colors.bg} ${colors.border} border-2 mb-6`}
             >
-              <IconComponent className={`h-8 w-8 ${colors.text}`} />
+              <IconComponent className={`h-6 w-6 ${colors.text}`} />
             </div>
 
             <div>
-              <h1 className="text-xl font-bold text-slate-900">
+              <h1 className="text-lg font-bold text-slate-900">
                 {questionnaire.patientFriendlyName || questionnaire.name}
               </h1>
 
-              <p className="text-md text-slate-600 mb-6 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-sm text-slate-600 mb-6 max-w-2xl mx-auto leading-relaxed">
                 {questionnaire.patientFriendlyDescription || questionnaire.description}
               </p>
             </div>
@@ -101,13 +101,7 @@ export function QuestionnairePage({ questionnaire, children }: QuestionnairePage
         </div>
       </section>
 
-      <section className="pb-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-lg overflow-hidden">
-            <div className="p-6 sm:p-8">{children}</div>
-          </div>
-        </div>
-      </section>
+      {children}
     </div>
   )
 }
