@@ -269,7 +269,14 @@
           "max": 9.9
         },
         "color": "#10b981",
-        "description": "Low 10-year fracture risk - Focus on prevention and lifestyle measures"
+        "description": "Low 10-year fracture risk - Focus on prevention and lifestyle measures",
+        "recommendations": [
+          "Maintain adequate calcium (1200mg daily) and vitamin D (800-1000 IU daily) intake",
+          "Regular weight-bearing and muscle-strengthening exercises",
+          "Fall prevention strategies (balance exercises, home safety)",
+          "Avoid smoking and limit alcohol consumption",
+          "Regular bone density screening as recommended"
+        ]
       },
       {
         "name": "Moderate Risk",
@@ -278,7 +285,14 @@
           "max": 19.9
         },
         "color": "#f59e0b",
-        "description": "Moderate 10-year fracture risk - Consider treatment based on additional factors"
+        "description": "Moderate 10-year fracture risk - Consider treatment based on additional factors",
+        "recommendations": [
+          "Discuss treatment options with healthcare provider",
+          "Consider bone density testing (DEXA scan) if not recently done",
+          "Optimize calcium and vitamin D supplementation",
+          "Implement comprehensive fall prevention program",
+          "Consider medication therapy based on individual risk factors"
+        ]
       },
       {
         "name": "High Risk",
@@ -287,7 +301,14 @@
           "max": 100
         },
         "color": "#ef4444",
-        "description": "High 10-year fracture risk - Treatment recommended"
+        "description": "High 10-year fracture risk - Treatment recommended",
+        "recommendations": [
+          "Initiate osteoporosis treatment with healthcare provider",
+          "Consider bisphosphonates or other anti-fracture medications",
+          "Comprehensive fall prevention and home safety assessment",
+          "Regular monitoring with bone density testing",
+          "Urgent consultation with endocrinologist or bone specialist"
+        ]
       }
     ]
   },

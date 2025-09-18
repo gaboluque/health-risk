@@ -47,8 +47,10 @@ export function QuestionnaireResults({
 
   return (
     <div className="space-y-8">
-      <div className="bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-2xl p-8 text-center shadow-lg">
-        <div className="mb-6">
+      {/* Risk Results and Recommendations */}
+      <div className="bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-2xl p-8 shadow-lg">
+        {/* Risk Indicator */}
+        <div className="text-center mb-8">
           <div
             className="inline-flex items-center justify-center w-24 h-24 rounded-2xl text-white text-lg font-bold mb-4 shadow-lg"
             style={{ backgroundColor: categoryDetails.color }}
@@ -63,33 +65,27 @@ export function QuestionnaireResults({
             </p>
           </div>
         </div>
-      </div>
 
-      {/* Next Steps */}
-      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
-        <div className="flex items-start">
-          <div className="p-2 bg-blue-100 rounded-lg mr-4 mt-1">
-            <Info className="h-5 w-5 text-blue-600" />
-          </div>
-          <div className="flex-1">
-            <h4 className="text-lg font-semibold text-blue-900 mb-3">What This Means</h4>
-            <div className="prose prose-blue text-sm text-blue-800 leading-relaxed">
-              <p>{categoryDetails.description}</p>
-              {categoryDetails.name.toLowerCase().includes('high') && (
-                <p className="mt-2">
-                  <strong>Recommendation:</strong> Consider discussing these results with your
-                  healthcare provider to develop an appropriate prevention or management plan.
-                </p>
-              )}
-              {categoryDetails.name.toLowerCase().includes('low') && (
-                <p className="mt-2">
-                  <strong>Recommendation:</strong> Continue with regular health maintenance and
-                  periodic reassessment.
-                </p>
-              )}
+        {/* Recommendations */}
+        {categoryDetails.recommendations && categoryDetails.recommendations.length > 0 && (
+          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-6">
+            <div className="flex items-start">
+              <div className="p-2 bg-blue-100 rounded-lg mr-4 mt-1">
+                <Info className="h-5 w-5 text-blue-600" />
+              </div>
+              <div className="flex-1">
+                <h4 className="text-lg font-semibold text-blue-900 mb-3">Recommendations</h4>
+                <div className="prose prose-blue text-sm text-blue-800 leading-relaxed">
+                  <ul className="list-disc list-inside space-y-1 m-0">
+                    {categoryDetails.recommendations.map((recommendation, index) => (
+                      <li key={index}>{recommendation}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Important Disclaimer */}

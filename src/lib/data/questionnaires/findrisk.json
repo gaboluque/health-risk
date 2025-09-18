@@ -192,7 +192,13 @@
           "max": 6
         },
         "color": "#10b981",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 100"
+        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 100",
+        "recommendations": [
+          "Continue maintaining healthy lifestyle habits",
+          "Regular physical activity (at least 150 minutes moderate exercise per week)",
+          "Maintain healthy weight and balanced diet",
+          "Annual health check-ups with routine blood sugar screening"
+        ]
       },
       {
         "name": "Slightly Elevated Risk",
@@ -201,7 +207,14 @@
           "max": 11
         },
         "color": "#f59e0b",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 25"
+        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 25",
+        "recommendations": [
+          "Focus on lifestyle modifications to reduce risk",
+          "Increase physical activity to at least 150 minutes per week",
+          "Work on achieving and maintaining healthy weight",
+          "Consider consultation with healthcare provider for personalized prevention plan",
+          "Annual diabetes screening with blood tests"
+        ]
       },
       {
         "name": "Moderate Risk",
@@ -210,7 +223,14 @@
           "max": 14
         },
         "color": "#ef4444",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 6"
+        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 6",
+        "recommendations": [
+          "Schedule consultation with healthcare provider within 3-6 months",
+          "Consider structured lifestyle intervention program",
+          "Implement comprehensive diet and exercise plan",
+          "Regular monitoring of blood glucose levels",
+          "Consider referral to diabetes prevention program"
+        ]
       },
       {
         "name": "High Risk",
@@ -219,7 +239,14 @@
           "max": 20
         },
         "color": "#dc2626",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 3"
+        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 3",
+        "recommendations": [
+          "Schedule consultation with healthcare provider as soon as possible",
+          "Enroll in structured diabetes prevention program",
+          "Work with healthcare team to develop comprehensive prevention plan",
+          "Regular monitoring of blood glucose and other metabolic markers",
+          "Consider medication for diabetes prevention if lifestyle changes insufficient"
+        ]
       },
       {
         "name": "Very High Risk",
@@ -228,7 +255,14 @@
           "max": 26
         },
         "color": "#991b1b",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 2"
+        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 2",
+        "recommendations": [
+          "Schedule urgent consultation with healthcare provider",
+          "Immediate enrollment in intensive diabetes prevention program",
+          "Consider medication for diabetes prevention",
+          "Frequent monitoring of blood glucose and metabolic health",
+          "Work closely with healthcare team for comprehensive risk management"
+        ]
       }
     ]
   },

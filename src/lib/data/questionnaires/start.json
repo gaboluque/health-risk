@@ -191,7 +191,14 @@
           "max": 3
         },
         "color": "#10b981",
-        "description": "Low risk of persistent disabling low back pain - Good prognosis with minimal intervention"
+        "description": "Low risk of persistent disabling low back pain - Good prognosis with minimal intervention",
+        "recommendations": [
+          "Continue normal activities as much as possible",
+          "Use simple pain relief methods (heat, ice, over-the-counter pain medication)",
+          "Stay active and avoid bed rest",
+          "Gradual return to normal activities as pain improves",
+          "Self-manage with reassurance and basic advice"
+        ]
       },
       {
         "name": "Medium Risk",
@@ -200,7 +207,14 @@
           "max": 9
         },
         "color": "#f59e0b",
-        "description": "Medium risk of persistent disabling low back pain - May benefit from targeted physiotherapy"
+        "description": "Medium risk of persistent disabling low back pain - May benefit from targeted physiotherapy",
+        "recommendations": [
+          "Consider referral to physiotherapy for targeted treatment",
+          "Focus on physical conditioning and movement",
+          "Education about back pain and self-management strategies",
+          "Gradual increase in activity levels",
+          "Address any physical factors contributing to pain"
+        ]
       },
       {
         "name": "High Risk",
@@ -209,7 +223,14 @@
           "max": 9
         },
         "color": "#ef4444",
-        "description": "High risk of persistent disabling low back pain - Requires psychologically-informed intervention"
+        "description": "High risk of persistent disabling low back pain - Requires psychologically-informed intervention",
+        "recommendations": [
+          "Referral to healthcare provider experienced in psychologically-informed care",
+          "Consider cognitive-behavioral therapy for pain management",
+          "Address psychological factors (fear, anxiety, depression)",
+          "Comprehensive biopsychosocial approach to treatment",
+          "Focus on pain coping strategies and activity pacing"
+        ]
       }
     ]
   },

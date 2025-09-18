@@ -241,7 +241,14 @@
           "max": 4.9
         },
         "color": "#10b981",
-        "description": "Low 10-year risk of ASCVD"
+        "description": "Low 10-year risk of ASCVD",
+        "recommendations": [
+          "Continue healthy lifestyle habits",
+          "Regular exercise (at least 150 minutes moderate activity per week)",
+          "Maintain heart-healthy diet (Mediterranean or DASH diet)",
+          "Regular health screenings every 3-5 years",
+          "Avoid smoking and limit alcohol consumption"
+        ]
       },
       {
         "name": "Borderline",
@@ -250,7 +257,14 @@
           "max": 7.4
         },
         "color": "#f59e0b",
-        "description": "Borderline 10-year risk of ASCVD"
+        "description": "Borderline 10-year risk of ASCVD",
+        "recommendations": [
+          "Focus on lifestyle modifications to reduce risk",
+          "Discuss with healthcare provider about risk reduction strategies",
+          "Consider additional risk factors (family history, coronary calcium scoring)",
+          "Optimize blood pressure, cholesterol, and blood sugar control",
+          "Annual cardiovascular risk assessment"
+        ]
       },
       {
         "name": "Intermediate",
@@ -259,7 +273,14 @@
           "max": 19.9
         },
         "color": "#ef4444",
-        "description": "Intermediate 10-year risk of ASCVD"
+        "description": "Intermediate 10-year risk of ASCVD",
+        "recommendations": [
+          "Consider statin therapy for cholesterol management",
+          "Discuss aspirin therapy with healthcare provider",
+          "Intensive lifestyle counseling and support",
+          "Regular monitoring of blood pressure and cholesterol",
+          "Consider coronary calcium scoring for further risk stratification"
+        ]
       },
       {
         "name": "High Risk",
@@ -268,7 +289,14 @@
           "max": 100
         },
         "color": "#dc2626",
-        "description": "High 10-year risk of ASCVD"
+        "description": "High 10-year risk of ASCVD",
+        "recommendations": [
+          "Initiate statin therapy unless contraindicated",
+          "Consider aspirin therapy for primary prevention",
+          "Aggressive blood pressure management (target <130/80)",
+          "Comprehensive cardiovascular risk management",
+          "Regular follow-up with healthcare provider every 3-6 months"
+        ]
       }
     ]
   },

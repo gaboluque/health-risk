@@ -201,7 +201,14 @@
           "max": 4
         },
         "color": "#10b981",
-        "description": "Minimal anxiety symptoms - No clinically significant anxiety disorder"
+        "description": "Minimal anxiety symptoms - No clinically significant anxiety disorder",
+        "recommendations": [
+          "Continue with current coping strategies",
+          "Maintain regular exercise and healthy lifestyle habits",
+          "Practice stress management techniques as needed",
+          "Regular self-monitoring of mental health",
+          "Seek support if symptoms worsen"
+        ]
       },
       {
         "name": "Mild Anxiety",
@@ -210,7 +217,14 @@
           "max": 9
         },
         "color": "#84cc16",
-        "description": "Mild anxiety symptoms - May indicate mild GAD or adjustment disorder"
+        "description": "Mild anxiety symptoms - May indicate mild GAD or adjustment disorder",
+        "recommendations": [
+          "Consider self-help resources and stress management techniques",
+          "Practice relaxation techniques (deep breathing, meditation)",
+          "Maintain regular exercise and good sleep hygiene",
+          "Consider counseling or therapy if symptoms persist",
+          "Monitor symptoms and seek help if they worsen"
+        ]
       },
       {
         "name": "Moderate Anxiety",
@@ -219,7 +233,14 @@
           "max": 14
         },
         "color": "#f59e0b",
-        "description": "Moderate anxiety symptoms - Likely indicates GAD or other anxiety disorder"
+        "description": "Moderate anxiety symptoms - Likely indicates GAD or other anxiety disorder",
+        "recommendations": [
+          "Schedule consultation with healthcare provider or mental health professional",
+          "Consider therapy (cognitive-behavioral therapy is highly effective)",
+          "Discuss treatment options including counseling and possibly medication",
+          "Implement structured stress management and coping strategies",
+          "Regular follow-up to monitor progress"
+        ]
       },
       {
         "name": "Severe Anxiety",
@@ -228,7 +249,14 @@
           "max": 21
         },
         "color": "#ef4444",
-        "description": "Severe anxiety symptoms - Strong indication of GAD requiring immediate attention"
+        "description": "Severe anxiety symptoms - Strong indication of GAD requiring immediate attention",
+        "recommendations": [
+          "Seek immediate consultation with healthcare provider or mental health professional",
+          "Consider urgent referral to psychiatrist or anxiety specialist",
+          "Discuss comprehensive treatment plan including therapy and medication",
+          "Ensure adequate support system is in place",
+          "Consider intensive outpatient treatment if symptoms are severely impairing"
+        ]
       }
     ]
   },

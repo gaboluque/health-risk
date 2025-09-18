@@ -22,6 +22,7 @@ export interface RiskCategory {
   }
   color: string
   description: string
+  recommendations?: string[]
 }
 
 export interface QuestionnaireReference {
