@@ -1,11 +1,13 @@
 import { headers as getHeaders } from 'next/headers.js'
 import Image from 'next/image'
+import Link from 'next/link'
 import { getPayload } from 'payload'
 import React from 'react'
 import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './styles.css'
+import { Button } from '@/components/ui/button'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -30,6 +32,9 @@ export default async function HomePage() {
         {!user && <h1>Welcome to your new project.</h1>}
         {user && <h1>Welcome back, {user.email}</h1>}
         <div className="links">
+          <Link href="/ascvd">
+            <Button className="mb-4 mr-4">Take ASCVD Risk Assessment</Button>
+          </Link>
           <a
             className="admin"
             href={payloadConfig.routes.admin}
@@ -54,6 +59,7 @@ export default async function HomePage() {
           <code>app/(frontend)/page.tsx</code>
         </a>
       </div>
+      <Button>Click me</Button>
     </div>
   )
 }

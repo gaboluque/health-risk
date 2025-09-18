@@ -1,0 +1,289 @@
+{
+  "id": "ascvd",
+  "name": "ASCVD Risk Calculator",
+  "description": "Estimates 10-year risk of atherosclerotic cardiovascular disease using Pooled Cohort Equations",
+  "version": "1.0.0",
+  "category": "cardiovascular",
+  "questions": [
+    {
+      "id": "age",
+      "type": "select",
+      "label": "Age",
+      "description": "Patient's age in years",
+      "required": true,
+      "options": [
+        {
+          "value": "40-44",
+          "label": "40-44 years"
+        },
+        {
+          "value": "45-49",
+          "label": "45-49 years"
+        },
+        {
+          "value": "50-54",
+          "label": "50-54 years"
+        },
+        {
+          "value": "55-59",
+          "label": "55-59 years"
+        },
+        {
+          "value": "60-64",
+          "label": "60-64 years"
+        },
+        {
+          "value": "65-69",
+          "label": "65-69 years"
+        },
+        {
+          "value": "70-74",
+          "label": "70-74 years"
+        },
+        {
+          "value": "75-79",
+          "label": "75-79 years"
+        }
+      ]
+    },
+    {
+      "id": "sex",
+      "type": "select",
+      "label": "Sex",
+      "description": "Biological sex",
+      "required": true,
+      "options": [
+        {
+          "value": "male",
+          "label": "Male"
+        },
+        {
+          "value": "female",
+          "label": "Female"
+        }
+      ]
+    },
+    {
+      "id": "race",
+      "type": "select",
+      "label": "Race/Ethnicity",
+      "description": "Patient's race/ethnicity",
+      "required": true,
+      "options": [
+        {
+          "value": "white",
+          "label": "Non-Hispanic White"
+        },
+        {
+          "value": "african_american",
+          "label": "African American"
+        },
+        {
+          "value": "other",
+          "label": "Other"
+        }
+      ]
+    },
+    {
+      "id": "total_cholesterol",
+      "type": "select",
+      "label": "Total Cholesterol",
+      "description": "Total cholesterol level (mg/dL)",
+      "required": true,
+      "options": [
+        {
+          "value": "<160",
+          "label": "Less than 160 mg/dL"
+        },
+        {
+          "value": "160-199",
+          "label": "160-199 mg/dL"
+        },
+        {
+          "value": "200-239",
+          "label": "200-239 mg/dL"
+        },
+        {
+          "value": "240-279",
+          "label": "240-279 mg/dL"
+        },
+        {
+          "value": "≥280",
+          "label": "280 mg/dL or higher"
+        }
+      ]
+    },
+    {
+      "id": "hdl_cholesterol",
+      "type": "select",
+      "label": "HDL Cholesterol",
+      "description": "High-density lipoprotein cholesterol level (mg/dL)",
+      "required": true,
+      "options": [
+        {
+          "value": "<40",
+          "label": "Less than 40 mg/dL"
+        },
+        {
+          "value": "40-49",
+          "label": "40-49 mg/dL"
+        },
+        {
+          "value": "50-59",
+          "label": "50-59 mg/dL"
+        },
+        {
+          "value": "≥60",
+          "label": "60 mg/dL or higher"
+        }
+      ]
+    },
+    {
+      "id": "systolic_bp",
+      "type": "select",
+      "label": "Systolic Blood Pressure",
+      "description": "Systolic blood pressure measurement (mmHg)",
+      "required": true,
+      "options": [
+        {
+          "value": "<120",
+          "label": "Less than 120 mmHg"
+        },
+        {
+          "value": "120-129",
+          "label": "120-129 mmHg"
+        },
+        {
+          "value": "130-139",
+          "label": "130-139 mmHg"
+        },
+        {
+          "value": "140-159",
+          "label": "140-159 mmHg"
+        },
+        {
+          "value": "160-179",
+          "label": "160-179 mmHg"
+        },
+        {
+          "value": "≥180",
+          "label": "180 mmHg or higher"
+        }
+      ]
+    },
+    {
+      "id": "bp_treatment",
+      "type": "select",
+      "label": "Blood Pressure Treatment",
+      "description": "Currently taking medication for high blood pressure?",
+      "required": true,
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "diabetes",
+      "type": "select",
+      "label": "Diabetes",
+      "description": "Currently diagnosed with diabetes?",
+      "required": true,
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "id": "current_smoking",
+      "type": "select",
+      "label": "Current Smoking",
+      "description": "Currently smoking cigarettes?",
+      "required": true,
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "label": "No"
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "algorithm": "pooled_cohort_equations",
+    "output": {
+      "type": "percentage",
+      "label": "10-Year ASCVD Risk",
+      "unit": "%",
+      "precision": 1
+    },
+    "riskCategories": [
+      {
+        "name": "Low Risk",
+        "range": {
+          "min": 0,
+          "max": 4.9
+        },
+        "color": "#10b981",
+        "description": "Low 10-year risk of ASCVD"
+      },
+      {
+        "name": "Borderline",
+        "range": {
+          "min": 5.0,
+          "max": 7.4
+        },
+        "color": "#f59e0b",
+        "description": "Borderline 10-year risk of ASCVD"
+      },
+      {
+        "name": "Intermediate",
+        "range": {
+          "min": 7.5,
+          "max": 19.9
+        },
+        "color": "#ef4444",
+        "description": "Intermediate 10-year risk of ASCVD"
+      },
+      {
+        "name": "High Risk",
+        "range": {
+          "min": 20,
+          "max": 100
+        },
+        "color": "#dc2626",
+        "description": "High 10-year risk of ASCVD"
+      }
+    ]
+  },
+  "references": [
+    {
+      "title": "2013 ACC/AHA Guideline on the Treatment of Blood Cholesterol",
+      "url": "https://www.ahajournals.org/doi/10.1161/01.cir.0000437738.63853.7a"
+    },
+    {
+      "title": "Pooled Cohort Equations for 10-Year ASCVD Risk",
+      "url": "https://tools.acc.org/ASCVD-Risk-Estimator-Plus/"
+    }
+  ],
+  "metadata": {
+    "createdAt": "2025-09-17",
+    "estimatedCompletionTime": "3-5 minutes",
+    "targetPopulation": "Adults aged 40-79 years",
+    "clinicalUse": "Primary prevention of atherosclerotic cardiovascular disease"
+  }
+}

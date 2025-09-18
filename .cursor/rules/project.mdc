@@ -1,0 +1,10 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+
+
+- This project uses NextJS, PayloadCMS, Tailwind and shadcn/ui.
+- Always check documentation for these libraries and apply best practices in the project.
+- 

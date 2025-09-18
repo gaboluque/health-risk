@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    questionnaires: Questionnaire;
+    'questionnaire-submissions': QuestionnaireSubmission;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +79,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    questionnaires: QuestionnairesSelect<false> | QuestionnairesSelect<true>;
+    'questionnaire-submissions': QuestionnaireSubmissionsSelect<false> | QuestionnaireSubmissionsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -158,6 +162,49 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "questionnaires".
+ */
+export interface Questionnaire {
+  id: string;
+  name: string;
+  questions: {
+    text: string;
+    possibleAnswers: {
+      text: string;
+      score: number;
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "questionnaire-submissions".
+ */
+export interface QuestionnaireSubmission {
+  id: string;
+  questionnaire: string | Questionnaire;
+  submittedAnswers: {
+    questionIndex: number;
+    questionText: string;
+    selectedAnswerIndex: number;
+    selectedAnswerText: string;
+    score: number;
+    id?: string | null;
+  }[];
+  totalScore: number;
+  submittedBy: {
+    firstName: string;
+    lastName: string;
+    email: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -170,6 +217,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'questionnaires';
+        value: string | Questionnaire;
+      } | null)
+    | ({
+        relationTo: 'questionnaire-submissions';
+        value: string | QuestionnaireSubmission;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -252,6 +307,55 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "questionnaires_select".
+ */
+export interface QuestionnairesSelect<T extends boolean = true> {
+  name?: T;
+  questions?:
+    | T
+    | {
+        text?: T;
+        possibleAnswers?:
+          | T
+          | {
+              text?: T;
+              score?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "questionnaire-submissions_select".
+ */
+export interface QuestionnaireSubmissionsSelect<T extends boolean = true> {
+  questionnaire?: T;
+  submittedAnswers?:
+    | T
+    | {
+        questionIndex?: T;
+        questionText?: T;
+        selectedAnswerIndex?: T;
+        selectedAnswerText?: T;
+        score?: T;
+        id?: T;
+      };
+  totalScore?: T;
+  submittedBy?:
+    | T
+    | {
+        firstName?: T;
+        lastName?: T;
+        email?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
