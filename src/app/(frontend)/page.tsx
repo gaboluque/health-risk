@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { Heart, Activity, Bone, Brain, Shield, ArrowRight } from 'lucide-react'
+import { ProfileGate } from '@/components/profile/ProfileGate'
 
 import './styles.css'
 
@@ -59,67 +60,69 @@ const healthAssessments = [
 
 export default async function HomePage() {
   return (
-    <div className="flex flex-col min-h-full">
-      {/* Content wrapper */}
+    <ProfileGate>
+      <div className="flex flex-col min-h-full">
+        {/* Content wrapper */}
 
-      {/* Health Assessments Grid */}
-      <section className="pb-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="my-20">
-              <h1 className="text-4xl sm:text-6xl font-bold text-slate-900 mb-6">
-                Take Control of Your{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                  Health
-                </span>
-              </h1>
+        {/* Health Assessments Grid */}
+        <section className="pb-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <div className="my-20">
+                <h1 className="text-4xl sm:text-6xl font-bold text-slate-900 mb-6">
+                  Take Control of Your{' '}
+                  <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                    Health
+                  </span>
+                </h1>
+              </div>
+              <h2 className="text-3xl font-bold text-slate-900 mb-4">
+                Choose Your Health Assessment
+              </h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                Select from our comprehensive range of validated health risk calculators and
+                screening tools designed by healthcare professionals.
+              </p>
             </div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              Choose Your Health Assessment
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-              Select from our comprehensive range of validated health risk calculators and screening
-              tools designed by healthcare professionals.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {healthAssessments.map((assessment) => {
-              const IconComponent = assessment.icon
-              return (
-                <Link key={assessment.id} href={`/${assessment.id}`} className="group">
-                  <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300 transform hover:-translate-y-1">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className={`p-3 rounded-xl ${assessment.bgColor}`}>
-                        <IconComponent className={`h-6 w-6 ${assessment.textColor}`} />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {healthAssessments.map((assessment) => {
+                const IconComponent = assessment.icon
+                return (
+                  <Link key={assessment.id} href={`/${assessment.id}`} className="group">
+                    <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300 transform hover:-translate-y-1">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`p-3 rounded-xl ${assessment.bgColor}`}>
+                          <IconComponent className={`h-6 w-6 ${assessment.textColor}`} />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-semibold text-slate-900 group-hover:text-slate-700 transition-colors">
-                          {assessment.title}
-                        </h3>
-                        <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-600 transition-colors" />
+                      <div className="mb-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-lg font-semibold text-slate-900 group-hover:text-slate-700 transition-colors">
+                            {assessment.title}
+                          </h3>
+                          <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-600 transition-colors" />
+                        </div>
+                        <p className="text-sm text-slate-600 mb-3">{assessment.description}</p>
+                        <span
+                          className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${assessment.bgColor} ${assessment.textColor}`}
+                        >
+                          {assessment.category}
+                        </span>
                       </div>
-                      <p className="text-sm text-slate-600 mb-3">{assessment.description}</p>
-                      <span
-                        className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${assessment.bgColor} ${assessment.textColor}`}
-                      >
-                        {assessment.category}
-                      </span>
-                    </div>
 
-                    <div
-                      className={`w-full h-1 bg-gradient-to-r ${assessment.color} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                    />
-                  </div>
-                </Link>
-              )
-            })}
+                      <div
+                        className={`w-full h-1 bg-gradient-to-r ${assessment.color} rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                      />
+                    </div>
+                  </Link>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </ProfileGate>
   )
 }

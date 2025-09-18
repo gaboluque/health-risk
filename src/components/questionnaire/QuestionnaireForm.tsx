@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { useUserProfile } from '@/contexts/UserProfileContext'
+import { mapProfileToAnswers, getProfileAnsweredQuestions } from '@/lib/utils/profile-mapping'
 import type {
   QuestionnaireSchema,
   FormData,
@@ -27,14 +28,45 @@ export function QuestionnaireForm({
   submitButtonText = 'Submit Assessment',
   loadingText = 'Processing...',
 }: QuestionnaireFormProps) {
-  const [formData, setFormData] = useState<FormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    answers: {},
+  const { profile } = useUserProfile()
+
+  // Initialize form data with profile info and pre-filled answers
+  const [formData, setFormData] = useState<FormData>(() => {
+    const initialAnswers = profile ? mapProfileToAnswers(profile, questionnaire) : {}
+    return {
+      firstName: profile?.firstName || '',
+      lastName: profile?.lastName || '',
+      email: profile?.email || '',
+      answers: initialAnswers,
+    }
   })
+
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  // Get questions that are answered by profile
+  const profileAnsweredQuestions = profile
+    ? getProfileAnsweredQuestions(profile, questionnaire)
+    : new Set()
+
+  // Filter out questions that are answered by profile
+  const displayedQuestions = questionnaire.questions.filter(
+    (question) => !profileAnsweredQuestions.has(question.id),
+  )
+
+  // Update form data when profile changes
+  useEffect(() => {
+    if (profile) {
+      const profileAnswers = mapProfileToAnswers(profile, questionnaire)
+      setFormData((prev) => ({
+        ...prev,
+        firstName: profile.firstName,
+        lastName: profile.lastName,
+        email: profile.email,
+        answers: { ...prev.answers, ...profileAnswers },
+      }))
+    }
+  }, [profile, questionnaire])
 
   // Handle sticky progress bar
   useEffect(() => {
@@ -127,77 +159,6 @@ export function QuestionnaireForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
-        <div className="flex items-center mb-6">
-          <div className="p-2 bg-blue-100 rounded-lg mr-3">
-            <svg
-              className="w-5 h-5 text-blue-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-slate-900">Personal Information</h3>
-            <p className="text-sm text-slate-600">
-              We need some basic information to personalize your results
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <Label htmlFor="firstName" className="text-sm font-medium text-slate-700">
-              First Name <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="firstName"
-              type="text"
-              value={formData.firstName}
-              onChange={(e) => handleInputChange('firstName', e.target.value)}
-              placeholder="Enter your first name"
-              className="mt-1 block w-full border-slate-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor="lastName" className="text-sm font-medium text-slate-700">
-              Last Name <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="lastName"
-              type="text"
-              value={formData.lastName}
-              onChange={(e) => handleInputChange('lastName', e.target.value)}
-              placeholder="Enter your last name"
-              className="mt-1 block w-full border-slate-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
-          <div className="md:col-span-2">
-            <Label htmlFor="email" className="text-sm font-medium text-slate-700">
-              Email Address <span className="text-red-500">*</span>
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
-              placeholder="Enter your email address"
-              className="mt-1 block w-full border-slate-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-              required
-            />
-          </div>
-        </div>
-      </div>
-
       {/* Progress Indicator */}
       <div
         id="progress-indicator"
@@ -227,7 +188,8 @@ export function QuestionnaireForm({
           </div>
           <div className="text-right">
             <div className="text-lg font-bold text-blue-900">
-              {Object.keys(formData.answers).length}/{questionnaire.questions.length}
+              {displayedQuestions.filter((q) => formData.answers[q.id]).length}/
+              {displayedQuestions.length}
             </div>
             <div className="text-xs text-blue-700">questions answered</div>
           </div>
@@ -236,7 +198,7 @@ export function QuestionnaireForm({
           <div
             className="bg-gradient-to-r from-blue-500 to-indigo-600 h-full rounded-full transition-all duration-500 ease-out"
             style={{
-              width: `${(Object.keys(formData.answers).length / questionnaire.questions.length) * 100}%`,
+              width: `${displayedQuestions.length > 0 ? (displayedQuestions.filter((q) => formData.answers[q.id]).length / displayedQuestions.length) * 100 : 100}%`,
             }}
           />
         </div>
@@ -244,7 +206,7 @@ export function QuestionnaireForm({
 
       {/* Sticky Progress Bar */}
       <div
-        className="fixed top-[73px] left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300 transform -translate-y-full opacity-0"
+        className="fixed top-[96px] left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-200 transition-all duration-300 transform -translate-y-full opacity-0"
         id="sticky-progress"
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
@@ -267,8 +229,8 @@ export function QuestionnaireForm({
               </div>
               <div>
                 <span className="text-sm font-semibold text-slate-900">
-                  {Object.keys(formData.answers).length} of {questionnaire.questions.length}{' '}
-                  completed
+                  {displayedQuestions.filter((q) => formData.answers[q.id]).length} of{' '}
+                  {displayedQuestions.length} completed
                 </span>
               </div>
             </div>
@@ -277,14 +239,18 @@ export function QuestionnaireForm({
                 <div
                   className="bg-gradient-to-r from-blue-500 to-indigo-600 h-full rounded-full transition-all duration-500 ease-out"
                   style={{
-                    width: `${(Object.keys(formData.answers).length / questionnaire.questions.length) * 100}%`,
+                    width: `${displayedQuestions.length > 0 ? (displayedQuestions.filter((q) => formData.answers[q.id]).length / displayedQuestions.length) * 100 : 100}%`,
                   }}
                 />
               </div>
             </div>
             <div className="text-sm font-bold text-blue-600">
               {Math.round(
-                (Object.keys(formData.answers).length / questionnaire.questions.length) * 100,
+                displayedQuestions.length > 0
+                  ? (displayedQuestions.filter((q) => formData.answers[q.id]).length /
+                      displayedQuestions.length) *
+                      100
+                  : 100,
               )}
               %
             </div>
@@ -318,88 +284,117 @@ export function QuestionnaireForm({
           </div>
         </div>
 
-        {questionnaire.questions.map((question, index) => (
-          <div
-            key={question.id}
-            className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
-          >
-            <div className="mb-6">
-              <div className="flex items-start justify-between mb-3">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0 w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center mr-3">
-                    <span className="text-sm font-semibold text-slate-600">{index + 1}</span>
-                  </div>
-                  <div className="flex-1">
-                    <Label
-                      htmlFor={question.id}
-                      className="text-base font-semibold text-slate-900 block"
-                    >
-                      {question.label}
-                      {question.required && <span className="text-red-500 ml-1">*</span>}
-                    </Label>
-                  </div>
-                </div>
+        {displayedQuestions.length === 0 ? (
+          <div className="bg-green-50 border border-green-200 rounded-xl p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-green-100 rounded-lg mr-3">
+                <svg
+                  className="w-5 h-5 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
               </div>
-              {question.description && (
-                <p className="text-sm text-slate-600 ml-11 leading-relaxed">
-                  {question.description}
+              <div>
+                <h3 className="text-lg font-semibold text-green-900">All Questions Answered!</h3>
+                <p className="text-sm text-green-700">
+                  Your profile information has answered all the questions for this assessment. You
+                  can submit directly.
                 </p>
-              )}
-            </div>
-
-            <div className="ml-11">
-              <ToggleGroup
-                type="single"
-                value={formData.answers[question.id] || ''}
-                onValueChange={(value) => {
-                  if (value) {
-                    handleInputChange(question.id, value)
-                  }
-                }}
-                className="flex-col items-stretch gap-3 w-full"
-                variant="outline"
-              >
-                {question.options.map((option) => (
-                  <ToggleGroupItem
-                    key={option.value}
-                    value={option.value}
-                    className="justify-start text-left p-4 h-auto min-h-[3rem] whitespace-normal break-words transition-all duration-200 data-[state=on]:bg-blue-50 data-[state=on]:border-blue-500 data-[state=on]:text-blue-900 data-[state=on]:shadow-md hover:bg-slate-50 hover:border-slate-300 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 relative border-slate-200 rounded-lg"
-                  >
-                    <div className="flex items-center w-full">
-                      <div className="flex-shrink-0 w-4 h-4 mr-3 rounded-full border-2 border-slate-300 transition-colors duration-200 flex items-center justify-center">
-                        {formData.answers[question.id] === option.value && (
-                          <div className="w-2 h-2 rounded-full bg-blue-500" />
-                        )}
-                      </div>
-                      <span className="text-sm leading-relaxed font-medium text-slate-700">
-                        {option.label}
-                      </span>
-                    </div>
-                    {formData.answers[question.id] === option.value && (
-                      <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                        <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                          <svg
-                            className="w-3 h-3 text-white"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M5 13l4 4L19 7"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    )}
-                  </ToggleGroupItem>
-                ))}
-              </ToggleGroup>
+              </div>
             </div>
           </div>
-        ))}
+        ) : (
+          displayedQuestions.map((question, index) => (
+            <div
+              key={question.id}
+              className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200"
+            >
+              <div className="mb-6">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center mr-3">
+                      <span className="text-sm font-semibold text-slate-600">{index + 1}</span>
+                    </div>
+                    <div className="flex-1">
+                      <Label
+                        htmlFor={question.id}
+                        className="text-base font-semibold text-slate-900 block"
+                      >
+                        {question.label}
+                        {question.required && <span className="text-red-500 ml-1">*</span>}
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+                {question.description && (
+                  <p className="text-sm text-slate-600 ml-11 leading-relaxed">
+                    {question.description}
+                  </p>
+                )}
+              </div>
+
+              <div className="ml-11">
+                <ToggleGroup
+                  type="single"
+                  value={formData.answers[question.id] || ''}
+                  onValueChange={(value) => {
+                    if (value) {
+                      handleInputChange(question.id, value)
+                    }
+                  }}
+                  className="flex-col items-stretch gap-3 w-full"
+                  variant="outline"
+                >
+                  {question.options.map((option) => (
+                    <ToggleGroupItem
+                      key={option.value}
+                      value={option.value}
+                      className="justify-start text-left p-4 h-auto min-h-[3rem] whitespace-normal break-words transition-all duration-200 data-[state=on]:bg-blue-50 data-[state=on]:border-blue-500 data-[state=on]:text-blue-900 data-[state=on]:shadow-md hover:bg-slate-50 hover:border-slate-300 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 relative border-slate-200 rounded-lg"
+                    >
+                      <div className="flex items-center w-full">
+                        <div className="flex-shrink-0 w-4 h-4 mr-3 rounded-full border-2 border-slate-300 transition-colors duration-200 flex items-center justify-center">
+                          {formData.answers[question.id] === option.value && (
+                            <div className="w-2 h-2 rounded-full bg-blue-500" />
+                          )}
+                        </div>
+                        <span className="text-sm leading-relaxed font-medium text-slate-700">
+                          {option.label}
+                        </span>
+                      </div>
+                      {formData.answers[question.id] === option.value && (
+                        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+                          <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                            <svg
+                              className="w-3 h-3 text-white"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      )}
+                    </ToggleGroupItem>
+                  ))}
+                </ToggleGroup>
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Error Message */}

@@ -3,8 +3,9 @@ import { headers as getHeaders } from 'next/headers.js'
 import { getPayload } from 'payload'
 
 import config from '@/payload.config'
-import { Header } from '@/components/ui/header'
+import { ClientHeader } from '@/components/ui/ClientHeader'
 import { Footer } from '@/components/ui/footer'
+import { UserProfileProvider } from '@/contexts/UserProfileContext'
 import './styles.css'
 import './global.css'
 
@@ -30,11 +31,13 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
-          <Header user={user} />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </div>
+        <UserProfileProvider>
+          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
+            <ClientHeader user={user} />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </div>
+        </UserProfileProvider>
       </body>
     </html>
   )
