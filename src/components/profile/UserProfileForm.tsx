@@ -22,7 +22,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
     birthDate: initialProfile?.birthDate || '',
     height: initialProfile?.height,
     weight: initialProfile?.weight,
-    sex: initialProfile?.sex || '',
+    sex: initialProfile?.sex,
     currentSmoking: initialProfile?.currentSmoking,
     idNumber: initialProfile?.idNumber || '',
     socialSecurityNumber: initialProfile?.socialSecurityNumber || '',
@@ -50,7 +50,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
     if (!formData.birthDate?.trim()) missingFields.push('Date of Birth')
     if (!formData.height || formData.height <= 0) missingFields.push('Height')
     if (!formData.weight || formData.weight <= 0) missingFields.push('Weight')
-    if (!formData.sex?.trim()) missingFields.push('Biological Sex')
+    if (!formData.sex) missingFields.push('Biological Sex')
     if (!formData.idNumber?.trim()) missingFields.push('ID Number')
     if (!formData.cellphoneNumber?.trim()) missingFields.push('Cellphone Number')
 

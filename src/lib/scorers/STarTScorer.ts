@@ -60,6 +60,8 @@ export class STarTScorer extends BaseScorer {
     return {
       score: totalScore,
       risk: riskCategory,
+      standardRiskLevel: this.mapToStandardRiskLevel(riskCategory),
+      riskDescription: this.getRiskDescription(riskCategory, totalScore, psychosocialScore),
     }
   }
 
@@ -86,6 +88,23 @@ export class STarTScorer extends BaseScorer {
       return 'Medium Risk'
     } else {
       return 'Low Risk'
+    }
+  }
+
+  private getRiskDescription(
+    riskCategory: string,
+    totalScore: number,
+    psychosocialScore: number,
+  ): string {
+    switch (riskCategory) {
+      case 'Low Risk':
+        return 'Low risk for persistent disabling back pain. Self-management and simple advice recommended.'
+      case 'Medium Risk':
+        return 'Medium risk for persistent disabling back pain. Physiotherapy and exercise therapy recommended.'
+      case 'High Risk':
+        return 'High risk for persistent disabling back pain. Multidisciplinary approach with psychological support recommended.'
+      default:
+        return `Total score: ${totalScore}, Psychosocial score: ${psychosocialScore}`
     }
   }
 }

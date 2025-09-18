@@ -123,6 +123,43 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  role: 'superadmin' | 'admin' | 'user';
+  /**
+   * Patient profile information (only for regular users)
+   */
+  profile?: {
+    firstName: string;
+    lastName: string;
+    /**
+     * Date of birth
+     */
+    birthDate: string;
+    height: number;
+    weight: number;
+    sex: 'male' | 'female';
+    currentSmoking?: boolean | null;
+    /**
+     * National identification number
+     */
+    idNumber: string;
+    /**
+     * Numero de Caja de Seguro Social (optional)
+     */
+    socialSecurityNumber?: string | null;
+    cellphoneNumber: string;
+    /**
+     * Seguro privado
+     */
+    privateInsurance?: string | null;
+    /**
+     * Calculated from birth date
+     */
+    age?: number | null;
+    /**
+     * Calculated from height and weight (BMI = weight / (height/100)²)
+     */
+    bmi?: number | null;
+  };
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -195,11 +232,19 @@ export interface QuestionnaireSubmission {
     id?: string | null;
   }[];
   totalScore: number;
-  submittedBy: {
-    firstName: string;
-    lastName: string;
-    email: string;
-  };
+  /**
+   * Original risk level as calculated by the questionnaire-specific scorer
+   */
+  riskLevel: string;
+  /**
+   * Standardized risk level for filtering and comparison across questionnaires
+   */
+  standardRiskLevel: 'minimal' | 'low' | 'moderate' | 'high' | 'severe';
+  /**
+   * Additional description or interpretation of the risk level
+   */
+  riskDescription?: string | null;
+  submittedBy: string | User;
   updatedAt: string;
   createdAt: string;
 }
@@ -273,6 +318,24 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
+  profile?:
+    | T
+    | {
+        firstName?: T;
+        lastName?: T;
+        birthDate?: T;
+        height?: T;
+        weight?: T;
+        sex?: T;
+        currentSmoking?: T;
+        idNumber?: T;
+        socialSecurityNumber?: T;
+        cellphoneNumber?: T;
+        privateInsurance?: T;
+        age?: T;
+        bmi?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -347,13 +410,10 @@ export interface QuestionnaireSubmissionsSelect<T extends boolean = true> {
         id?: T;
       };
   totalScore?: T;
-  submittedBy?:
-    | T
-    | {
-        firstName?: T;
-        lastName?: T;
-        email?: T;
-      };
+  riskLevel?: T;
+  standardRiskLevel?: T;
+  riskDescription?: T;
+  submittedBy?: T;
   updatedAt?: T;
   createdAt?: T;
 }

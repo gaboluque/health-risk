@@ -4,22 +4,30 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { QuestionnaireSchema, FormData, SubmissionResponse } from '@/lib/types/questionnaire'
+import { StandardRiskLevel } from '@/lib/types/questionnaire'
+import type { UserProfile } from '@/lib/types/user-profile'
 import { BaseScorer } from '@/lib/scorers/BaseScorer'
+import { findOrCreateUser } from '@/lib/services/user-service'
 
 interface SubmitQuestionnaireParams {
   questionnaire: QuestionnaireSchema
   formData: FormData
+  userProfile: UserProfile
   scorerClass: new (submission: QuestionnaireSubmission, formData: FormData) => BaseScorer
 }
 
 export async function submitQuestionnaire({
   questionnaire,
   formData,
+  userProfile,
   scorerClass,
 }: SubmitQuestionnaireParams): Promise<SubmissionResponse> {
   try {
     const payloadConfig = await config
     const payload = await getPayload({ config: payloadConfig })
+
+    // Find or create user based on the profile information
+    const { user, isNewUser } = await findOrCreateUser({ profile: userProfile })
 
     // Create the submission data structure
     const submittedAnswers = questionnaire.questions.map((question, index) => {
@@ -69,31 +77,51 @@ export async function submitQuestionnaire({
       })
     }
 
-    // Create the questionnaire submission in the database
+    // Create a temporary submission to calculate risk
+    const tempSubmission: QuestionnaireSubmission = {
+      id: '',
+      questionnaire: questionnaireDoc.docs[0].id,
+      submittedAnswers,
+      totalScore,
+      riskLevel: '',
+      standardRiskLevel: StandardRiskLevel.LOW,
+      riskDescription: '',
+      submittedBy: user.id,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
+
+    // Run the scorer to get risk information
+    const scorer = new scorerClass(tempSubmission, formData)
+    const riskResult = scorer.calculateRisk()
+
+    // Create the questionnaire submission in the database with risk information
     const submission = (await payload.create({
       collection: 'questionnaire-submissions',
       data: {
         questionnaire: questionnaireDoc.docs[0].id, // Use the actual database document ID
         submittedAnswers,
         totalScore,
-        submittedBy: {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-        },
+        riskLevel: riskResult.risk,
+        standardRiskLevel: riskResult.standardRiskLevel,
+        riskDescription: riskResult.riskDescription || '',
+        submittedBy: user.id, // Reference the user by ID
       },
     })) as QuestionnaireSubmission
-
-    // Run the scorer
-    const scorer = new scorerClass(submission, formData)
-    const riskResult = scorer.calculateRisk()
 
     return {
       success: true,
       data: {
         submission: {
           id: submission.id,
-          submittedBy: submission.submittedBy,
+          submittedBy: user.id,
+        },
+        user: {
+          id: user.id,
+          firstName: user.profile?.firstName || '',
+          lastName: user.profile?.lastName || '',
+          email: user.email,
+          isNewUser,
         },
         riskResult,
       },

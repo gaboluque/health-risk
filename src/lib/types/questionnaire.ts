@@ -66,19 +66,33 @@ export interface FormData {
   answers: Record<string, string>
 }
 
+// Standardized risk levels across all questionnaires
+export enum StandardRiskLevel {
+  MINIMAL = 'minimal',
+  LOW = 'low',
+  MODERATE = 'moderate',
+  HIGH = 'high',
+  SEVERE = 'severe',
+}
+
 export interface RiskResult {
   score: number
   risk: string
+  standardRiskLevel: StandardRiskLevel
+  riskDescription?: string
 }
 
 export interface SubmissionResult {
   submission: {
     id: string
-    submittedBy: {
-      firstName: string
-      lastName: string
-      email: string
-    }
+    submittedBy: string // User ID
+  }
+  user: {
+    id: string
+    firstName: string
+    lastName: string
+    email: string
+    isNewUser: boolean
   }
   riskResult: RiskResult
 }

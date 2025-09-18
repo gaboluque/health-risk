@@ -75,6 +75,8 @@ export class FRAXScorer extends BaseScorer {
     return {
       score: majorFractureRisk,
       risk,
+      standardRiskLevel: this.mapToStandardRiskLevel(risk),
+      riskDescription: `10-year probability of major osteoporotic fracture: ${majorFractureRisk}%`,
     }
   }
 

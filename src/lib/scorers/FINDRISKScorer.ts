@@ -45,6 +45,8 @@ export class FINDRISKScorer extends BaseScorer {
     return {
       score: totalScore,
       risk,
+      standardRiskLevel: this.mapToStandardRiskLevel(risk),
+      riskDescription: this.getRiskDescription(totalScore),
     }
   }
 
@@ -180,6 +182,20 @@ export class FINDRISKScorer extends BaseScorer {
       return 'High Risk'
     } else {
       return 'Very High Risk'
+    }
+  }
+
+  private getRiskDescription(score: number): string {
+    if (score < 7) {
+      return '1 in 100 will develop type 2 diabetes in 10 years'
+    } else if (score >= 7 && score <= 11) {
+      return '1 in 25 will develop type 2 diabetes in 10 years'
+    } else if (score >= 12 && score <= 14) {
+      return '1 in 6 will develop type 2 diabetes in 10 years'
+    } else if (score >= 15 && score <= 20) {
+      return '1 in 3 will develop type 2 diabetes in 10 years'
+    } else {
+      return '1 in 2 will develop type 2 diabetes in 10 years'
     }
   }
 }

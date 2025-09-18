@@ -65,6 +65,8 @@ export class ASCVDScorer extends BaseScorer {
     return {
       score: riskScore,
       risk: risk.name,
+      standardRiskLevel: this.mapToStandardRiskLevel(risk.name),
+      riskDescription: risk.description,
     }
   }
 

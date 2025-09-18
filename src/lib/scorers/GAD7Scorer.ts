@@ -48,6 +48,8 @@ export class GAD7Scorer extends BaseScorer {
     return {
       score: totalScore,
       risk: severityCategory,
+      standardRiskLevel: this.mapToStandardRiskLevel(severityCategory),
+      riskDescription: this.getSeverityDescription(totalScore),
     }
   }
 
@@ -88,6 +90,20 @@ export class GAD7Scorer extends BaseScorer {
       return 'Severe Anxiety'
     } else {
       return 'Invalid Score'
+    }
+  }
+
+  private getSeverityDescription(totalScore: number): string {
+    if (totalScore >= 0 && totalScore <= 4) {
+      return 'Minimal anxiety symptoms. No treatment needed.'
+    } else if (totalScore >= 5 && totalScore <= 9) {
+      return 'Mild anxiety symptoms. Watchful waiting and self-help recommended.'
+    } else if (totalScore >= 10 && totalScore <= 14) {
+      return 'Moderate anxiety symptoms. Consider counseling or medication.'
+    } else if (totalScore >= 15 && totalScore <= 21) {
+      return 'Severe anxiety symptoms. Treatment strongly recommended.'
+    } else {
+      return 'Invalid score range'
     }
   }
 }

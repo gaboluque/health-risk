@@ -5,7 +5,7 @@ export interface UserProfile {
   birthDate: string // YYYY-MM-DD format
   height: number // in cm
   weight: number // in kg
-  sex: string
+  sex: 'male' | 'female'
   currentSmoking?: boolean // Added for autofilling questionnaires
   idNumber: string // ID Number
   socialSecurityNumber?: string // Numero de Caja de Seguro Social (optional)
