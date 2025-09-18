@@ -1,7 +1,12 @@
+'use client'
+
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Heart, Activity, Bone, Brain, Shield, ArrowRight } from 'lucide-react'
 import { ProfileGate } from '@/components/profile/ProfileGate'
+import { useUserProfile } from '@/contexts/UserProfileContext'
+import { getUserSubmissions, type UserSubmissionSummary } from '@/lib/actions/get-user-submissions'
+import { RiskBadge } from '@/components/ui/risk-badge'
 
 import './styles.css'
 
@@ -58,7 +63,34 @@ const healthAssessments = [
   },
 ]
 
-export default async function HomePage() {
+export default function HomePage() {
+  const { profile, isProfileComplete } = useUserProfile()
+  const [submissions, setSubmissions] = useState<UserSubmissionSummary[]>([])
+  const [_loadingSubmissions, setLoadingSubmissions] = useState(false)
+
+  // Fetch submissions when profile is available
+  useEffect(() => {
+    if (profile && isProfileComplete) {
+      setLoadingSubmissions(true)
+      getUserSubmissions(profile)
+        .then(setSubmissions)
+        .catch((error) => {
+          console.error('Error fetching submissions:', error)
+          setSubmissions([])
+        })
+        .finally(() => setLoadingSubmissions(false))
+    }
+  }, [profile, isProfileComplete])
+
+  // Helper function to get submission data for a specific assessment
+  const getSubmissionForAssessment = (assessmentId: string) => {
+    return submissions.find(
+      (sub) =>
+        sub.questionnaireId === assessmentId ||
+        sub.questionnaireName.toLowerCase().includes(assessmentId.toLowerCase()),
+    )
+  }
+
   return (
     <ProfileGate>
       <div className="flex flex-col min-h-full">
@@ -70,6 +102,9 @@ export default async function HomePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {healthAssessments.map((assessment) => {
                 const IconComponent = assessment.icon
+                const submission = getSubmissionForAssessment(assessment.id)
+                const hasSubmission = submission?.lastSubmission
+
                 return (
                   <Link key={assessment.id} href={`/${assessment.id}`} className="group">
                     <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300 transform hover:-translate-y-1">
@@ -77,6 +112,12 @@ export default async function HomePage() {
                         <div className={`p-3 rounded-xl ${assessment.bgColor}`}>
                           <IconComponent className={`h-6 w-6 ${assessment.textColor}`} />
                         </div>
+                        {hasSubmission && (
+                          <RiskBadge
+                            riskLevel={submission.lastSubmission!.standardRiskLevel}
+                            className="ml-2"
+                          />
+                        )}
                       </div>
 
                       <div className="mb-4">
@@ -87,11 +128,21 @@ export default async function HomePage() {
                           <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-600 transition-colors" />
                         </div>
                         <p className="text-sm text-slate-600 mb-3">{assessment.description}</p>
-                        <span
-                          className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${assessment.bgColor} ${assessment.textColor}`}
-                        >
-                          {assessment.category}
-                        </span>
+                        <div className="flex items-center justify-between">
+                          <span
+                            className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${assessment.bgColor} ${assessment.textColor}`}
+                          >
+                            {assessment.category}
+                          </span>
+                          {hasSubmission && (
+                            <span className="text-xs text-slate-500">
+                              Last completed:{' '}
+                              {new Date(
+                                submission.lastSubmission!.submittedAt,
+                              ).toLocaleDateString()}
+                            </span>
+                          )}
+                        </div>
                       </div>
 
                       <div
