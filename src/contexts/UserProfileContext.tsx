@@ -55,7 +55,9 @@ export function UserProfileProvider({ children }: { children: React.ReactNode })
     profile.birthDate.trim() !== '' &&
     profile.height > 0 &&
     profile.weight > 0 &&
-    profile.sex.trim() !== ''
+    profile.sex.trim() !== '' &&
+    profile.idNumber.trim() !== '' &&
+    profile.cellphoneNumber.trim() !== ''
 
   return (
     <UserProfileContext.Provider

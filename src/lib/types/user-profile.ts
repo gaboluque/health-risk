@@ -7,6 +7,10 @@ export interface UserProfile {
   weight: number // in kg
   sex: string
   currentSmoking?: boolean // Added for autofilling questionnaires
+  idNumber: string // ID Number
+  socialSecurityNumber?: string // Numero de Caja de Seguro Social (optional)
+  cellphoneNumber: string // Cellphone number
+  privateInsurance?: string // Seguro privado
   createdAt: string
   // Calculated fields (computed from the above)
   age?: number

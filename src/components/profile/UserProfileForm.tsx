@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { Mail, Calendar, Scale, Users, Ruler, Cigarette, Check, X } from 'lucide-react'
+import { Mail, Calendar, Scale, Ruler, Phone, CreditCard } from 'lucide-react'
 import { enrichProfileWithCalculations } from '@/lib/utils/health-calculations'
 import type { UserProfile } from '@/lib/types/user-profile'
 
@@ -24,6 +24,10 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
     weight: initialProfile?.weight,
     sex: initialProfile?.sex || '',
     currentSmoking: initialProfile?.currentSmoking,
+    idNumber: initialProfile?.idNumber || '',
+    socialSecurityNumber: initialProfile?.socialSecurityNumber || '',
+    cellphoneNumber: initialProfile?.cellphoneNumber || '',
+    privateInsurance: initialProfile?.privateInsurance || '',
   })
   const [error, setError] = useState<string | null>(null)
 
@@ -47,6 +51,8 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
     if (!formData.height || formData.height <= 0) missingFields.push('Height')
     if (!formData.weight || formData.weight <= 0) missingFields.push('Weight')
     if (!formData.sex?.trim()) missingFields.push('Biological Sex')
+    if (!formData.idNumber?.trim()) missingFields.push('ID Number')
+    if (!formData.cellphoneNumber?.trim()) missingFields.push('Cellphone Number')
 
     if (missingFields.length > 0) {
       setError(`Please fill in the following required fields: ${missingFields.join(', ')}`)
@@ -82,6 +88,10 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
       weight: formData.weight,
       sex: formData.sex,
       currentSmoking: formData.currentSmoking,
+      idNumber: formData.idNumber!,
+      socialSecurityNumber: formData.socialSecurityNumber,
+      cellphoneNumber: formData.cellphoneNumber!,
+      privateInsurance: formData.privateInsurance,
       createdAt: new Date().toISOString(),
     })
 
@@ -157,6 +167,93 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
                 className="mt-1"
                 required
               />
+            </div>
+          </div>
+        </div>
+
+        {/* Contact & Identification Information */}
+        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+          <div className="flex items-center mb-6">
+            <div className="p-2 bg-purple-100 rounded-lg mr-3">
+              <CreditCard className="h-5 w-5 text-purple-600" />
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-slate-900">Contact & Identification</h3>
+              <p className="text-sm text-slate-600">
+                Required for identification and communication purposes
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <Label htmlFor="idNumber" className="text-sm font-medium text-slate-700">
+                ID Number <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="idNumber"
+                type="text"
+                value={formData.idNumber}
+                onChange={(e) => handleInputChange('idNumber', e.target.value)}
+                placeholder="Enter your ID number"
+                className="mt-1"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="cellphoneNumber" className="text-sm font-medium text-slate-700">
+                Cellphone Number <span className="text-red-500">*</span>
+              </Label>
+              <div className="flex items-center space-x-2 mt-1">
+                <Phone className="h-4 w-4 text-slate-400" />
+                <Input
+                  id="cellphoneNumber"
+                  type="tel"
+                  value={formData.cellphoneNumber}
+                  onChange={(e) => handleInputChange('cellphoneNumber', e.target.value)}
+                  placeholder="Enter your cellphone number"
+                  className="flex-1"
+                  required
+                />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="socialSecurityNumber" className="text-sm font-medium text-slate-700">
+                Número de Caja de Seguro Social
+              </Label>
+              <p className="text-xs text-slate-500 mb-2">Optional</p>
+              <Input
+                id="socialSecurityNumber"
+                type="text"
+                value={formData.socialSecurityNumber}
+                onChange={(e) => handleInputChange('socialSecurityNumber', e.target.value)}
+                placeholder="Enter your social security number"
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="privateInsurance" className="text-sm font-medium text-slate-700">
+                Seguro Privado
+              </Label>
+              <p className="text-xs text-slate-500 mb-2">
+                Optional - Select if you have private insurance
+              </p>
+              <select
+                id="privateInsurance"
+                value={formData.privateInsurance}
+                onChange={(e) => handleInputChange('privateInsurance', e.target.value)}
+                className="mt-1 w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">Select insurance provider</option>
+                <option value="Palig">Palig</option>
+                <option value="IS">IS</option>
+                <option value="ASSA">ASSA</option>
+                <option value="Mapfre">Mapfre</option>
+                <option value="Ancon">Ancon</option>
+                <option value="Sura">Sura</option>
+                <option value="General de Seguros">General de Seguros</option>
+                <option value="Otras">Otro</option>
+              </select>
             </div>
           </div>
         </div>
