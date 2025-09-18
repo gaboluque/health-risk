@@ -62,27 +62,27 @@
       "options": [
         {
           "value": "male_under_94",
-          "label": "Male: Under 94 cm (37 inches)"
+          "label": "Under 94 cm (37 inches)"
         },
         {
           "value": "male_94_102",
-          "label": "Male: 94-102 cm (37-40 inches)"
+          "label": "94-102 cm (37-40 inches)"
         },
         {
           "value": "male_over_102",
-          "label": "Male: Over 102 cm (40 inches)"
+          "label": "Over 102 cm (40 inches)"
         },
         {
           "value": "female_under_80",
-          "label": "Female: Under 80 cm (31 inches)"
+          "label": "Under 80 cm (31 inches)"
         },
         {
           "value": "female_80_88",
-          "label": "Female: 80-88 cm (31-35 inches)"
+          "label": "80-88 cm (31-35 inches)"
         },
         {
           "value": "female_over_88",
-          "label": "Female: Over 88 cm (35 inches)"
+          "label": "Over 88 cm (35 inches)"
         }
       ]
     },

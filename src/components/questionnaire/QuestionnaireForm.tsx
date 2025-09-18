@@ -11,6 +11,8 @@ import type {
   FormData,
   SubmissionResult,
   SubmissionResponse,
+  QuestionnaireQuestion,
+  QuestionnaireOption,
 } from '@/lib/types/questionnaire'
 
 interface QuestionnaireFormProps {
@@ -53,6 +55,28 @@ export function QuestionnaireForm({
   const displayedQuestions = questionnaire.questions.filter(
     (question) => !profileAnsweredQuestions.has(question.id),
   )
+
+  // Filter question options based on profile data (e.g., sex-specific options)
+  const getFilteredOptions = (question: QuestionnaireQuestion): QuestionnaireOption[] => {
+    // Filter waist circumference options based on user's sex
+    if (question.id === 'waist_circumference' && profile?.sex) {
+      const userSex = profile.sex.toLowerCase()
+      return question.options.filter((option: QuestionnaireOption) => {
+        const optionValue = option.value.toLowerCase()
+        // Show only options that match the user's sex
+        if (userSex === 'male') {
+          return optionValue.startsWith('male_')
+        } else if (userSex === 'female') {
+          return optionValue.startsWith('female_')
+        }
+        // If sex is not male/female, show all options
+        return true
+      })
+    }
+
+    // Return all options for other questions
+    return question.options
+  }
 
   // Update form data when profile changes
   useEffect(() => {
@@ -279,7 +303,7 @@ export function QuestionnaireForm({
                   className="flex-col items-stretch gap-3 w-full"
                   variant="outline"
                 >
-                  {question.options.map((option) => (
+                  {getFilteredOptions(question).map((option) => (
                     <ToggleGroupItem
                       key={option.value}
                       value={option.value}
