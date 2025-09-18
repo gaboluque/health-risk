@@ -93,7 +93,9 @@ export function Modal({
         </div>
 
         {/* Modal Content */}
-        <div className="overflow-y-auto max-h-[calc(95vh-80px)]">{children}</div>
+        <div className="overflow-y-auto max-h-[calc(95vh-80px)] flex items-center justify-center">
+          {children}
+        </div>
       </div>
     </div>
   )
