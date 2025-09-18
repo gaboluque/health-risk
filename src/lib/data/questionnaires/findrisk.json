@@ -1,0 +1,253 @@
+{
+  "id": "findrisk",
+  "name": "FINDRISK Diabetes Risk Calculator",
+  "description": "Finnish Diabetes Risk Score - Predicts 10-year risk of developing Type 2 diabetes",
+  "version": "1.0.0",
+  "category": "diabetes",
+  "questions": [
+    {
+      "id": "age",
+      "type": "select",
+      "label": "Age",
+      "description": "Your current age in years",
+      "required": true,
+      "options": [
+        {
+          "value": "under_45",
+          "label": "Under 45 years"
+        },
+        {
+          "value": "45_54",
+          "label": "45-54 years"
+        },
+        {
+          "value": "55_64",
+          "label": "55-64 years"
+        },
+        {
+          "value": "65_over",
+          "label": "65 years or over"
+        }
+      ]
+    },
+    {
+      "id": "bmi",
+      "type": "select",
+      "label": "Body Mass Index (BMI)",
+      "description": "Your BMI in kg/m². If you don't know your BMI, you can calculate it: weight (kg) ÷ [height (m)]²",
+      "required": true,
+      "options": [
+        {
+          "value": "under_25",
+          "label": "Under 25 kg/m² (Normal weight)"
+        },
+        {
+          "value": "25_30",
+          "label": "25-30 kg/m² (Overweight)"
+        },
+        {
+          "value": "over_30",
+          "label": "Over 30 kg/m² (Obese)"
+        }
+      ]
+    },
+    {
+      "id": "waist_circumference",
+      "type": "select",
+      "label": "Waist Circumference",
+      "description": "Measure around your waist at the level of your navel",
+      "required": true,
+      "options": [
+        {
+          "value": "male_under_94",
+          "label": "Male: Under 94 cm (37 inches)"
+        },
+        {
+          "value": "male_94_102",
+          "label": "Male: 94-102 cm (37-40 inches)"
+        },
+        {
+          "value": "male_over_102",
+          "label": "Male: Over 102 cm (40 inches)"
+        },
+        {
+          "value": "female_under_80",
+          "label": "Female: Under 80 cm (31 inches)"
+        },
+        {
+          "value": "female_80_88",
+          "label": "Female: 80-88 cm (31-35 inches)"
+        },
+        {
+          "value": "female_over_88",
+          "label": "Female: Over 88 cm (35 inches)"
+        }
+      ]
+    },
+    {
+      "id": "physical_activity",
+      "type": "select",
+      "label": "Physical Activity",
+      "description": "Do you usually have at least 30 minutes of physical activity at work and/or during leisure time (including normal daily activity)?",
+      "required": true,
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes, at least 30 minutes per day"
+        },
+        {
+          "value": "no",
+          "label": "No, less than 30 minutes per day"
+        }
+      ]
+    },
+    {
+      "id": "vegetables_fruits",
+      "type": "select",
+      "label": "Daily Vegetables and Fruits",
+      "description": "Do you eat vegetables, fruits or berries every day?",
+      "required": true,
+      "options": [
+        {
+          "value": "yes",
+          "label": "Yes, every day"
+        },
+        {
+          "value": "no",
+          "label": "No, not every day"
+        }
+      ]
+    },
+    {
+      "id": "bp_medication",
+      "type": "select",
+      "label": "Blood Pressure Medication",
+      "description": "Have you ever taken medication for high blood pressure on a regular basis?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "high_glucose_history",
+      "type": "select",
+      "label": "History of High Blood Glucose",
+      "description": "Have you ever been found to have high blood glucose (e.g., in a health examination, during an illness, during pregnancy)?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "family_diabetes_history",
+      "type": "select",
+      "label": "Family History of Diabetes",
+      "description": "Have any of your family members been diagnosed with Type 1 or Type 2 diabetes?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "grandparent_relative",
+          "label": "Yes: grandparent, aunt, uncle, or first cousin (but not parent, sibling or child)"
+        },
+        {
+          "value": "parent_sibling_child",
+          "label": "Yes: parent, sibling, or own child"
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "algorithm": "findrisk_points",
+    "output": {
+      "type": "percentage",
+      "label": "10-Year Diabetes Risk",
+      "unit": "%",
+      "precision": 0
+    },
+    "riskCategories": [
+      {
+        "name": "Low Risk",
+        "range": {
+          "min": 0,
+          "max": 6
+        },
+        "color": "#10b981",
+        "description": "Low risk (1% chance) - Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 100"
+      },
+      {
+        "name": "Slightly Elevated Risk",
+        "range": {
+          "min": 7,
+          "max": 11
+        },
+        "color": "#f59e0b",
+        "description": "Slightly elevated risk (4% chance) - Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 25"
+      },
+      {
+        "name": "Moderate Risk",
+        "range": {
+          "min": 12,
+          "max": 14
+        },
+        "color": "#ef4444",
+        "description": "Moderate risk (17% chance) - Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 6"
+      },
+      {
+        "name": "High Risk",
+        "range": {
+          "min": 15,
+          "max": 20
+        },
+        "color": "#dc2626",
+        "description": "High risk (33% chance) - Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 3"
+      },
+      {
+        "name": "Very High Risk",
+        "range": {
+          "min": 21,
+          "max": 26
+        },
+        "color": "#991b1b",
+        "description": "Very high risk (50% chance) - Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 2"
+      }
+    ]
+  },
+  "references": [
+    {
+      "title": "FINDRISK: A practical tool to identify individuals at high risk for type 2 diabetes",
+      "url": "https://www.diabetes.fi/en/finnish_diabetes_association/for_professionals/type_2_diabetes_risk_test"
+    },
+    {
+      "title": "Finnish Diabetes Risk Score for screening of undiagnosed type 2 diabetes",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12610029/"
+    },
+    {
+      "title": "Prevention of type 2 diabetes mellitus by changes in lifestyle among subjects with impaired glucose tolerance",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11333990/"
+    }
+  ],
+  "metadata": {
+    "createdAt": "2025-09-18",
+    "estimatedCompletionTime": "2-3 minutes",
+    "targetPopulation": "Adults aged 18 years and older without known diabetes",
+    "clinicalUse": "Screening tool for identifying individuals at high risk of developing Type 2 diabetes within 10 years"
+  }
+}

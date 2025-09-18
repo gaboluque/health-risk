@@ -1,5 +1,6 @@
 import { BaseScorer } from './BaseScorer'
 import type { QuestionnaireSubmission } from '@/payload-types'
+import type { FormData } from '@/lib/types/questionnaire'
 import type { RiskResult } from './BaseScorer'
 
 export interface ASCVDInputs {
@@ -42,8 +43,8 @@ export class ASCVDScorer extends BaseScorer {
     },
   ]
 
-  constructor(questionnaireSubmission: QuestionnaireSubmission) {
-    super(questionnaireSubmission)
+  constructor(questionnaireSubmission: QuestionnaireSubmission, formData: FormData) {
+    super(questionnaireSubmission, formData)
   }
 
   /**

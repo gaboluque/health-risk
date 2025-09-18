@@ -2,23 +2,23 @@
 
 import React from 'react'
 import { QuestionnaireContainer } from '@/components/questionnaire'
-import { submitASCVDQuestionnaire } from '../actions/submit-ascvd'
+import { submitFINDRISKQuestionnaire } from '../actions/submit-findrisk'
 import type { QuestionnaireSchema, FormData } from '@/lib/types/questionnaire'
 
-interface ASCVDFormProps {
+interface FINDRISKFormProps {
   questionnaire: QuestionnaireSchema
 }
 
-export function ASCVDForm({ questionnaire }: ASCVDFormProps) {
+export function FINDRISKForm({ questionnaire }: FINDRISKFormProps) {
   const handleSubmit = async (formData: FormData) => {
-    return submitASCVDQuestionnaire(questionnaire, formData)
+    return submitFINDRISKQuestionnaire(questionnaire, formData)
   }
 
   return (
     <QuestionnaireContainer
       questionnaire={questionnaire}
       onSubmit={handleSubmit}
-      submitButtonText="Calculate ASCVD Risk"
+      submitButtonText="Calculate Diabetes Risk"
       loadingText="Calculating Risk..."
     />
   )
