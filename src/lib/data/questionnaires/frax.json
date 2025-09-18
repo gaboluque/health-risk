@@ -1,0 +1,317 @@
+{
+  "id": "frax",
+  "name": "FRAX Fracture Risk Assessment",
+  "description": "10-year probability calculator for major osteoporotic fracture and hip fracture",
+  "version": "1.0.0",
+  "category": "bone_health",
+  "questions": [
+    {
+      "id": "age",
+      "type": "select",
+      "label": "Age",
+      "description": "Your current age in years",
+      "required": true,
+      "options": [
+        {
+          "value": "under_40",
+          "label": "Under 40 years"
+        },
+        {
+          "value": "40-44",
+          "label": "40-44 years"
+        },
+        {
+          "value": "45-49",
+          "label": "45-49 years"
+        },
+        {
+          "value": "50-54",
+          "label": "50-54 years"
+        },
+        {
+          "value": "55-59",
+          "label": "55-59 years"
+        },
+        {
+          "value": "60-64",
+          "label": "60-64 years"
+        },
+        {
+          "value": "65-69",
+          "label": "65-69 years"
+        },
+        {
+          "value": "70-74",
+          "label": "70-74 years"
+        },
+        {
+          "value": "75-79",
+          "label": "75-79 years"
+        },
+        {
+          "value": "80-84",
+          "label": "80-84 years"
+        },
+        {
+          "value": "85-90",
+          "label": "85-90 years"
+        }
+      ]
+    },
+    {
+      "id": "sex",
+      "type": "select",
+      "label": "Sex",
+      "description": "Biological sex",
+      "required": true,
+      "options": [
+        {
+          "value": "male",
+          "label": "Male"
+        },
+        {
+          "value": "female",
+          "label": "Female"
+        }
+      ]
+    },
+    {
+      "id": "bmi",
+      "type": "select",
+      "label": "Body Mass Index (BMI)",
+      "description": "Your BMI in kg/m². If you don't know your BMI, you can calculate it: weight (kg) ÷ [height (m)]²",
+      "required": true,
+      "options": [
+        {
+          "value": "under_19",
+          "label": "Under 19 kg/m² (Underweight)"
+        },
+        {
+          "value": "19-25",
+          "label": "19-25 kg/m² (Normal weight)"
+        },
+        {
+          "value": "25-30",
+          "label": "25-30 kg/m² (Overweight)"
+        },
+        {
+          "value": "30-35",
+          "label": "30-35 kg/m² (Obese Class I)"
+        },
+        {
+          "value": "over_35",
+          "label": "Over 35 kg/m² (Obese Class II+)"
+        }
+      ]
+    },
+    {
+      "id": "previous_fracture",
+      "type": "select",
+      "label": "Previous Fracture",
+      "description": "Have you had a fracture after age 50 from a fall from standing height or less?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "parent_hip_fracture",
+      "type": "select",
+      "label": "Parent Hip Fracture",
+      "description": "Did either of your parents break a hip?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "current_smoking",
+      "type": "select",
+      "label": "Current Smoking",
+      "description": "Do you currently smoke tobacco?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "glucocorticoids",
+      "type": "select",
+      "label": "Glucocorticoids",
+      "description": "Have you ever taken glucocorticoids (cortisone, prednisone) for more than 3 months?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "rheumatoid_arthritis",
+      "type": "select",
+      "label": "Rheumatoid Arthritis",
+      "description": "Do you have rheumatoid arthritis?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "secondary_osteoporosis",
+      "type": "select",
+      "label": "Secondary Osteoporosis",
+      "description": "Do you have any conditions associated with secondary osteoporosis (e.g., Type 1 diabetes, osteogenesis imperfecta, hyperthyroidism, hypogonadism, premature menopause, chronic malnutrition, chronic liver disease)?",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No"
+        },
+        {
+          "value": "yes",
+          "label": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "alcohol",
+      "type": "select",
+      "label": "Alcohol Consumption",
+      "description": "Do you drink 3 or more units of alcohol per day? (1 unit = glass of beer, single measure of spirits, or medium-sized glass of wine)",
+      "required": true,
+      "options": [
+        {
+          "value": "no",
+          "label": "No (less than 3 units per day)"
+        },
+        {
+          "value": "yes",
+          "label": "Yes (3 or more units per day)"
+        }
+      ]
+    },
+    {
+      "id": "bmd_t_score",
+      "type": "select",
+      "label": "Bone Density (BMD T-score)",
+      "description": "If you have had a bone density test (DEXA), what was your femoral neck T-score result?",
+      "required": true,
+      "options": [
+        {
+          "value": "not_available",
+          "label": "BMD test not available or not done"
+        },
+        {
+          "value": "above_minus_1",
+          "label": "Above -1.0 (Normal bone density)"
+        },
+        {
+          "value": "minus_1_to_minus_2.5",
+          "label": "-1.0 to -2.5 (Osteopenia - Low bone density)"
+        },
+        {
+          "value": "below_minus_2.5",
+          "label": "Below -2.5 (Osteoporosis - Very low bone density)"
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "algorithm": "frax_fracture_risk",
+    "output": {
+      "type": "dual_percentage",
+      "label": "10-Year Fracture Risk",
+      "unit": "%",
+      "precision": 1,
+      "primary": "Major Osteoporotic Fracture",
+      "secondary": "Hip Fracture"
+    },
+    "riskCategories": [
+      {
+        "name": "Low Risk",
+        "range": {
+          "min": 0,
+          "max": 9.9
+        },
+        "color": "#10b981",
+        "description": "Low 10-year fracture risk - Focus on prevention and lifestyle measures"
+      },
+      {
+        "name": "Moderate Risk",
+        "range": {
+          "min": 10,
+          "max": 19.9
+        },
+        "color": "#f59e0b",
+        "description": "Moderate 10-year fracture risk - Consider treatment based on additional factors"
+      },
+      {
+        "name": "High Risk",
+        "range": {
+          "min": 20,
+          "max": 100
+        },
+        "color": "#ef4444",
+        "description": "High 10-year fracture risk - Treatment recommended"
+      }
+    ]
+  },
+  "references": [
+    {
+      "title": "FRAX WHO Fracture Risk Assessment Tool",
+      "url": "https://frax.shef.ac.uk/"
+    },
+    {
+      "title": "Kanis JA, et al. FRAX and the assessment of fracture probability in men and women from the UK",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18525909/"
+    },
+    {
+      "title": "WHO Technical Report: Assessment of fracture risk and its application to screening for postmenopausal osteoporosis",
+      "url": "https://apps.who.int/iris/handle/10665/39142"
+    },
+    {
+      "title": "Clinical Guidelines: Osteoporosis prevention, diagnosis, and therapy",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/11346808/"
+    }
+  ],
+  "metadata": {
+    "createdAt": "2025-09-18",
+    "estimatedCompletionTime": "3-5 minutes",
+    "targetPopulation": "Adults aged 40-90 years at risk for osteoporotic fractures",
+    "clinicalUse": "Assessment of 10-year probability of major osteoporotic fracture and hip fracture to guide treatment decisions",
+    "disclaimer": "This is a simplified implementation for educational purposes. For clinical use, please use the official FRAX calculator at frax.shef.ac.uk which includes country-specific mortality data and more precise algorithms."
+  }
+}

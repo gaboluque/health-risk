@@ -38,6 +38,9 @@ export default async function HomePage() {
           <Link href="/findrisk">
             <Button className="mb-4 mr-4">Take FINDRISK Risk Assessment</Button>
           </Link>
+          <Link href="/frax">
+            <Button className="mb-4 mr-4">Take FRAX Risk Assessment</Button>
+          </Link>
           <a
             className="admin"
             href={payloadConfig.routes.admin}
