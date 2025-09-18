@@ -104,21 +104,23 @@ export function QuestionnaireResults({
               <AlertTriangle className="h-5 w-5 text-amber-600" />
             </div>
             <h4 className="text-base sm:text-lg font-semibold text-amber-900">
-              Important Medical Disclaimer
+              Aviso Médico Importante
             </h4>
           </div>
           <div className="text-sm sm:text-base text-amber-800 leading-relaxed space-y-3 pl-0">
             <p>
-              This risk calculator is for <strong>informational purposes only</strong> and should
-              not replace professional medical advice, diagnosis, or treatment.
+              Esta calculadora de riesgo es solo para <strong>fines informativos</strong> y no debe
+              reemplazar el consejo, diagnóstico o tratamiento médico profesional.
             </p>
             <p>
-              The results are estimates based on population data and may not reflect your individual
-              risk. Many factors can influence your personal health outcomes.
+              Los resultados son estimaciones basadas en datos poblacionales y pueden no reflejar tu
+              riesgo individual. Muchos factores pueden influir en tus resultados de salud
+              personales.
             </p>
             <p>
-              <strong>Please consult with your healthcare provider</strong> to discuss these results
-              and determine the most appropriate care plan for your specific situation.
+              <strong>Por favor consulta con tu proveedor de atención médica</strong> para discutir
+              estos resultados y determinar el plan de atención más apropiado para tu situación
+              específica.
             </p>
           </div>
         </div>
@@ -135,7 +137,7 @@ export function QuestionnaireResults({
               className="flex items-center justify-center gap-2 border-slate-300 hover:bg-slate-100 h-12 sm:h-auto w-full sm:w-auto"
             >
               <RotateCcw className="h-4 w-4" />
-              Retake Assessment
+              Repetir Evaluación
             </Button>
           )}
 
@@ -144,59 +146,13 @@ export function QuestionnaireResults({
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 flex items-center justify-center gap-2 h-12 sm:h-auto w-full"
             >
-              Take Another Assessment
+              Realizar Otra Evaluación
               <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
         </div>
 
         {customActions && <div className="mt-4 flex justify-center">{customActions}</div>}
-      </div>
-
-      {/* Related Assessments */}
-      <div className="bg-white border border-slate-200 rounded-xl sm:rounded-2xl p-4 sm:p-6">
-        <h4 className="text-base sm:text-lg font-semibold text-slate-900 mb-4 text-center px-4 sm:px-0">
-          Consider These Related Assessments
-        </h4>
-        <div className="grid grid-cols-1 gap-3 sm:gap-4">
-          {questionnaire.id !== 'ascvd' && (
-            <Link href="/ascvd" className="group">
-              <div className="p-4 border border-slate-200 rounded-xl hover:border-red-300 hover:bg-red-50 transition-colors min-h-[60px] flex items-center">
-                <div className="flex items-center gap-3 w-full">
-                  <div className="flex-shrink-0 p-3 bg-red-100 rounded-lg group-hover:bg-red-200">
-                    <Heart className="h-5 w-5 text-red-600" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-medium text-slate-900 text-sm sm:text-base">
-                      Heart Health
-                    </div>
-                    <div className="text-xs sm:text-sm text-slate-600">ASCVD Risk Assessment</div>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-slate-600 flex-shrink-0" />
-                </div>
-              </div>
-            </Link>
-          )}
-
-          {questionnaire.id !== 'gad7' && (
-            <Link href="/gad7" className="group">
-              <div className="p-4 border border-slate-200 rounded-xl hover:border-purple-300 hover:bg-purple-50 transition-colors min-h-[60px] flex items-center">
-                <div className="flex items-center gap-3 w-full">
-                  <div className="flex-shrink-0 p-3 bg-purple-100 rounded-lg group-hover:bg-purple-200">
-                    <Brain className="h-5 w-5 text-purple-600" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-medium text-slate-900 text-sm sm:text-base">
-                      Anxiety Screen
-                    </div>
-                    <div className="text-xs sm:text-sm text-slate-600">GAD-7 Assessment</div>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-slate-400 group-hover:text-slate-600 flex-shrink-0" />
-                </div>
-              </div>
-            </Link>
-          )}
-        </div>
       </div>
     </div>
   )

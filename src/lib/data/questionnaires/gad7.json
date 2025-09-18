@@ -1,184 +1,184 @@
 {
   "id": "gad7",
-  "name": "GAD-7 Anxiety Assessment",
-  "description": "7-item self-report questionnaire to screen for and assess severity of generalized anxiety disorder",
-  "patientFriendlyName": "Anxiety Check",
-  "patientFriendlyDescription": "Help us understand how anxiety may be affecting your daily life",
+  "name": "Evaluación de Ansiedad GAD-7",
+  "description": "Cuestionario de autorreporte de 7 elementos para detectar y evaluar la severidad del trastorno de ansiedad generalizada",
+  "patientFriendlyName": "Evaluación de Ansiedad",
+  "patientFriendlyDescription": "Ayúdanos a entender cómo la ansiedad puede estar afectando tu vida diaria",
   "version": "1.0.0",
   "category": "mental_health",
   "questions": [
     {
       "id": "feeling_nervous",
       "type": "select",
-      "label": "Feeling Nervous or Anxious",
-      "description": "Over the last 2 weeks, how often have you felt nervous, anxious, or on edge?",
+      "label": "Sentirse Nervioso o Ansioso",
+      "description": "En las últimas 2 semanas, ¿con qué frecuencia te has sentido nervioso, ansioso o tenso?",
       "required": true,
       "options": [
         {
           "value": "not",
-          "label": "Not at all"
+          "label": "Para nada"
         },
         {
           "value": "several",
-          "label": "Several days"
+          "label": "Varios días"
         },
         {
           "value": "more_than_half",
-          "label": "More than half the days"
+          "label": "Más de la mitad de los días"
         },
         {
           "value": "nearly_every",
-          "label": "Nearly every day"
+          "label": "Casi todos los días"
         }
       ]
     },
     {
       "id": "uncontrollable_worrying",
       "type": "select",
-      "label": "Uncontrollable Worrying",
-      "description": "Over the last 2 weeks, how often have you not been able to stop or control worrying?",
+      "label": "Preocupaciones Incontrolables",
+      "description": "En las últimas 2 semanas, ¿con qué frecuencia no has podido parar o controlar tus preocupaciones?",
       "required": true,
       "options": [
         {
           "value": "not",
-          "label": "Not at all"
+          "label": "Para nada"
         },
         {
           "value": "several",
-          "label": "Several days"
+          "label": "Varios días"
         },
         {
           "value": "more_than_half",
-          "label": "More than half the days"
+          "label": "Más de la mitad de los días"
         },
         {
           "value": "nearly_every",
-          "label": "Nearly every day"
+          "label": "Casi todos los días"
         }
       ]
     },
     {
       "id": "worrying_too_much",
       "type": "select",
-      "label": "Excessive Worrying",
-      "description": "Over the last 2 weeks, how often have you worried too much about different things?",
+      "label": "Preocupaciones Excesivas",
+      "description": "En las últimas 2 semanas, ¿con qué frecuencia has preocupado demasiado sobre diferentes cosas?",
       "required": true,
       "options": [
         {
           "value": "not",
-          "label": "Not at all"
+          "label": "Para nada"
         },
         {
           "value": "several",
-          "label": "Several days"
+          "label": "Varios días"
         },
         {
           "value": "more_than_half",
-          "label": "More than half the days"
+          "label": "Más de la mitad de los días"
         },
         {
           "value": "nearly_every",
-          "label": "Nearly every day"
+          "label": "Casi todos los días"
         }
       ]
     },
     {
       "id": "trouble_relaxing",
       "type": "select",
-      "label": "Trouble Relaxing",
-      "description": "Over the last 2 weeks, how often have you had trouble relaxing?",
+      "label": "Problemas para Relajarse",
+      "description": "En las últimas 2 semanas, ¿con qué frecuencia has tenido problemas para relajarte?",
       "required": true,
       "options": [
         {
           "value": "not",
-          "label": "Not at all"
+          "label": "Para nada"
         },
         {
           "value": "several",
-          "label": "Several days"
+          "label": "Varios días"
         },
         {
           "value": "more_than_half",
-          "label": "More than half the days"
+          "label": "Más de la mitad de los días"
         },
         {
           "value": "nearly_every",
-          "label": "Nearly every day"
+          "label": "Casi todos los días"
         }
       ]
     },
     {
       "id": "restlessness",
       "type": "select",
-      "label": "Restlessness",
-      "description": "Over the last 2 weeks, how often have you been so restless that it's hard to sit still?",
+      "label": "Sin descanso",
+      "description": "En las últimas 2 semanas, ¿con qué frecuencia has estado tan inquieto que es difícil quedarte quieto?",
       "required": true,
       "options": [
         {
           "value": "not",
-          "label": "Not at all"
+          "label": "Para nada"
         },
         {
           "value": "several",
-          "label": "Several days"
+          "label": "Varios días"
         },
         {
           "value": "more_than_half",
-          "label": "More than half the days"
+          "label": "Más de la mitad de los días"
         },
         {
           "value": "nearly_every",
-          "label": "Nearly every day"
+          "label": "Casi todos los días"
         }
       ]
     },
     {
       "id": "easily_annoyed",
       "type": "select",
-      "label": "Irritability",
-      "description": "Over the last 2 weeks, how often have you become easily annoyed or irritable?",
+      "label": "Irritabilidad",
+      "description": "En las últimas 2 semanas, ¿con qué frecuencia te has irritado o has estado irritable?",
       "required": true,
       "options": [
         {
           "value": "not",
-          "label": "Not at all"
+          "label": "Para nada"
         },
         {
           "value": "several",
-          "label": "Several days"
+          "label": "Varios días"
         },
         {
           "value": "more_than_half",
-          "label": "More than half the days"
+          "label": "Más de la mitad de los días"
         },
         {
           "value": "nearly_every",
-          "label": "Nearly every day"
+          "label": "Casi todos los días"
         }
       ]
     },
     {
       "id": "feeling_afraid",
       "type": "select",
-      "label": "Fear of Something Bad Happening",
-      "description": "Over the last 2 weeks, how often have you felt afraid that something awful might happen?",
+      "label": "Miedo a Que Algo Malo Puede Pasar",
+      "description": "En las últimas 2 semanas, ¿con qué frecuencia has sentido miedo de que algo terrible pueda suceder?",
       "required": true,
       "options": [
         {
           "value": "not",
-          "label": "Not at all"
+          "label": "Para nada"
         },
         {
           "value": "several",
-          "label": "Several days"
+          "label": "Varios días"
         },
         {
           "value": "more_than_half",
-          "label": "More than half the days"
+          "label": "Más de la mitad de los días"
         },
         {
           "value": "nearly_every",
-          "label": "Nearly every day"
+          "label": "Casi todos los días"
         }
       ]
     }
@@ -195,73 +195,73 @@
     },
     "riskCategories": [
       {
-        "name": "Minimal Anxiety",
+        "name": "Ansiedad Mínima",
         "range": {
           "min": 0,
           "max": 4
         },
         "color": "#10b981",
-        "description": "Minimal anxiety symptoms - No clinically significant anxiety disorder",
+        "description": "Síntomas de ansiedad mínima - No hay un trastorno de ansiedad clínicamente significativo",
         "recommendations": [
-          "Continue with current coping strategies",
-          "Maintain regular exercise and healthy lifestyle habits",
-          "Practice stress management techniques as needed",
-          "Regular self-monitoring of mental health",
-          "Seek support if symptoms worsen"
+          "Continúa con las estrategias de afrontamiento actuales",
+          "Mantén un ejercicio regular y hábitos de estilo de vida saludable",
+          "Practica técnicas de gestión del estrés según sea necesario",
+          "Monitoreo regular de la salud mental",
+          "Busca apoyo si los síntomas empeoran"
         ]
       },
       {
-        "name": "Mild Anxiety",
+        "name": "Ansiedad Leve",
         "range": {
           "min": 5,
           "max": 9
         },
         "color": "#84cc16",
-        "description": "Mild anxiety symptoms - May indicate mild GAD or adjustment disorder",
+        "description": "Síntomas de ansiedad leve - Puede indicar ansiedad generalizada leve o trastorno de ajuste",
         "recommendations": [
-          "Consider self-help resources and stress management techniques",
-          "Practice relaxation techniques (deep breathing, meditation)",
-          "Maintain regular exercise and good sleep hygiene",
-          "Consider counseling or therapy if symptoms persist",
-          "Monitor symptoms and seek help if they worsen"
+          "Considera recursos de autoayuda y técnicas de gestión del estrés",
+          "Practica técnicas de relajación (respiración profunda, meditación)",
+          "Mantén un ejercicio regular y buena higiene del sueño",
+          "Considera consulta o terapia si los síntomas persisten",
+          "Monitorea los síntomas y busca ayuda si empeoran"
         ]
       },
       {
-        "name": "Moderate Anxiety",
+        "name": "Ansiedad Moderada",
         "range": {
           "min": 10,
           "max": 14
         },
         "color": "#f59e0b",
-        "description": "Moderate anxiety symptoms - Likely indicates GAD or other anxiety disorder",
+        "description": "Síntomas de ansiedad moderada - Probablemente indica ansiedad generalizada o otro trastorno de ansiedad",
         "recommendations": [
-          "Schedule consultation with healthcare provider or mental health professional",
-          "Consider therapy (cognitive-behavioral therapy is highly effective)",
-          "Discuss treatment options including counseling and possibly medication",
-          "Implement structured stress management and coping strategies",
-          "Regular follow-up to monitor progress"
+          "Programa consulta con proveedor de atención médica o profesional de salud mental",
+          "Considera terapia (terapia cognitivo-conductual es altamente efectiva)",
+          "Discute opciones de tratamiento incluyendo consulta y posible medicación",
+          "Implementa estrategias de gestión del estrés y afrontamiento estructurado",
+          "Seguimiento regular para monitorear el progreso"
         ]
       },
       {
-        "name": "Severe Anxiety",
+        "name": "Ansiedad Severa",
         "range": {
           "min": 15,
           "max": 21
         },
         "color": "#ef4444",
-        "description": "Severe anxiety symptoms - Strong indication of GAD requiring immediate attention",
+        "description": "Síntomas de ansiedad severa - Indicación fuerte de ansiedad generalizada que requiere atención inmediata",
         "recommendations": [
-          "Seek immediate consultation with healthcare provider or mental health professional",
-          "Consider urgent referral to psychiatrist or anxiety specialist",
-          "Discuss comprehensive treatment plan including therapy and medication",
-          "Ensure adequate support system is in place",
-          "Consider intensive outpatient treatment if symptoms are severely impairing"
+          "Busca consulta inmediata con proveedor de atención médica o profesional de salud mental",
+          "Considera referencia urgente a psiquiatra o especialista en ansiedad",
+          "Discute plan de tratamiento integral incluyendo terapia y medicación",
+          "Asegura que el sistema de apoyo adecuado esté en lugar",
+          "Considera tratamiento intensivo ambulatorio si los síntomas son severamente limitantes"
         ]
       }
     ]
   },
   "metadata": {
     "createdAt": "2025-09-18",
-    "clinicalUse": "Screening and severity assessment for generalized anxiety disorder; monitoring treatment response"
+    "clinicalUse": "Evaluación y detección del trastorno de ansiedad generalizada; monitoreo de respuesta al tratamiento"
   }
 }

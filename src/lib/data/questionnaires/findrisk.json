@@ -1,130 +1,130 @@
 {
   "id": "findrisk",
-  "name": "FINDRISK Diabetes Risk Calculator",
-  "description": "Finnish Diabetes Risk Score - Predicts 10-year risk of developing Type 2 diabetes",
-  "patientFriendlyName": "Diabetes Risk Check",
-  "patientFriendlyDescription": "Find out your risk of developing diabetes in the next 10 years",
+  "name": "Calculadora de Riesgo de Diabetes FINDRISK",
+  "description": "Puntuación de Riesgo de Diabetes Finlandesa - Predice el riesgo a 10 años de desarrollar diabetes tipo 2",
+  "patientFriendlyName": "Evaluación de Riesgo de Diabetes",
+  "patientFriendlyDescription": "Descubre tu riesgo de desarrollar diabetes en los próximos 10 años",
   "version": "1.0.0",
   "category": "diabetes",
   "questions": [
     {
       "id": "age",
       "type": "select",
-      "label": "Age",
-      "description": "What is your current age?",
+      "label": "Edad",
+      "description": "¿Cuál es tu edad actual?",
       "required": true,
       "options": [
         {
           "value": "under_45",
-          "label": "Under 45 years"
+          "label": "Menor de 45 años"
         },
         {
           "value": "45_54",
-          "label": "45-54 years"
+          "label": "45-54 años"
         },
         {
           "value": "55_64",
-          "label": "55-64 years"
+          "label": "55-64 años"
         },
         {
           "value": "65_over",
-          "label": "65 years or over"
+          "label": "65 años o más"
         }
       ]
     },
     {
       "id": "bmi",
       "type": "select",
-      "label": "Body Mass Index (BMI)",
-      "description": "What is your BMI in kg/m²? If you don't know your BMI, you can calculate it: weight (kg) ÷ [height (m)]²",
+      "label": "Índice de Masa Corporal (IMC)",
+      "description": "¿Cuál es tu IMC en kg/m²? Si no conoces tu IMC, puedes calcularlo: peso (kg) ÷ [altura (m)]²",
       "required": true,
       "options": [
         {
           "value": "under_25",
-          "label": "Under 25 kg/m² (Normal weight)"
+          "label": "Menor de 25 kg/m² (Peso normal)"
         },
         {
           "value": "25_30",
-          "label": "25-30 kg/m² (Overweight)"
+          "label": "25-30 kg/m² (Sobrepeso)"
         },
         {
           "value": "over_30",
-          "label": "Over 30 kg/m² (Obese)"
+          "label": "Más de 30 kg/m² (Obeso)"
         }
       ]
     },
     {
       "id": "waist_circumference",
       "type": "select",
-      "label": "Waist Circumference",
-      "description": "What is your waist circumference? Measure around your waist at the level of your navel",
+      "label": "Circunferencia de la Cintura",
+      "description": "¿Cuál es tu circunferencia de cintura? Mide alrededor de tu cintura a la altura del ombligo",
       "required": true,
       "options": [
         {
           "value": "male_under_94",
-          "label": "Under 94 cm (37 inches)"
+          "label": "Menor de 94 cm (37 pulgadas)"
         },
         {
           "value": "male_94_102",
-          "label": "94-102 cm (37-40 inches)"
+          "label": "94-102 cm (37-40 pulgadas)"
         },
         {
           "value": "male_over_102",
-          "label": "Over 102 cm (40 inches)"
+          "label": "Más de 102 cm (40 pulgadas)"
         },
         {
           "value": "female_under_80",
-          "label": "Under 80 cm (31 inches)"
+          "label": "Menor de 80 cm (31 pulgadas)"
         },
         {
           "value": "female_80_88",
-          "label": "80-88 cm (31-35 inches)"
+          "label": "80-88 cm (31-35 pulgadas)"
         },
         {
           "value": "female_over_88",
-          "label": "Over 88 cm (35 inches)"
+          "label": "Más de 88 cm (35 pulgadas)"
         }
       ]
     },
     {
       "id": "physical_activity",
       "type": "select",
-      "label": "Physical Activity",
-      "description": "Do you get at least 30 minutes of physical activity most days? This includes work, exercise, or daily activities like walking.",
+      "label": "Actividad Física",
+      "description": "¿Realizas al menos 30 minutos de actividad física la mayoría de los días? Esto incluye trabajo, ejercicio o actividades diarias como caminar.",
       "required": true,
       "options": [
         {
           "value": "yes",
-          "label": "Yes, at least 30 minutes per day"
+          "label": "Sí, al menos 30 minutos por día"
         },
         {
           "value": "no",
-          "label": "No, less than 30 minutes per day"
+          "label": "No, menos de 30 minutos por día"
         }
       ]
     },
     {
       "id": "vegetables_fruits",
       "type": "select",
-      "label": "Daily Fruits and Vegetables",
-      "description": "Do you eat fruits, vegetables, or berries every day?",
+      "label": "Frutas y Verduras Diarias",
+      "description": "¿Comes frutas, verduras o bayas todos los días?",
       "required": true,
       "options": [
         {
           "value": "yes",
-          "label": "Yes, every day"
+          "label": "Sí, todos los días"
         },
         {
           "value": "no",
-          "label": "No, not every day"
+          "label": "No, no todos los días"
         }
       ]
     },
     {
       "id": "bp_medication",
       "type": "select",
-      "label": "Blood Pressure Medication",
-      "description": "Have you ever taken medication for high blood pressure regularly?",
+      "label": "Medicación para Presión Arterial",
+      "description": "¿Alguna vez has tomado medicación para la presión arterial alta de manera regular?",
       "required": true,
       "options": [
         {
@@ -133,15 +133,15 @@
         },
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Si"
         }
       ]
     },
     {
       "id": "high_glucose_history",
       "type": "select",
-      "label": "History of High Blood Sugar",
-      "description": "Have you ever been told you have high blood sugar? This could be during a health exam, illness, or pregnancy.",
+      "label": "Historial de Azúcar en Sangre Alto",
+      "description": "¿Alguna vez te han dicho que tienes azúcar en sangre alto? Esto podría haber sido durante un examen médico, enfermedad o embarazo.",
       "required": true,
       "options": [
         {
@@ -150,15 +150,15 @@
         },
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Si"
         }
       ]
     },
     {
       "id": "family_diabetes_history",
       "type": "select",
-      "label": "Family History of Diabetes",
-      "description": "Have any of your family members been diagnosed with Type 1 or Type 2 diabetes?",
+      "label": "Historial Familiar de Diabetes",
+      "description": "¿Alguno de tus familiares ha sido diagnosticado con diabetes tipo 1 o tipo 2?",
       "required": true,
       "options": [
         {
@@ -167,11 +167,11 @@
         },
         {
           "value": "grandparent_relative",
-          "label": "Yes: grandparent, aunt, uncle, or cousin"
+          "label": "Sí: abuelo/a, tío/a o primo/a"
         },
         {
           "value": "parent_sibling_child",
-          "label": "Yes: parent, brother/sister, or child"
+          "label": "Sí: padre/madre, hermano/a o hijo/a"
         }
       ]
     }
@@ -180,94 +180,94 @@
     "algorithm": "findrisk_points",
     "output": {
       "type": "percentage",
-      "label": "10-Year Diabetes Risk",
+      "label": "Riesgo de Diabetes a 10 Años",
       "unit": "%",
       "precision": 0
     },
     "riskCategories": [
       {
-        "name": "Low Risk",
+        "name": "Riesgo Bajo",
         "range": {
           "min": 0,
           "max": 6
         },
         "color": "#10b981",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 100",
+        "description": "Tu riesgo de desarrollar diabetes tipo 2 en 10 años se estima en 1 de cada 100",
         "recommendations": [
-          "Continue maintaining healthy lifestyle habits",
-          "Regular physical activity (at least 150 minutes moderate exercise per week)",
-          "Maintain healthy weight and balanced diet",
-          "Annual health check-ups with routine blood sugar screening"
+          "Continúa manteniendo hábitos de vida saludables",
+          "Actividad física regular (al menos 150 minutos de ejercicio moderado por semana)",
+          "Mantén un peso saludable y una dieta equilibrada",
+          "Exámenes de salud anuales con detección rutinaria de azúcar en sangre"
         ]
       },
       {
-        "name": "Slightly Elevated Risk",
+        "name": "Riesgo Ligeramente Elevado",
         "range": {
           "min": 7,
           "max": 11
         },
         "color": "#f59e0b",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 25",
+        "description": "Tu riesgo de desarrollar diabetes tipo 2 en 10 años se estima en 1 de cada 25",
         "recommendations": [
-          "Focus on lifestyle modifications to reduce risk",
-          "Increase physical activity to at least 150 minutes per week",
-          "Work on achieving and maintaining healthy weight",
-          "Consider consultation with healthcare provider for personalized prevention plan",
-          "Annual diabetes screening with blood tests"
+          "Enfócate en modificaciones del estilo de vida para reducir el riesgo",
+          "Aumenta la actividad física a al menos 150 minutos por semana",
+          "Trabaja en lograr y mantener un peso saludable",
+          "Considera consultar con tu proveedor de atención médica para un plan de prevención personalizado",
+          "Detección anual de diabetes con análisis de sangre"
         ]
       },
       {
-        "name": "Moderate Risk",
+        "name": "Riesgo Moderado",
         "range": {
           "min": 12,
           "max": 14
         },
         "color": "#ef4444",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 6",
+        "description": "Tu riesgo de desarrollar diabetes tipo 2 en 10 años se estima en 1 de cada 6",
         "recommendations": [
-          "Schedule consultation with healthcare provider within 3-6 months",
-          "Consider structured lifestyle intervention program",
-          "Implement comprehensive diet and exercise plan",
-          "Regular monitoring of blood glucose levels",
-          "Consider referral to diabetes prevention program"
+          "Programa una consulta con tu proveedor de atención médica en 3-6 meses",
+          "Considera un programa de intervención estructurada del estilo de vida",
+          "Implementa un plan integral de dieta y ejercicio",
+          "Monitoreo regular de los niveles de glucosa en sangre",
+          "Considera la derivación a un programa de prevención de diabetes"
         ]
       },
       {
-        "name": "High Risk",
+        "name": "Riesgo Alto",
         "range": {
           "min": 15,
           "max": 20
         },
         "color": "#dc2626",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 3",
+        "description": "Tu riesgo de desarrollar diabetes tipo 2 en 10 años se estima en 1 de cada 3",
         "recommendations": [
-          "Schedule consultation with healthcare provider as soon as possible",
-          "Enroll in structured diabetes prevention program",
-          "Work with healthcare team to develop comprehensive prevention plan",
-          "Regular monitoring of blood glucose and other metabolic markers",
-          "Consider medication for diabetes prevention if lifestyle changes insufficient"
+          "Programa una consulta con tu proveedor de atención médica lo antes posible",
+          "Inscríbete en un programa estructurado de prevención de diabetes",
+          "Trabaja con el equipo de atención médica para desarrollar un plan de prevención integral",
+          "Monitoreo regular de glucosa en sangre y otros marcadores metabólicos",
+          "Considera medicación para la prevención de diabetes si los cambios de estilo de vida son insuficientes"
         ]
       },
       {
-        "name": "Very High Risk",
+        "name": "Riesgo Muy Alto",
         "range": {
           "min": 21,
           "max": 26
         },
         "color": "#991b1b",
-        "description": "Your risk of developing type 2 diabetes within 10 years is estimated to be 1 in 2",
+        "description": "Tu riesgo de desarrollar diabetes tipo 2 en 10 años se estima en 1 de cada 2",
         "recommendations": [
-          "Schedule urgent consultation with healthcare provider",
-          "Immediate enrollment in intensive diabetes prevention program",
-          "Consider medication for diabetes prevention",
-          "Frequent monitoring of blood glucose and metabolic health",
-          "Work closely with healthcare team for comprehensive risk management"
+          "Programa una consulta urgente con tu proveedor de atención médica",
+          "Inscripción inmediata en un programa intensivo de prevención de diabetes",
+          "Considera medicación para la prevención de diabetes",
+          "Monitoreo frecuente de glucosa en sangre y salud metabólica",
+          "Trabaja estrechamente con el equipo de atención médica para el manejo integral del riesgo"
         ]
       }
     ]
   },
   "metadata": {
     "createdAt": "2025-09-18",
-    "clinicalUse": "Screening tool for identifying individuals at high risk of developing Type 2 diabetes within 10 years"
+    "clinicalUse": "Herramienta de detección para identificar individuos con alto riesgo de desarrollar diabetes tipo 2 en 10 años"
   }
 }

@@ -1,116 +1,116 @@
 {
   "id": "frax",
-  "name": "FRAX Fracture Risk Assessment",
-  "description": "10-year probability calculator for major osteoporotic fracture and hip fracture",
-  "patientFriendlyName": "Bone Health Check",
-  "patientFriendlyDescription": "Assess your risk of bone fractures in the next 10 years",
+  "name": "Evaluación de Riesgo de Fractura FRAX",
+  "description": "Calcula la probabilidad a 10 años de fracturas osteoporóticas mayores y fracturas de cadera",
+  "patientFriendlyName": "Evaluación de Salud Ósea",
+  "patientFriendlyDescription": "Evalúa tu riesgo de fracturas óseas en los próximos 10 años",
   "version": "1.0.0",
   "category": "bone_health",
   "questions": [
     {
       "id": "age",
       "type": "select",
-      "label": "Age",
-      "description": "What is your current age?",
+      "label": "Edad",
+      "description": "¿Cuál es tu edad actual?",
       "required": true,
       "options": [
         {
           "value": "under_40",
-          "label": "Under 40 years"
+          "label": "Menor de 40 años"
         },
         {
           "value": "40-44",
-          "label": "40-44 years"
+          "label": "40-44 años"
         },
         {
           "value": "45-49",
-          "label": "45-49 years"
+          "label": "45-49 años"
         },
         {
           "value": "50-54",
-          "label": "50-54 years"
+          "label": "50-54 años"
         },
         {
           "value": "55-59",
-          "label": "55-59 years"
+          "label": "55-59 años"
         },
         {
           "value": "60-64",
-          "label": "60-64 years"
+          "label": "60-64 años"
         },
         {
           "value": "65-69",
-          "label": "65-69 years"
+          "label": "65-69 años"
         },
         {
           "value": "70-74",
-          "label": "70-74 years"
+          "label": "70-74 años"
         },
         {
           "value": "75-79",
-          "label": "75-79 years"
+          "label": "75-79 años"
         },
         {
           "value": "80-84",
-          "label": "80-84 years"
+          "label": "80-84 años"
         },
         {
           "value": "85-90",
-          "label": "85-90 years"
+          "label": "85-90 años"
         }
       ]
     },
     {
       "id": "sex",
       "type": "select",
-      "label": "Sex",
-      "description": "What is your biological sex?",
+      "label": "Sexo",
+      "description": "¿Cuál es tu sexo biológico?",
       "required": true,
       "options": [
         {
           "value": "male",
-          "label": "Male"
+          "label": "Masculino"
         },
         {
           "value": "female",
-          "label": "Female"
+          "label": "Femenino"
         }
       ]
     },
     {
       "id": "bmi",
       "type": "select",
-      "label": "Body Mass Index (BMI)",
-      "description": "What is your BMI in kg/m²? If you don't know your BMI, you can calculate it: weight (kg) ÷ [height (m)]²",
+      "label": "Índice de Masa Corporal (IMC)",
+      "description": "¿Cuál es tu IMC en kg/m²? Si no conoces tu IMC, puedes calcularlo: peso (kg) ÷ [altura (m)]²",
       "required": true,
       "options": [
         {
           "value": "under_19",
-          "label": "Under 19 kg/m² (Underweight)"
+          "label": "Menor de 19 kg/m² (Bajo peso)"
         },
         {
           "value": "19-25",
-          "label": "19-25 kg/m² (Normal weight)"
+          "label": "19-25 kg/m² (Peso normal)"
         },
         {
           "value": "25-30",
-          "label": "25-30 kg/m² (Overweight)"
+          "label": "25-30 kg/m² (Sobrepeso)"
         },
         {
           "value": "30-35",
-          "label": "30-35 kg/m² (Obese Class I)"
+          "label": "30-35 kg/m² (Obeso Clase I)"
         },
         {
           "value": "over_35",
-          "label": "Over 35 kg/m² (Obese Class II+)"
+          "label": "Más de 35 kg/m² (Obeso Clase II+)"
         }
       ]
     },
     {
       "id": "previous_fracture",
       "type": "select",
-      "label": "Previous Fracture",
-      "description": "Have you broken a bone after age 50 from a minor fall (from standing height or less)?",
+      "label": "Fractura Previa",
+      "description": "¿Has tenido una fractura de hueso después de los 50 años por una caída menor (desde la altura de pie o menos)?",
       "required": true,
       "options": [
         {
@@ -119,15 +119,15 @@
         },
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         }
       ]
     },
     {
       "id": "parent_hip_fracture",
       "type": "select",
-      "label": "Parent Hip Fracture",
-      "description": "Has either of your parents broken their hip?",
+      "label": "Fractura de Cadera de los Padres",
+      "description": "¿Alguno de tus padres se ha fracturado la cadera?",
       "required": true,
       "options": [
         {
@@ -136,15 +136,15 @@
         },
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         }
       ]
     },
     {
       "id": "current_smoking",
       "type": "select",
-      "label": "Current Smoking",
-      "description": "Do you currently smoke tobacco?",
+      "label": "Fumado Actual",
+      "description": "¿Actualmente fumas cigarrillos?",
       "required": true,
       "options": [
         {
@@ -153,15 +153,15 @@
         },
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         }
       ]
     },
     {
       "id": "glucocorticoids",
       "type": "select",
-      "label": "Steroid Medication",
-      "description": "Have you ever taken steroid medications (such as cortisone or prednisone) for more than 3 months?",
+      "label": "Medicación con Esteroides",
+      "description": "¿Alguna vez has tomado medicamentos esteroides (como cortisona o prednisona) por más de 3 meses?",
       "required": true,
       "options": [
         {
@@ -170,15 +170,15 @@
         },
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         }
       ]
     },
     {
       "id": "rheumatoid_arthritis",
       "type": "select",
-      "label": "Rheumatoid Arthritis",
-      "description": "Do you have rheumatoid arthritis?",
+      "label": "Artritis Reumatoide",
+      "description": "¿Tienes artritis reumatoide?",
       "required": true,
       "options": [
         {
@@ -187,15 +187,15 @@
         },
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         }
       ]
     },
     {
       "id": "secondary_osteoporosis",
       "type": "select",
-      "label": "Other Medical Conditions",
-      "description": "Do you have any of these conditions: Type 1 diabetes, overactive thyroid, premature menopause (before age 45), chronic liver disease, or other conditions that affect bone health?",
+      "label": "Otras Condiciones Médicas",
+      "description": "¿Tienes alguna de estas condiciones: diabetes tipo 1, tiroides sobreactiva, menopausia prematura (antes de los 45 años), enfermedad hepática crónica, o otras condiciones que afectan la salud ósea?",
       "required": true,
       "options": [
         {
@@ -204,49 +204,49 @@
         },
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         }
       ]
     },
     {
       "id": "alcohol",
       "type": "select",
-      "label": "Alcohol Consumption",
-      "description": "Do you drink 3 or more units of alcohol per day? (1 unit = glass of beer, single measure of spirits, or medium-sized glass of wine)",
+      "label": "Consumo de Alcohol",
+      "description": "¿Consumes 3 o más unidades de alcohol por día? (1 unidad = una copa de cerveza, una medida de destilado, o una copa media de vino)",
       "required": true,
       "options": [
         {
           "value": "no",
-          "label": "No (less than 3 units per day)"
+          "label": "No (menos de 3 unidades por día)"
         },
         {
           "value": "yes",
-          "label": "Yes (3 or more units per day)"
+          "label": "Sí (3 o más unidades por día)"
         }
       ]
     },
     {
       "id": "bmd_t_score",
       "type": "select",
-      "label": "Bone Density Test Results",
-      "description": "If you have had a bone density test (DEXA scan), what were your results?",
+      "label": "Densidad Ósea",
+      "description": "¿Has tenido un examen de densidad ósea (DEXA)?",
       "required": true,
       "options": [
         {
           "value": "not_available",
-          "label": "BMD test not available or not done"
+          "label": "Examen de densidad ósea no disponible o no realizado"
         },
         {
           "value": "above_minus_1",
-          "label": "Above -1.0 (Normal bone density)"
+          "label": "Más de -1.0 (Densidad ósea normal)"
         },
         {
           "value": "minus_1_to_minus_2.5",
-          "label": "-1.0 to -2.5 (Osteopenia - Low bone density)"
+          "label": "-1.0 a -2.5 (Osteopenia - Densidad ósea baja)"
         },
         {
           "value": "below_minus_2.5",
-          "label": "Below -2.5 (Osteoporosis - Very low bone density)"
+          "label": "Más de -2.5 (Osteoporosis - Densidad ósea muy baja)"
         }
       ]
     }
@@ -255,65 +255,65 @@
     "algorithm": "frax_fracture_risk",
     "output": {
       "type": "dual_percentage",
-      "label": "10-Year Fracture Risk",
+      "label": "Riesgo de Fractura a 10 Años",
       "unit": "%",
       "precision": 1,
-      "primary": "Major Osteoporotic Fracture",
-      "secondary": "Hip Fracture"
+      "primary": "Fractura Osteoporótica Mayor",
+      "secondary": "Fractura de Cadera"
     },
     "riskCategories": [
       {
-        "name": "Low Risk",
+        "name": "Riesgo Bajo",
         "range": {
           "min": 0,
           "max": 9.9
         },
         "color": "#10b981",
-        "description": "Low 10-year fracture risk - Focus on prevention and lifestyle measures",
+        "description": "Riesgo bajo de fractura osteoporótica mayor a 10 años - Enfócate en prevención y medidas de estilo de vida",
         "recommendations": [
-          "Maintain adequate calcium (1200mg daily) and vitamin D (800-1000 IU daily) intake",
-          "Regular weight-bearing and muscle-strengthening exercises",
-          "Fall prevention strategies (balance exercises, home safety)",
-          "Avoid smoking and limit alcohol consumption",
-          "Regular bone density screening as recommended"
+          "Mantén un adecuado consumo de calcio (1200mg diario) y vitamina D (800-1000 IU diario)",
+          "Ejercicios de peso y fortalecimiento muscular",
+          "Estrategias de prevención de caídas (ejercicios de equilibrio, seguridad en el hogar)",
+          "Evita el tabaco y limita el consumo de alcohol",
+          "Exámenes de densidad ósea regularmente como se recomienda"
         ]
       },
       {
-        "name": "Moderate Risk",
+        "name": "Riesgo Moderado",
         "range": {
           "min": 10,
           "max": 19.9
         },
         "color": "#f59e0b",
-        "description": "Moderate 10-year fracture risk - Consider treatment based on additional factors",
+        "description": "Riesgo moderado de fractura osteoporótica mayor a 10 años - Considera tratamiento basado en factores adicionales",
         "recommendations": [
-          "Discuss treatment options with healthcare provider",
-          "Consider bone density testing (DEXA scan) if not recently done",
-          "Optimize calcium and vitamin D supplementation",
-          "Implement comprehensive fall prevention program",
-          "Consider medication therapy based on individual risk factors"
+          "Discute tratamiento con tu proveedor de atención médica",
+          "Considera exámenes de densidad ósea (DEXA) si no se han realizado recientemente",
+          "Optimiza el consumo de calcio y vitamina D",
+          "Implementa un programa de prevención de caídas",
+          "Considera terapia medicamentosa basada en factores de riesgo individuales"
         ]
       },
       {
-        "name": "High Risk",
+        "name": "Riesgo Alto",
         "range": {
           "min": 20,
           "max": 100
         },
         "color": "#ef4444",
-        "description": "High 10-year fracture risk - Treatment recommended",
+        "description": "Riesgo alto de fractura osteoporótica mayor a 10 años - Tratamiento recomendado",
         "recommendations": [
-          "Initiate osteoporosis treatment with healthcare provider",
-          "Consider bisphosphonates or other anti-fracture medications",
-          "Comprehensive fall prevention and home safety assessment",
-          "Regular monitoring with bone density testing",
-          "Urgent consultation with endocrinologist or bone specialist"
+          "Inicia tratamiento de osteoporosis con tu proveedor de atención médica",
+          "Considera bisfosfato o otras medicinas contra fracturas",
+          "Evaluación integral de prevención de caídas y seguridad en el hogar",
+          "Monitoreo regular con exámenes de densidad ósea",
+          "Consulta urgente con endocrinólogo o especialista en osteoporosis"
         ]
       }
     ]
   },
   "metadata": {
     "createdAt": "2025-09-18",
-    "clinicalUse": "Assessment of 10-year probability of major osteoporotic fracture and hip fracture to guide treatment decisions"
+    "clinicalUse": "Evaluación de la probabilidad a 10 años de fractura osteoporótica mayor y fractura de cadera para guiar decisiones de tratamiento"
   }
 }

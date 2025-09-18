@@ -1,174 +1,174 @@
 {
   "id": "start",
-  "name": "STarT Back Tool",
-  "description": "9-question prognostic tool for low back pain, stratifying patients into risk groups for persistent disabling pain",
-  "patientFriendlyName": "Back Pain Assessment",
-  "patientFriendlyDescription": "Help us understand your back pain and find the best way to help you recover",
+  "name": "Herramienta STarT Back",
+  "description": "Herramienta pronóstica de 9 preguntas para dolor lumbar, estratificando pacientes en grupos de riesgo para dolor persistente incapacitante",
+  "patientFriendlyName": "Evaluación de Dolor de Espalda",
+  "patientFriendlyDescription": "Ayúdanos a entender tu dolor de espalda y encontrar la mejor manera de ayudarte a recuperarte",
   "version": "1.0.0",
   "category": "musculoskeletal",
   "questions": [
     {
       "id": "leg_pain",
       "type": "select",
-      "label": "Leg Pain",
-      "description": "Has your back pain spread down your leg(s) at any time in the last 2 weeks?",
+      "label": "Dolor en las Piernas",
+      "description": "¿Tu dolor de espalda se ha extendido hacia tus piernas en algún momento en las últimas 2 semanas?",
       "required": true,
       "options": [
         {
           "value": "disagree",
-          "label": "Disagree"
+          "label": "En desacuerdo"
         },
         {
           "value": "agree",
-          "label": "Agree"
+          "label": "De acuerdo"
         }
       ]
     },
     {
       "id": "shoulder_neck_pain",
       "type": "select",
-      "label": "Shoulder or Neck Pain",
-      "description": "Have you had pain in your shoulder or neck at any time in the last 2 weeks?",
+      "label": "Dolor de Hombro o Cuello",
+      "description": "¿Has tenido dolor en el hombro o cuello en algún momento en las últimas 2 semanas?",
       "required": true,
       "options": [
         {
           "value": "disagree",
-          "label": "Disagree"
+          "label": "En desacuerdo"
         },
         {
           "value": "agree",
-          "label": "Agree"
+          "label": "De acuerdo"
         }
       ]
     },
     {
       "id": "walking_limited",
       "type": "select",
-      "label": "Walking Difficulties",
-      "description": "Have you only been able to walk short distances because of your back pain?",
+      "label": "Dificultades para Caminar",
+      "description": "¿Solo has podido caminar distancias cortas debido a tu dolor de espalda?",
       "required": true,
       "options": [
         {
           "value": "disagree",
-          "label": "Disagree"
+          "label": "En desacuerdo"
         },
         {
           "value": "agree",
-          "label": "Agree"
+          "label": "De acuerdo"
         }
       ]
     },
     {
       "id": "dressing_slower",
       "type": "select",
-      "label": "Dressing Difficulties",
-      "description": "In the last 2 weeks, have you dressed more slowly than usual because of back pain?",
+      "label": "Dificultades para Vestirse",
+      "description": "En las últimas 2 semanas, ¿te has vestido más lentamente de lo usual debido al dolor de espalda?",
       "required": true,
       "options": [
         {
           "value": "disagree",
-          "label": "Disagree"
+          "label": "En desacuerdo"
         },
         {
           "value": "agree",
-          "label": "Agree"
+          "label": "De acuerdo"
         }
       ]
     },
     {
       "id": "fear_activity",
       "type": "select",
-      "label": "Fear of Physical Activity",
-      "description": "Do you feel it's not safe for someone with your condition to be physically active?",
+      "label": "Miedo a la Actividad Física",
+      "description": "¿Sientes que no es seguro para alguien con tu condición ser físicamente activo?",
       "required": true,
       "options": [
         {
           "value": "disagree",
-          "label": "Disagree"
+          "label": "En desacuerdo"
         },
         {
           "value": "agree",
-          "label": "Agree"
+          "label": "De acuerdo"
         }
       ]
     },
     {
       "id": "worrying_thoughts",
       "type": "select",
-      "label": "Worrying Thoughts",
-      "description": "Have worrying thoughts been going through your mind a lot of the time?",
+      "label": "Pensamientos Preocupantes",
+      "description": "¿Han estado pasando pensamientos preocupantes por tu mente la mayor parte del tiempo?",
       "required": true,
       "options": [
         {
           "value": "disagree",
-          "label": "Disagree"
+          "label": "En desacuerdo"
         },
         {
           "value": "agree",
-          "label": "Agree"
+          "label": "De acuerdo"
         }
       ]
     },
     {
       "id": "coping_poor",
       "type": "select",
-      "label": "Negative Thoughts About Recovery",
-      "description": "Do you feel that your back pain is terrible and will never get better?",
+      "label": "Pensamientos Negativos sobre la Recuperación",
+      "description": "¿Sientes que tu dolor de espalda es terrible y nunca mejorará?",
       "required": true,
       "options": [
         {
           "value": "disagree",
-          "label": "Disagree"
+          "label": "En desacuerdo"
         },
         {
           "value": "agree",
-          "label": "Agree"
+          "label": "De acuerdo"
         }
       ]
     },
     {
       "id": "enjoyment_reduced",
       "type": "select",
-      "label": "Reduced Enjoyment",
-      "description": "In general, have you not enjoyed the things you used to enjoy?",
+      "label": "Disfrute Reducido",
+      "description": "En general, ¿no has dejado de disfrutar las cosas que solías disfrutar?",
       "required": true,
       "options": [
         {
           "value": "disagree",
-          "label": "Disagree"
+          "label": "En desacuerdo"
         },
         {
           "value": "agree",
-          "label": "Agree"
+          "label": "De acuerdo"
         }
       ]
     },
     {
       "id": "bothersomeness",
       "type": "select",
-      "label": "Pain Bothersomeness",
-      "description": "Overall, how bothersome has your back pain been in the last 2 weeks?",
+      "label": "Molestia del Dolor",
+      "description": "En general, ¿qué tan molesto ha sido tu dolor de espalda en las últimas 2 semanas?",
       "required": true,
       "options": [
         {
           "value": "not",
-          "label": "Not at all"
+          "label": "Para nada"
         },
         {
           "value": "slightly",
-          "label": "Slightly"
+          "label": "Ligeramente"
         },
         {
           "value": "moderately",
-          "label": "Moderately"
+          "label": "Moderadamente"
         },
         {
           "value": "very",
-          "label": "Very much"
+          "label": "Mucho"
         },
         {
           "value": "extremely",
-          "label": "Extremely"
+          "label": "Extremadamente"
         }
       ]
     }
@@ -177,65 +177,65 @@
     "algorithm": "start_back_risk",
     "output": {
       "type": "category_with_scores",
-      "label": "STarT Back Risk Category",
+      "label": "Categoría de Riesgo STarT Back",
       "unit": "points",
       "precision": 0,
-      "primary": "Risk Category",
-      "secondary": "Total Score"
+      "primary": "Categoría de Riesgo",
+      "secondary": "Puntuación Total"
     },
     "riskCategories": [
       {
-        "name": "Low Risk",
+        "name": "Riesgo Bajo",
         "range": {
           "min": 0,
           "max": 3
         },
         "color": "#10b981",
-        "description": "Low risk of persistent disabling low back pain - Good prognosis with minimal intervention",
+        "description": "Riesgo bajo de dolor lumbar persistente incapacitante - Buen pronóstico con intervención mínima",
         "recommendations": [
-          "Continue normal activities as much as possible",
-          "Use simple pain relief methods (heat, ice, over-the-counter pain medication)",
-          "Stay active and avoid bed rest",
-          "Gradual return to normal activities as pain improves",
-          "Self-manage with reassurance and basic advice"
+          "Continúa las actividades normales tanto como sea posible",
+          "Usa métodos simples de alivio del dolor (calor, hielo, medicamentos de venta libre)",
+          "Manténte activo y evita el reposo en cama",
+          "Regreso gradual a las actividades normales a medida que mejore el dolor",
+          "Automanejo con tranquilidad y consejos básicos"
         ]
       },
       {
-        "name": "Medium Risk",
+        "name": "Riesgo Medio",
         "range": {
           "min": 4,
           "max": 9
         },
         "color": "#f59e0b",
-        "description": "Medium risk of persistent disabling low back pain - May benefit from targeted physiotherapy",
+        "description": "Riesgo medio de dolor lumbar persistente incapacitante - Puede beneficiarse de fisioterapia específica",
         "recommendations": [
-          "Consider referral to physiotherapy for targeted treatment",
-          "Focus on physical conditioning and movement",
-          "Education about back pain and self-management strategies",
-          "Gradual increase in activity levels",
-          "Address any physical factors contributing to pain"
+          "Considera referencia a fisioterapia para tratamiento específico",
+          "Enfócate en el acondicionamiento físico y movimiento",
+          "Educación sobre dolor de espalda y estrategias de automanejo",
+          "Aumento gradual en los niveles de actividad",
+          "Aborda cualquier factor físico que contribuya al dolor"
         ]
       },
       {
-        "name": "High Risk",
+        "name": "Riesgo Alto",
         "range": {
           "min": 4,
           "max": 9
         },
         "color": "#ef4444",
-        "description": "High risk of persistent disabling low back pain - Requires psychologically-informed intervention",
+        "description": "Riesgo alto de dolor lumbar persistente incapacitante - Requiere intervención psicológicamente informada",
         "recommendations": [
-          "Referral to healthcare provider experienced in psychologically-informed care",
-          "Consider cognitive-behavioral therapy for pain management",
-          "Address psychological factors (fear, anxiety, depression)",
-          "Comprehensive biopsychosocial approach to treatment",
-          "Focus on pain coping strategies and activity pacing"
+          "Referencia a proveedor de atención médica con experiencia en cuidado psicológicamente informado",
+          "Considera terapia cognitivo-conductual para el manejo del dolor",
+          "Aborda factores psicológicos (miedo, ansiedad, depresión)",
+          "Enfoque biopsicosocial integral para el tratamiento",
+          "Enfócate en estrategias de afrontamiento del dolor y ritmo de actividades"
         ]
       }
     ]
   },
   "metadata": {
     "createdAt": "2025-09-18",
-    "clinicalUse": "Risk stratification for low back pain to guide treatment decisions and predict prognosis for persistent disabling pain"
+    "clinicalUse": "Estratificación de riesgo para dolor lumbar para guiar decisiones de tratamiento y predecir pronóstico para dolor persistente incapacitante"
   }
 }

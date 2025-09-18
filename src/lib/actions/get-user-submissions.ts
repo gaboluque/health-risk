@@ -69,16 +69,31 @@ export async function getUserSubmissions(
     // Create result array with all questionnaires, including those without submissions
     const healthAssessmentIds = ['ascvd', 'findrisk', 'frax', 'gad7', 'start']
 
+    // Define questionnaire name patterns to match against
+    const questionnairePatterns = {
+      ascvd: ['ascvd', 'cardiovascular', 'heart'],
+      findrisk: ['findrisk', 'diabetes', 'diabético'],
+      frax: ['frax', 'fracture', 'fractura', 'osteoporosis'],
+      gad7: ['gad7', 'gad-7', 'ansiedad', 'anxiety'],
+      start: ['start', 'espalda', 'back', 'dolor'],
+    }
+
     const result: UserSubmissionSummary[] = []
 
     // Add questionnaires that have submissions
     for (const [questionnaireId, submission] of submissionMap) {
       const questionnaireName = questionnaireMap.get(questionnaireId) || 'Unknown'
+      const lowerCaseName = questionnaireName.toLowerCase()
 
-      // Only include if it's one of our health assessments
-      if (healthAssessmentIds.some((id) => questionnaireName.toLowerCase().includes(id))) {
+      // Check if this questionnaire matches any of our health assessments
+      const matchingAssessment = healthAssessmentIds.find((assessmentId) => {
+        const patterns = questionnairePatterns[assessmentId as keyof typeof questionnairePatterns]
+        return patterns.some((pattern) => lowerCaseName.includes(pattern))
+      })
+
+      if (matchingAssessment) {
         result.push({
-          questionnaireId,
+          questionnaireId: matchingAssessment, // Use the matching assessment ID instead of the database ID
           questionnaireName,
           lastSubmission: {
             id: submission.id,
@@ -92,9 +107,11 @@ export async function getUserSubmissions(
 
     // Add questionnaires without submissions
     for (const assessmentId of healthAssessmentIds) {
-      const hasSubmission = result.some((item) =>
-        item.questionnaireName.toLowerCase().includes(assessmentId),
-      )
+      const patterns = questionnairePatterns[assessmentId as keyof typeof questionnairePatterns]
+      const hasSubmission = result.some((item) => {
+        const lowerCaseName = item.questionnaireName.toLowerCase()
+        return patterns.some((pattern) => lowerCaseName.includes(pattern))
+      })
 
       if (!hasSubmission) {
         result.push({

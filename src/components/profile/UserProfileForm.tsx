@@ -44,37 +44,37 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
 
     // Validate required fields
     const missingFields = []
-    if (!formData.firstName?.trim()) missingFields.push('First Name')
-    if (!formData.lastName?.trim()) missingFields.push('Last Name')
-    if (!formData.email?.trim()) missingFields.push('Email')
-    if (!formData.birthDate?.trim()) missingFields.push('Date of Birth')
-    if (!formData.height || formData.height <= 0) missingFields.push('Height')
-    if (!formData.weight || formData.weight <= 0) missingFields.push('Weight')
-    if (!formData.sex) missingFields.push('Biological Sex')
-    if (!formData.idNumber?.trim()) missingFields.push('ID Number')
-    if (!formData.cellphoneNumber?.trim()) missingFields.push('Cellphone Number')
+    if (!formData.firstName?.trim()) missingFields.push('Nombre')
+    if (!formData.lastName?.trim()) missingFields.push('Apellido')
+    if (!formData.email?.trim()) missingFields.push('Correo electrónico')
+    if (!formData.birthDate?.trim()) missingFields.push('Fecha de nacimiento')
+    if (!formData.height || formData.height <= 0) missingFields.push('Estatura')
+    if (!formData.weight || formData.weight <= 0) missingFields.push('Peso')
+    if (!formData.sex) missingFields.push('Sexo biológico')
+    if (!formData.idNumber?.trim()) missingFields.push('Número de cédula')
+    if (!formData.cellphoneNumber?.trim()) missingFields.push('Número de celular')
 
     if (missingFields.length > 0) {
-      setError(`Please fill in the following required fields: ${missingFields.join(', ')}`)
+      setError(`Por favor completa los siguientes campos requeridos: ${missingFields.join(', ')}`)
       return
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.email!)) {
-      setError('Please enter a valid email address')
+      setError('Por favor ingresa una dirección de correo electrónico válida')
       return
     }
 
     // Validate height range
     if (formData.height! < 100 || formData.height! > 250) {
-      setError('Please enter a valid height between 100 and 250 cm')
+      setError('Por favor ingresa una estatura válida entre 100 y 250 cm')
       return
     }
 
     // Validate weight range
     if (formData.weight! < 30 || formData.weight! > 300) {
-      setError('Please enter a valid weight between 30 and 300 kg')
+      setError('Por favor ingresa un peso válido entre 30 y 300 kg')
       return
     }
 
@@ -99,13 +99,13 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
   }
 
   const sexOptions = [
-    { value: 'male', label: 'Male' },
-    { value: 'female', label: 'Female' },
+    { value: 'male', label: 'Masculino' },
+    { value: 'female', label: 'Femenino' },
   ]
 
   const smokingOptions = [
     { value: 'no', label: 'No' },
-    { value: 'yes', label: 'Yes' },
+    { value: 'yes', label: 'Sí' },
   ]
 
   return (
@@ -118,9 +118,9 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
               <Mail className="h-5 w-5 text-blue-600" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">Personal Information</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Información Personal</h3>
               <p className="text-sm text-slate-600">
-                This information is required for all assessments
+                Esta información es requerida para todas las evaluaciones
               </p>
             </div>
           </div>
@@ -128,42 +128,42 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <Label htmlFor="firstName" className="text-sm font-medium text-slate-700">
-                First Name <span className="text-red-500">*</span>
+                Nombre <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="firstName"
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange('firstName', e.target.value)}
-                placeholder="Enter your first name"
+                placeholder="Ingresa tu nombre"
                 className="mt-1"
                 required
               />
             </div>
             <div>
               <Label htmlFor="lastName" className="text-sm font-medium text-slate-700">
-                Last Name <span className="text-red-500">*</span>
+                Apellido <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="lastName"
                 type="text"
                 value={formData.lastName}
                 onChange={(e) => handleInputChange('lastName', e.target.value)}
-                placeholder="Enter your last name"
+                placeholder="Ingresa tu apellido"
                 className="mt-1"
                 required
               />
             </div>
             <div className="md:col-span-2">
               <Label htmlFor="email" className="text-sm font-medium text-slate-700">
-                Email Address <span className="text-red-500">*</span>
+                Correo Electrónico <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="email"
                 type="email"
                 value={formData.email}
                 onChange={(e) => handleInputChange('email', e.target.value)}
-                placeholder="Enter your email address"
+                placeholder="Ingresa tu dirección de correo electrónico"
                 className="mt-1"
                 required
               />
@@ -178,9 +178,9 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
               <CreditCard className="h-5 w-5 text-purple-600" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">Contact & Identification</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Contacto e Identificación</h3>
               <p className="text-sm text-slate-600">
-                Required for identification and communication purposes
+                Requerido para propósitos de identificación y comunicación
               </p>
             </div>
           </div>
@@ -188,21 +188,21 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <Label htmlFor="idNumber" className="text-sm font-medium text-slate-700">
-                ID Number <span className="text-red-500">*</span>
+                Número de Cédula <span className="text-red-500">*</span>
               </Label>
               <Input
                 id="idNumber"
                 type="text"
                 value={formData.idNumber}
                 onChange={(e) => handleInputChange('idNumber', e.target.value)}
-                placeholder="Enter your ID number"
+                placeholder="Ingresa tu número de cédula"
                 className="mt-1"
                 required
               />
             </div>
             <div>
               <Label htmlFor="cellphoneNumber" className="text-sm font-medium text-slate-700">
-                Cellphone Number <span className="text-red-500">*</span>
+                Número de Celular <span className="text-red-500">*</span>
               </Label>
               <div className="flex items-center space-x-2 mt-1">
                 <Phone className="h-4 w-4 text-slate-400" />
@@ -211,7 +211,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
                   type="tel"
                   value={formData.cellphoneNumber}
                   onChange={(e) => handleInputChange('cellphoneNumber', e.target.value)}
-                  placeholder="Enter your cellphone number"
+                  placeholder="Ingresa tu número de celular"
                   className="flex-1"
                   required
                 />
@@ -221,13 +221,13 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
               <Label htmlFor="socialSecurityNumber" className="text-sm font-medium text-slate-700">
                 Número de Caja de Seguro Social
               </Label>
-              <p className="text-xs text-slate-500 mb-2">Optional</p>
+              <p className="text-xs text-slate-500 mb-2">Opcional</p>
               <Input
                 id="socialSecurityNumber"
                 type="text"
                 value={formData.socialSecurityNumber}
                 onChange={(e) => handleInputChange('socialSecurityNumber', e.target.value)}
-                placeholder="Enter your social security number"
+                placeholder="Ingresa tu número de Caja de Seguro Social"
                 className="mt-1"
               />
             </div>
@@ -236,7 +236,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
                 Seguro Privado
               </Label>
               <p className="text-xs text-slate-500 mb-2">
-                Optional - Select if you have private insurance
+                Opcional - Selecciona si tienes seguro privado
               </p>
               <select
                 id="privateInsurance"
@@ -244,7 +244,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
                 onChange={(e) => handleInputChange('privateInsurance', e.target.value)}
                 className="mt-1 w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="">Select insurance provider</option>
+                <option value="">Selecciona proveedor de seguro</option>
                 <option value="Palig">Palig</option>
                 <option value="IS">IS</option>
                 <option value="ASSA">ASSA</option>
@@ -265,9 +265,9 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
               <Calendar className="h-5 w-5 text-green-600" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-slate-900">Health Information</h3>
+              <h3 className="text-lg font-semibold text-slate-900">Información de Salud</h3>
               <p className="text-sm text-slate-600">
-                This information is required to provide accurate health assessments
+                Esta información es requerida para proporcionar evaluaciones de salud precisas
               </p>
             </div>
           </div>
@@ -276,7 +276,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
             {/* Birth Date */}
             <div>
               <Label htmlFor="birthDate" className="text-sm font-medium text-slate-700 mb-3 block">
-                Date of Birth <span className="text-red-500">*</span>
+                Fecha de Nacimiento <span className="text-red-500">*</span>
               </Label>
               <div className="flex items-center space-x-2">
                 <Calendar className="h-4 w-4 text-slate-400" />
@@ -296,7 +296,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
             <div className="grid grid-cols-1 gap-6">
               <div>
                 <Label htmlFor="height" className="text-sm font-medium text-slate-700 mb-3 block">
-                  Height (cm) <span className="text-red-500">*</span>
+                  Estatura (cm) <span className="text-red-500">*</span>
                 </Label>
                 <div className="flex items-center space-x-2">
                   <Ruler className="h-4 w-4 text-slate-400" />
@@ -320,7 +320,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
 
               <div>
                 <Label htmlFor="weight" className="text-sm font-medium text-slate-700 mb-3 block">
-                  Weight (kg) <span className="text-red-500">*</span>
+                  Peso (kg) <span className="text-red-500">*</span>
                 </Label>
                 <div className="flex items-center space-x-2">
                   <Scale className="h-4 w-4 text-slate-400" />
@@ -347,7 +347,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
             {/* Sex */}
             <div>
               <Label className="text-sm font-medium text-slate-700 mb-3 block">
-                Biological Sex <span className="text-red-500">*</span>
+                Sexo Biológico <span className="text-red-500">*</span>
               </Label>
               <ToggleGroup
                 type="single"
@@ -375,10 +375,10 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
             {/* Current Smoking */}
             <div>
               <Label className="text-sm font-medium text-slate-700 mb-3 block">
-                Current Smoking Status
+                Actualmente fumas?
               </Label>
               <p className="text-xs text-slate-500 mb-3">
-                This helps us provide more accurate health risk assessments
+                Esto nos ayuda a proporcionar evaluaciones de riesgo de salud más precisas
               </p>
               <ToggleGroup
                 type="single"
@@ -432,7 +432,9 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
                 </svg>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-red-800">Please check the following:</h3>
+                <h3 className="text-sm font-semibold text-red-800">
+                  Por favor verifica lo siguiente:
+                </h3>
                 <p className="text-sm text-red-700 mt-1">{error}</p>
               </div>
             </div>
@@ -443,9 +445,9 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
         <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-center sm:text-left">
-              <h4 className="text-sm font-semibold text-slate-900">Ready to continue?</h4>
+              <h4 className="text-sm font-semibold text-slate-900">¿Listo para continuar?</h4>
               <p className="text-xs text-slate-600">
-                All fields are required for accurate health assessments
+                Todos los campos son requeridos para evaluaciones de salud precisas
               </p>
             </div>
             <Button
@@ -453,7 +455,7 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
             >
-              Continue to Assessments
+              Continuar a Evaluaciones
             </Button>
           </div>
         </div>

@@ -98,13 +98,13 @@ export class STarTScorer extends BaseScorer {
   ): string {
     switch (riskCategory) {
       case 'Low Risk':
-        return 'Low risk for persistent disabling back pain. Self-management and simple advice recommended.'
+        return 'Riesgo bajo de dolor de espalda persistente e incapacitante. Se recomienda automanejo y consejos simples.'
       case 'Medium Risk':
-        return 'Medium risk for persistent disabling back pain. Physiotherapy and exercise therapy recommended.'
+        return 'Riesgo medio de dolor de espalda persistente e incapacitante. Se recomienda fisioterapia y terapia de ejercicios.'
       case 'High Risk':
-        return 'High risk for persistent disabling back pain. Multidisciplinary approach with psychological support recommended.'
+        return 'Riesgo alto de dolor de espalda persistente e incapacitante. Se recomienda un enfoque multidisciplinario con apoyo psicológico.'
       default:
-        return `Total score: ${totalScore}, Psychosocial score: ${psychosocialScore}`
+        return `Puntuación total: ${totalScore}, Puntuación psicosocial: ${psychosocialScore}`
     }
   }
 }

@@ -27,8 +27,8 @@ export function QuestionnaireForm({
   questionnaire,
   onSubmit,
   onResults,
-  submitButtonText = 'Submit Assessment',
-  loadingText = 'Processing...',
+  submitButtonText = 'Enviar Respuestas',
+  loadingText = 'Procesando...',
 }: QuestionnaireFormProps) {
   const { profile } = useUserProfile()
 
@@ -146,9 +146,9 @@ export function QuestionnaireForm({
       // Validate all required fields are filled
       const missingFields = []
 
-      if (!formData.firstName.trim()) missingFields.push('First Name')
-      if (!formData.lastName.trim()) missingFields.push('Last Name')
-      if (!formData.email.trim()) missingFields.push('Email')
+      if (!formData.firstName.trim()) missingFields.push('Nombre')
+      if (!formData.lastName.trim()) missingFields.push('Apellido')
+      if (!formData.email.trim()) missingFields.push('Correo electrónico')
 
       const requiredQuestions = questionnaire.questions.filter((q) => q.required)
       const missingAnswers = requiredQuestions.filter((q) => !formData.answers[q.id])
@@ -158,7 +158,7 @@ export function QuestionnaireForm({
       }
 
       if (missingFields.length > 0) {
-        setError(`Please fill in the following required fields: ${missingFields.join(', ')}`)
+        setError(`Por favor completa los siguientes campos requeridos: ${missingFields.join(', ')}`)
         return
       }
 
@@ -169,11 +169,11 @@ export function QuestionnaireForm({
         // Scroll to top to show results
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } else {
-        setError(result.error || 'An error occurred while submitting the questionnaire.')
+        setError(result.error || 'Ocurrió un error al enviar el cuestionario.')
       }
     } catch (err) {
       console.error('Submit error:', err)
-      setError('An unexpected error occurred. Please try again.')
+      setError('Ocurrió un error inesperado. Por favor inténtalo de nuevo.')
     } finally {
       setIsSubmitting(false)
     }
@@ -378,8 +378,12 @@ export function QuestionnaireForm({
       <div className="bg-slate-50 border border-slate-200 rounded-xl p-6">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-center sm:text-left">
-            <h4 className="text-sm font-semibold text-slate-900">Ready to see your results?</h4>
-            <p className="text-xs text-slate-600">Make sure all required fields are completed</p>
+            <h4 className="text-sm font-semibold text-slate-900">
+              ¿Listo para ver tus resultados?
+            </h4>
+            <p className="text-xs text-slate-600">
+              Asegúrate de que todos los campos requeridos estén completos
+            </p>
           </div>
           <Button
             type="submit"

@@ -1,105 +1,105 @@
 {
   "id": "ascvd",
-  "name": "ASCVD Risk Calculator",
-  "description": "Estimates 10-year risk of atherosclerotic cardiovascular disease using Pooled Cohort Equations",
-  "patientFriendlyName": "Heart Health Check",
-  "patientFriendlyDescription": "Find out your risk of heart disease and stroke in the next 10 years",
+  "name": "Calculadora de Riesgo ASCVD",
+  "description": "Estima el riesgo a 10 años de enfermedad cardiovascular aterosclerótica usando las Ecuaciones de Cohorte Agrupada",
+  "patientFriendlyName": "Evaluación de Salud Cardíaca",
+  "patientFriendlyDescription": "Descubre tu riesgo de una enfermedad cardíaca o accidente cerebrovascular en los próximos 10 años",
   "version": "1.0.0",
   "category": "cardiovascular",
   "questions": [
     {
       "id": "age",
       "type": "select",
-      "label": "Age",
-      "description": "What is your current age?",
+      "label": "Edad",
+      "description": "¿Cuál es tu edad actual?",
       "required": true,
       "options": [
         {
           "value": "under_40",
-          "label": "Under 40 years"
+          "label": "Menor de 40 años"
         },
         {
           "value": "40-44",
-          "label": "40-44 years"
+          "label": "40-44 años"
         },
         {
           "value": "45-49",
-          "label": "45-49 years"
+          "label": "45-49 años"
         },
         {
           "value": "50-54",
-          "label": "50-54 years"
+          "label": "50-54 años"
         },
         {
           "value": "55-59",
-          "label": "55-59 years"
+          "label": "55-59 años"
         },
         {
           "value": "60-64",
-          "label": "60-64 years"
+          "label": "60-64 años"
         },
         {
           "value": "65-69",
-          "label": "65-69 years"
+          "label": "65-69 años"
         },
         {
           "value": "70-74",
-          "label": "70-74 years"
+          "label": "70-74 años"
         },
         {
           "value": "75-79",
-          "label": "75-79 years"
+          "label": "75-79 años"
         }
       ]
     },
     {
       "id": "sex",
       "type": "select",
-      "label": "Sex",
-      "description": "What is your biological sex?",
+      "label": "Sexo",
+      "description": "¿Cuál es tu sexo biológico?",
       "required": true,
       "options": [
         {
           "value": "male",
-          "label": "Male"
+          "label": "Masculino"
         },
         {
           "value": "female",
-          "label": "Female"
+          "label": "Femenino"
         }
       ]
     },
     {
       "id": "race",
       "type": "select",
-      "label": "Race/Ethnicity",
-      "description": "What is your race/ethnicity?",
+      "label": "Raza/Etnia",
+      "description": "¿Cuál es tu raza/etnia?",
       "required": true,
       "options": [
         {
           "value": "white",
-          "label": "Non-Hispanic White"
+          "label": "Blanco no Hispano"
         },
         {
           "value": "african_american",
-          "label": "African American"
+          "label": "Afroamericano"
         },
         {
           "value": "other",
-          "label": "Other"
+          "label": "Otro"
         }
       ]
     },
     {
       "id": "total_cholesterol",
       "type": "select",
-      "label": "Total Cholesterol",
-      "description": "What is your total cholesterol level (mg/dL)?",
+      "label": "Colesterol Total",
+      "description": "¿Cuál es tu nivel de colesterol total (mg/dL)?",
       "required": true,
       "options": [
         {
           "value": "<160",
-          "label": "Less than 160 mg/dL"
+          "label": "Menos de 160 mg/dL"
         },
         {
           "value": "160-199",
@@ -115,20 +115,20 @@
         },
         {
           "value": "≥280",
-          "label": "280 mg/dL or higher"
+          "label": "280 mg/dL o más"
         }
       ]
     },
     {
       "id": "hdl_cholesterol",
       "type": "select",
-      "label": "HDL Cholesterol (Good Cholesterol)",
-      "description": "What is your HDL (good) cholesterol level (mg/dL)?",
+      "label": "Colesterol HDL (Colesterol Bueno)",
+      "description": "¿Cuál es tu nivel de colesterol HDL (bueno) (mg/dL)?",
       "required": true,
       "options": [
         {
           "value": "<40",
-          "label": "Less than 40 mg/dL"
+          "label": "Menos de 40 mg/dL"
         },
         {
           "value": "40-49",
@@ -140,20 +140,20 @@
         },
         {
           "value": "≥60",
-          "label": "60 mg/dL or higher"
+          "label": "60 mg/dL o más"
         }
       ]
     },
     {
       "id": "systolic_bp",
       "type": "select",
-      "label": "Systolic Blood Pressure (Top Number)",
-      "description": "What is your systolic blood pressure - the top number (mmHg)?",
+      "label": "Presión Arterial Sistólica (Número Superior)",
+      "description": "¿Cuál es tu presión arterial sistólica - el número superior (mmHg)?",
       "required": true,
       "options": [
         {
           "value": "<120",
-          "label": "Less than 120 mmHg"
+          "label": "Menos de 120 mmHg"
         },
         {
           "value": "120-129",
@@ -173,20 +173,20 @@
         },
         {
           "value": "≥180",
-          "label": "180 mmHg or higher"
+          "label": "180 mmHg o más"
         }
       ]
     },
     {
       "id": "bp_treatment",
       "type": "select",
-      "label": "Blood Pressure Medication",
-      "description": "Are you currently taking medication for high blood pressure?",
+      "label": "Medicación para Presión Arterial",
+      "description": "¿Actualmente tomas alguna medicación para la presión arterial alta?",
       "required": true,
       "options": [
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         },
         {
           "value": "no",
@@ -198,12 +198,12 @@
       "id": "diabetes",
       "type": "select",
       "label": "Diabetes",
-      "description": "Have you been diagnosed with diabetes?",
+      "description": "¿Has sido diagnosticado con diabetes?",
       "required": true,
       "options": [
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         },
         {
           "value": "no",
@@ -214,13 +214,13 @@
     {
       "id": "current_smoking",
       "type": "select",
-      "label": "Current Smoking",
-      "description": "Do you currently smoke cigarettes?",
+      "label": "Fumado Actual",
+      "description": "¿Actualmente fumas cigarrillos?",
       "required": true,
       "options": [
         {
           "value": "yes",
-          "label": "Yes"
+          "label": "Sí"
         },
         {
           "value": "no",
@@ -233,96 +233,96 @@
     "algorithm": "pooled_cohort_equations",
     "output": {
       "type": "percentage",
-      "label": "10-Year ASCVD Risk",
+      "label": "Riesgo ASCVD a 10 Años",
       "unit": "%",
       "precision": 1
     },
     "riskCategories": [
       {
-        "name": "Very Low Risk",
+        "name": "Riesgo Muy Bajo",
         "range": {
           "min": 0,
           "max": 1.9
         },
         "color": "#22c55e",
-        "description": "Very low 10-year risk of ASCVD (typically under 40 years)",
+        "description": "Riesgo muy bajo a 10 años de ASCVD (típicamente menores de 40 años)",
         "recommendations": [
-          "Continue healthy lifestyle habits",
-          "Regular exercise (at least 150 minutes moderate activity per week)",
-          "Maintain heart-healthy diet (Mediterranean or DASH diet)",
-          "Regular health screenings every 5 years",
-          "Avoid smoking and limit alcohol consumption",
-          "Focus on establishing long-term healthy habits"
+          "Continúa con hábitos de vida saludables",
+          "Ejercicio regular (al menos 150 minutos de actividad moderada por semana)",
+          "Mantén una dieta saludable para el corazón (dieta mediterránea o DASH)",
+          "Exámenes de salud regulares cada 5 años",
+          "Evita fumar y limita el consumo de alcohol",
+          "Enfócate en establecer hábitos saludables a largo plazo"
         ]
       },
       {
-        "name": "Low Risk",
+        "name": "Riesgo Bajo",
         "range": {
           "min": 2.0,
           "max": 4.9
         },
         "color": "#10b981",
-        "description": "Low 10-year risk of ASCVD",
+        "description": "Riesgo bajo a 10 años de ASCVD",
         "recommendations": [
-          "Continue healthy lifestyle habits",
-          "Regular exercise (at least 150 minutes moderate activity per week)",
-          "Maintain heart-healthy diet (Mediterranean or DASH diet)",
-          "Regular health screenings every 3-5 years",
-          "Avoid smoking and limit alcohol consumption"
+          "Continúa con hábitos de vida saludables",
+          "Ejercicio regular (al menos 150 minutos de actividad moderada por semana)",
+          "Mantén una dieta saludable para el corazón (dieta mediterránea o DASH)",
+          "Exámenes de salud regulares cada 3-5 años",
+          "Evita fumar y limita el consumo de alcohol"
         ]
       },
       {
-        "name": "Borderline",
+        "name": "Límite",
         "range": {
           "min": 5.0,
           "max": 7.4
         },
         "color": "#f59e0b",
-        "description": "Borderline 10-year risk of ASCVD",
+        "description": "Riesgo límite a 10 años de ASCVD",
         "recommendations": [
-          "Focus on lifestyle modifications to reduce risk",
-          "Discuss with healthcare provider about risk reduction strategies",
-          "Consider additional risk factors (family history, coronary calcium scoring)",
-          "Optimize blood pressure, cholesterol, and blood sugar control",
-          "Annual cardiovascular risk assessment"
+          "Enfócate en modificaciones del estilo de vida para reducir el riesgo",
+          "Habla con tu proveedor de atención médica sobre estrategias de reducción de riesgo",
+          "Considera factores de riesgo adicionales (historial familiar, puntuación de calcio coronario)",
+          "Optimiza el control de la presión arterial, colesterol y azúcar en sangre",
+          "Evaluación anual del riesgo cardiovascular"
         ]
       },
       {
-        "name": "Intermediate",
+        "name": "Intermedio",
         "range": {
           "min": 7.5,
           "max": 19.9
         },
         "color": "#ef4444",
-        "description": "Intermediate 10-year risk of ASCVD",
+        "description": "Riesgo intermedio a 10 años de ASCVD",
         "recommendations": [
-          "Consider statin therapy for cholesterol management",
-          "Discuss aspirin therapy with healthcare provider",
-          "Intensive lifestyle counseling and support",
-          "Regular monitoring of blood pressure and cholesterol",
-          "Consider coronary calcium scoring for further risk stratification"
+          "Considera terapia con estatinas para el manejo del colesterol",
+          "Habla con tu proveedor de atención médica sobre la terapia con aspirina",
+          "Asesoramiento intensivo sobre estilo de vida y apoyo",
+          "Monitoreo regular de la presión arterial y colesterol",
+          "Considera la puntuación de calcio coronario para mayor estratificación de riesgo"
         ]
       },
       {
-        "name": "High Risk",
+        "name": "Riesgo Alto",
         "range": {
           "min": 20,
           "max": 100
         },
         "color": "#dc2626",
-        "description": "High 10-year risk of ASCVD",
+        "description": "Riesgo alto a 10 años de ASCVD",
         "recommendations": [
-          "Initiate statin therapy unless contraindicated",
-          "Consider aspirin therapy for primary prevention",
-          "Aggressive blood pressure management (target <130/80)",
-          "Comprehensive cardiovascular risk management",
-          "Regular follow-up with healthcare provider every 3-6 months"
+          "Inicia terapia con estatinas a menos que esté contraindicada",
+          "Considera terapia con aspirina para prevención primaria",
+          "Manejo agresivo de la presión arterial (objetivo <130/80)",
+          "Manejo integral del riesgo cardiovascular",
+          "Seguimiento regular con el proveedor de atención médica cada 3-6 meses"
         ]
       }
     ]
   },
   "metadata": {
     "createdAt": "2025-09-17",
-    "clinicalUse": "Primary prevention of atherosclerotic cardiovascular disease"
+    "clinicalUse": "Prevención primaria de enfermedad cardiovascular aterosclerótica"
   }
 }

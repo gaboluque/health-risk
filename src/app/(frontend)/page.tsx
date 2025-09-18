@@ -13,8 +13,9 @@ import './styles.css'
 const healthAssessments = [
   {
     id: 'ascvd',
-    title: 'Heart Health Check',
-    description: 'Assess your 10-year risk of heart disease and stroke',
+    title: 'Evaluación de Salud Cardíaca',
+    description:
+      'Evalúa tu riesgo de una enfermedad cardíaca o accidente cerebrovascular en los próximos 10 años',
     icon: Heart,
     category: 'Cardiovascular',
     color: 'from-red-500 to-pink-600',
@@ -23,40 +24,40 @@ const healthAssessments = [
   },
   {
     id: 'findrisk',
-    title: 'Diabetes Risk Check',
-    description: 'Evaluate your risk of developing Type 2 diabetes',
+    title: 'Evaluación de Riesgo de Diabetes',
+    description: 'Evalúa tu riesgo de desarrollar diabetes tipo 2',
     icon: Activity,
-    category: 'Metabolic',
+    category: 'Metabólico',
     color: 'from-blue-500 to-cyan-600',
     bgColor: 'bg-blue-50',
     textColor: 'text-blue-700',
   },
   {
     id: 'frax',
-    title: 'Bone Health Check',
-    description: 'Calculate your risk of osteoporotic fractures',
+    title: 'Evaluación de Salud Ósea',
+    description: 'Calcula tu riesgo de fracturas osteoporóticas',
     icon: Bone,
-    category: 'Musculoskeletal',
+    category: 'Musculoesquelético',
     color: 'from-amber-500 to-orange-600',
     bgColor: 'bg-amber-50',
     textColor: 'text-amber-700',
   },
   {
     id: 'gad7',
-    title: 'Anxiety Assessment',
-    description: 'Screen for generalized anxiety disorder symptoms',
+    title: 'Evaluación de Ansiedad',
+    description: 'Detecta síntomas de trastorno de ansiedad generalizada',
     icon: Brain,
-    category: 'Mental Health',
+    category: 'Salud Mental',
     color: 'from-purple-500 to-indigo-600',
     bgColor: 'bg-purple-50',
     textColor: 'text-purple-700',
   },
   {
     id: 'start',
-    title: 'Back Pain Assessment',
-    description: 'Evaluate your back pain and treatment options',
+    title: 'Evaluación de Dolor de Espalda',
+    description: 'Evalúa tu dolor de espalda y opciones de tratamiento',
     icon: Shield,
-    category: 'Pain Management',
+    category: 'Manejo del Dolor',
     color: 'from-green-500 to-emerald-600',
     bgColor: 'bg-green-50',
     textColor: 'text-green-700',
@@ -136,7 +137,7 @@ export default function HomePage() {
                           </span>
                           {hasSubmission && (
                             <span className="text-xs text-slate-500">
-                              Last completed:{' '}
+                              Última evaluación:{' '}
                               {new Date(
                                 submission.lastSubmission!.submittedAt,
                               ).toLocaleDateString()}

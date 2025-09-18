@@ -8,31 +8,31 @@ interface RiskBadgeProps {
 
 const riskConfig = {
   minimal: {
-    label: 'Minimal Risk',
+    label: 'Riesgo Mínimo',
     bgColor: 'bg-emerald-50',
     textColor: 'text-emerald-700',
     borderColor: 'border-emerald-200',
   },
   low: {
-    label: 'Low Risk',
+    label: 'Riesgo Bajo',
     bgColor: 'bg-green-50',
     textColor: 'text-green-700',
     borderColor: 'border-green-200',
   },
   moderate: {
-    label: 'Moderate Risk',
+    label: 'Riesgo Moderado',
     bgColor: 'bg-yellow-50',
     textColor: 'text-yellow-700',
     borderColor: 'border-yellow-200',
   },
   high: {
-    label: 'High Risk',
+    label: 'Riesgo Alto',
     bgColor: 'bg-orange-50',
     textColor: 'text-orange-700',
     borderColor: 'border-orange-200',
   },
   severe: {
-    label: 'Severe Risk',
+    label: 'Riesgo Severo',
     bgColor: 'bg-red-50',
     textColor: 'text-red-700',
     borderColor: 'border-red-200',
