@@ -8,6 +8,7 @@ const UserProfileContext = createContext<UserProfileContextType | undefined>(und
 
 export function UserProfileProvider({ children }: { children: React.ReactNode }) {
   const [profile, setProfileState] = useState<UserProfile | null>(null)
+  const [loadingProfile, setLoadingProfile] = useState(true)
 
   // Load profile from localStorage on mount
   useEffect(() => {
@@ -18,11 +19,14 @@ export function UserProfileProvider({ children }: { children: React.ReactNode })
         // Re-calculate age and BMI in case they've changed since last storage
         const enrichedProfile = enrichProfileWithCalculations(parsedProfile)
         setProfileState(enrichedProfile)
+        setLoadingProfile(false)
       } catch (error) {
         console.error('Error parsing stored profile:', error)
         localStorage.removeItem('userProfile')
+        setLoadingProfile(false)
       }
     }
+    setLoadingProfile(false)
   }, [])
 
   const setProfile = (newProfile: UserProfile) => {
@@ -34,11 +38,13 @@ export function UserProfileProvider({ children }: { children: React.ReactNode })
     const enrichedProfile = enrichProfileWithCalculations(profileWithTimestamp)
     setProfileState(enrichedProfile)
     localStorage.setItem('userProfile', JSON.stringify(enrichedProfile))
+    setLoadingProfile(false)
   }
 
   const clearProfile = () => {
     setProfileState(null)
     localStorage.removeItem('userProfile')
+    setLoadingProfile(false)
   }
 
   const isProfileComplete =
@@ -58,6 +64,7 @@ export function UserProfileProvider({ children }: { children: React.ReactNode })
         setProfile,
         clearProfile,
         isProfileComplete,
+        loadingProfile,
       }}
     >
       {children}

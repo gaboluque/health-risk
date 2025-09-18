@@ -2,10 +2,11 @@
 
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Modal } from '@/components/ui/modal'
 import { useUserProfile } from '@/contexts/UserProfileContext'
-import { UserProfileForm } from './index'
+import { UserProfileForm } from './UserProfileForm'
 import type { UserProfile } from '@/lib/types/user-profile'
-import { Edit3, LogOut, X } from 'lucide-react'
+import { Edit3, LogOut } from 'lucide-react'
 
 export function ProfileMenu() {
   const { profile, setProfile, clearProfile } = useUserProfile()
@@ -22,8 +23,8 @@ export function ProfileMenu() {
 
   const handleClearProfile = () => {
     if (
-      confirm(
-        'Are you sure you want to clear your profile? You will need to enter your information again.',
+      window.confirm(
+        'Are you sure you want to exit? You will need to enter your information again in the future.',
       )
     ) {
       clearProfile()
@@ -39,22 +40,22 @@ export function ProfileMenu() {
             {profile.firstName} {profile.lastName}
           </p>
         </div>
-        <div className="flex space-x-2 flex-col">
+        <div className="flex space-x-2">
           <Button
-            style={{ width: '30px' }}
             variant="ghost"
             size="sm"
             onClick={() => setShowEditForm(true)}
-            className="flex items-center space-x-1"
+            className="flex items-center space-x-1 hover:bg-slate-100"
+            title="Edit Profile"
           >
             <Edit3 className="h-4 w-4" />
           </Button>
           <Button
-            style={{ width: '30px' }}
             variant="ghost"
             size="sm"
             onClick={handleClearProfile}
-            className="flex items-center space-x-1 text-red-600 hover:text-red-700 hover:border-red-300"
+            className="flex items-center space-x-1 text-red-600 hover:text-red-700 hover:bg-red-50"
+            title="Clear Profile"
           >
             <LogOut className="h-4 w-4" />
           </Button>
@@ -62,28 +63,15 @@ export function ProfileMenu() {
       </div>
 
       {/* Edit Profile Modal */}
-      {showEditForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6 border-b border-slate-200">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-slate-900">Edit Your Profile</h2>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowEditForm(false)}
-                  className="text-slate-400 hover:text-slate-600"
-                >
-                  <X className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
-            <div className="p-6">
-              <UserProfileForm onSubmit={handleProfileUpdate} initialProfile={profile} />
-            </div>
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={showEditForm}
+        onClose={() => setShowEditForm(false)}
+        title="Edit Your Profile"
+        description="Update your personal information"
+        maxWidth="4xl"
+      >
+        <UserProfileForm onSubmit={handleProfileUpdate} initialProfile={profile} />
+      </Modal>
     </>
   )
 }

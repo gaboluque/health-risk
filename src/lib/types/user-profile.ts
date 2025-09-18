@@ -18,4 +18,5 @@ export interface UserProfileContextType {
   setProfile: (profile: UserProfile) => void
   clearProfile: () => void
   isProfileComplete: boolean
+  loadingProfile: boolean
 }

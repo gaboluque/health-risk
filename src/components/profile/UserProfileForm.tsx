@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { User, Mail, Calendar, Scale, Users, Ruler, Cigarette } from 'lucide-react'
+import { Mail, Calendar, Scale, Users, Ruler, Cigarette } from 'lucide-react'
 import { enrichProfileWithCalculations } from '@/lib/utils/health-calculations'
 import type { UserProfile } from '@/lib/types/user-profile'
 
@@ -100,13 +100,6 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="text-center mb-8">
-        <div className="p-3 bg-blue-100 rounded-xl w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-          <User className="h-8 w-8 text-blue-600" />
-        </div>
-        <h1 className="text-3xl font-bold text-slate-900 mb-2">Set Up Your Profile</h1>
-      </div>
-
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Personal Information */}
         <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
