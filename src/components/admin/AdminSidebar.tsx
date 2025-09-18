@@ -29,13 +29,13 @@ interface AdminSidebarProps {
 
 const navigationItems = [
   {
-    title: 'Dashboard',
+    title: 'Inicio',
     icon: Home,
     href: '/private/admin',
     badge: null,
   },
   {
-    title: 'Users',
+    title: 'Usuarios',
     icon: Users,
     href: '/private/admin/users',
     badge: null,
@@ -53,7 +53,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
             <BarChart3 className="h-4 w-4 text-primary-foreground" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold">Admin Dashboard</h2>
+            <h2 className="text-lg font-semibold">Panel de Administración</h2>
             <p className="text-xs text-muted-foreground">Auditare Health</p>
           </div>
         </div>
@@ -61,7 +61,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Main Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel>Navegación Principal</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => (
@@ -94,7 +94,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium truncate">{user.email}</p>
             <Badge variant="outline" className="text-xs">
-              {user.role === 'superadmin' ? 'Super Admin' : 'Admin'}
+              {user.role === 'superadmin' ? 'Super Administrador' : 'Administrador'}
             </Badge>
           </div>
         </div>

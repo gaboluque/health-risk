@@ -34,9 +34,11 @@ export function RiskTrendsChart({ monthlyData }: RiskTrendsChartProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <TrendingUp className="h-5 w-5" />
-          Risk Trends
+          Tendencias de Riesgo
         </CardTitle>
-        <CardDescription>Monthly submission patterns and high-risk identification</CardDescription>
+        <CardDescription>
+          Patrones mensuales de envíos e identificación de alto riesgo
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
@@ -44,22 +46,22 @@ export function RiskTrendsChart({ monthlyData }: RiskTrendsChartProps) {
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
               <div className="text-2xl font-bold">{totalSubmissions}</div>
-              <div className="text-sm text-muted-foreground">Total Submissions</div>
+              <div className="text-sm text-muted-foreground">Total de Envíos</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-red-600">{totalHighRisk}</div>
-              <div className="text-sm text-muted-foreground">High Risk</div>
+              <div className="text-sm text-muted-foreground">Alto Riesgo</div>
             </div>
             <div>
               <div className="text-2xl font-bold">{highRiskPercentage}%</div>
-              <div className="text-sm text-muted-foreground">Risk Rate</div>
+              <div className="text-sm text-muted-foreground">Tasa de Riesgo</div>
             </div>
           </div>
 
           {/* Chart */}
           <div className="space-y-4">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Monthly Trends</span>
+              <span className="text-muted-foreground">Tendencias Mensuales</span>
               <div className="flex items-center gap-2">
                 <Badge variant={isPositiveTrend ? 'default' : 'secondary'}>
                   {isPositiveTrend ? '+' : ''}
@@ -82,7 +84,7 @@ export function RiskTrendsChart({ monthlyData }: RiskTrendsChartProps) {
                         {data.highRisk > 0 && (
                           <div className="flex items-center gap-1 text-red-600">
                             <AlertTriangle className="h-3 w-3" />
-                            <span>{data.highRisk} high risk</span>
+                            <span>{data.highRisk} alto riesgo</span>
                           </div>
                         )}
                       </div>
@@ -112,11 +114,11 @@ export function RiskTrendsChart({ monthlyData }: RiskTrendsChartProps) {
           <div className="flex items-center justify-center gap-6 text-sm pt-4 border-t">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-blue-500 rounded-full" />
-              <span>Total Submissions</span>
+              <span>Total de Envíos</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-red-500 rounded-full" />
-              <span>High Risk</span>
+              <span>Alto Riesgo</span>
             </div>
           </div>
         </div>

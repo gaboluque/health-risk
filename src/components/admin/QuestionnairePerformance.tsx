@@ -35,17 +35,17 @@ export function QuestionnairePerformance({
 
   const getQuestionnaireDescription = (name: string) => {
     const descriptions = {
-      ASCVD: 'Cardiovascular Disease Risk',
-      FINDRISK: 'Diabetes Risk Assessment',
-      FRAX: 'Fracture Risk Assessment',
-      'GAD-7': 'Anxiety Disorder Screening',
-      STarT: 'Back Pain Assessment',
+      ASCVD: 'Riesgo de Enfermedad Cardiovascular',
+      FINDRISK: 'Evaluación de Riesgo de Diabetes',
+      FRAX: 'Evaluación de Riesgo de Fractura',
+      'GAD-7': 'Detección de Trastorno de Ansiedad',
+      STarT: 'Evaluación de Dolor de Espalda',
     }
 
     for (const [key, desc] of Object.entries(descriptions)) {
       if (name.toUpperCase().includes(key)) return desc
     }
-    return 'Health Risk Assessment'
+    return 'Evaluación de Riesgo de Salud'
   }
 
   if (questionnaires.length === 0) {
@@ -54,14 +54,14 @@ export function QuestionnairePerformance({
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5" />
-            Questionnaire Performance
+            Rendimiento de Cuestionarios
           </CardTitle>
-          <CardDescription>Usage statistics for each assessment type</CardDescription>
+          <CardDescription>Estadísticas de uso para cada tipo de evaluación</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">
             <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground">No questionnaire data available</p>
+            <p className="text-muted-foreground">No hay datos de cuestionarios disponibles</p>
           </div>
         </CardContent>
       </Card>
@@ -73,9 +73,9 @@ export function QuestionnairePerformance({
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <FileText className="h-5 w-5" />
-          Questionnaire Performance
+          Rendimiento de Cuestionarios
         </CardTitle>
-        <CardDescription>Usage statistics and popularity of each assessment</CardDescription>
+        <CardDescription>Estadísticas de uso y popularidad de cada evaluación</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
@@ -83,17 +83,17 @@ export function QuestionnairePerformance({
           <div className="grid grid-cols-2 gap-4 text-center">
             <div>
               <div className="text-2xl font-bold">{questionnaires.length}</div>
-              <div className="text-sm text-muted-foreground">Active Questionnaires</div>
+              <div className="text-sm text-muted-foreground">Cuestionarios Activos</div>
             </div>
             <div>
               <div className="text-2xl font-bold">{totalSubmissions}</div>
-              <div className="text-sm text-muted-foreground">Total Responses</div>
+              <div className="text-sm text-muted-foreground">Total de Respuestas</div>
             </div>
           </div>
 
           {/* Performance List */}
           <div className="space-y-4">
-            <h4 className="font-medium text-sm text-muted-foreground">Usage by Assessment</h4>
+            <h4 className="font-medium text-sm text-muted-foreground">Uso por Evaluación</h4>
             <div className="space-y-3">
               {questionnaires.map((questionnaire, index) => {
                 const percentage =
@@ -112,7 +112,7 @@ export function QuestionnairePerformance({
                         </div>
                         {index === 0 && (
                           <Badge variant="secondary" className="text-xs">
-                            Most Popular
+                            Más Popular
                           </Badge>
                         )}
                       </div>
@@ -141,11 +141,11 @@ export function QuestionnairePerformance({
             <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg">
               <Users className="h-4 w-4 text-blue-600 mt-0.5" />
               <div className="space-y-1">
-                <div className="text-sm font-medium text-blue-900">Assessment Insights</div>
+                <div className="text-sm font-medium text-blue-900">Perspectivas de Evaluación</div>
                 <div className="text-xs text-blue-700">
-                  {questionnaires[0]?.name} is the most used assessment with{' '}
-                  {questionnaires[0]?.count} submissions. Consider promoting less-used assessments
-                  to provide comprehensive health screening.
+                  {questionnaires[0]?.name} es la evaluación más utilizada con{' '}
+                  {questionnaires[0]?.count} envíos. Considera promover evaluaciones menos
+                  utilizadas para proporcionar un screening de salud integral.
                 </div>
               </div>
             </div>

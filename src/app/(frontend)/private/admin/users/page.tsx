@@ -20,8 +20,10 @@ export default async function UsersPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Users</h1>
-        <p className="text-muted-foreground">Manage system users and patient profiles</p>
+        <h1 className="text-3xl font-bold tracking-tight">Usuarios</h1>
+        <p className="text-muted-foreground">
+          Gestionar usuarios del sistema y perfiles de pacientes
+        </p>
       </div>
 
       <UsersDataTable users={usersResult.docs} />

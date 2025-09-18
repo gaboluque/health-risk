@@ -53,13 +53,13 @@ export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Recent Submissions</CardTitle>
-          <CardDescription>Latest risk assessment submissions</CardDescription>
+          <CardTitle>Envíos Recientes</CardTitle>
+          <CardDescription>Últimos envíos de evaluaciones de riesgo</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">
             <Clock className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <p className="text-muted-foreground">No recent submissions found</p>
+            <p className="text-muted-foreground">No se encontraron envíos recientes</p>
           </div>
         </CardContent>
       </Card>
@@ -70,12 +70,12 @@ export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle>Recent Submissions</CardTitle>
-          <CardDescription>Latest risk assessment submissions</CardDescription>
+          <CardTitle>Envíos Recientes</CardTitle>
+          <CardDescription>Últimos envíos de evaluaciones de riesgo</CardDescription>
         </div>
         <Button variant="ghost" size="sm" asChild>
           <Link href="/private/admin/submissions">
-            View All
+            Ver Todos
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </Button>
@@ -85,7 +85,7 @@ export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
           {submissions.map((submission) => {
             const questionnaireName =
               typeof submission.questionnaire === 'string'
-                ? 'Unknown Questionnaire'
+                ? 'Cuestionario Desconocido'
                 : submission.questionnaire.name
 
             return (
@@ -99,7 +99,7 @@ export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
                 <div className="flex-1 min-w-0">
                   <p className="font-medium truncate">{questionnaireName}</p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>Score: {submission.totalScore}</span>
+                    <span>Puntuación: {submission.totalScore}</span>
                     <span>•</span>
                     <span>
                       {formatDistanceToNow(new Date(submission.createdAt), { addSuffix: true })}

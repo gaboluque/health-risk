@@ -30,42 +30,34 @@ export function AnalyticsOverview({ data }: AnalyticsOverviewProps) {
 
   const metrics = [
     {
-      title: 'Engagement Rate',
+      title: 'Tasa de Participación',
       value: `${completionRate}%`,
-      description: 'Users who completed assessments',
+      description: 'Usuarios que completaron evaluaciones',
       icon: Users,
-      trend: '+12%',
-      trendUp: true,
       color: 'text-blue-600',
       bgColor: 'bg-blue-100',
     },
     {
-      title: 'Total Assessments',
+      title: 'Total de Evaluaciones',
       value: totalSubmissions.toLocaleString(),
-      description: 'Completed risk assessments',
+      description: 'Evaluaciones de riesgo completadas',
       icon: ClipboardCheck,
-      trend: '+8%',
-      trendUp: true,
       color: 'text-green-600',
       bgColor: 'bg-green-100',
     },
     {
-      title: 'High Risk Patients',
+      title: 'Pacientes de Alto Riesgo',
       value: `${highRiskPercentage}%`,
-      description: `${highRiskCount} patients need attention`,
+      description: `${highRiskCount} pacientes necesitan atención`,
       icon: AlertTriangle,
-      trend: '-3%',
-      trendUp: false,
       color: 'text-red-600',
       bgColor: 'bg-red-100',
     },
     {
-      title: 'Average Score',
+      title: 'Puntuación Promedio',
       value: averageScore.toFixed(1),
-      description: 'Across all assessments',
+      description: 'En todas las evaluaciones',
       icon: Activity,
-      trend: '+0.5',
-      trendUp: true,
       color: 'text-purple-600',
       bgColor: 'bg-purple-100',
     },
@@ -87,16 +79,6 @@ export function AnalyticsOverview({ data }: AnalyticsOverviewProps) {
             <div className="text-2xl font-bold">{metric.value}</div>
             <div className="flex items-center justify-between mt-2">
               <p className="text-xs text-muted-foreground">{metric.description}</p>
-              <div className="flex items-center gap-1">
-                {metric.trendUp ? (
-                  <TrendingUp className="h-3 w-3 text-green-600" />
-                ) : (
-                  <TrendingDown className="h-3 w-3 text-red-600" />
-                )}
-                <Badge variant={metric.trendUp ? 'default' : 'secondary'} className="text-xs">
-                  {metric.trend}
-                </Badge>
-              </div>
             </div>
           </CardContent>
         </Card>

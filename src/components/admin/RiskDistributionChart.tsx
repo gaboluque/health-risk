@@ -7,10 +7,10 @@ import { PieChart } from 'lucide-react'
 export function RiskDistributionChart() {
   // Mock data for risk distribution - in a real app, this would come from your database
   const riskData = [
-    { level: 'Low Risk', count: 156, percentage: 45, color: 'bg-green-500' },
-    { level: 'Moderate Risk', count: 89, percentage: 26, color: 'bg-yellow-500' },
-    { level: 'High Risk', count: 67, percentage: 19, color: 'bg-orange-500' },
-    { level: 'Very High Risk', count: 34, percentage: 10, color: 'bg-red-500' },
+    { level: 'Riesgo Bajo', count: 156, percentage: 45, color: 'bg-green-500' },
+    { level: 'Riesgo Moderado', count: 89, percentage: 26, color: 'bg-yellow-500' },
+    { level: 'Riesgo Alto', count: 67, percentage: 19, color: 'bg-orange-500' },
+    { level: 'Riesgo Muy Alto', count: 34, percentage: 10, color: 'bg-red-500' },
   ]
 
   const totalAssessments = riskData.reduce((sum, item) => sum + item.count, 0)
@@ -20,9 +20,11 @@ export function RiskDistributionChart() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <PieChart className="h-5 w-5" />
-          Risk Distribution
+          Distribución de Riesgo
         </CardTitle>
-        <CardDescription>Distribution of risk levels across all assessments</CardDescription>
+        <CardDescription>
+          Distribución de niveles de riesgo en todas las evaluaciones
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
@@ -54,7 +56,7 @@ export function RiskDistributionChart() {
 
           <div className="pt-4 border-t">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Total Assessments</span>
+              <span className="text-muted-foreground">Total de Evaluaciones</span>
               <span className="font-medium">{totalAssessments.toLocaleString()}</span>
             </div>
           </div>
@@ -65,13 +67,13 @@ export function RiskDistributionChart() {
               <div className="text-lg font-bold text-green-700">
                 {riskData[0].percentage.toFixed(0)}%
               </div>
-              <div className="text-xs text-green-600">Low Risk</div>
+              <div className="text-xs text-green-600">Riesgo Bajo</div>
             </div>
             <div className="text-center p-2 bg-red-50 rounded-lg">
               <div className="text-lg font-bold text-red-700">
                 {(riskData[2].percentage + riskData[3].percentage).toFixed(0)}%
               </div>
-              <div className="text-xs text-red-600">High Risk+</div>
+              <div className="text-xs text-red-600">Riesgo Alto+</div>
             </div>
           </div>
         </div>

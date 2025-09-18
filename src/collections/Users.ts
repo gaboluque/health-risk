@@ -7,23 +7,6 @@ export const Users: CollectionConfig = {
     defaultColumns: ['email', 'role', 'createdAt'],
   },
   auth: true,
-  hooks: {
-    beforeValidate: [
-      ({ data }) => {
-        console.log('beforeValidate', data)
-      },
-    ],
-    beforeChange: [
-      ({ data }) => {
-        console.log('beforeChange', data)
-      },
-    ],
-    afterChange: [
-      ({ data }) => {
-        console.log('afterChange', data)
-      },
-    ],
-  },
   fields: [
     // Email added by default
     {

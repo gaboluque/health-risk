@@ -17,53 +17,53 @@ interface DashboardStatsProps {
 export function DashboardStats({ stats }: DashboardStatsProps) {
   const statCards = [
     {
-      title: 'Total Users',
+      title: 'Total de Usuarios',
       value: stats.totalUsers.toLocaleString(),
-      description: 'Active patients',
+      description: 'Pacientes activos',
       icon: Users,
       color: 'text-blue-600',
       bgColor: 'bg-blue-100',
-      change: '+12%',
+      change: '-',
       changeType: 'positive' as const,
     },
     {
-      title: 'Submissions',
+      title: 'Envíos',
       value: stats.totalSubmissions.toLocaleString(),
-      description: 'Risk assessments completed',
+      description: 'Evaluaciones de riesgo completadas',
       icon: ClipboardList,
       color: 'text-green-600',
       bgColor: 'bg-green-100',
-      change: '+8%',
+      change: '-',
       changeType: 'positive' as const,
     },
     {
-      title: 'Questionnaires',
+      title: 'Cuestionarios',
       value: stats.totalQuestionnaires.toLocaleString(),
-      description: 'Available assessments',
+      description: 'Evaluaciones disponibles',
       icon: FileText,
       color: 'text-purple-600',
       bgColor: 'bg-purple-100',
-      change: 'New',
+      change: 'Nuevo',
       changeType: 'neutral' as const,
     },
     {
-      title: 'Completion Rate',
+      title: 'Tasa de Finalización',
       value: `${stats.completionRate}%`,
-      description: 'Last 30 days',
+      description: 'Últimos 30 días',
       icon: TrendingUp,
       color: 'text-orange-600',
       bgColor: 'bg-orange-100',
-      change: '+5%',
+      change: '-',
       changeType: 'positive' as const,
     },
     {
-      title: 'Admin Users',
+      title: 'Usuarios Administradores',
       value: stats.adminUsers.toLocaleString(),
-      description: 'System administrators',
+      description: 'Administradores del sistema',
       icon: Shield,
       color: 'text-red-600',
       bgColor: 'bg-red-100',
-      change: 'Secure',
+      change: 'Seguro',
       changeType: 'neutral' as const,
     },
   ]
@@ -84,7 +84,7 @@ export function DashboardStats({ stats }: DashboardStatsProps) {
             <div className="text-2xl font-bold">{stat.value}</div>
             <div className="flex items-center justify-between mt-2">
               <p className="text-xs text-muted-foreground">{stat.description}</p>
-              <Badge 
+              <Badge
                 variant={stat.changeType === 'positive' ? 'default' : 'secondary'}
                 className="text-xs"
               >

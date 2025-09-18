@@ -55,7 +55,7 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: 'profile',
-      header: 'Patient',
+      header: 'Paciente',
       cell: ({ row }) => {
         const user = row.original
         const profile = user.profile
@@ -80,27 +80,32 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
     },
     {
       accessorKey: 'role',
-      header: 'Role',
+      header: 'Rol',
       cell: ({ row }) => {
         const role = row.getValue('role') as string
         const variant =
           role === 'superadmin' ? 'destructive' : role === 'admin' ? 'default' : 'secondary'
-        const label = role === 'superadmin' ? 'Super Admin' : role === 'admin' ? 'Admin' : 'Patient'
+        const label =
+          role === 'superadmin'
+            ? 'Super Administrador'
+            : role === 'admin'
+              ? 'Administrador'
+              : 'Paciente'
 
         return <Badge variant={variant}>{label}</Badge>
       },
     },
     {
       accessorKey: 'profile.age',
-      header: 'Age',
+      header: 'Edad',
       cell: ({ row }) => {
         const profile = row.original.profile
-        return profile?.age ? `${profile.age} years` : '—'
+        return profile?.age ? `${profile.age} años` : '—'
       },
     },
     {
       accessorKey: 'profile.sex',
-      header: 'Sex',
+      header: 'Sexo',
       cell: ({ row }) => {
         const profile = row.original.profile
         return profile?.sex ? profile.sex.charAt(0).toUpperCase() + profile.sex.slice(1) : '—'
@@ -118,13 +123,13 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
         let color = 'text-green-600'
 
         if (bmi < 18.5) {
-          category = 'Underweight'
+          category = 'Bajo peso'
           color = 'text-blue-600'
         } else if (bmi >= 25 && bmi < 30) {
-          category = 'Overweight'
+          category = 'Sobrepeso'
           color = 'text-yellow-600'
         } else if (bmi >= 30) {
-          category = 'Obese'
+          category = 'Obesidad'
           color = 'text-red-600'
         }
 
@@ -138,7 +143,7 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
     },
     {
       accessorKey: 'createdAt',
-      header: 'Joined',
+      header: 'Se Unió',
       cell: ({ row }) => {
         return formatDistanceToNow(new Date(row.getValue('createdAt')), { addSuffix: true })
       },
@@ -169,8 +174,8 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle>Users</CardTitle>
-              <CardDescription>Manage and view all system users</CardDescription>
+              <CardTitle>Usuarios</CardTitle>
+              <CardDescription>Gestionar y ver todos los usuarios del sistema</CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -180,7 +185,7 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
             <div className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Search users..."
+                placeholder="Buscar usuarios..."
                 value={globalFilter ?? ''}
                 onChange={(event) => setGlobalFilter(String(event.target.value))}
                 className="pl-8"
@@ -219,7 +224,7 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
                   ) : (
                     <TableRow>
                       <TableCell colSpan={columns.length} className="h-24 text-center">
-                        No users found.
+                        No se encontraron usuarios.
                       </TableCell>
                     </TableRow>
                   )}
@@ -230,8 +235,8 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
             {/* Pagination */}
             <div className="flex items-center justify-end space-x-2">
               <div className="flex-1 text-sm text-muted-foreground">
-                {table.getFilteredSelectedRowModel().rows.length} of{' '}
-                {table.getFilteredRowModel().rows.length} row(s) selected.
+                {table.getFilteredSelectedRowModel().rows.length} de{' '}
+                {table.getFilteredRowModel().rows.length} fila(s) seleccionada(s).
               </div>
               <div className="space-x-2">
                 <Button
@@ -240,7 +245,7 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
                   onClick={() => table.previousPage()}
                   disabled={!table.getCanPreviousPage()}
                 >
-                  Previous
+                  Anterior
                 </Button>
                 <Button
                   variant="outline"
@@ -248,7 +253,7 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
                   onClick={() => table.nextPage()}
                   disabled={!table.getCanNextPage()}
                 >
-                  Next
+                  Siguiente
                 </Button>
               </div>
             </div>
