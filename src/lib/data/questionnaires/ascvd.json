@@ -9,7 +9,7 @@
       "id": "age",
       "type": "select",
       "label": "Age",
-      "description": "Patient's age in years",
+      "description": "Your current age in years",
       "required": true,
       "options": [
         {
@@ -50,7 +50,7 @@
       "id": "sex",
       "type": "select",
       "label": "Sex",
-      "description": "Biological sex",
+      "description": "Your biological sex",
       "required": true,
       "options": [
         {
@@ -67,7 +67,7 @@
       "id": "race",
       "type": "select",
       "label": "Race/Ethnicity",
-      "description": "Patient's race/ethnicity",
+      "description": "Your race/ethnicity",
       "required": true,
       "options": [
         {
@@ -88,7 +88,7 @@
       "id": "total_cholesterol",
       "type": "select",
       "label": "Total Cholesterol",
-      "description": "Total cholesterol level (mg/dL)",
+      "description": "Your total cholesterol level (mg/dL)",
       "required": true,
       "options": [
         {
@@ -116,8 +116,8 @@
     {
       "id": "hdl_cholesterol",
       "type": "select",
-      "label": "HDL Cholesterol",
-      "description": "High-density lipoprotein cholesterol level (mg/dL)",
+      "label": "HDL Cholesterol (Good Cholesterol)",
+      "description": "Your HDL (good) cholesterol level (mg/dL)",
       "required": true,
       "options": [
         {
@@ -141,8 +141,8 @@
     {
       "id": "systolic_bp",
       "type": "select",
-      "label": "Systolic Blood Pressure",
-      "description": "Systolic blood pressure measurement (mmHg)",
+      "label": "Systolic Blood Pressure (Top Number)",
+      "description": "Your systolic blood pressure - the top number (mmHg)",
       "required": true,
       "options": [
         {
@@ -174,8 +174,8 @@
     {
       "id": "bp_treatment",
       "type": "select",
-      "label": "Blood Pressure Treatment",
-      "description": "Currently taking medication for high blood pressure?",
+      "label": "Blood Pressure Medication",
+      "description": "Are you currently taking medication for high blood pressure?",
       "required": true,
       "options": [
         {
@@ -192,7 +192,7 @@
       "id": "diabetes",
       "type": "select",
       "label": "Diabetes",
-      "description": "Currently diagnosed with diabetes?",
+      "description": "Have you been diagnosed with diabetes?",
       "required": true,
       "options": [
         {
@@ -209,7 +209,7 @@
       "id": "current_smoking",
       "type": "select",
       "label": "Current Smoking",
-      "description": "Currently smoking cigarettes?",
+      "description": "Do you currently smoke cigarettes?",
       "required": true,
       "options": [
         {

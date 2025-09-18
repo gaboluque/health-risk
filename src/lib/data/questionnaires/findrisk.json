@@ -88,7 +88,7 @@
       "id": "physical_activity",
       "type": "select",
       "label": "Physical Activity",
-      "description": "Do you usually have at least 30 minutes of physical activity at work and/or during leisure time (including normal daily activity)?",
+      "description": "Do you get at least 30 minutes of physical activity most days? This includes work, exercise, or daily activities like walking.",
       "required": true,
       "options": [
         {
@@ -104,8 +104,8 @@
     {
       "id": "vegetables_fruits",
       "type": "select",
-      "label": "Daily Vegetables and Fruits",
-      "description": "Do you eat vegetables, fruits or berries every day?",
+      "label": "Daily Fruits and Vegetables",
+      "description": "Do you eat fruits, vegetables, or berries every day?",
       "required": true,
       "options": [
         {
@@ -122,7 +122,7 @@
       "id": "bp_medication",
       "type": "select",
       "label": "Blood Pressure Medication",
-      "description": "Have you ever taken medication for high blood pressure on a regular basis?",
+      "description": "Have you ever taken medication for high blood pressure regularly?",
       "required": true,
       "options": [
         {
@@ -138,8 +138,8 @@
     {
       "id": "high_glucose_history",
       "type": "select",
-      "label": "History of High Blood Glucose",
-      "description": "Have you ever been found to have high blood glucose (e.g., in a health examination, during an illness, during pregnancy)?",
+      "label": "History of High Blood Sugar",
+      "description": "Have you ever been told you have high blood sugar? This could be during a health exam, illness, or pregnancy.",
       "required": true,
       "options": [
         {
@@ -165,11 +165,11 @@
         },
         {
           "value": "grandparent_relative",
-          "label": "Yes: grandparent, aunt, uncle, or first cousin (but not parent, sibling or child)"
+          "label": "Yes: grandparent, aunt, uncle, or cousin"
         },
         {
           "value": "parent_sibling_child",
-          "label": "Yes: parent, sibling, or own child"
+          "label": "Yes: parent, brother/sister, or child"
         }
       ]
     }

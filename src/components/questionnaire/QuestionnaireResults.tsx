@@ -42,18 +42,17 @@ export function QuestionnaireResults({
         <p className="text-gray-600">{questionnaire.description}</p>
       </div>
 
-      {/* Risk Score Display */}
+      {/* Risk Category Display */}
       <div className="bg-white border-2 rounded-lg p-6 text-center">
         <div className="mb-4">
           <div
-            className="inline-flex items-center justify-center w-32 h-32 rounded-full text-white text-3xl font-bold mb-4"
+            className="inline-flex items-center justify-center w-32 h-32 rounded-full text-white text-2xl font-bold mb-4"
             style={{ backgroundColor: categoryDetails.color }}
           >
-            {riskResult.score.toFixed(questionnaire.scoring.output.precision)}
-            {questionnaire.scoring.output.unit}
+            {categoryDetails.name}
           </div>
           <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            {questionnaire.scoring.output.label}: {categoryDetails.name}
+            Your Risk Level: {categoryDetails.name}
           </h3>
           <p className="text-gray-600">{categoryDetails.description}</p>
         </div>
@@ -85,11 +84,6 @@ export function QuestionnaireResults({
                 />
                 <span className="font-semibold">{category.name}</span>
               </div>
-              <p className="text-sm text-gray-600 mb-1">
-                {category.range.min}
-                {questionnaire.scoring.output.unit} - {category.range.max}
-                {questionnaire.scoring.output.unit}
-              </p>
               <p className="text-sm text-gray-700">{category.description}</p>
             </div>
           ))}

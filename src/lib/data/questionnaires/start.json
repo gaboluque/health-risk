@@ -8,8 +8,8 @@
     {
       "id": "leg_pain",
       "type": "select",
-      "label": "Leg Pain Spread",
-      "description": "My back pain has spread down my leg(s) at some time in the last 2 weeks",
+      "label": "Leg Pain",
+      "description": "Has your back pain spread down your leg(s) at any time in the last 2 weeks?",
       "required": true,
       "options": [
         {
@@ -25,8 +25,8 @@
     {
       "id": "shoulder_neck_pain",
       "type": "select",
-      "label": "Shoulder/Neck Pain",
-      "description": "I have had pain in the shoulder or neck at some time in the last 2 weeks",
+      "label": "Shoulder or Neck Pain",
+      "description": "Have you had pain in your shoulder or neck at any time in the last 2 weeks?",
       "required": true,
       "options": [
         {
@@ -42,8 +42,8 @@
     {
       "id": "walking_limited",
       "type": "select",
-      "label": "Walking Limitations",
-      "description": "I have only walked short distances because of my back pain",
+      "label": "Walking Difficulties",
+      "description": "Have you only been able to walk short distances because of your back pain?",
       "required": true,
       "options": [
         {
@@ -60,7 +60,7 @@
       "id": "dressing_slower",
       "type": "select",
       "label": "Dressing Difficulties",
-      "description": "In the last 2 weeks, I have dressed more slowly than usual because of back pain",
+      "description": "In the last 2 weeks, have you dressed more slowly than usual because of back pain?",
       "required": true,
       "options": [
         {
@@ -77,7 +77,7 @@
       "id": "fear_activity",
       "type": "select",
       "label": "Fear of Physical Activity",
-      "description": "It's not really safe for a person with a condition like mine to be physically active",
+      "description": "Do you feel it's not safe for someone with your condition to be physically active?",
       "required": true,
       "options": [
         {
@@ -94,7 +94,7 @@
       "id": "worrying_thoughts",
       "type": "select",
       "label": "Worrying Thoughts",
-      "description": "Worrying thoughts have been going through my mind a lot of the time",
+      "description": "Have worrying thoughts been going through your mind a lot of the time?",
       "required": true,
       "options": [
         {
@@ -110,8 +110,8 @@
     {
       "id": "coping_poor",
       "type": "select",
-      "label": "Poor Coping/Catastrophizing",
-      "description": "I feel that my back pain is terrible and it's never going to get any better",
+      "label": "Negative Thoughts About Recovery",
+      "description": "Do you feel that your back pain is terrible and will never get better?",
       "required": true,
       "options": [
         {
@@ -128,7 +128,7 @@
       "id": "enjoyment_reduced",
       "type": "select",
       "label": "Reduced Enjoyment",
-      "description": "In general I have not enjoyed all the things I used to enjoy",
+      "description": "In general, have you not enjoyed the things you used to enjoy?",
       "required": true,
       "options": [
         {

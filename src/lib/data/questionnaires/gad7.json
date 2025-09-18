@@ -9,7 +9,7 @@
       "id": "feeling_nervous",
       "type": "select",
       "label": "Feeling Nervous or Anxious",
-      "description": "Over the last 2 weeks, how often have you been bothered by feeling nervous, anxious, or on edge?",
+      "description": "Over the last 2 weeks, how often have you felt nervous, anxious, or on edge?",
       "required": true,
       "options": [
         {
@@ -34,7 +34,7 @@
       "id": "uncontrollable_worrying",
       "type": "select",
       "label": "Uncontrollable Worrying",
-      "description": "Over the last 2 weeks, how often have you been bothered by not being able to stop or control worrying?",
+      "description": "Over the last 2 weeks, how often have you not been able to stop or control worrying?",
       "required": true,
       "options": [
         {
@@ -59,7 +59,7 @@
       "id": "worrying_too_much",
       "type": "select",
       "label": "Excessive Worrying",
-      "description": "Over the last 2 weeks, how often have you been bothered by worrying too much about different things?",
+      "description": "Over the last 2 weeks, how often have you worried too much about different things?",
       "required": true,
       "options": [
         {
@@ -84,7 +84,7 @@
       "id": "trouble_relaxing",
       "type": "select",
       "label": "Trouble Relaxing",
-      "description": "Over the last 2 weeks, how often have you been bothered by trouble relaxing?",
+      "description": "Over the last 2 weeks, how often have you had trouble relaxing?",
       "required": true,
       "options": [
         {
@@ -109,7 +109,7 @@
       "id": "restlessness",
       "type": "select",
       "label": "Restlessness",
-      "description": "Over the last 2 weeks, how often have you been bothered by being so restless that it's hard to sit still?",
+      "description": "Over the last 2 weeks, how often have you been so restless that it's hard to sit still?",
       "required": true,
       "options": [
         {
@@ -134,7 +134,7 @@
       "id": "easily_annoyed",
       "type": "select",
       "label": "Irritability",
-      "description": "Over the last 2 weeks, how often have you been bothered by becoming easily annoyed or irritable?",
+      "description": "Over the last 2 weeks, how often have you become easily annoyed or irritable?",
       "required": true,
       "options": [
         {
@@ -158,8 +158,8 @@
     {
       "id": "feeling_afraid",
       "type": "select",
-      "label": "Anticipatory Anxiety",
-      "description": "Over the last 2 weeks, how often have you been bothered by feeling afraid as if something awful might happen?",
+      "label": "Fear of Something Bad Happening",
+      "description": "Over the last 2 weeks, how often have you felt afraid that something awful might happen?",
       "required": true,
       "options": [
         {

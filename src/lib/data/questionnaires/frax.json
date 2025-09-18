@@ -108,7 +108,7 @@
       "id": "previous_fracture",
       "type": "select",
       "label": "Previous Fracture",
-      "description": "Have you had a fracture after age 50 from a fall from standing height or less?",
+      "description": "Have you broken a bone after age 50 from a minor fall (from standing height or less)?",
       "required": true,
       "options": [
         {
@@ -125,7 +125,7 @@
       "id": "parent_hip_fracture",
       "type": "select",
       "label": "Parent Hip Fracture",
-      "description": "Did either of your parents break a hip?",
+      "description": "Has either of your parents broken their hip?",
       "required": true,
       "options": [
         {
@@ -158,8 +158,8 @@
     {
       "id": "glucocorticoids",
       "type": "select",
-      "label": "Glucocorticoids",
-      "description": "Have you ever taken glucocorticoids (cortisone, prednisone) for more than 3 months?",
+      "label": "Steroid Medication",
+      "description": "Have you ever taken steroid medications (such as cortisone or prednisone) for more than 3 months?",
       "required": true,
       "options": [
         {
@@ -192,8 +192,8 @@
     {
       "id": "secondary_osteoporosis",
       "type": "select",
-      "label": "Secondary Osteoporosis",
-      "description": "Do you have any conditions associated with secondary osteoporosis (e.g., Type 1 diabetes, osteogenesis imperfecta, hyperthyroidism, hypogonadism, premature menopause, chronic malnutrition, chronic liver disease)?",
+      "label": "Other Medical Conditions",
+      "description": "Do you have any of these conditions: Type 1 diabetes, overactive thyroid, premature menopause (before age 45), chronic liver disease, or other conditions that affect bone health?",
       "required": true,
       "options": [
         {
@@ -226,8 +226,8 @@
     {
       "id": "bmd_t_score",
       "type": "select",
-      "label": "Bone Density (BMD T-score)",
-      "description": "If you have had a bone density test (DEXA), what was your femoral neck T-score result?",
+      "label": "Bone Density Test Results",
+      "description": "If you have had a bone density test (DEXA scan), what were your results?",
       "required": true,
       "options": [
         {
