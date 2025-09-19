@@ -14,10 +14,14 @@ import { FINDRISKScorer } from '@/lib/scorers/FINDRISKScorer'
 import { FRAXScorer } from '@/lib/scorers/FRAXScorer'
 import { GAD7Scorer } from '@/lib/scorers/GAD7Scorer'
 import { STarTScorer } from '@/lib/scorers/STarTScorer'
-import type { BaseScorer } from '@/lib/scorers/BaseScorer'
 
 // Type for scorer constructor
-type ScorerConstructor = new (...args: unknown[]) => BaseScorer
+type ScorerConstructor =
+  | typeof ASCVDScorer
+  | typeof FINDRISKScorer
+  | typeof FRAXScorer
+  | typeof GAD7Scorer
+  | typeof STarTScorer
 
 /**
  * Registry of all available questionnaires
@@ -40,6 +44,26 @@ export const scorerRegistry = new Map<string, ScorerConstructor>([
   ['gad7', GAD7Scorer],
   ['start', STarTScorer],
 ])
+
+/**
+ * Registry mapping questionnaire IDs to their data
+ */
+const questionnaireDataRegistry = new Map<string, QuestionnaireSchema>([
+  ['ascvd', loadQuestionnaire(ascvdData)],
+  ['findrisk', loadQuestionnaire(findriskData)],
+  ['frax', loadQuestionnaire(fraxData)],
+  ['gad7', loadQuestionnaire(gad7Data)],
+  ['start', loadQuestionnaire(startData)],
+])
+
+/**
+ * Get a questionnaire schema by ID
+ * @param id - The ID of the questionnaire (e.g., 'ascvd', 'findrisk')
+ * @returns The questionnaire schema or undefined if not found
+ */
+export function getQuestionnaireById(id: string): QuestionnaireSchema | undefined {
+  return questionnaireDataRegistry.get(id.toLowerCase())
+}
 
 /**
  * Get a questionnaire schema by name

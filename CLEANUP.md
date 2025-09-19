@@ -40,6 +40,18 @@ This document outlines areas for improvement in code cleanliness and maintainabi
 - **Enhanced type safety**: Consistent prop interfaces and proper TypeScript support throughout
 - **Maintained functionality**: Zero breaking changes, same user experience with improved consistency
 
+### 🎯 **4. Dynamic Route Refactoring** - ✅ COMPLETE
+- **Moved UI metadata to JSON files**: Each questionnaire now contains its UI configuration (submitButtonText, loadingText, description)
+- **Created dynamic route**: `[questionnaireId]/page.tsx` handles all questionnaire types with a single file
+- **Enhanced questionnaire registry**: Added `getQuestionnaireById()` function for dynamic loading
+- **Eliminated file duplication**: Removed 5 individual questionnaire directories (ascvd/, findrisk/, frax/, gad7/, start/)
+- **Reduced codebase**: From 25+ questionnaire-specific files to 1 dynamic route + registry
+- **Added static generation**: `generateStaticParams()` pre-builds all questionnaire pages at build time
+- **Added dynamic metadata**: `generateMetadata()` generates SEO-friendly titles and descriptions per questionnaire
+- **Improved maintainability**: Adding new questionnaires requires only JSON file + registry entry
+- **Enhanced type safety**: Full TypeScript support with Next.js 15 async params pattern
+- **Maintained functionality**: All URLs (/ascvd, /findrisk, etc.) work exactly the same
+
 
 ## 📊 Current State Assessment
 
@@ -275,7 +287,6 @@ export function QuestionnaireForm({ questionnaire }: QuestionnaireFormProps) {
 // - Consistent UI text from metadata registry
 // - Proper TypeScript typing
 ```
-```
 
 ---
 
@@ -466,6 +477,7 @@ src/
 ### Phase 2: Code Quality (Week 3-4)
 - [ ] Add runtime type validation
 - [x] Standardize component patterns ✅ **COMPLETED**
+- [x] Refactor duplicate questionnaire routes ✅ **COMPLETED**
 - [ ] Improve error handling throughout app
 - [ ] Add component documentation
 

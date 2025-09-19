@@ -128,7 +128,7 @@ export default function HomePage() {
                           </h3>
                           <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-600 transition-colors" />
                         </div>
-                        <p className="text-sm text-slate-600 mb-3">{assessment.description}</p>
+                        <p className="text-sm text-slate-600 mb-3 h-14">{assessment.description}</p>
                         <div className="flex items-center justify-between">
                           <span
                             className={`inline-block px-3 py-1 rounded-full text-xs font-medium ${assessment.bgColor} ${assessment.textColor}`}
