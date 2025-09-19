@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { QuestionnaireContainer } from '@/components/questionnaire'
-import { submitGAD7Questionnaire } from '../actions/submit-gad7'
+import { submitQuestionnaireByType } from '@/lib/actions/submit-questionnaire-by-type'
 import { useUserProfile } from '@/contexts/UserProfileContext'
 import type { QuestionnaireSchema, FormData } from '@/lib/types/questionnaire'
 
@@ -17,7 +17,7 @@ export function GAD7Form({ questionnaire }: GAD7FormProps) {
     if (!profile) {
       throw new Error('User profile is required')
     }
-    return submitGAD7Questionnaire(questionnaire, formData, profile)
+    return submitQuestionnaireByType(questionnaire, formData, profile)
   }
 
   return (

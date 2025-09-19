@@ -32,7 +32,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <html lang="en">
         <body>
           <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
-            <main className="p-2 md:p-4">{children}</main>
+            <main className="p-2 md:p-4 flex justify-center">{children}</main>
           </div>
         </body>
       </html>
@@ -45,7 +45,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         <UserProfileProvider>
           <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
             <ClientHeader user={user} />
-            <main className="p-2 md:p-4">{children}</main>
+            <main className="p-2 md:p-4 flex justify-center">{children}</main>
             <Footer />
           </div>
         </UserProfileProvider>

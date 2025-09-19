@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { QuestionnaireForm } from './QuestionnaireForm'
 import { QuestionnaireResults } from './QuestionnaireResults'
+import { ErrorBoundary } from '../common/ErrorBoundary'
 import type {
   QuestionnaireSchema,
   SubmissionResult,
@@ -35,24 +36,24 @@ export function QuestionnaireContainer({
     setResults(null)
   }
 
-  if (results) {
-    return (
-      <QuestionnaireResults
-        questionnaire={questionnaire}
-        results={results}
-        onStartOver={handleStartOver}
-        customActions={customActions}
-      />
-    )
-  }
-
   return (
-    <QuestionnaireForm
-      questionnaire={questionnaire}
-      onSubmit={onSubmit}
-      onResults={handleResults}
-      submitButtonText={submitButtonText}
-      loadingText={loadingText}
-    />
+    <ErrorBoundary onReset={handleStartOver}>
+      {results ? (
+        <QuestionnaireResults
+          questionnaire={questionnaire}
+          results={results}
+          onStartOver={handleStartOver}
+          customActions={customActions}
+        />
+      ) : (
+        <QuestionnaireForm
+          questionnaire={questionnaire}
+          onSubmit={onSubmit}
+          onResults={handleResults}
+          submitButtonText={submitButtonText}
+          loadingText={loadingText}
+        />
+      )}
+    </ErrorBoundary>
   )
 }

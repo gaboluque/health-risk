@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { QuestionnaireContainer } from '@/components/questionnaire'
-import { submitASCVDQuestionnaire } from '../actions/submit-ascvd'
+import { submitQuestionnaireByType } from '@/lib/actions/submit-questionnaire-by-type'
 import { useUserProfile } from '@/contexts/UserProfileContext'
 import type { QuestionnaireSchema, FormData } from '@/lib/types/questionnaire'
 
@@ -17,7 +17,7 @@ export function ASCVDForm({ questionnaire }: ASCVDFormProps) {
     if (!profile) {
       throw new Error('User profile is required')
     }
-    return submitASCVDQuestionnaire(questionnaire, formData, profile)
+    return submitQuestionnaireByType(questionnaire, formData, profile)
   }
 
   return (

@@ -8,6 +8,17 @@ import fraxData from '@/lib/data/questionnaires/frax.json'
 import gad7Data from '@/lib/data/questionnaires/gad7.json'
 import startData from '@/lib/data/questionnaires/start.json'
 
+// Import all scorer classes
+import { ASCVDScorer } from '@/lib/scorers/ASCVDScorer'
+import { FINDRISKScorer } from '@/lib/scorers/FINDRISKScorer'
+import { FRAXScorer } from '@/lib/scorers/FRAXScorer'
+import { GAD7Scorer } from '@/lib/scorers/GAD7Scorer'
+import { STarTScorer } from '@/lib/scorers/STarTScorer'
+import type { BaseScorer } from '@/lib/scorers/BaseScorer'
+
+// Type for scorer constructor
+type ScorerConstructor = new (...args: unknown[]) => BaseScorer
+
 /**
  * Registry of all available questionnaires
  */
@@ -17,6 +28,17 @@ export const questionnaireRegistry = new Map<string, QuestionnaireSchema>([
   ['Evaluación de Riesgo de Fractura FRAX', loadQuestionnaire(fraxData)],
   ['Evaluación de Ansiedad GAD-7', loadQuestionnaire(gad7Data)],
   ['Herramienta STarT Back', loadQuestionnaire(startData)],
+])
+
+/**
+ * Registry mapping questionnaire IDs to their corresponding scorer classes
+ */
+export const scorerRegistry = new Map<string, ScorerConstructor>([
+  ['ascvd', ASCVDScorer],
+  ['findrisk', FINDRISKScorer],
+  ['frax', FRAXScorer],
+  ['gad7', GAD7Scorer],
+  ['start', STarTScorer],
 ])
 
 /**
@@ -71,4 +93,30 @@ export function getQuestionnaireTailwindColor(name: string): string {
  */
 export function getAllQuestionnaires(): QuestionnaireSchema[] {
   return Array.from(questionnaireRegistry.values())
+}
+
+/**
+ * Get a scorer class by questionnaire ID
+ * @param questionnaireId - The ID of the questionnaire
+ * @returns The scorer class or undefined if not found
+ */
+export function getScorerByQuestionnaireId(questionnaireId: string): ScorerConstructor | undefined {
+  return scorerRegistry.get(questionnaireId.toLowerCase())
+}
+
+/**
+ * Check if a questionnaire ID has a registered scorer
+ * @param questionnaireId - The ID of the questionnaire
+ * @returns True if the questionnaire has a registered scorer
+ */
+export function hasScorer(questionnaireId: string): boolean {
+  return scorerRegistry.has(questionnaireId.toLowerCase())
+}
+
+/**
+ * Get all available questionnaire IDs that have scorers
+ * @returns Array of questionnaire IDs
+ */
+export function getAvailableQuestionnaireIds(): string[] {
+  return Array.from(scorerRegistry.keys())
 }

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { QuestionnaireContainer } from '@/components/questionnaire'
-import { submitFRAXQuestionnaire } from '../actions/submit-frax'
+import { submitQuestionnaireByType } from '@/lib/actions/submit-questionnaire-by-type'
 import { useUserProfile } from '@/contexts/UserProfileContext'
 import type { QuestionnaireSchema, FormData } from '@/lib/types/questionnaire'
 
@@ -17,7 +17,7 @@ export function FRAXForm({ questionnaire }: FRAXFormProps) {
     if (!profile) {
       throw new Error('User profile is required')
     }
-    return submitFRAXQuestionnaire(questionnaire, formData, profile)
+    return submitQuestionnaireByType(questionnaire, formData, profile)
   }
 
   return (
