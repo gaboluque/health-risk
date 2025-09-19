@@ -7,6 +7,11 @@
   "version": "1.0.0",
   "category": "bone_health",
   "chartColor": "#10b981",
+  "icon": "Bone",
+  "displayCategory": "Musculoesquelético",
+  "color": "from-amber-500 to-orange-600",
+  "bgColor": "bg-amber-50",
+  "textColor": "text-amber-700",
   "questions": [
     {
       "id": "age",

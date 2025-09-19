@@ -7,67 +7,26 @@ import { ProfileGate } from '@/components/profile/ProfileGate'
 import { useUserProfile } from '@/contexts/UserProfileContext'
 import { getUserSubmissions, type UserSubmissionSummary } from '@/lib/actions/get-user-submissions'
 import { RiskBadge } from '@/components/ui/risk-badge'
+import { getQuestionnairesForDisplay } from '@/lib/utils/questionnaire-registry'
 
 import './styles.css'
 
-const healthAssessments = [
-  {
-    id: 'ascvd',
-    title: 'Evaluación de Salud Cardíaca',
-    description:
-      'Evalúa tu riesgo de una enfermedad cardíaca o accidente cerebrovascular en los próximos 10 años',
-    icon: Heart,
-    category: 'Cardiovascular',
-    color: 'from-red-500 to-pink-600',
-    bgColor: 'bg-red-50',
-    textColor: 'text-red-700',
-  },
-  {
-    id: 'findrisk',
-    title: 'Evaluación de Riesgo de Diabetes',
-    description: 'Evalúa tu riesgo de desarrollar diabetes tipo 2',
-    icon: Activity,
-    category: 'Metabólico',
-    color: 'from-blue-500 to-cyan-600',
-    bgColor: 'bg-blue-50',
-    textColor: 'text-blue-700',
-  },
-  {
-    id: 'frax',
-    title: 'Evaluación de Salud Ósea',
-    description: 'Calcula tu riesgo de fracturas osteoporóticas',
-    icon: Bone,
-    category: 'Musculoesquelético',
-    color: 'from-amber-500 to-orange-600',
-    bgColor: 'bg-amber-50',
-    textColor: 'text-amber-700',
-  },
-  {
-    id: 'gad7',
-    title: 'Evaluación de Ansiedad',
-    description: 'Detecta síntomas de trastorno de ansiedad generalizada',
-    icon: Brain,
-    category: 'Salud Mental',
-    color: 'from-purple-500 to-indigo-600',
-    bgColor: 'bg-purple-50',
-    textColor: 'text-purple-700',
-  },
-  {
-    id: 'start',
-    title: 'Evaluación de Dolor de Espalda',
-    description: 'Evalúa tu dolor de espalda y opciones de tratamiento',
-    icon: Shield,
-    category: 'Manejo del Dolor',
-    color: 'from-green-500 to-emerald-600',
-    bgColor: 'bg-green-50',
-    textColor: 'text-green-700',
-  },
-]
+// Icon mapping for questionnaire icons
+const iconMap = {
+  Heart,
+  Activity,
+  Bone,
+  Brain,
+  Shield,
+}
 
 export default function HomePage() {
   const { profile, isProfileComplete } = useUserProfile()
   const [submissions, setSubmissions] = useState<UserSubmissionSummary[]>([])
   const [_loadingSubmissions, setLoadingSubmissions] = useState(false)
+
+  // Get questionnaires from registry
+  const healthAssessments = getQuestionnairesForDisplay()
 
   // Fetch submissions when profile is available
   useEffect(() => {
@@ -102,7 +61,7 @@ export default function HomePage() {
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {healthAssessments.map((assessment) => {
-                const IconComponent = assessment.icon
+                const IconComponent = iconMap[assessment.icon as keyof typeof iconMap] || Activity
                 const submission = getSubmissionForAssessment(assessment.id)
                 const hasSubmission = submission?.lastSubmission
 

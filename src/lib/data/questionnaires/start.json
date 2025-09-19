@@ -7,6 +7,11 @@
   "version": "1.0.0",
   "category": "musculoskeletal",
   "chartColor": "#f59e0b",
+  "icon": "Shield",
+  "displayCategory": "Manejo del Dolor",
+  "color": "from-green-500 to-emerald-600",
+  "bgColor": "bg-green-50",
+  "textColor": "text-green-700",
   "questions": [
     {
       "id": "leg_pain",

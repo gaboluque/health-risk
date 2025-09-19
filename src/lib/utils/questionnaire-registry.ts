@@ -144,3 +144,41 @@ export function hasScorer(questionnaireId: string): boolean {
 export function getAvailableQuestionnaireIds(): string[] {
   return Array.from(scorerRegistry.keys())
 }
+
+/**
+ * Type for questionnaire display data
+ */
+export interface QuestionnaireDisplayData {
+  id: string
+  title: string
+  description: string
+  icon: string
+  category: string
+  color: string
+  bgColor: string
+  textColor: string
+}
+
+/**
+ * Get all available questionnaires with their visual properties for UI display
+ * @returns Array of questionnaire objects with visual properties
+ */
+export function getQuestionnairesForDisplay(): QuestionnaireDisplayData[] {
+  return getAvailableQuestionnaireIds()
+    .map((id) => {
+      const questionnaire = getQuestionnaireById(id)
+      if (!questionnaire) return null
+
+      return {
+        id: questionnaire.id,
+        title: questionnaire.patientFriendlyName || questionnaire.name,
+        description: questionnaire.patientFriendlyDescription || questionnaire.description,
+        icon: questionnaire.icon || 'Activity',
+        category: questionnaire.displayCategory || questionnaire.category,
+        color: questionnaire.color || 'from-gray-500 to-gray-600',
+        bgColor: questionnaire.bgColor || 'bg-gray-50',
+        textColor: questionnaire.textColor || 'text-gray-700',
+      }
+    })
+    .filter((item): item is QuestionnaireDisplayData => item !== null)
+}

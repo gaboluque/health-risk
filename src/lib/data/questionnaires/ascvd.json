@@ -7,6 +7,11 @@
   "version": "1.0.0",
   "category": "cardiovascular",
   "chartColor": "#ef4444",
+  "icon": "Heart",
+  "displayCategory": "Cardiovascular",
+  "color": "from-red-500 to-pink-600",
+  "bgColor": "bg-red-50",
+  "textColor": "text-red-700",
   "questions": [
     {
       "id": "age",

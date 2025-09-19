@@ -7,6 +7,11 @@
   "version": "1.0.0",
   "category": "diabetes",
   "chartColor": "#3b82f6",
+  "icon": "Activity",
+  "displayCategory": "Metabólico",
+  "color": "from-blue-500 to-cyan-600",
+  "bgColor": "bg-blue-50",
+  "textColor": "text-blue-700",
   "questions": [
     {
       "id": "age",

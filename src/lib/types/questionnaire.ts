@@ -61,6 +61,11 @@ export interface QuestionnaireSchema {
   version: string
   category: string
   chartColor?: string
+  icon?: string
+  displayCategory?: string
+  color?: string
+  bgColor?: string
+  textColor?: string
   questions: QuestionnaireQuestion[]
   scoring: QuestionnaireScoring
   ui: QuestionnaireUIMetadata
