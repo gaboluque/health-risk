@@ -235,6 +235,11 @@
       }
     ]
   },
+  "ui": {
+    "submitButtonText": "Calcular Riesgo de Dolor de Espalda",
+    "loadingText": "Calculando Riesgo...",
+    "description": "Evalúa el riesgo de dolor lumbar persistente"
+  },
   "metadata": {
     "createdAt": "2025-09-18",
     "clinicalUse": "Estratificación de riesgo para dolor lumbar para guiar decisiones de tratamiento y predecir pronóstico para dolor persistente incapacitante"

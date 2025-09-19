@@ -4,6 +4,9 @@ export { QuestionnaireForm } from './QuestionnaireForm'
 export { QuestionnaireResults } from './QuestionnaireResults'
 export { QuestionnairePage } from './QuestionnairePage'
 
+// Export standardized components
+export { StandardQuestionnaireForm } from './StandardQuestionnaireForm'
+
 // Export new modular components
 export { ProgressIndicator } from './ProgressIndicator'
 export { StickyProgressBar } from './StickyProgressBar'

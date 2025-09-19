@@ -1,31 +1,19 @@
 'use client'
 
 import React from 'react'
-import { QuestionnaireContainer } from '@/components/questionnaire'
-import { submitQuestionnaireByType } from '@/lib/actions/submit-questionnaire-by-type'
-import { useUserProfile } from '@/contexts/UserProfileContext'
-import type { QuestionnaireSchema, FormData } from '@/lib/types/questionnaire'
+import { StandardQuestionnaireForm } from '@/components/questionnaire'
+import type { QuestionnaireSchema } from '@/lib/types/questionnaire'
 
 interface FRAXFormProps {
   questionnaire: QuestionnaireSchema
 }
 
+/**
+ * FRAX Form Component
+ *
+ * Renders the FRAX fracture risk assessment questionnaire.
+ * Uses the standardized questionnaire form pattern for consistent behavior and UI.
+ */
 export function FRAXForm({ questionnaire }: FRAXFormProps) {
-  const { profile } = useUserProfile()
-
-  const handleSubmit = async (formData: FormData) => {
-    if (!profile) {
-      throw new Error('User profile is required')
-    }
-    return submitQuestionnaireByType(questionnaire, formData, profile)
-  }
-
-  return (
-    <QuestionnaireContainer
-      questionnaire={questionnaire}
-      onSubmit={handleSubmit}
-      submitButtonText="Calculate Fracture Risk"
-      loadingText="Calculating Risk..."
-    />
-  )
+  return <StandardQuestionnaireForm questionnaire={questionnaire} />
 }

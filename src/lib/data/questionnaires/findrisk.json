@@ -267,6 +267,11 @@
       }
     ]
   },
+  "ui": {
+    "submitButtonText": "Calcular Riesgo de Diabetes",
+    "loadingText": "Calculando Riesgo...",
+    "description": "Evalúa el riesgo de desarrollar diabetes tipo 2"
+  },
   "metadata": {
     "createdAt": "2025-09-18",
     "clinicalUse": "Herramienta de detección para identificar individuos con alto riesgo de desarrollar diabetes tipo 2 en 10 años"

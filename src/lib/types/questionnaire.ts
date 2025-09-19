@@ -41,6 +41,12 @@ export interface QuestionnaireScoring {
   riskCategories: RiskCategory[]
 }
 
+export interface QuestionnaireUIMetadata {
+  submitButtonText: string
+  loadingText: string
+  description: string
+}
+
 export interface QuestionnaireMetadata {
   createdAt: string
   clinicalUse: string
@@ -57,6 +63,7 @@ export interface QuestionnaireSchema {
   chartColor?: string
   questions: QuestionnaireQuestion[]
   scoring: QuestionnaireScoring
+  ui: QuestionnaireUIMetadata
   metadata: QuestionnaireMetadata
 }
 

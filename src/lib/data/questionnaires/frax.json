@@ -313,6 +313,11 @@
       }
     ]
   },
+  "ui": {
+    "submitButtonText": "Calcular Riesgo de Fractura",
+    "loadingText": "Calculando Riesgo...",
+    "description": "Evalúa el riesgo de fractura osteoporótica a 10 años"
+  },
   "metadata": {
     "createdAt": "2025-09-18",
     "clinicalUse": "Evaluación de la probabilidad a 10 años de fractura osteoporótica mayor y fractura de cadera para guiar decisiones de tratamiento"

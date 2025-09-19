@@ -261,6 +261,11 @@
       }
     ]
   },
+  "ui": {
+    "submitButtonText": "Calcular Nivel de Ansiedad",
+    "loadingText": "Calculando Puntuación...",
+    "description": "Evalúa el nivel de ansiedad generalizada"
+  },
   "metadata": {
     "createdAt": "2025-09-18",
     "clinicalUse": "Evaluación y detección del trastorno de ansiedad generalizada; monitoreo de respuesta al tratamiento"

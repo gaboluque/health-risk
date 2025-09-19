@@ -322,6 +322,11 @@
       }
     ]
   },
+  "ui": {
+    "submitButtonText": "Calcular Riesgo ASCVD",
+    "loadingText": "Calculando Riesgo...",
+    "description": "Evalúa el riesgo de enfermedad cardiovascular aterosclerótica a 10 años"
+  },
   "metadata": {
     "createdAt": "2025-09-17",
     "clinicalUse": "Prevención primaria de enfermedad cardiovascular aterosclerótica"
