@@ -1,3 +1,5 @@
+import type { UserProfile } from '@/lib/types/user-profile'
+
 /**
  * Calculate age from birth date
  */
@@ -27,10 +29,10 @@ export function calculateBMI(height: number, weight: number): number {
 /**
  * Calculate and add computed fields to a profile
  */
-export function enrichProfileWithCalculations<T extends Record<string, unknown>>(
-  profile: T,
-): T & { age?: number; bmi?: number } {
-  const enriched: T & { age?: number; bmi?: number } = { ...profile }
+export function enrichProfileWithCalculations(
+  profile: UserProfile,
+): UserProfile & { age?: number; bmi?: number } {
+  const enriched: UserProfile & { age?: number; bmi?: number } = { ...profile }
 
   // Calculate age if birth date is provided
   if ('birthDate' in profile && typeof profile.birthDate === 'string') {

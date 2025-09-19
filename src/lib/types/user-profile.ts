@@ -23,4 +23,5 @@ export interface UserProfileContextType {
   clearProfile: () => void
   isProfileComplete: boolean
   loadingProfile: boolean
+  isHydrated: boolean
 }
