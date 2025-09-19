@@ -54,6 +54,7 @@ export interface QuestionnaireSchema {
   patientFriendlyDescription?: string
   version: string
   category: string
+  chartColor?: string
   questions: QuestionnaireQuestion[]
   scoring: QuestionnaireScoring
   metadata: QuestionnaireMetadata

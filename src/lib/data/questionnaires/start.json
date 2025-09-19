@@ -6,6 +6,7 @@
   "patientFriendlyDescription": "Ayúdanos a entender tu dolor de espalda y encontrar la mejor manera de ayudarte a recuperarte",
   "version": "1.0.0",
   "category": "musculoskeletal",
+  "chartColor": "#f59e0b",
   "questions": [
     {
       "id": "leg_pain",

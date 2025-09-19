@@ -6,6 +6,7 @@
   "patientFriendlyDescription": "Descubre tu riesgo de una enfermedad cardíaca o accidente cerebrovascular en los próximos 10 años",
   "version": "1.0.0",
   "category": "cardiovascular",
+  "chartColor": "#ef4444",
   "questions": [
     {
       "id": "age",

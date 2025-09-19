@@ -6,6 +6,7 @@
   "patientFriendlyDescription": "Descubre tu riesgo de desarrollar diabetes en los próximos 10 años",
   "version": "1.0.0",
   "category": "diabetes",
+  "chartColor": "#3b82f6",
   "questions": [
     {
       "id": "age",

@@ -6,6 +6,7 @@
   "patientFriendlyDescription": "Evalúa tu riesgo de fracturas óseas en los próximos 10 años",
   "version": "1.0.0",
   "category": "bone_health",
+  "chartColor": "#10b981",
   "questions": [
     {
       "id": "age",

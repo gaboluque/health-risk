@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { TrendingUp, TrendingDown, Minus, BarChart3 } from 'lucide-react'
 import { riskNumberToName } from '@/lib/utils/risk-mapping'
 import { StandardRiskLevel } from '@/lib/types/questionnaire'
+import { getQuestionnaireChartColor } from '@/lib/utils/questionnaire-registry'
 
 export interface MonthlyRiskData {
   month: string
@@ -64,20 +65,9 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
   const maxRisk = 5
   const minRisk = 0
 
-  // Helper functions for line chart
+  // Helper function for line chart colors
   const getQuestionnaireLineColor = (name: string) => {
-    const colors = {
-      ASCVD: '#ef4444', // red-500
-      FINDRISK: '#3b82f6', // blue-500
-      FRAX: '#10b981', // green-500
-      'GAD-7': '#8b5cf6', // violet-500
-      STarT: '#f59e0b', // amber-500
-    }
-
-    for (const [key, color] of Object.entries(colors)) {
-      if (name.toUpperCase().includes(key)) return color
-    }
-    return '#6b7280' // gray-500
+    return getQuestionnaireChartColor(name)
   }
 
   // Generate SVG path for a questionnaire line

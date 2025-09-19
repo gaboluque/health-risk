@@ -6,6 +6,7 @@
   "patientFriendlyDescription": "Ayúdanos a entender cómo la ansiedad puede estar afectando tu vida diaria",
   "version": "1.0.0",
   "category": "mental_health",
+  "chartColor": "#8b5cf6",
   "questions": [
     {
       "id": "feeling_nervous",

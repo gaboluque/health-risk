@@ -3,6 +3,10 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { FileText, Users } from 'lucide-react'
+import {
+  getQuestionnaireTailwindColor,
+  getQuestionnaireByName,
+} from '@/lib/utils/questionnaire-registry'
 
 interface QuestionnairePerformanceProps {
   submissionsByQuestionnaire: Record<string, number>
@@ -19,33 +23,16 @@ export function QuestionnairePerformance({
   const maxCount = Math.max(...questionnaires.map((q) => q.count))
 
   const getQuestionnaireColor = (name: string) => {
-    const colors = {
-      ASCVD: 'bg-red-500',
-      FINDRISK: 'bg-blue-500',
-      FRAX: 'bg-green-500',
-      'GAD-7': 'bg-purple-500',
-      STarT: 'bg-orange-500',
-    }
-
-    for (const [key, color] of Object.entries(colors)) {
-      if (name.toUpperCase().includes(key)) return color
-    }
-    return 'bg-gray-500'
+    return getQuestionnaireTailwindColor(name)
   }
 
   const getQuestionnaireDescription = (name: string) => {
-    const descriptions = {
-      ASCVD: 'Riesgo de Enfermedad Cardiovascular',
-      FINDRISK: 'Evaluación de Riesgo de Diabetes',
-      FRAX: 'Evaluación de Riesgo de Fractura',
-      'GAD-7': 'Detección de Trastorno de Ansiedad',
-      STarT: 'Evaluación de Dolor de Espalda',
-    }
-
-    for (const [key, desc] of Object.entries(descriptions)) {
-      if (name.toUpperCase().includes(key)) return desc
-    }
-    return 'Evaluación de Riesgo de Salud'
+    const questionnaire = getQuestionnaireByName(name)
+    return (
+      questionnaire?.patientFriendlyName ||
+      questionnaire?.description ||
+      'Evaluación de Riesgo de Salud'
+    )
   }
 
   if (questionnaires.length === 0) {
