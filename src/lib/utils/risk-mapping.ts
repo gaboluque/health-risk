@@ -21,32 +21,32 @@ export const RISK_VALUE_TO_NAME = {
 export const RISK_LEVEL_COLORS = {
   [StandardRiskLevel.UNKNOWN]: {
     bgColor: '#6b7280',
-    textColor: '#374151',
+    textColor: '#ffffff',
     borderColor: '#d1d5db',
   }, // gray-500, gray-700, gray-300
   [StandardRiskLevel.MINIMAL]: {
     bgColor: '#10b981',
-    textColor: '#047857',
+    textColor: '#ffffff',
     borderColor: '#a7f3d0',
   }, // emerald-500, emerald-700, emerald-200
   [StandardRiskLevel.LOW]: {
     bgColor: '#3b82f6',
-    textColor: '#15803d',
-    borderColor: '#bbf7d0',
-  }, // blue-500, green-700, green-200
+    textColor: '#ffffff',
+    borderColor: '#c7d2fe',
+  }, // blue-500, blue-700, blue-200
   [StandardRiskLevel.MODERATE]: {
     bgColor: '#f59e0b',
-    textColor: '#a16207',
+    textColor: '#ffffff',
     borderColor: '#fef3c7',
   }, // amber-500, yellow-700, yellow-200
   [StandardRiskLevel.HIGH]: {
     bgColor: '#ef4444',
-    textColor: '#c2410c',
+    textColor: '#ffffff',
     borderColor: '#fed7aa',
   }, // red-500, orange-700, orange-200
   [StandardRiskLevel.SEVERE]: {
     bgColor: '#991b1b',
-    textColor: '#dc2626',
+    textColor: '#ffffff',
     borderColor: '#fecaca',
   }, // red-800, red-600, red-200
 } as const

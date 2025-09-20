@@ -116,6 +116,9 @@ export function hexToTailwindColor(hexColor: string): string {
     // Additional colors from risk mapping
     '#a16207': 'yellow-700',
     '#c2410c': 'orange-700',
+
+    // White colors
+    '#ffffff': 'white',
   }
   return colorMap[hexColor] || 'gray-500'
 }

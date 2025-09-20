@@ -168,7 +168,7 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
               <svg
                 width={chartWidth}
                 height={chartHeight}
-                className="border rounded-lg bg-background"
+                className="border rounded-lg bg-background p-4"
                 viewBox={`0 0 ${chartWidth} ${chartHeight}`}
               >
                 {/* Grid lines */}
@@ -225,7 +225,7 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
                         textAnchor="end"
                         className="fill-muted-foreground"
                       >
-                        {risk} - {riskNumberToName(risk)}
+                        {riskNumberToName(risk)}
                       </text>
                     )
                   })}
@@ -284,14 +284,6 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
                               className="drop-shadow-sm"
                             />
                             <circle cx={point.x} cy={point.y} r="3" fill={color} />
-
-                            {/* Tooltip on hover */}
-                            <title>
-                              {questionnaire.questionnaireName} - {point.month}
-                              {'\n'}Riesgo Promedio: {point.value.toFixed(2)} (
-                              {riskNumberToName(Math.round(point.value))}){'\n'}Evaluaciones:{' '}
-                              {point.submissions}
-                            </title>
                           </g>
                         ))}
                       </g>

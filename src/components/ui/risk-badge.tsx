@@ -18,6 +18,8 @@ export function RiskBadge({ riskLevel, className }: RiskBadgeProps) {
     borderColor: `border-${hexToTailwindColor(colorConfig.borderColor)}`,
   }
 
+  console.log({ config })
+
   return (
     <span
       className={cn(
