@@ -87,7 +87,6 @@ export const Users: CollectionConfig = {
           name: 'idNumber',
           type: 'text',
           required: true,
-          unique: true,
           label: 'ID Number',
           admin: {
             description: 'National identification number',
@@ -105,7 +104,6 @@ export const Users: CollectionConfig = {
           name: 'cellphoneNumber',
           type: 'text',
           required: true,
-          unique: true,
           label: 'Cellphone Number',
         },
         {
