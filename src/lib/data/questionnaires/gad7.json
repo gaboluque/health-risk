@@ -1,6 +1,6 @@
 {
   "id": "gad7",
-  "name": "Evaluación de Ansiedad GAD-7",
+  "name": "gad7",
   "description": "Cuestionario de autorreporte de 7 elementos para detectar y evaluar la severidad del trastorno de ansiedad generalizada",
   "patientFriendlyName": "Evaluación de Ansiedad",
   "patientFriendlyDescription": "Ayúdanos a entender cómo la ansiedad puede estar afectando tu vida diaria",
@@ -202,6 +202,7 @@
     "riskCategories": [
       {
         "name": "Ansiedad Mínima",
+        "level": 1,
         "range": {
           "min": 0,
           "max": 4
@@ -218,6 +219,7 @@
       },
       {
         "name": "Ansiedad Leve",
+        "level": 2,
         "range": {
           "min": 5,
           "max": 9
@@ -234,6 +236,7 @@
       },
       {
         "name": "Ansiedad Moderada",
+        "level": 3,
         "range": {
           "min": 10,
           "max": 14
@@ -250,6 +253,7 @@
       },
       {
         "name": "Ansiedad Severa",
+        "level": 4,
         "range": {
           "min": 15,
           "max": 21

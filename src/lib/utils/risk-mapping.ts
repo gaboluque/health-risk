@@ -1,10 +1,7 @@
-import { StandardRiskLevel } from '@/lib/types/questionnaire'
+import { RiskCategory, RiskResult, StandardRiskLevel } from '@/lib/types/questionnaire'
 
-/**
- * Maps standardized risk levels to numerical values for trend analysis
- * Higher numbers represent higher risk levels
- */
 export const RISK_LEVEL_MAPPING = {
+  [StandardRiskLevel.UNKNOWN]: 0,
   [StandardRiskLevel.MINIMAL]: 1,
   [StandardRiskLevel.LOW]: 2,
   [StandardRiskLevel.MODERATE]: 3,
@@ -12,10 +9,8 @@ export const RISK_LEVEL_MAPPING = {
   [StandardRiskLevel.SEVERE]: 5,
 } as const
 
-/**
- * Maps numerical risk values back to risk level names for display
- */
 export const RISK_VALUE_TO_NAME = {
+  0: 'Desconocido',
   1: 'Mínimo',
   2: 'Bajo',
   3: 'Moderado',
@@ -23,52 +18,54 @@ export const RISK_VALUE_TO_NAME = {
   5: 'Severo',
 } as const
 
-/**
- * Maps risk levels to colors for consistent visualization
- */
 export const RISK_LEVEL_COLORS = {
-  [StandardRiskLevel.MINIMAL]: '#10b981', // green-500
-  [StandardRiskLevel.LOW]: '#3b82f6', // blue-500
-  [StandardRiskLevel.MODERATE]: '#f59e0b', // amber-500
-  [StandardRiskLevel.HIGH]: '#ef4444', // red-500
-  [StandardRiskLevel.SEVERE]: '#991b1b', // red-800
+  [StandardRiskLevel.UNKNOWN]: {
+    bgColor: '#6b7280',
+    textColor: '#374151',
+    borderColor: '#d1d5db',
+  }, // gray-500, gray-700, gray-300
+  [StandardRiskLevel.MINIMAL]: {
+    bgColor: '#10b981',
+    textColor: '#047857',
+    borderColor: '#a7f3d0',
+  }, // emerald-500, emerald-700, emerald-200
+  [StandardRiskLevel.LOW]: {
+    bgColor: '#3b82f6',
+    textColor: '#15803d',
+    borderColor: '#bbf7d0',
+  }, // blue-500, green-700, green-200
+  [StandardRiskLevel.MODERATE]: {
+    bgColor: '#f59e0b',
+    textColor: '#a16207',
+    borderColor: '#fef3c7',
+  }, // amber-500, yellow-700, yellow-200
+  [StandardRiskLevel.HIGH]: {
+    bgColor: '#ef4444',
+    textColor: '#c2410c',
+    borderColor: '#fed7aa',
+  }, // red-500, orange-700, orange-200
+  [StandardRiskLevel.SEVERE]: {
+    bgColor: '#991b1b',
+    textColor: '#dc2626',
+    borderColor: '#fecaca',
+  }, // red-800, red-600, red-200
 } as const
 
-/**
- * Convert a risk level to its numerical value
- * @param riskLevel - The standardized risk level
- * @returns The numerical value (1-5)
- */
 export function riskLevelToNumber(riskLevel: StandardRiskLevel): number {
   return RISK_LEVEL_MAPPING[riskLevel] || 1
 }
 
-/**
- * Convert a numerical value back to a risk level name
- * @param value - The numerical value (1-5)
- * @returns The risk level name in Spanish
- */
 export function riskNumberToName(value: number): string {
-  return RISK_VALUE_TO_NAME[value as keyof typeof RISK_VALUE_TO_NAME] || 'Desconocido'
+  return RISK_VALUE_TO_NAME[value as keyof typeof RISK_VALUE_TO_NAME] || RISK_VALUE_TO_NAME[0]
 }
 
-/**
- * Get the color for a risk level
- * @param riskLevel - The standardized risk level
- * @returns The hex color code
- */
-export function getRiskLevelColor(riskLevel: StandardRiskLevel): string {
-  return RISK_LEVEL_COLORS[riskLevel] || '#6b7280' // gray-500 as fallback
+export function getRiskValueColor(riskLevel: StandardRiskLevel): string {
+  return `bg-${RISK_LEVEL_COLORS[riskLevel].bgColor || RISK_LEVEL_COLORS[StandardRiskLevel.UNKNOWN].bgColor}`
 }
 
-/**
- * Calculate the average risk value for a set of submissions
- * @param riskLevels - Array of standardized risk levels
- * @returns The average numerical risk value
- */
-export function calculateAverageRisk(riskLevels: StandardRiskLevel[]): number {
+export function calculateAverageRisk(riskLevels: RiskResult['riskValue'][]): number {
   if (riskLevels.length === 0) return 0
 
-  const sum = riskLevels.reduce((acc, level) => acc + riskLevelToNumber(level), 0)
+  const sum = riskLevels.reduce((acc, level) => acc + level, 0)
   return sum / riskLevels.length
 }

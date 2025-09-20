@@ -1,5 +1,5 @@
 import { BaseScorer } from './BaseScorer'
-import type { RiskResult } from '@/lib/types/questionnaire'
+import { StandardRiskLevel, type RiskResult } from '@/lib/types/questionnaire'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { FormData } from '@/lib/types/questionnaire'
 
@@ -59,9 +59,9 @@ export class STarTScorer extends BaseScorer {
 
     return {
       score: totalScore,
-      risk: riskCategory,
-      standardRiskLevel: this.mapToStandardRiskLevel(riskCategory),
-      riskDescription: this.getRiskDescription(riskCategory, totalScore, psychosocialScore),
+      riskLevel: riskCategory,
+      riskValue: this.getRiskValue(riskCategory),
+      riskDescription: this.getRiskDescription(riskCategory),
     }
   }
 
@@ -80,31 +80,16 @@ export class STarTScorer extends BaseScorer {
     }
   }
 
-  private determineRiskCategory(totalScore: number, psychosocialScore: number): string {
-    // STarT Back risk categorization algorithm
-    if (psychosocialScore >= 4) {
-      return 'High Risk'
-    } else if (totalScore >= 4) {
-      return 'Medium Risk'
-    } else {
-      return 'Low Risk'
-    }
-  }
-
-  private getRiskDescription(
-    riskCategory: string,
+  private determineRiskCategory(
     totalScore: number,
     psychosocialScore: number,
-  ): string {
-    switch (riskCategory) {
-      case 'Low Risk':
-        return 'Riesgo bajo de dolor de espalda persistente e incapacitante. Se recomienda automanejo y consejos simples.'
-      case 'Medium Risk':
-        return 'Riesgo medio de dolor de espalda persistente e incapacitante. Se recomienda fisioterapia y terapia de ejercicios.'
-      case 'High Risk':
-        return 'Riesgo alto de dolor de espalda persistente e incapacitante. Se recomienda un enfoque multidisciplinario con apoyo psicológico.'
-      default:
-        return `Puntuación total: ${totalScore}, Puntuación psicosocial: ${psychosocialScore}`
+  ): RiskResult['riskLevel'] {
+    if (psychosocialScore >= 4) {
+      return StandardRiskLevel.HIGH
+    } else if (totalScore >= 4) {
+      return StandardRiskLevel.MODERATE
+    } else {
+      return StandardRiskLevel.LOW
     }
   }
 }

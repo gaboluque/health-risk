@@ -1,7 +1,7 @@
 'use server'
 
 import { submitQuestionnaire } from '@/lib/actions/submit-questionnaire'
-import { getScorerByQuestionnaireId } from '@/lib/utils/questionnaire-registry'
+import { Questionnaires } from '@/lib/utils/questionnaires/questionnaire-registry'
 import type { FormData, QuestionnaireSchema, SubmissionResponse } from '@/lib/types/questionnaire'
 import type { UserProfile } from '@/lib/types/user-profile'
 
@@ -18,7 +18,7 @@ export async function submitQuestionnaireByType(
   userProfile: UserProfile,
 ): Promise<SubmissionResponse> {
   // Get the appropriate scorer class for this questionnaire
-  const ScorerClass = getScorerByQuestionnaireId(questionnaire.id)
+  const ScorerClass = Questionnaires[questionnaire.name].scorer
 
   if (!ScorerClass) {
     return {

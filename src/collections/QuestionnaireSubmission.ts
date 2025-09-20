@@ -21,6 +21,12 @@ export const QuestionnaireSubmission: CollectionConfig = {
       label: 'Questionnaire',
     },
     {
+      name: 'questionnaireName',
+      type: 'text',
+      required: true,
+      label: 'Questionnaire ID',
+    },
+    {
       name: 'submittedAnswers',
       type: 'array',
       required: true,
@@ -71,27 +77,28 @@ export const QuestionnaireSubmission: CollectionConfig = {
     },
     {
       name: 'riskLevel',
-      type: 'text',
-      required: true,
-      label: 'Risk Level',
-      admin: {
-        description: 'Original risk level as calculated by the questionnaire-specific scorer',
-      },
-    },
-    {
-      name: 'standardRiskLevel',
       type: 'select',
       required: true,
-      label: 'Standard Risk Level',
+      label: 'Risk Level',
       options: [
         { label: 'Minimal', value: 'minimal' },
         { label: 'Low', value: 'low' },
         { label: 'Moderate', value: 'moderate' },
         { label: 'High', value: 'high' },
         { label: 'Severe', value: 'severe' },
+        { label: 'Unknown', value: 'unknown' },
       ],
       admin: {
-        description: 'Standardized risk level for filtering and comparison across questionnaires',
+        description: 'Risk level',
+      },
+    },
+    {
+      name: 'riskValue',
+      type: 'number',
+      required: true,
+      label: 'Risk Level',
+      admin: {
+        description: 'Risk value',
       },
     },
     {

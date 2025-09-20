@@ -1,7 +1,7 @@
 import { BaseScorer } from './BaseScorer'
-import type { RiskResult } from '@/lib/types/questionnaire'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { FormData } from '@/lib/types/questionnaire'
+import { StandardRiskLevel, type RiskResult } from '@/lib/types/questionnaire'
 
 /**
  * FRAX (Fracture Risk Assessment Tool) Scorer
@@ -74,9 +74,9 @@ export class FRAXScorer extends BaseScorer {
 
     return {
       score: majorFractureRisk,
-      risk,
-      standardRiskLevel: this.mapToStandardRiskLevel(risk),
-      riskDescription: `10-year probability of major osteoporotic fracture: ${majorFractureRisk}%`,
+      riskLevel: risk,
+      riskValue: this.getRiskValue(risk),
+      riskDescription: this.getRiskDescription(risk),
     }
   }
 
@@ -209,13 +209,13 @@ export class FRAXScorer extends BaseScorer {
     }
   }
 
-  private interpretMajorFractureRisk(risk: number): string {
+  private interpretMajorFractureRisk(risk: number): RiskResult['riskLevel'] {
     if (risk < 10) {
-      return 'Low Risk'
+      return StandardRiskLevel.LOW
     } else if (risk < 20) {
-      return 'Moderate Risk'
+      return StandardRiskLevel.MODERATE
     } else {
-      return 'High Risk'
+      return StandardRiskLevel.HIGH
     }
   }
 }

@@ -11,7 +11,7 @@ export interface UserProfile {
   socialSecurityNumber?: string // Numero de Caja de Seguro Social (optional)
   cellphoneNumber: string // Cellphone number
   privateInsurance?: string // Seguro privado
-  createdAt: string
+  createdAt?: string
   // Calculated fields (computed from the above)
   age?: number
   bmi?: number

@@ -5,13 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { PieChart } from 'lucide-react'
 
 export function RiskDistributionChart() {
-  // Mock data for risk distribution - in a real app, this would come from your database
-  const riskData = [
-    { level: 'Riesgo Bajo', count: 156, percentage: 45, color: 'bg-green-500' },
-    { level: 'Riesgo Moderado', count: 89, percentage: 26, color: 'bg-yellow-500' },
-    { level: 'Riesgo Alto', count: 67, percentage: 19, color: 'bg-orange-500' },
-    { level: 'Riesgo Muy Alto', count: 34, percentage: 10, color: 'bg-red-500' },
-  ]
+  const riskData: any[] = []
 
   const totalAssessments = riskData.reduce((sum, item) => sum + item.count, 0)
 

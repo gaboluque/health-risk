@@ -1,6 +1,6 @@
 {
   "id": "findrisk",
-  "name": "Calculadora de Riesgo de Diabetes FINDRISK",
+  "name": "findrisk",
   "description": "Puntuación de Riesgo de Diabetes Finlandesa - Predice el riesgo a 10 años de desarrollar diabetes tipo 2",
   "patientFriendlyName": "Evaluación de Riesgo de Diabetes",
   "patientFriendlyDescription": "Descubre tu riesgo de desarrollar diabetes en los próximos 10 años",
@@ -193,6 +193,7 @@
     "riskCategories": [
       {
         "name": "Riesgo Bajo",
+        "level": 1,
         "range": {
           "min": 0,
           "max": 6
@@ -208,6 +209,7 @@
       },
       {
         "name": "Riesgo Ligeramente Elevado",
+        "level": 2,
         "range": {
           "min": 7,
           "max": 11
@@ -224,6 +226,7 @@
       },
       {
         "name": "Riesgo Moderado",
+        "level": 3,
         "range": {
           "min": 12,
           "max": 14
@@ -240,6 +243,7 @@
       },
       {
         "name": "Riesgo Alto",
+        "level": 4,
         "range": {
           "min": 15,
           "max": 20
@@ -256,6 +260,7 @@
       },
       {
         "name": "Riesgo Muy Alto",
+        "level": 5,
         "range": {
           "min": 21,
           "max": 26

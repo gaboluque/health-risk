@@ -5,8 +5,8 @@ import { Badge } from '@/components/ui/badge'
 import { FileText, Users } from 'lucide-react'
 import {
   getQuestionnaireTailwindColor,
-  getQuestionnaireByName,
-} from '@/lib/utils/questionnaire-registry'
+  getQuestionnaireDataByName,
+} from '@/lib/utils/questionnaires/questionnaire-registry'
 
 interface QuestionnairePerformanceProps {
   submissionsByQuestionnaire: Record<string, number>
@@ -27,7 +27,7 @@ export function QuestionnairePerformance({
   }
 
   const getQuestionnaireDescription = (name: string) => {
-    const questionnaire = getQuestionnaireByName(name)
+    const questionnaire = getQuestionnaireDataByName(name)
     return (
       questionnaire?.patientFriendlyName ||
       questionnaire?.description ||

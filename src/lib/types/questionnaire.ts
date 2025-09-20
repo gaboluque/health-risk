@@ -16,6 +16,7 @@ export interface QuestionnaireQuestion {
 
 export interface RiskCategory {
   name: string
+  level: number
   range: {
     min: number
     max: number
@@ -86,12 +87,13 @@ export enum StandardRiskLevel {
   MODERATE = 'moderate',
   HIGH = 'high',
   SEVERE = 'severe',
+  UNKNOWN = 'unknown',
 }
 
 export interface RiskResult {
   score: number
-  risk: string
-  standardRiskLevel: StandardRiskLevel
+  riskLevel: StandardRiskLevel
+  riskValue: number
   riskDescription?: string
 }
 

@@ -1,7 +1,8 @@
 import { BaseScorer } from './BaseScorer'
-import type { RiskResult } from '@/lib/types/questionnaire'
+import { StandardRiskLevel, type RiskResult } from '@/lib/types/questionnaire'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { FormData } from '@/lib/types/questionnaire'
+import { RISK_LEVEL_MAPPING } from '../utils/risk-mapping'
 
 /**
  * FINDRISK (Finnish Diabetes Risk Score) Scorer
@@ -44,9 +45,9 @@ export class FINDRISKScorer extends BaseScorer {
 
     return {
       score: totalScore,
-      risk,
-      standardRiskLevel: this.mapToStandardRiskLevel(risk),
-      riskDescription: this.getRiskDescription(totalScore),
+      riskLevel: risk,
+      riskValue: this.getRiskValue(risk),
+      riskDescription: this.getRiskDescription(risk),
     }
   }
 
@@ -171,31 +172,17 @@ export class FINDRISKScorer extends BaseScorer {
     }
   }
 
-  private interpretFINDRISK(score: number): string {
+  private interpretFINDRISK(score: number): RiskResult['riskLevel'] {
     if (score < 7) {
-      return 'Low Risk'
+      return StandardRiskLevel.MINIMAL
     } else if (score >= 7 && score <= 11) {
-      return 'Slightly Elevated Risk'
+      return StandardRiskLevel.LOW
     } else if (score >= 12 && score <= 14) {
-      return 'Moderate Risk'
+      return StandardRiskLevel.MODERATE
     } else if (score >= 15 && score <= 20) {
-      return 'High Risk'
+      return StandardRiskLevel.HIGH
     } else {
-      return 'Very High Risk'
-    }
-  }
-
-  private getRiskDescription(score: number): string {
-    if (score < 7) {
-      return '1 de cada 100 desarrollará diabetes tipo 2 en 10 años'
-    } else if (score >= 7 && score <= 11) {
-      return '1 de cada 25 desarrollará diabetes tipo 2 en 10 años'
-    } else if (score >= 12 && score <= 14) {
-      return '1 de cada 6 desarrollará diabetes tipo 2 en 10 años'
-    } else if (score >= 15 && score <= 20) {
-      return '1 de cada 3 desarrollará diabetes tipo 2 en 10 años'
-    } else {
-      return '1 de cada 2 desarrollará diabetes tipo 2 en 10 años'
+      return StandardRiskLevel.SEVERE
     }
   }
 }

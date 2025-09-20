@@ -1,6 +1,6 @@
 {
   "id": "start",
-  "name": "Herramienta STarT Back",
+  "name": "start",
   "description": "Herramienta pronóstica de 9 preguntas para dolor lumbar, estratificando pacientes en grupos de riesgo para dolor persistente incapacitante",
   "patientFriendlyName": "Evaluación de Dolor de Espalda",
   "patientFriendlyDescription": "Ayúdanos a entender tu dolor de espalda y encontrar la mejor manera de ayudarte a recuperarte",
@@ -192,6 +192,7 @@
     "riskCategories": [
       {
         "name": "Riesgo Bajo",
+        "level": 1,
         "range": {
           "min": 0,
           "max": 3
@@ -208,6 +209,7 @@
       },
       {
         "name": "Riesgo Medio",
+        "level": 2,
         "range": {
           "min": 4,
           "max": 9
@@ -224,6 +226,7 @@
       },
       {
         "name": "Riesgo Alto",
+        "level": 3,
         "range": {
           "min": 4,
           "max": 9

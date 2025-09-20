@@ -7,7 +7,7 @@ import {
   QuestionnaireRiskTrends,
   type QuestionnaireRiskData,
 } from '@/components/admin/QuestionnaireRiskTrends'
-import { calculateAverageRisk } from '@/lib/utils/risk-mapping'
+import { calculateAverageRisk, riskNumberToName } from '@/lib/utils/risk-mapping'
 import { StandardRiskLevel } from '@/lib/types/questionnaire'
 
 export default async function AnalyticsPage() {
@@ -32,7 +32,7 @@ export default async function AnalyticsPage() {
   // Risk distribution
   const riskDistribution = submissions.reduce(
     (acc, submission) => {
-      acc[submission.standardRiskLevel] = (acc[submission.standardRiskLevel] || 0) + 1
+      acc[submission.riskLevel] = (acc[submission.riskLevel] || 0) + 1
       return acc
     },
     {} as Record<string, number>,
@@ -66,7 +66,7 @@ export default async function AnalyticsPage() {
       month: date.toLocaleDateString('en-US', { month: 'short' }),
       submissions: monthSubmissions.length,
       highRisk: monthSubmissions.filter(
-        (s) => s.standardRiskLevel === 'high' || s.standardRiskLevel === 'severe',
+        (s) => s.riskLevel === StandardRiskLevel.HIGH || s.riskLevel === StandardRiskLevel.SEVERE,
       ).length,
     })
   }
@@ -105,16 +105,17 @@ export default async function AnalyticsPage() {
       })
 
       if (monthSubmissions.length > 0) {
-        const riskLevels = monthSubmissions.map((s) => s.standardRiskLevel as StandardRiskLevel)
-        const averageRisk = calculateAverageRisk(riskLevels)
+        const riskValues = monthSubmissions.map((s) => s.riskValue)
+        const averageRisk = calculateAverageRisk(riskValues)
 
         // Calculate risk distribution for this month
-        const riskDistribution = riskLevels.reduce(
-          (acc, level) => {
+        const riskDistribution = riskValues.reduce(
+          (acc, value) => {
+            const level = riskNumberToName(value)
             acc[level] = (acc[level] || 0) + 1
             return acc
           },
-          {} as Record<StandardRiskLevel, number>,
+          {} as Record<string, number>,
         )
 
         questionnaireMonthlyData.push({
@@ -160,10 +161,8 @@ export default async function AnalyticsPage() {
     }
 
     // Calculate overall average risk for this questionnaire
-    const allRiskLevels = questionnaireSubmissions.map(
-      (s) => s.standardRiskLevel as StandardRiskLevel,
-    )
-    const overallAverageRisk = calculateAverageRisk(allRiskLevels)
+    const allRiskValues = questionnaireSubmissions.map((s) => s.riskValue)
+    const overallAverageRisk = calculateAverageRisk(allRiskValues)
 
     questionnaireRiskData.push({
       questionnaireName,

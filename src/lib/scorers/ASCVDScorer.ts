@@ -1,7 +1,6 @@
 import { BaseScorer } from './BaseScorer'
 import type { QuestionnaireSubmission } from '@/payload-types'
-import type { FormData } from '@/lib/types/questionnaire'
-import type { RiskResult } from './BaseScorer'
+import { RiskResult, StandardRiskLevel, type FormData } from '@/lib/types/questionnaire'
 
 export interface ASCVDInputs {
   age: number
@@ -22,29 +21,24 @@ export interface ASCVDInputs {
 export class ASCVDScorer extends BaseScorer {
   private readonly riskCategories = [
     {
-      name: 'Very Low',
+      name: StandardRiskLevel.MINIMAL,
       range: { min: 0, max: 1.9 },
-      description: 'Very low 10-year risk of ASCVD',
     },
     {
-      name: 'Low',
+      name: StandardRiskLevel.LOW,
       range: { min: 2.0, max: 4.9 },
-      description: 'Low 10-year risk of ASCVD',
     },
     {
-      name: 'Medium',
+      name: StandardRiskLevel.MODERATE,
       range: { min: 5.0, max: 7.4 },
-      description: 'Borderline 10-year risk of ASCVD',
     },
     {
-      name: 'Medium-High',
+      name: StandardRiskLevel.HIGH,
       range: { min: 7.5, max: 19.9 },
-      description: 'Intermediate 10-year risk of ASCVD',
     },
     {
-      name: 'High',
+      name: StandardRiskLevel.SEVERE,
       range: { min: 20, max: 100 },
-      description: 'High 10-year risk of ASCVD',
     },
   ]
 
@@ -64,9 +58,9 @@ export class ASCVDScorer extends BaseScorer {
 
     return {
       score: riskScore,
-      risk: risk.name,
-      standardRiskLevel: this.mapToStandardRiskLevel(risk.name),
-      riskDescription: risk.description,
+      riskLevel: risk,
+      riskValue: this.getRiskValue(risk),
+      riskDescription: this.getRiskDescription(risk),
     }
   }
 
@@ -309,8 +303,8 @@ export class ASCVDScorer extends BaseScorer {
    */
   private getRiskCategory(score: number) {
     return (
-      this.riskCategories.find((cat) => score >= cat.range.min && score <= cat.range.max) ||
-      this.riskCategories[0]
+      this.riskCategories.find((cat) => score >= cat.range.min && score <= cat.range.max)?.name ||
+      this.riskCategories[0].name
     )
   }
 }

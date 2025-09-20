@@ -9,12 +9,7 @@ import { findOrCreateUser } from '@/lib/services/user-service'
 export interface UserSubmissionSummary {
   questionnaireId: string
   questionnaireName: string
-  lastSubmission: {
-    id: string
-    standardRiskLevel: 'minimal' | 'low' | 'moderate' | 'high' | 'severe'
-    riskLevel: string
-    submittedAt: string
-  } | null
+  lastSubmission?: QuestionnaireSubmission
 }
 
 export async function getUserSubmissions(
@@ -95,12 +90,7 @@ export async function getUserSubmissions(
         result.push({
           questionnaireId: matchingAssessment, // Use the matching assessment ID instead of the database ID
           questionnaireName,
-          lastSubmission: {
-            id: submission.id,
-            standardRiskLevel: submission.standardRiskLevel,
-            riskLevel: submission.riskLevel,
-            submittedAt: submission.createdAt,
-          },
+          lastSubmission: submission,
         })
       }
     }
@@ -117,7 +107,6 @@ export async function getUserSubmissions(
         result.push({
           questionnaireId: assessmentId,
           questionnaireName: assessmentId,
-          lastSubmission: null,
         })
       }
     }

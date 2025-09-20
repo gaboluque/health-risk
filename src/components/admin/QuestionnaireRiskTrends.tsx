@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { TrendingUp, TrendingDown, Minus, BarChart3 } from 'lucide-react'
 import { riskNumberToName } from '@/lib/utils/risk-mapping'
 import { StandardRiskLevel } from '@/lib/types/questionnaire'
-import { getQuestionnaireChartColor } from '@/lib/utils/questionnaire-registry'
+import { getQuestionnaireChartColor } from '@/lib/utils/questionnaires/questionnaire-registry'
 
 export interface MonthlyRiskData {
   month: string

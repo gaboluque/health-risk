@@ -223,6 +223,7 @@ export interface Questionnaire {
 export interface QuestionnaireSubmission {
   id: string;
   questionnaire: string | Questionnaire;
+  questionnaireName: string;
   submittedAnswers: {
     questionIndex: number;
     questionText: string;
@@ -233,13 +234,13 @@ export interface QuestionnaireSubmission {
   }[];
   totalScore: number;
   /**
-   * Original risk level as calculated by the questionnaire-specific scorer
+   * Risk level
    */
-  riskLevel: string;
+  riskLevel: 'minimal' | 'low' | 'moderate' | 'high' | 'severe' | 'unknown';
   /**
-   * Standardized risk level for filtering and comparison across questionnaires
+   * Risk value
    */
-  standardRiskLevel: 'minimal' | 'low' | 'moderate' | 'high' | 'severe';
+  riskValue: number;
   /**
    * Additional description or interpretation of the risk level
    */
@@ -399,6 +400,7 @@ export interface QuestionnairesSelect<T extends boolean = true> {
  */
 export interface QuestionnaireSubmissionsSelect<T extends boolean = true> {
   questionnaire?: T;
+  questionnaireName?: T;
   submittedAnswers?:
     | T
     | {
@@ -411,7 +413,7 @@ export interface QuestionnaireSubmissionsSelect<T extends boolean = true> {
       };
   totalScore?: T;
   riskLevel?: T;
-  standardRiskLevel?: T;
+  riskValue?: T;
   riskDescription?: T;
   submittedBy?: T;
   updatedAt?: T;

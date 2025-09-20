@@ -1,6 +1,6 @@
 {
   "id": "frax",
-  "name": "Evaluación de Riesgo de Fractura FRAX",
+  "name": "frax",
   "description": "Calcula la probabilidad a 10 años de fracturas osteoporóticas mayores y fracturas de cadera",
   "patientFriendlyName": "Evaluación de Salud Ósea",
   "patientFriendlyDescription": "Evalúa tu riesgo de fracturas óseas en los próximos 10 años",
@@ -270,6 +270,7 @@
     "riskCategories": [
       {
         "name": "Riesgo Bajo",
+        "level": 1,
         "range": {
           "min": 0,
           "max": 9.9
@@ -286,6 +287,7 @@
       },
       {
         "name": "Riesgo Moderado",
+        "level": 2,
         "range": {
           "min": 10,
           "max": 19.9
@@ -302,6 +304,7 @@
       },
       {
         "name": "Riesgo Alto",
+        "level": 3,
         "range": {
           "min": 20,
           "max": 100

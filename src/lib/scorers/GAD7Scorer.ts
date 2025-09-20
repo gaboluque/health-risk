@@ -1,7 +1,7 @@
 import { BaseScorer } from './BaseScorer'
-import type { RiskResult } from '@/lib/types/questionnaire'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { FormData } from '@/lib/types/questionnaire'
+import { StandardRiskLevel, type RiskResult } from '@/lib/types/questionnaire'
 
 /**
  * GAD-7 (Generalized Anxiety Disorder 7-item) Scorer
@@ -43,13 +43,13 @@ export class GAD7Scorer extends BaseScorer {
     const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0)
 
     // Determine severity category
-    const severityCategory = this.determineSeverityCategory(totalScore)
+    const risk = this.determineSeverityCategory(totalScore)
 
     return {
       score: totalScore,
-      risk: severityCategory,
-      standardRiskLevel: this.mapToStandardRiskLevel(severityCategory),
-      riskDescription: this.getSeverityDescription(totalScore),
+      riskLevel: risk,
+      riskValue: this.getRiskValue(risk),
+      riskDescription: this.getRiskDescription(risk),
     }
   }
 
@@ -69,41 +69,17 @@ export class GAD7Scorer extends BaseScorer {
     }
   }
 
-  private getFrequencyDescription(frequency: string): string {
-    const descriptions = {
-      not: 'Not at all',
-      several: 'Several days',
-      more_than_half: 'More than half the days',
-      nearly_every: 'Nearly every day',
-    }
-    return descriptions[frequency as keyof typeof descriptions] || 'Not specified'
-  }
-
-  private determineSeverityCategory(totalScore: number): string {
+  private determineSeverityCategory(totalScore: number): RiskResult['riskLevel'] {
     if (totalScore >= 0 && totalScore <= 4) {
-      return 'Minimal Anxiety'
+      return StandardRiskLevel.MINIMAL
     } else if (totalScore >= 5 && totalScore <= 9) {
-      return 'Mild Anxiety'
+      return StandardRiskLevel.LOW
     } else if (totalScore >= 10 && totalScore <= 14) {
-      return 'Moderate Anxiety'
+      return StandardRiskLevel.HIGH
     } else if (totalScore >= 15 && totalScore <= 21) {
-      return 'Severe Anxiety'
+      return StandardRiskLevel.SEVERE
     } else {
-      return 'Invalid Score'
-    }
-  }
-
-  private getSeverityDescription(totalScore: number): string {
-    if (totalScore >= 0 && totalScore <= 4) {
-      return 'Minimal anxiety symptoms. No treatment needed.'
-    } else if (totalScore >= 5 && totalScore <= 9) {
-      return 'Mild anxiety symptoms. Watchful waiting and self-help recommended.'
-    } else if (totalScore >= 10 && totalScore <= 14) {
-      return 'Moderate anxiety symptoms. Consider counseling or medication.'
-    } else if (totalScore >= 15 && totalScore <= 21) {
-      return 'Severe anxiety symptoms. Treatment strongly recommended.'
-    } else {
-      return 'Invalid score range'
+      return StandardRiskLevel.UNKNOWN
     }
   }
 }

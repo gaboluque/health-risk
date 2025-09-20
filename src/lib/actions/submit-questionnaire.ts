@@ -81,10 +81,11 @@ export async function submitQuestionnaire({
     const tempSubmission: QuestionnaireSubmission = {
       id: '',
       questionnaire: questionnaireDoc.docs[0].id,
+      questionnaireName: questionnaire.name,
       submittedAnswers,
       totalScore,
-      riskLevel: '',
-      standardRiskLevel: StandardRiskLevel.LOW,
+      riskLevel: StandardRiskLevel.UNKNOWN,
+      riskValue: 0,
       riskDescription: '',
       submittedBy: user.id,
       createdAt: new Date().toISOString(),
@@ -100,10 +101,11 @@ export async function submitQuestionnaire({
       collection: 'questionnaire-submissions',
       data: {
         questionnaire: questionnaireDoc.docs[0].id, // Use the actual database document ID
+        questionnaireName: questionnaire.name,
         submittedAnswers,
         totalScore,
-        riskLevel: riskResult.risk,
-        standardRiskLevel: riskResult.standardRiskLevel,
+        riskLevel: riskResult.riskLevel,
+        riskValue: riskResult.riskValue,
         riskDescription: riskResult.riskDescription || '',
         submittedBy: user.id, // Reference the user by ID
       },

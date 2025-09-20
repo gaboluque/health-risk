@@ -7,9 +7,10 @@ import { ProfileGate } from '@/components/profile/ProfileGate'
 import { useUserProfile } from '@/contexts/UserProfileContext'
 import { getUserSubmissions, type UserSubmissionSummary } from '@/lib/actions/get-user-submissions'
 import { RiskBadge } from '@/components/ui/risk-badge'
-import { getQuestionnairesForDisplay } from '@/lib/utils/questionnaire-registry'
+import { getQuestionnairesForDisplay } from '@/lib/utils/questionnaires/questionnaire-registry'
 
 import './styles.css'
+import { StandardRiskLevel } from '@/lib/types/questionnaire'
 
 // Icon mapping for questionnaire icons
 const iconMap = {
@@ -74,7 +75,7 @@ export default function HomePage() {
                         </div>
                         {hasSubmission && (
                           <RiskBadge
-                            riskLevel={submission.lastSubmission!.standardRiskLevel}
+                            riskLevel={submission.lastSubmission!.riskLevel as StandardRiskLevel}
                             className="ml-2"
                           />
                         )}
@@ -97,9 +98,7 @@ export default function HomePage() {
                           {hasSubmission && (
                             <span className="text-xs text-slate-500">
                               Última evaluación:{' '}
-                              {new Date(
-                                submission.lastSubmission!.submittedAt,
-                              ).toLocaleDateString()}
+                              {new Date(submission.lastSubmission!.createdAt).toLocaleDateString()}
                             </span>
                           )}
                         </div>

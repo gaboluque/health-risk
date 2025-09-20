@@ -67,14 +67,24 @@ export function UserProfileForm({ onSubmit, initialProfile }: UserProfileFormPro
     }
 
     // Validate height range
-    if (formData.height! < 100 || formData.height! > 250) {
+    if (!formData.height || formData.height! < 100 || formData.height! > 250) {
       setError('Por favor ingresa una estatura válida entre 100 y 250 cm')
       return
     }
 
     // Validate weight range
-    if (formData.weight! < 30 || formData.weight! > 300) {
+    if (!formData.weight || formData.weight! < 30 || formData.weight! > 300) {
       setError('Por favor ingresa un peso válido entre 30 y 300 kg')
+      return
+    }
+
+    if (!formData.sex) {
+      setError('Por favor ingresa tu sexo biológico')
+      return
+    }
+
+    if (!formData.birthDate) {
+      setError('Por favor ingresa tu fecha de nacimiento')
       return
     }
 

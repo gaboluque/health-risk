@@ -28,20 +28,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Search } from 'lucide-react'
-
-interface User {
-  id: string
-  email: string
-  role: 'user' | 'admin' | 'superadmin'
-  profile?: {
-    firstName: string
-    lastName: string
-    age?: number
-    sex: 'male' | 'female'
-    bmi?: number
-  }
-  createdAt: string
-}
+import { User } from '@/payload-types'
 
 interface UsersDataTableProps {
   users: User[]
@@ -55,7 +42,7 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
   const columns: ColumnDef<User>[] = [
     {
       accessorKey: 'profile',
-      header: 'Paciente',
+      header: 'Usuario',
       cell: ({ row }) => {
         const user = row.original
         const profile = user.profile
@@ -76,23 +63,6 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
             </div>
           </div>
         )
-      },
-    },
-    {
-      accessorKey: 'role',
-      header: 'Rol',
-      cell: ({ row }) => {
-        const role = row.getValue('role') as string
-        const variant =
-          role === 'superadmin' ? 'destructive' : role === 'admin' ? 'default' : 'secondary'
-        const label =
-          role === 'superadmin'
-            ? 'Super Administrador'
-            : role === 'admin'
-              ? 'Administrador'
-              : 'Paciente'
-
-        return <Badge variant={variant}>{label}</Badge>
       },
     },
     {
@@ -139,13 +109,6 @@ export function UsersDataTable({ users }: UsersDataTableProps) {
             <div className={`text-xs ${color}`}>{category}</div>
           </div>
         )
-      },
-    },
-    {
-      accessorKey: 'createdAt',
-      header: 'Se Unió',
-      cell: ({ row }) => {
-        return formatDistanceToNow(new Date(row.getValue('createdAt')), { addSuffix: true })
       },
     },
   ]

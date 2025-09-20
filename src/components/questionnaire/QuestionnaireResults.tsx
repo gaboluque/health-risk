@@ -134,7 +134,7 @@ export function QuestionnaireResults({
               onClick={onStartOver}
               variant="outline"
               size="lg"
-              className="flex items-center justify-center gap-2 border-slate-300 hover:bg-slate-100 h-12 sm:h-auto w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 border-slate-300 hover:bg-slate-100 h-12 w-full sm:w-auto"
             >
               <RotateCcw className="h-4 w-4" />
               Repetir Evaluación
@@ -144,7 +144,7 @@ export function QuestionnaireResults({
           <Link href="/" className="w-full sm:w-auto">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 flex items-center justify-center gap-2 h-12 sm:h-auto w-full"
+              className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 flex items-center justify-center gap-2 h-12 w-full"
             >
               Realizar Otra Evaluación
               <ArrowRight className="h-4 w-4" />

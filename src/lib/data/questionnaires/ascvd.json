@@ -1,6 +1,6 @@
 {
   "id": "ascvd",
-  "name": "Calculadora de Riesgo ASCVD",
+  "name": "ascvd",
   "description": "Estima el riesgo a 10 años de enfermedad cardiovascular aterosclerótica usando las Ecuaciones de Cohorte Agrupada",
   "patientFriendlyName": "Evaluación de Salud Cardíaca",
   "patientFriendlyDescription": "Descubre tu riesgo de una enfermedad cardíaca o accidente cerebrovascular en los próximos 10 años",
@@ -246,6 +246,7 @@
     "riskCategories": [
       {
         "name": "Riesgo Muy Bajo",
+        "level": 1,
         "range": {
           "min": 0,
           "max": 1.9
@@ -263,6 +264,7 @@
       },
       {
         "name": "Riesgo Bajo",
+        "level": 2,
         "range": {
           "min": 2.0,
           "max": 4.9
@@ -279,6 +281,7 @@
       },
       {
         "name": "Límite",
+        "level": 3,
         "range": {
           "min": 5.0,
           "max": 7.4
@@ -295,6 +298,7 @@
       },
       {
         "name": "Intermedio",
+        "level": 4,
         "range": {
           "min": 7.5,
           "max": 19.9
@@ -311,6 +315,7 @@
       },
       {
         "name": "Riesgo Alto",
+        "level": 5,
         "range": {
           "min": 20,
           "max": 100
