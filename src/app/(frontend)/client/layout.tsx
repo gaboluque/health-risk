@@ -5,16 +5,20 @@ import config from '@/payload.config'
 import { AdminSidebar } from '@/components/admin/AdminSidebar'
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
 
-export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const payload = await getPayload({ config })
+export default async function ClientLayout({ children }: { children: React.ReactNode }) {
+  const headersList = await headers()
+  const pathname = headersList.get('x-pathname') || headersList.get('x-invoke-path') || ''
 
-  // Get the current user from the session
-  const { user } = await payload.auth({ headers: await headers() })
-
-  // Check if user is authenticated and has admin or client role
-  if (!user || (user.role !== 'admin' && user.role !== 'client')) {
-    redirect('/client/login') // Redirect to custom client login
+  // Skip authentication for login page to prevent infinite redirect
+  if (pathname.includes('/client/login')) {
+    return <>{children}</>
   }
+
+  const payload = await getPayload({ config })
+  // Get the current user from the session
+  const { user } = await payload.auth({ headers: headersList })
+
+  if (!user || user.role !== 'client') redirect('/')
 
   return (
     <SidebarProvider

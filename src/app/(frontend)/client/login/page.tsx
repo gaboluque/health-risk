@@ -1,6 +1,6 @@
-import { redirect } from 'next/navigation'
-import { getCurrentClientUser } from '@/lib/actions/client-auth'
 import { ClientLoginForm } from '@/components/auth/ClientLoginForm'
+import { getCurrentClientUser } from '@/lib/actions/client-auth'
+import { redirect } from 'next/navigation'
 
 export const metadata = {
   title: 'Iniciar Sesión - Cliente | Auditare Health',
@@ -8,11 +8,10 @@ export const metadata = {
 }
 
 export default async function ClientLoginPage() {
-  // Check if user is already logged in as a client
-  const currentUser = await getCurrentClientUser()
+  const user = await getCurrentClientUser()
 
-  if (currentUser) {
-    redirect('/private/admin')
+  if (user) {
+    redirect('/client')
   }
 
   return <ClientLoginForm />

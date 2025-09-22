@@ -26,7 +26,7 @@ export function ClientLoginForm() {
       const result = await loginClient(email, password)
 
       if (result.success) {
-        router.push('/private/admin')
+        router.push('/client')
         router.refresh()
       } else {
         setError(result.error || 'Error al iniciar sesión')

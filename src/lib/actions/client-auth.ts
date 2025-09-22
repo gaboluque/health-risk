@@ -108,7 +108,7 @@ export async function logoutClient(): Promise<void> {
     console.error('Client logout error:', error)
   }
 
-  redirect('/client/login')
+  redirect('/')
 }
 
 /**

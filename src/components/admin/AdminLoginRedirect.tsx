@@ -18,10 +18,10 @@ export function AdminLoginRedirect() {
     if (user) {
       if (user.role === 'client') {
         // Redirect client users to custom dashboard
-        router.push('/private/admin')
+        router.push('/client')
       } else if (user.role === 'user') {
         // Regular users shouldn't be in admin panel, redirect to client login
-        router.push('/client/login')
+        router.push('/')
       }
       // Admin users stay in PayloadCMS admin panel (no redirect needed)
     }

@@ -72,7 +72,7 @@ The admin dashboard provides a comprehensive interface for managing the health r
 ## Usage
 
 ### Accessing the Dashboard
-The admin dashboard is available at `/private/admin` and requires authentication with admin or superadmin role.
+The admin dashboard is available at `/client` and requires authentication with admin or superadmin role.
 
 ### Navigation
 - Use the sidebar to navigate between different sections

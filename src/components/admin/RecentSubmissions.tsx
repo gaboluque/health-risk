@@ -64,12 +64,6 @@ export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
           <CardTitle>Envíos Recientes</CardTitle>
           <CardDescription>Últimos envíos de evaluaciones de riesgo</CardDescription>
         </div>
-        <Button variant="ghost" size="sm" asChild>
-          <Link href="/private/admin/submissions">
-            Ver Todos
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">

@@ -5,7 +5,7 @@ import { enrichProfileWithCalculations } from '@/lib/utils/health-calculations'
 import { useClientStorage } from '@/hooks/useClientStorage'
 import type { UserProfile, UserProfileContextType } from '@/lib/types/user-profile'
 
-const UserProfileContext = createContext<UserProfileContextType | undefined>(undefined)
+export const UserProfileContext = createContext<UserProfileContextType | undefined>(undefined)
 
 export function UserProfileProvider({ children }: { children: React.ReactNode }) {
   const [storedProfile, setStoredProfile, removeStoredProfile, isHydrated] =

@@ -6,10 +6,9 @@ import { getCurrentClientUser } from '@/lib/actions/client-auth'
 
 interface ClientAuthGuardProps {
   children: React.ReactNode
-  redirectTo?: string
 }
 
-export function ClientAuthGuard({ children, redirectTo = '/client/login' }: ClientAuthGuardProps) {
+export function ClientAuthGuard({ children }: ClientAuthGuardProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null)
   const router = useRouter()
 
@@ -21,17 +20,17 @@ export function ClientAuthGuard({ children, redirectTo = '/client/login' }: Clie
           setIsAuthenticated(true)
         } else {
           setIsAuthenticated(false)
-          router.push(redirectTo)
+          router.push('/client/login')
         }
       } catch (error) {
         console.error('Auth check error:', error)
         setIsAuthenticated(false)
-        router.push(redirectTo)
+        router.push('/')
       }
     }
 
     checkAuth()
-  }, [router, redirectTo])
+  }, [router])
 
   // Show loading state while checking authentication
   if (isAuthenticated === null) {

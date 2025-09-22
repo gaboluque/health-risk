@@ -1,13 +1,7 @@
 import React from 'react'
-import { headers as getHeaders } from 'next/headers.js'
-import { getPayload } from 'payload'
-
-import config from '@/payload.config'
-import { ClientHeader } from '@/components/ui/ClientHeader'
-import { Footer } from '@/components/ui/footer'
-import { UserProfileProvider } from '@/contexts/UserProfileContext'
 import './styles.css'
 import './global.css'
+import { Footer } from '@/components/ui/footer'
 
 export const metadata = {
   description:
@@ -21,34 +15,11 @@ export const metadata = {
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
-  // Get user authentication status
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  if (user?.role === 'client') {
-    return (
-      <html lang="en">
-        <body>
-          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
-            <main className="p-2 md:p-4 flex justify-center">{children}</main>
-          </div>
-        </body>
-      </html>
-    )
-  }
-
   return (
-    <html lang="en">
+    <html lang="es">
       <body>
-        <UserProfileProvider>
-          <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
-            <ClientHeader user={user} />
-            <main className="p-2 md:p-4 flex justify-center">{children}</main>
-            <Footer />
-          </div>
-        </UserProfileProvider>
+        {children}
+        <Footer />
       </body>
     </html>
   )

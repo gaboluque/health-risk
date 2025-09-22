@@ -32,19 +32,21 @@ const navigationItems = [
   {
     title: 'Inicio',
     icon: Home,
-    href: '/private/admin',
+    href: '/client',
     badge: null,
   },
   {
     title: 'Usuarios',
     icon: Users,
-    href: '/private/admin/users',
+    href: '/client/users',
     badge: null,
   },
 ]
 
 export function AdminSidebar({ user }: AdminSidebarProps) {
   const pathname = usePathname()
+
+  if (user?.role !== 'client') return null
 
   return (
     <Sidebar variant="inset">
@@ -94,9 +96,6 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
           </Avatar>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium truncate">{user.email}</p>
-            <Badge variant="outline" className="text-xs mt-1">
-              {user.role === 'admin' ? 'Administrador' : 'Cliente'}
-            </Badge>
           </div>
         </div>
         <div className="px-3 pb-2">
