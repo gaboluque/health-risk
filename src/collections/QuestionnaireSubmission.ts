@@ -4,7 +4,7 @@ export const QuestionnaireSubmission: CollectionConfig = {
   slug: 'questionnaire-submissions',
   admin: {
     useAsTitle: 'id',
-    defaultColumns: ['questionnaire', 'totalScore', 'standardRiskLevel', 'riskLevel', 'createdAt'],
+    defaultColumns: ['questionnaire', 'totalScore', 'riskLevel', 'createdAt'],
   },
   access: {
     read: () => true,

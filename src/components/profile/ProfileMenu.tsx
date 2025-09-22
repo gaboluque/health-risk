@@ -6,7 +6,7 @@ import { Modal } from '@/components/ui/modal'
 import { useUserProfile } from '@/contexts/UserProfileContext'
 import { UserProfileForm } from './UserProfileForm'
 import type { UserProfile } from '@/lib/types/user-profile'
-import { Edit3, LogOut, Menu, X, User } from 'lucide-react'
+import { Edit3, LogOut, Menu, X } from 'lucide-react'
 
 export function ProfileMenu() {
   const { profile, setProfile, clearProfile } = useUserProfile()

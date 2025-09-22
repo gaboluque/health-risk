@@ -4,7 +4,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { QuestionnaireSchema, FormData, SubmissionResponse } from '@/lib/types/questionnaire'
-import { StandardRiskLevel } from '@/lib/types/questionnaire'
+import { RiskLevel } from '@/lib/types/questionnaire'
 import type { UserProfile } from '@/lib/types/user-profile'
 import { BaseScorer } from '@/lib/scorers/BaseScorer'
 import { findOrCreateUser } from '@/lib/services/user-service'
@@ -84,7 +84,7 @@ export async function submitQuestionnaire({
       questionnaireName: questionnaire.name,
       submittedAnswers,
       totalScore,
-      riskLevel: StandardRiskLevel.UNKNOWN,
+      riskLevel: RiskLevel.UNKNOWN,
       riskValue: 0,
       riskDescription: '',
       submittedBy: user.id,

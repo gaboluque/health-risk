@@ -16,17 +16,22 @@ function mapAgeToRange(age: number, questionnaire: QuestionnaireSchema): string 
     if (value === 'under_40' && age < 40) return value
     if (value === 'under_45' && age < 45) return value
     if (value === '40-44' && age >= 40 && age <= 44) return value
+    if (value === '40-49' && age >= 40 && age <= 49) return value
     if (value === '45-49' && age >= 45 && age <= 49) return value
     if (value === '45_54' && age >= 45 && age <= 54) return value
     if (value === '50-54' && age >= 50 && age <= 54) return value
+    if (value === '50-59' && age >= 50 && age <= 59) return value
     if (value === '55-59' && age >= 55 && age <= 59) return value
     if (value === '55_64' && age >= 55 && age <= 64) return value
     if (value === '60-64' && age >= 60 && age <= 64) return value
+    if (value === '60-69' && age >= 60 && age <= 69) return value
     if (value === '65-69' && age >= 65 && age <= 69) return value
     if (value === '65_over' && age >= 65) return value
     if (value === '70-74' && age >= 70 && age <= 74) return value
+    if (value === '70-79' && age >= 70 && age <= 79) return value
     if (value === '75-79' && age >= 75 && age <= 79) return value
     if (value === '80-84' && age >= 80 && age <= 84) return value
+    if (value === '80_plus' && age >= 80) return value
     if (value === '85-90' && age >= 85 && age <= 90) return value
   }
 
@@ -97,6 +102,21 @@ export function mapProfileToAnswers(
       answers[question.id] = profile.currentSmoking ? 'yes' : 'no'
       continue
     }
+
+    // Handle gender-specific conditional questions
+    if (question.conditionalDisplay) {
+      const dependsOnValue = profile[question.conditionalDisplay.dependsOn as keyof UserProfile]
+
+      // If the condition is not met, provide appropriate default answers
+      if (dependsOnValue !== question.conditionalDisplay.showWhen) {
+        if (['reproductive_history', 'hormone_use'].includes(question.id)) {
+          // For males, don't provide any answer (scorer will return 0 points)
+          // This is more accurate than giving a female-specific answer
+          answers[question.id] = 'not_applicable'
+        }
+        continue
+      }
+    }
   }
 
   return answers
@@ -136,6 +156,16 @@ export function getProfileAnsweredQuestions(
     // Hide current smoking question if profile has smoking status
     if (question.id === 'current_smoking' && profile.currentSmoking !== undefined) {
       answeredQuestions.add(question.id)
+    }
+
+    // Hide gender-specific conditional questions when condition is not met
+    if (question.conditionalDisplay) {
+      const dependsOnValue = profile[question.conditionalDisplay.dependsOn as keyof UserProfile]
+
+      // If the condition is not met, hide the question (it will get a default answer)
+      if (dependsOnValue !== question.conditionalDisplay.showWhen) {
+        answeredQuestions.add(question.id)
+      }
     }
   }
 

@@ -5,6 +5,11 @@ export interface QuestionnaireOption {
   label: string
 }
 
+export interface ConditionalDisplay {
+  dependsOn: string
+  showWhen: string
+}
+
 export interface QuestionnaireQuestion {
   id: string
   type: string
@@ -12,6 +17,7 @@ export interface QuestionnaireQuestion {
   description: string
   required: boolean
   options: QuestionnaireOption[]
+  conditionalDisplay?: ConditionalDisplay
 }
 
 export interface RiskCategory {
@@ -81,7 +87,7 @@ export interface FormData {
 }
 
 // Standardized risk levels across all questionnaires
-export enum StandardRiskLevel {
+export enum RiskLevel {
   MINIMAL = 'minimal',
   LOW = 'low',
   MODERATE = 'moderate',
@@ -92,7 +98,7 @@ export enum StandardRiskLevel {
 
 export interface RiskResult {
   score: number
-  riskLevel: StandardRiskLevel
+  riskLevel: RiskLevel
   riskValue: number
   riskDescription?: string
 }

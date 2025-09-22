@@ -3,8 +3,11 @@
 import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { CheckCircle, AlertTriangle, Info, ArrowRight, RotateCcw, Heart, Brain } from 'lucide-react'
-import type { QuestionnaireSchema, SubmissionResult, RiskCategory } from '@/lib/types/questionnaire'
+import { CheckCircle, AlertTriangle, Info, ArrowRight, RotateCcw } from 'lucide-react'
+import { RiskLevel } from '@/lib/types/questionnaire'
+import type { QuestionnaireSchema } from '@/lib/types/questionnaire'
+import type { SubmissionResult } from '@/lib/types/questionnaire'
+import type { RiskCategory } from '@/lib/types/questionnaire'
 
 interface QuestionnaireResultsProps {
   questionnaire: QuestionnaireSchema
@@ -13,11 +16,11 @@ interface QuestionnaireResultsProps {
   customActions?: React.ReactNode
 }
 
-const getRiskIcon = (riskLevel: string) => {
-  const level = riskLevel.toLowerCase()
-  if (level.includes('low') || level.includes('minimal')) {
+const getRiskIcon = (riskLevel: RiskLevel) => {
+  const level = riskLevel
+  if (level === RiskLevel.LOW || level === RiskLevel.MINIMAL) {
     return CheckCircle
-  } else if (level.includes('high') || level.includes('severe')) {
+  } else if (level === RiskLevel.HIGH || level === RiskLevel.SEVERE) {
     return AlertTriangle
   } else {
     return Info
@@ -43,7 +46,7 @@ export function QuestionnaireResults({
   }
 
   const categoryDetails = getRiskCategoryDetails(riskResult.score)
-  const RiskIcon = getRiskIcon(categoryDetails.name)
+  const RiskIcon = getRiskIcon(riskResult.riskLevel)
 
   return (
     <div className="space-y-4 sm:space-y-6 lg:space-y-8">

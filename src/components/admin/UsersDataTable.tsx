@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { formatDistanceToNow } from 'date-fns'
 import {
   ColumnDef,
   flexRender,
@@ -25,7 +24,6 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Search } from 'lucide-react'
 import { User } from '@/payload-types'

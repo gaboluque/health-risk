@@ -8,7 +8,7 @@ import {
   type QuestionnaireRiskData,
 } from '@/components/admin/QuestionnaireRiskTrends'
 import { calculateAverageRisk, riskNumberToName } from '@/lib/utils/risk-mapping'
-import { StandardRiskLevel } from '@/lib/types/questionnaire'
+import { RiskLevel } from '@/lib/types/questionnaire'
 
 export default async function AnalyticsPage() {
   const payload = await getPayload({ config })
@@ -66,7 +66,7 @@ export default async function AnalyticsPage() {
       month: date.toLocaleDateString('en-US', { month: 'short' }),
       submissions: monthSubmissions.length,
       highRisk: monthSubmissions.filter(
-        (s) => s.riskLevel === StandardRiskLevel.HIGH || s.riskLevel === StandardRiskLevel.SEVERE,
+        (s) => s.riskLevel === RiskLevel.HIGH || s.riskLevel === RiskLevel.SEVERE,
       ).length,
     })
   }
@@ -129,7 +129,7 @@ export default async function AnalyticsPage() {
           month: date.toLocaleDateString('en-US', { month: 'short' }),
           averageRisk: 0,
           submissionCount: 0,
-          riskDistribution: {} as Record<StandardRiskLevel, number>,
+          riskDistribution: {} as Record<RiskLevel, number>,
         })
       }
     }

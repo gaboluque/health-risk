@@ -10,7 +10,7 @@ import { RiskBadge } from '@/components/ui/risk-badge'
 import { getQuestionnairesForDisplay } from '@/lib/utils/questionnaires/questionnaire-registry'
 
 import './styles.css'
-import { StandardRiskLevel } from '@/lib/types/questionnaire'
+import { RiskLevel } from '@/lib/types/questionnaire'
 
 // Icon mapping for questionnaire icons
 const iconMap = {
@@ -66,6 +66,10 @@ export default function HomePage() {
                 const submission = getSubmissionForAssessment(assessment.id)
                 const hasSubmission = submission?.lastSubmission
 
+                if (hasSubmission) {
+                  console.log({ submission, hasSubmission, assessment })
+                }
+
                 return (
                   <Link key={assessment.id} href={`/${assessment.id}`} className="group">
                     <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300 transform hover:-translate-y-1">
@@ -75,7 +79,7 @@ export default function HomePage() {
                         </div>
                         {hasSubmission && (
                           <RiskBadge
-                            riskLevel={submission.lastSubmission!.riskLevel as StandardRiskLevel}
+                            riskLevel={submission.lastSubmission!.riskLevel as RiskLevel}
                             className="ml-2"
                           />
                         )}

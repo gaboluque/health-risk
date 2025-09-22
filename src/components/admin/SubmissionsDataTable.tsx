@@ -34,6 +34,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { MoreHorizontal, Search, Download, Filter } from 'lucide-react'
+import { RiskLevel } from '@/lib/types/questionnaire'
 
 interface Submission {
   id: string
@@ -43,8 +44,7 @@ interface Submission {
       }
     | string
   totalScore: number
-  standardRiskLevel: 'low' | 'moderate' | 'high' | 'very-high'
-  riskLevel: string
+  riskLevel: RiskLevel
   submittedAnswers: Array<{
     questionText: string
     selectedAnswerText: string
@@ -63,30 +63,30 @@ export function SubmissionsDataTable({ submissions, totalCount }: SubmissionsDat
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [globalFilter, setGlobalFilter] = React.useState('')
 
-  const getRiskBadgeVariant = (standardRiskLevel: string) => {
-    switch (standardRiskLevel) {
-      case 'low':
+  const getRiskBadgeVariant = (riskLevel: RiskLevel) => {
+    switch (riskLevel) {
+      case RiskLevel.LOW:
         return 'secondary'
-      case 'moderate':
+      case RiskLevel.MODERATE:
         return 'default'
-      case 'high':
+      case RiskLevel.HIGH:
         return 'destructive'
-      case 'very-high':
+      case RiskLevel.SEVERE:
         return 'destructive'
       default:
         return 'outline'
     }
   }
 
-  const getRiskColor = (standardRiskLevel: string) => {
-    switch (standardRiskLevel) {
-      case 'low':
+  const getRiskColor = (riskLevel: RiskLevel) => {
+    switch (riskLevel) {
+      case RiskLevel.LOW:
         return 'text-green-600'
-      case 'moderate':
+      case RiskLevel.MODERATE:
         return 'text-yellow-600'
-      case 'high':
+      case RiskLevel.HIGH:
         return 'text-orange-600'
-      case 'very-high':
+      case RiskLevel.SEVERE:
         return 'text-red-600'
       default:
         return 'text-gray-600'
@@ -117,21 +117,22 @@ export function SubmissionsDataTable({ submissions, totalCount }: SubmissionsDat
       },
     },
     {
-      accessorKey: 'standardRiskLevel',
+      accessorKey: 'riskLevel',
       header: 'Risk Level',
       cell: ({ row }) => {
-        const standardRiskLevel = row.getValue('standardRiskLevel') as string
-        const riskLevel = row.original.riskLevel
+        const rowRiskLevel = row.getValue('riskLevel') as RiskLevel
 
         return (
           <div className="space-y-1">
             <Badge
-              variant={getRiskBadgeVariant(standardRiskLevel)}
-              className={getRiskColor(standardRiskLevel)}
+              variant={getRiskBadgeVariant(rowRiskLevel)}
+              className={getRiskColor(rowRiskLevel)}
             >
-              {standardRiskLevel.replace('-', ' ').toUpperCase()}
+              {rowRiskLevel}
             </Badge>
-            <div className="text-xs text-muted-foreground truncate max-w-[120px]">{riskLevel}</div>
+            <div className="text-xs text-muted-foreground truncate max-w-[120px]">
+              {rowRiskLevel}
+            </div>
           </div>
         )
       },
@@ -205,7 +206,7 @@ export function SubmissionsDataTable({ submissions, totalCount }: SubmissionsDat
   // Calculate stats
   const riskDistribution = submissions.reduce(
     (acc, submission) => {
-      acc[submission.standardRiskLevel] = (acc[submission.standardRiskLevel] || 0) + 1
+      acc[submission.riskLevel] = (acc[submission.riskLevel] || 0) + 1
       return acc
     },
     {} as Record<string, number>,
@@ -242,7 +243,7 @@ export function SubmissionsDataTable({ submissions, totalCount }: SubmissionsDat
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-red-600">
-              {(riskDistribution.high || 0) + (riskDistribution['very-high'] || 0)}
+              {(riskDistribution.high || 0) + (riskDistribution.severe || 0)}
             </div>
           </CardContent>
         </Card>

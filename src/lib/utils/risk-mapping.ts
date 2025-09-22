@@ -1,12 +1,12 @@
-import { RiskCategory, RiskResult, StandardRiskLevel } from '@/lib/types/questionnaire'
+import { RiskResult, RiskLevel } from '@/lib/types/questionnaire'
 
 export const RISK_LEVEL_MAPPING = {
-  [StandardRiskLevel.UNKNOWN]: 0,
-  [StandardRiskLevel.MINIMAL]: 1,
-  [StandardRiskLevel.LOW]: 2,
-  [StandardRiskLevel.MODERATE]: 3,
-  [StandardRiskLevel.HIGH]: 4,
-  [StandardRiskLevel.SEVERE]: 5,
+  [RiskLevel.UNKNOWN]: 0,
+  [RiskLevel.MINIMAL]: 1,
+  [RiskLevel.LOW]: 2,
+  [RiskLevel.MODERATE]: 3,
+  [RiskLevel.HIGH]: 4,
+  [RiskLevel.SEVERE]: 5,
 } as const
 
 export const RISK_VALUE_TO_NAME = {
@@ -19,39 +19,39 @@ export const RISK_VALUE_TO_NAME = {
 } as const
 
 export const RISK_LEVEL_COLORS = {
-  [StandardRiskLevel.UNKNOWN]: {
-    bgColor: '#6b7280',
-    textColor: '#ffffff',
-    borderColor: '#d1d5db',
-  }, // gray-500, gray-700, gray-300
-  [StandardRiskLevel.MINIMAL]: {
-    bgColor: '#10b981',
-    textColor: '#ffffff',
-    borderColor: '#a7f3d0',
-  }, // emerald-500, emerald-700, emerald-200
-  [StandardRiskLevel.LOW]: {
-    bgColor: '#3b82f6',
-    textColor: '#ffffff',
-    borderColor: '#c7d2fe',
-  }, // blue-500, blue-700, blue-200
-  [StandardRiskLevel.MODERATE]: {
-    bgColor: '#f59e0b',
-    textColor: '#ffffff',
-    borderColor: '#fef3c7',
-  }, // amber-500, yellow-700, yellow-200
-  [StandardRiskLevel.HIGH]: {
-    bgColor: '#ef4444',
-    textColor: '#ffffff',
-    borderColor: '#fed7aa',
-  }, // red-500, orange-700, orange-200
-  [StandardRiskLevel.SEVERE]: {
-    bgColor: '#991b1b',
-    textColor: '#ffffff',
-    borderColor: '#fecaca',
-  }, // red-800, red-600, red-200
+  [RiskLevel.UNKNOWN]: {
+    bgColor: 'gray-50',
+    textColor: 'gray-700',
+    borderColor: 'gray-300',
+  },
+  [RiskLevel.MINIMAL]: {
+    bgColor: 'emerald-50',
+    textColor: 'emerald-700',
+    borderColor: 'emerald-200',
+  },
+  [RiskLevel.LOW]: {
+    bgColor: 'green-50',
+    textColor: 'green-700',
+    borderColor: 'green-200',
+  },
+  [RiskLevel.MODERATE]: {
+    bgColor: 'amber-50',
+    textColor: 'amber-700',
+    borderColor: 'amber-200',
+  },
+  [RiskLevel.HIGH]: {
+    bgColor: 'red-50',
+    textColor: 'red-700',
+    borderColor: 'red-200',
+  },
+  [RiskLevel.SEVERE]: {
+    bgColor: 'red-50',
+    textColor: 'red-700',
+    borderColor: 'red-200',
+  },
 } as const
 
-export function riskLevelToNumber(riskLevel: StandardRiskLevel): number {
+export function riskLevelToNumber(riskLevel: RiskLevel): number {
   return RISK_LEVEL_MAPPING[riskLevel] || 1
 }
 
@@ -59,8 +59,8 @@ export function riskNumberToName(value: number): string {
   return RISK_VALUE_TO_NAME[value as keyof typeof RISK_VALUE_TO_NAME] || RISK_VALUE_TO_NAME[0]
 }
 
-export function getRiskValueColor(riskLevel: StandardRiskLevel): string {
-  return `bg-${RISK_LEVEL_COLORS[riskLevel].bgColor || RISK_LEVEL_COLORS[StandardRiskLevel.UNKNOWN].bgColor}`
+export function getRiskValueColor(riskLevel: RiskLevel): string {
+  return `bg-${RISK_LEVEL_COLORS[riskLevel].bgColor || RISK_LEVEL_COLORS[RiskLevel.UNKNOWN].bgColor}`
 }
 
 export function calculateAverageRisk(riskLevels: RiskResult['riskValue'][]): number {

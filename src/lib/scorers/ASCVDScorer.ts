@@ -1,6 +1,6 @@
 import { BaseScorer } from './BaseScorer'
 import type { QuestionnaireSubmission } from '@/payload-types'
-import { RiskResult, StandardRiskLevel, type FormData } from '@/lib/types/questionnaire'
+import { RiskResult, RiskLevel, type FormData } from '@/lib/types/questionnaire'
 
 export interface ASCVDInputs {
   age: number
@@ -21,23 +21,23 @@ export interface ASCVDInputs {
 export class ASCVDScorer extends BaseScorer {
   private readonly riskCategories = [
     {
-      name: StandardRiskLevel.MINIMAL,
+      name: RiskLevel.MINIMAL,
       range: { min: 0, max: 1.9 },
     },
     {
-      name: StandardRiskLevel.LOW,
+      name: RiskLevel.LOW,
       range: { min: 2.0, max: 4.9 },
     },
     {
-      name: StandardRiskLevel.MODERATE,
+      name: RiskLevel.MODERATE,
       range: { min: 5.0, max: 7.4 },
     },
     {
-      name: StandardRiskLevel.HIGH,
+      name: RiskLevel.HIGH,
       range: { min: 7.5, max: 19.9 },
     },
     {
-      name: StandardRiskLevel.SEVERE,
+      name: RiskLevel.SEVERE,
       range: { min: 20, max: 100 },
     },
   ]

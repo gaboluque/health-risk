@@ -1,5 +1,5 @@
 import { BaseScorer } from './BaseScorer'
-import { StandardRiskLevel, type RiskResult } from '@/lib/types/questionnaire'
+import { RiskLevel, type RiskResult } from '@/lib/types/questionnaire'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { FormData } from '@/lib/types/questionnaire'
 
@@ -55,13 +55,13 @@ export class STarTScorer extends BaseScorer {
       scores.q9_bothersomeness
 
     // Determine risk category
-    const riskCategory = this.determineRiskCategory(totalScore, psychosocialScore)
+    const risk = this.determineRiskCategory(totalScore, psychosocialScore)
 
     return {
       score: totalScore,
-      riskLevel: riskCategory,
-      riskValue: this.getRiskValue(riskCategory),
-      riskDescription: this.getRiskDescription(riskCategory),
+      riskLevel: risk,
+      riskValue: this.getRiskValue(risk),
+      riskDescription: this.getRiskDescription(risk),
     }
   }
 
@@ -85,11 +85,11 @@ export class STarTScorer extends BaseScorer {
     psychosocialScore: number,
   ): RiskResult['riskLevel'] {
     if (psychosocialScore >= 4) {
-      return StandardRiskLevel.HIGH
+      return RiskLevel.HIGH
     } else if (totalScore >= 4) {
-      return StandardRiskLevel.MODERATE
+      return RiskLevel.MODERATE
     } else {
-      return StandardRiskLevel.LOW
+      return RiskLevel.LOW
     }
   }
 }

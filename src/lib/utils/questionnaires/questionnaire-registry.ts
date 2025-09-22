@@ -6,6 +6,7 @@ import ascvdData from '@/lib/data/questionnaires/ascvd.json'
 import findriskData from '@/lib/data/questionnaires/findrisk.json'
 import fraxData from '@/lib/data/questionnaires/frax.json'
 import gad7Data from '@/lib/data/questionnaires/gad7.json'
+import hcriData from '@/lib/data/questionnaires/hcri.json'
 import startData from '@/lib/data/questionnaires/start.json'
 
 // Import all scorer classes
@@ -13,6 +14,7 @@ import { ASCVDScorer } from '@/lib/scorers/ASCVDScorer'
 import { FINDRISKScorer } from '@/lib/scorers/FINDRISKScorer'
 import { FRAXScorer } from '@/lib/scorers/FRAXScorer'
 import { GAD7Scorer } from '@/lib/scorers/GAD7Scorer'
+import { HCRIScorer } from '@/lib/scorers/HCRIScorer'
 import { STarTScorer } from '@/lib/scorers/STarTScorer'
 import { BaseScorer } from '@/lib/scorers/BaseScorer'
 
@@ -40,6 +42,11 @@ export const Questionnaires: Record<
     data: gad7Data,
     scorer: GAD7Scorer,
   },
+  hcri: {
+    name: 'hcri',
+    data: hcriData,
+    scorer: HCRIScorer,
+  },
   start: {
     name: 'start',
     data: startData,
@@ -47,8 +54,31 @@ export const Questionnaires: Record<
   },
 }
 
-export function getQuestionnaireDataByName(name: string): QuestionnaireSchema {
-  return loadQuestionnaire(Questionnaires[name.toLowerCase()].data)
+export function getQuestionnaireDataByName(name: string): QuestionnaireSchema | null {
+  const questionnaireName = name.toLowerCase()
+
+  // Filter out common browser requests that aren't questionnaires
+  const ignoredPaths = ['favicon.ico', 'robots.txt', 'sitemap.xml', 'manifest.json']
+  if (ignoredPaths.includes(questionnaireName)) {
+    return null
+  }
+
+  const questionnaire = Questionnaires[questionnaireName]
+
+  if (!questionnaire) {
+    console.error(
+      `Questionnaire "${questionnaireName}" not found. Available questionnaires:`,
+      Object.keys(Questionnaires),
+    )
+    return null
+  }
+
+  if (!questionnaire.data) {
+    console.error(`Questionnaire "${questionnaireName}" has no data property`)
+    return null
+  }
+
+  return loadQuestionnaire(questionnaire.data)
 }
 
 export function getQuestionnaireChartColor(name: string): string {

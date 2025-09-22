@@ -5,6 +5,7 @@ import config from '@/payload.config'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { UserProfile } from '@/lib/types/user-profile'
 import { findOrCreateUser } from '@/lib/services/user-service'
+import { Questionnaires } from '../utils/questionnaires/questionnaire-registry'
 
 export interface UserSubmissionSummary {
   questionnaireId: string
@@ -62,33 +63,17 @@ export async function getUserSubmissions(
     }
 
     // Create result array with all questionnaires, including those without submissions
-    const healthAssessmentIds = ['ascvd', 'findrisk', 'frax', 'gad7', 'start']
-
-    // Define questionnaire name patterns to match against
-    const questionnairePatterns = {
-      ascvd: ['ascvd', 'cardiovascular', 'heart'],
-      findrisk: ['findrisk', 'diabetes', 'diabético'],
-      frax: ['frax', 'fracture', 'fractura', 'osteoporosis'],
-      gad7: ['gad7', 'gad-7', 'ansiedad', 'anxiety'],
-      start: ['start', 'espalda', 'back', 'dolor'],
-    }
+    const healthAssessmentNames = Object.keys(Questionnaires)
 
     const result: UserSubmissionSummary[] = []
 
     // Add questionnaires that have submissions
     for (const [questionnaireId, submission] of submissionMap) {
       const questionnaireName = questionnaireMap.get(questionnaireId) || 'Unknown'
-      const lowerCaseName = questionnaireName.toLowerCase()
 
-      // Check if this questionnaire matches any of our health assessments
-      const matchingAssessment = healthAssessmentIds.find((assessmentId) => {
-        const patterns = questionnairePatterns[assessmentId as keyof typeof questionnairePatterns]
-        return patterns.some((pattern) => lowerCaseName.includes(pattern))
-      })
-
-      if (matchingAssessment) {
+      if (healthAssessmentNames.includes(questionnaireName)) {
         result.push({
-          questionnaireId: matchingAssessment, // Use the matching assessment ID instead of the database ID
+          questionnaireId: questionnaireName, // Use the matching assessment ID instead of the database ID
           questionnaireName,
           lastSubmission: submission,
         })
@@ -96,11 +81,11 @@ export async function getUserSubmissions(
     }
 
     // Add questionnaires without submissions
-    for (const assessmentId of healthAssessmentIds) {
-      const patterns = questionnairePatterns[assessmentId as keyof typeof questionnairePatterns]
+    for (const assessmentId of healthAssessmentNames) {
+      const patterns = Questionnaires[assessmentId as keyof typeof Questionnaires]
       const hasSubmission = result.some((item) => {
-        const lowerCaseName = item.questionnaireName.toLowerCase()
-        return patterns.some((pattern) => lowerCaseName.includes(pattern))
+        const lowerCaseName = item.questionnaireName
+        return lowerCaseName.includes(patterns.name)
       })
 
       if (!hasSubmission) {

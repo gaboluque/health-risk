@@ -1,7 +1,7 @@
 import { BaseScorer } from './BaseScorer'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { FormData } from '@/lib/types/questionnaire'
-import { StandardRiskLevel, type RiskResult } from '@/lib/types/questionnaire'
+import { RiskLevel, type RiskResult } from '@/lib/types/questionnaire'
 
 /**
  * GAD-7 (Generalized Anxiety Disorder 7-item) Scorer
@@ -71,15 +71,15 @@ export class GAD7Scorer extends BaseScorer {
 
   private determineSeverityCategory(totalScore: number): RiskResult['riskLevel'] {
     if (totalScore >= 0 && totalScore <= 4) {
-      return StandardRiskLevel.MINIMAL
+      return RiskLevel.MINIMAL
     } else if (totalScore >= 5 && totalScore <= 9) {
-      return StandardRiskLevel.LOW
+      return RiskLevel.LOW
     } else if (totalScore >= 10 && totalScore <= 14) {
-      return StandardRiskLevel.HIGH
+      return RiskLevel.HIGH
     } else if (totalScore >= 15 && totalScore <= 21) {
-      return StandardRiskLevel.SEVERE
+      return RiskLevel.SEVERE
     } else {
-      return StandardRiskLevel.UNKNOWN
+      return RiskLevel.UNKNOWN
     }
   }
 }

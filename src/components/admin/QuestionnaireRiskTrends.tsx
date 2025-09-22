@@ -3,14 +3,14 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { TrendingUp, TrendingDown, Minus, BarChart3 } from 'lucide-react'
 import { riskNumberToName } from '@/lib/utils/risk-mapping'
-import { StandardRiskLevel } from '@/lib/types/questionnaire'
+import { RiskLevel } from '@/lib/types/questionnaire'
 import { getQuestionnaireChartColor } from '@/lib/utils/questionnaires/questionnaire-registry'
 
 export interface MonthlyRiskData {
   month: string
   averageRisk: number
   submissionCount: number
-  riskDistribution: Record<StandardRiskLevel, number>
+  riskDistribution: Record<RiskLevel, number>
 }
 
 export interface QuestionnaireRiskData {

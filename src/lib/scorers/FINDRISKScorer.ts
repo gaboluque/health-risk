@@ -1,8 +1,7 @@
 import { BaseScorer } from './BaseScorer'
-import { StandardRiskLevel, type RiskResult } from '@/lib/types/questionnaire'
+import { RiskLevel, type RiskResult } from '@/lib/types/questionnaire'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { FormData } from '@/lib/types/questionnaire'
-import { RISK_LEVEL_MAPPING } from '../utils/risk-mapping'
 
 /**
  * FINDRISK (Finnish Diabetes Risk Score) Scorer
@@ -174,15 +173,15 @@ export class FINDRISKScorer extends BaseScorer {
 
   private interpretFINDRISK(score: number): RiskResult['riskLevel'] {
     if (score < 7) {
-      return StandardRiskLevel.MINIMAL
+      return RiskLevel.MINIMAL
     } else if (score >= 7 && score <= 11) {
-      return StandardRiskLevel.LOW
+      return RiskLevel.LOW
     } else if (score >= 12 && score <= 14) {
-      return StandardRiskLevel.MODERATE
+      return RiskLevel.MODERATE
     } else if (score >= 15 && score <= 20) {
-      return StandardRiskLevel.HIGH
+      return RiskLevel.HIGH
     } else {
-      return StandardRiskLevel.SEVERE
+      return RiskLevel.SEVERE
     }
   }
 }

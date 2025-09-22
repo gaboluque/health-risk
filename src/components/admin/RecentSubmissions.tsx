@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Clock } from 'lucide-react'
 import Link from 'next/link'
+import { RiskLevel } from '@/lib/types/questionnaire'
 
 interface Submission {
   id: string
@@ -16,8 +17,7 @@ interface Submission {
       }
     | string
   totalScore: number
-  standardRiskLevel: 'low' | 'moderate' | 'high' | 'very-high'
-  riskLevel: string
+  riskLevel: RiskLevel
   createdAt: string
 }
 
@@ -25,23 +25,23 @@ interface RecentSubmissionsProps {
   submissions: Submission[]
 }
 
-const getRiskBadgeVariant = (riskLevel: string) => {
+const getRiskBadgeVariant = (riskLevel: RiskLevel) => {
   const level = riskLevel.toLowerCase()
-  if (level.includes('low')) return 'secondary'
-  if (level.includes('moderate')) return 'default'
-  if (level.includes('high')) return 'destructive'
+  if (level.includes(RiskLevel.LOW)) return 'secondary'
+  if (level.includes(RiskLevel.MODERATE)) return 'default'
+  if (level.includes(RiskLevel.HIGH)) return 'destructive'
   return 'outline'
 }
 
-const getRiskColor = (standardRiskLevel: string) => {
-  switch (standardRiskLevel) {
-    case 'low':
+const getRiskColor = (riskLevel: RiskLevel) => {
+  switch (riskLevel) {
+    case RiskLevel.LOW:
       return 'text-green-600'
-    case 'moderate':
+    case RiskLevel.MODERATE:
       return 'text-yellow-600'
-    case 'high':
+    case RiskLevel.HIGH:
       return 'text-orange-600'
-    case 'very-high':
+    case RiskLevel.SEVERE:
       return 'text-red-600'
     default:
       return 'text-gray-600'
@@ -110,9 +110,9 @@ export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
                 <div className="flex items-center gap-2">
                   <Badge
                     variant={getRiskBadgeVariant(submission.riskLevel)}
-                    className={getRiskColor(submission.standardRiskLevel)}
+                    className={getRiskColor(submission.riskLevel)}
                   >
-                    {submission.standardRiskLevel.replace('-', ' ').toUpperCase()}
+                    {submission.riskLevel}
                   </Badge>
                 </div>
               </div>

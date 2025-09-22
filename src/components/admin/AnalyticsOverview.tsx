@@ -1,15 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import {
-  TrendingUp,
-  TrendingDown,
-  Users,
-  ClipboardCheck,
-  AlertTriangle,
-  Activity,
-} from 'lucide-react'
+import { Users, ClipboardCheck, AlertTriangle, Activity } from 'lucide-react'
 
 interface AnalyticsOverviewProps {
   data: {

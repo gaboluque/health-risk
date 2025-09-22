@@ -1,7 +1,7 @@
 import { BaseScorer } from './BaseScorer'
 import type { QuestionnaireSubmission } from '@/payload-types'
 import type { FormData } from '@/lib/types/questionnaire'
-import { StandardRiskLevel, type RiskResult } from '@/lib/types/questionnaire'
+import { RiskLevel, type RiskResult } from '@/lib/types/questionnaire'
 
 /**
  * FRAX (Fracture Risk Assessment Tool) Scorer
@@ -211,11 +211,11 @@ export class FRAXScorer extends BaseScorer {
 
   private interpretMajorFractureRisk(risk: number): RiskResult['riskLevel'] {
     if (risk < 10) {
-      return StandardRiskLevel.LOW
+      return RiskLevel.LOW
     } else if (risk < 20) {
-      return StandardRiskLevel.MODERATE
+      return RiskLevel.MODERATE
     } else {
-      return StandardRiskLevel.HIGH
+      return RiskLevel.HIGH
     }
   }
 }
