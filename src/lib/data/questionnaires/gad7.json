@@ -253,7 +253,7 @@
       },
       {
         "name": "Ansiedad Severa",
-        "level": 4,
+        "level": 5,
         "range": {
           "min": 15,
           "max": 21

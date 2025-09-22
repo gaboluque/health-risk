@@ -192,7 +192,7 @@
     "riskCategories": [
       {
         "name": "Riesgo Bajo",
-        "level": 1,
+        "level": 2,
         "range": {
           "min": 0,
           "max": 3
@@ -208,14 +208,14 @@
         ]
       },
       {
-        "name": "Riesgo Medio",
-        "level": 2,
+        "name": "Riesgo Moderado",
+        "level": 3,
         "range": {
           "min": 4,
-          "max": 9
+          "max": 6
         },
         "color": "#f59e0b",
-        "description": "Riesgo medio de dolor lumbar persistente incapacitante - Puede beneficiarse de fisioterapia específica",
+        "description": "Riesgo moderado de dolor lumbar persistente incapacitante - Puede beneficiarse de fisioterapia específica",
         "recommendations": [
           "Considera referencia a fisioterapia para tratamiento específico",
           "Enfócate en el acondicionamiento físico y movimiento",
@@ -226,9 +226,9 @@
       },
       {
         "name": "Riesgo Alto",
-        "level": 3,
+        "level": 4,
         "range": {
-          "min": 4,
+          "min": 7,
           "max": 9
         },
         "color": "#ef4444",

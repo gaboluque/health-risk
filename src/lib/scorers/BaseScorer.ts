@@ -14,7 +14,11 @@ export class BaseScorer {
   ) {
     this.questionnaireSubmission = questionnaireSubmission
     this.formData = formData
-    this.questionnaireData = getQuestionnaireDataByName(questionnaireSubmission.questionnaireName)
+    const questionnaireData = getQuestionnaireDataByName(questionnaireSubmission.questionnaireName)
+    if (!questionnaireData) {
+      throw new Error('Questionnaire data not found')
+    }
+    this.questionnaireData = questionnaireData
   }
 
   public calculateRisk(): RiskResult {

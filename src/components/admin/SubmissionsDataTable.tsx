@@ -35,6 +35,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { MoreHorizontal, Search, Download, Filter } from 'lucide-react'
 import { RiskLevel } from '@/lib/types/questionnaire'
+import { RISK_LEVEL_COLORS, riskLevelToNumber, riskNumberToName } from '@/lib/utils/risk-mapping'
 
 interface Submission {
   id: string
@@ -79,18 +80,8 @@ export function SubmissionsDataTable({ submissions, totalCount }: SubmissionsDat
   }
 
   const getRiskColor = (riskLevel: RiskLevel) => {
-    switch (riskLevel) {
-      case RiskLevel.LOW:
-        return 'text-green-600'
-      case RiskLevel.MODERATE:
-        return 'text-yellow-600'
-      case RiskLevel.HIGH:
-        return 'text-orange-600'
-      case RiskLevel.SEVERE:
-        return 'text-red-600'
-      default:
-        return 'text-gray-600'
-    }
+    const colorConfig = RISK_LEVEL_COLORS[riskLevel] || RISK_LEVEL_COLORS[RiskLevel.UNKNOWN]
+    return `text-${colorConfig.textColor}`
   }
 
   const columns: ColumnDef<Submission>[] = [
@@ -128,10 +119,10 @@ export function SubmissionsDataTable({ submissions, totalCount }: SubmissionsDat
               variant={getRiskBadgeVariant(rowRiskLevel)}
               className={getRiskColor(rowRiskLevel)}
             >
-              {rowRiskLevel}
+              {riskNumberToName(riskLevelToNumber(rowRiskLevel))}
             </Badge>
             <div className="text-xs text-muted-foreground truncate max-w-[120px]">
-              {rowRiskLevel}
+              {riskNumberToName(riskLevelToNumber(rowRiskLevel))}
             </div>
           </div>
         )

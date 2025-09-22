@@ -66,10 +66,6 @@ export default function HomePage() {
                 const submission = getSubmissionForAssessment(assessment.id)
                 const hasSubmission = submission?.lastSubmission
 
-                if (hasSubmission) {
-                  console.log({ submission, hasSubmission, assessment })
-                }
-
                 return (
                   <Link key={assessment.id} href={`/${assessment.id}`} className="group">
                     <div className="bg-white rounded-2xl border border-slate-200 p-6 hover:shadow-xl hover:border-slate-300 transition-all duration-300 transform hover:-translate-y-1">

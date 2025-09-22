@@ -86,6 +86,8 @@ export class STarTScorer extends BaseScorer {
   ): RiskResult['riskLevel'] {
     if (psychosocialScore >= 4) {
       return RiskLevel.HIGH
+    } else if (totalScore >= 7) {
+      return RiskLevel.HIGH
     } else if (totalScore >= 4) {
       return RiskLevel.MODERATE
     } else {

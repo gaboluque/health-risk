@@ -75,7 +75,7 @@ export class GAD7Scorer extends BaseScorer {
     } else if (totalScore >= 5 && totalScore <= 9) {
       return RiskLevel.LOW
     } else if (totalScore >= 10 && totalScore <= 14) {
-      return RiskLevel.HIGH
+      return RiskLevel.MODERATE
     } else if (totalScore >= 15 && totalScore <= 21) {
       return RiskLevel.SEVERE
     } else {

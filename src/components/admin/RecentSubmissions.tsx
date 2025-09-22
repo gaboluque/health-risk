@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, Clock } from 'lucide-react'
 import Link from 'next/link'
 import { RiskLevel } from '@/lib/types/questionnaire'
+import { RISK_LEVEL_COLORS, riskLevelToNumber, riskNumberToName } from '@/lib/utils/risk-mapping'
 
 interface Submission {
   id: string
@@ -34,18 +35,8 @@ const getRiskBadgeVariant = (riskLevel: RiskLevel) => {
 }
 
 const getRiskColor = (riskLevel: RiskLevel) => {
-  switch (riskLevel) {
-    case RiskLevel.LOW:
-      return 'text-green-600'
-    case RiskLevel.MODERATE:
-      return 'text-yellow-600'
-    case RiskLevel.HIGH:
-      return 'text-orange-600'
-    case RiskLevel.SEVERE:
-      return 'text-red-600'
-    default:
-      return 'text-gray-600'
-  }
+  const colorConfig = RISK_LEVEL_COLORS[riskLevel] || RISK_LEVEL_COLORS[RiskLevel.UNKNOWN]
+  return `text-${colorConfig.textColor}`
 }
 
 export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
@@ -112,7 +103,7 @@ export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
                     variant={getRiskBadgeVariant(submission.riskLevel)}
                     className={getRiskColor(submission.riskLevel)}
                   >
-                    {submission.riskLevel}
+                    {riskNumberToName(riskLevelToNumber(submission.riskLevel))}
                   </Badge>
                 </div>
               </div>

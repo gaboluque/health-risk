@@ -40,9 +40,9 @@ export const RISK_LEVEL_COLORS = {
     borderColor: 'amber-200',
   },
   [RiskLevel.HIGH]: {
-    bgColor: 'red-50',
-    textColor: 'red-700',
-    borderColor: 'red-200',
+    bgColor: 'orange-50',
+    textColor: 'orange-700',
+    borderColor: 'orange-200',
   },
   [RiskLevel.SEVERE]: {
     bgColor: 'red-50',
