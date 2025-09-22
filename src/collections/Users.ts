@@ -13,10 +13,10 @@ export const Users: CollectionConfig = {
       name: 'role',
       type: 'select',
       required: true,
-      defaultValue: 'admin',
+      defaultValue: 'client',
       options: [
-        { label: 'Super Admin', value: 'superadmin' },
         { label: 'Admin', value: 'admin' },
+        { label: 'Client', value: 'client' },
         { label: 'User', value: 'user' },
       ],
     },

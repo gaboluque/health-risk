@@ -27,7 +27,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const payload = await getPayload({ config: payloadConfig })
   const { user } = await payload.auth({ headers })
 
-  if (user?.role === 'admin') {
+  if (user?.role === 'client') {
     return (
       <html lang="en">
         <body>

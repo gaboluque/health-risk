@@ -17,8 +17,6 @@ export function RiskBadge({ riskLevel, className }: RiskBadgeProps) {
     borderColor: `border-${colorConfig.borderColor}`,
   }
 
-  console.log({ config })
-
   return (
     <span
       className={cn(

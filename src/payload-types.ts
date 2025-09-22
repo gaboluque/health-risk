@@ -123,7 +123,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
-  role: 'superadmin' | 'admin' | 'user';
+  role: 'admin' | 'client' | 'user';
   /**
    * Patient profile information (only for regular users)
    */

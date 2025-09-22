@@ -19,11 +19,12 @@ import {
 } from '@/components/ui/sidebar'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { LogoutButton } from '@/components/auth/LogoutButton'
 
 interface AdminSidebarProps {
   user: {
     email: string
-    role: 'admin' | 'superadmin'
+    role: 'admin' | 'client'
   }
 }
 
@@ -93,10 +94,19 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
           </Avatar>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium truncate">{user.email}</p>
-            <Badge variant="outline" className="text-xs">
-              {user.role === 'superadmin' ? 'Super Administrador' : 'Administrador'}
+            <Badge variant="outline" className="text-xs mt-1">
+              {user.role === 'admin' ? 'Administrador' : 'Cliente'}
             </Badge>
           </div>
+        </div>
+        <div className="px-3 pb-2">
+          <LogoutButton
+            variant="outline"
+            size="sm"
+            className="w-full justify-start"
+            showIcon={true}
+            showText={true}
+          />
         </div>
       </SidebarFooter>
     </Sidebar>

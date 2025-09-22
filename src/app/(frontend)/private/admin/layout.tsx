@@ -11,9 +11,9 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   // Get the current user from the session
   const { user } = await payload.auth({ headers: await headers() })
 
-  // Check if user is authenticated and has admin role
-  if (!user || (user.role !== 'admin' && user.role !== 'superadmin')) {
-    redirect('/admin') // Redirect to PayloadCMS admin login
+  // Check if user is authenticated and has admin or client role
+  if (!user || (user.role !== 'admin' && user.role !== 'client')) {
+    redirect('/client/login') // Redirect to custom client login
   }
 
   return (
@@ -25,7 +25,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         } as React.CSSProperties
       }
     >
-      <AdminSidebar user={user as { email: string; role: 'admin' | 'superadmin' }} />
+      <AdminSidebar user={user as { email: string; role: 'admin' | 'client' }} />
       <SidebarInset>
         <main className="flex-1 overflow-auto">
           <div className="container mx-auto p-6">{children}</div>
