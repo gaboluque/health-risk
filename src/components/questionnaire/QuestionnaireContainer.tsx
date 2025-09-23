@@ -33,6 +33,7 @@ export function QuestionnaireContainer({
   }
 
   const handleStartOver = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
     setResults(null)
   }
 

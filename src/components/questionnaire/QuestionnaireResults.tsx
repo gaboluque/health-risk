@@ -144,7 +144,7 @@ export function QuestionnaireResults({
             </Button>
           )}
 
-          <Link href="/" className="w-full sm:w-auto">
+          <Link href="/user" className="w-full sm:w-auto">
             <Button
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 flex items-center justify-center gap-2 h-12 w-full"

@@ -4,7 +4,6 @@ import { getPayload } from 'payload'
 
 import config from '@/payload.config'
 import { ClientHeader } from '@/components/ui/ClientHeader'
-import { Footer } from '@/components/ui/footer'
 import { UserProfileProvider } from '@/contexts/UserProfileContext'
 import { redirect } from 'next/navigation'
 

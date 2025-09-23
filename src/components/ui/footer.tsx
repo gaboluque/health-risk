@@ -4,9 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useAuth } from '@payloadcms/ui'
 
-interface FooterProps {}
-
-export function Footer({}: FooterProps) {
+export function Footer() {
   const { user } = useAuth()
 
   return (
