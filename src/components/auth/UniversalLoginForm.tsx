@@ -149,12 +149,6 @@ export function UniversalLoginForm({
               )}
             </Button>
           </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-xs text-muted-foreground">
-              © 2024 Auditare Health. Todos los derechos reservados.
-            </p>
-          </div>
         </CardContent>
       </Card>
     </div>

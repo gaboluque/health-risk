@@ -20,7 +20,7 @@ export interface UserProfile {
 export interface UserProfileContextType {
   profile: UserProfile | null
   setProfile: (profile: UserProfile) => void
-  clearProfile: () => void
+  clearProfile: () => Promise<void>
   isProfileComplete: boolean
   loadingProfile: boolean
   isHydrated: boolean

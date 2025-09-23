@@ -531,12 +531,6 @@ export function UserLoginForm() {
             </div>
           </div>
         </form>
-
-        <div className="mt-6 text-center">
-          <p className="text-xs text-slate-500">
-            © 2024 Auditare Health. Todos los derechos reservados.
-          </p>
-        </div>
       </div>
     </div>
   )

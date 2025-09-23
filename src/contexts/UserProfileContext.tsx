@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { enrichProfileWithCalculations } from '@/lib/utils/health-calculations'
 import { getUserProfile } from '@/lib/actions/get-user-profile'
+import { logoutUser } from '@/lib/auth/auth-utils'
 import type { UserProfile, UserProfileContextType } from '@/lib/types/user-profile'
 
 export const UserProfileContext = createContext<UserProfileContextType | undefined>(undefined)
@@ -48,9 +49,17 @@ export function UserProfileProvider({ children }: { children: React.ReactNode })
     // we don't need to persist to client storage anymore
   }
 
-  const clearProfile = () => {
+  const clearProfile = async () => {
     setProfileState(null)
     setError(null)
+    // Log the user out from the server session
+    try {
+      await logoutUser('/')
+    } catch (error) {
+      console.error('Error during logout:', error)
+      // Even if logout fails, we still want to clear the local state
+      // The user will be redirected by logoutUser if successful
+    }
   }
 
   // Since users now login with complete profile data, they should always have a complete profile

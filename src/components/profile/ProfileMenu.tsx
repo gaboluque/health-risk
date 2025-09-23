@@ -19,13 +19,13 @@ export function ProfileMenu() {
     setShowEditForm(false)
   }
 
-  const handleClearProfile = () => {
-    if (
-      window.confirm(
-        '¿Estás seguro de que quieres salir? Tendrás que ingresar tu información nuevamente en el futuro.',
-      )
-    ) {
-      clearProfile()
+  const handleClearProfile = async () => {
+    try {
+      await clearProfile()
+      setShowMobileMenu(false)
+    } catch (error) {
+      console.error('Error clearing profile:', error)
+      // Still close the menu even if there's an error
       setShowMobileMenu(false)
     }
   }
