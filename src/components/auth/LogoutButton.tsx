@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { logoutClient } from '@/lib/actions/client-auth'
+import { logoutUser } from '@/lib/auth/auth-utils'
 import { LogOut } from 'lucide-react'
 
 interface LogoutButtonProps {
@@ -11,6 +11,7 @@ interface LogoutButtonProps {
   className?: string
   showIcon?: boolean
   showText?: boolean
+  redirectPath?: string
 }
 
 export function LogoutButton({
@@ -19,13 +20,14 @@ export function LogoutButton({
   className,
   showIcon = true,
   showText = true,
+  redirectPath = '/',
 }: LogoutButtonProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleLogout = async () => {
     setIsLoading(true)
     try {
-      await logoutClient()
+      await logoutUser(redirectPath)
     } catch (error) {
       console.error('Logout error:', error)
       setIsLoading(false)

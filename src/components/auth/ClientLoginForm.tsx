@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * @deprecated This component is deprecated. Use UniversalLoginForm from @/components/auth/UniversalLoginForm instead.
+ * This component is kept for backward compatibility but will be removed in a future version.
+ */
+
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'

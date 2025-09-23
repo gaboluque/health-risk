@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * @deprecated This component is deprecated. Use RoleAuthGuard from @/components/auth/RoleAuthGuard instead.
+ * This component is kept for backward compatibility but will be removed in a future version.
+ */
+
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { getCurrentClientUser } from '@/lib/actions/client-auth'
@@ -20,7 +25,7 @@ export function ClientAuthGuard({ children }: ClientAuthGuardProps) {
           setIsAuthenticated(true)
         } else {
           setIsAuthenticated(false)
-          router.push('/client/login')
+          router.push('/client-login')
         }
       } catch (error) {
         console.error('Auth check error:', error)

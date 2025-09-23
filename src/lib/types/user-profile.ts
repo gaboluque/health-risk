@@ -24,4 +24,5 @@ export interface UserProfileContextType {
   isProfileComplete: boolean
   loadingProfile: boolean
   isHydrated: boolean
+  error?: string | null
 }

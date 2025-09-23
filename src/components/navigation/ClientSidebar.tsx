@@ -11,7 +11,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -20,17 +19,15 @@ import {
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { LogoutButton } from '@/components/auth/LogoutButton'
+import { User } from '@/payload-types'
 
-interface AdminSidebarProps {
-  user: {
-    email: string
-    role: 'admin' | 'client'
-  }
+interface ClientSidebarProps {
+  user: User
 }
 
 const navigationItems = [
   {
-    title: 'Inicio',
+    title: 'Dashboard',
     icon: Home,
     href: '/client',
     badge: null,
@@ -43,7 +40,7 @@ const navigationItems = [
   },
 ]
 
-export function AdminSidebar({ user }: AdminSidebarProps) {
+export function ClientSidebar({ user }: ClientSidebarProps) {
   const pathname = usePathname()
 
   if (user?.role !== 'client') return null
@@ -52,19 +49,17 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
     <Sidebar variant="inset">
       <SidebarHeader className="border-b">
         <div className="flex items-center gap-3 px-3 py-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <BarChart3 className="h-4 w-4 text-primary-foreground" />
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600">
+            <BarChart3 className="h-4 w-4 text-white" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold">Panel de Administración</h2>
-            <p className="text-xs text-muted-foreground">Auditare Health</p>
+            <h2 className="text-lg font-semibold">Auditare Health</h2>
           </div>
         </div>
       </SidebarHeader>
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Navegación Principal</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => (
@@ -90,7 +85,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       <SidebarFooter className="border-t">
         <div className="flex items-center gap-3 px-3 py-2">
           <Avatar className="h-8 w-8">
-            <AvatarFallback className="text-xs">
+            <AvatarFallback className="text-xs bg-blue-100 text-blue-700">
               {user.email.substring(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>

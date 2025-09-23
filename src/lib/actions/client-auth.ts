@@ -1,5 +1,10 @@
 'use server'
 
+/**
+ * @deprecated This file is deprecated. Use the unified auth system from @/lib/auth/auth-utils instead.
+ * These functions are kept for backward compatibility but will be removed in a future version.
+ */
+
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { cookies } from 'next/headers'
@@ -47,7 +52,7 @@ export async function loginClient(email: string, password: string): Promise<Clie
     if (user.role !== 'client') {
       return {
         success: false,
-        error: 'Acceso no autorizado. Esta cuenta no tiene permisos de cliente.',
+        error: 'Acceso no autorizado.',
       }
     }
 

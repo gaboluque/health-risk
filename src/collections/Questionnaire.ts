@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { basePolicy } from '@/lib/policies/basePolicy'
 
 export const Questionnaire: CollectionConfig = {
   slug: 'questionnaires',
@@ -6,10 +7,10 @@ export const Questionnaire: CollectionConfig = {
     useAsTitle: 'name',
   },
   access: {
-    read: () => true,
-    create: () => true,
-    update: () => true,
-    delete: () => true,
+    read: basePolicy.onlyAdmin,
+    create: basePolicy.onlyAdmin,
+    update: basePolicy.onlyAdmin,
+    delete: basePolicy.onlyAdmin,
   },
   fields: [
     {

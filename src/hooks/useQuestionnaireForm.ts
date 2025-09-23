@@ -18,46 +18,33 @@ export function useQuestionnaireForm({
 }: UseQuestionnaireFormProps): UseQuestionnaireFormReturn {
   const { profile } = useUserProfile()
 
-  // Initialize form data with profile info and pre-filled answers
+  // Initialize form data with pre-filled answers (personal info is handled by UserProfile context)
   const [formData, setFormData] = useState<FormData>(() => {
     const initialAnswers = getInitialAnswers()
     return {
-      firstName: profile?.firstName || '',
-      lastName: profile?.lastName || '',
-      email: profile?.email || '',
       answers: initialAnswers,
     }
   })
 
-  // Update form data when profile changes
+  // Update form data when profile changes (only affects pre-filled questionnaire answers)
   useEffect(() => {
     if (profile) {
       const profileAnswers = getInitialAnswers()
       setFormData((prev) => ({
-        ...prev,
-        firstName: profile.firstName,
-        lastName: profile.lastName,
-        email: profile.email,
         answers: { ...prev.answers, ...profileAnswers },
       }))
     }
   }, [profile, questionnaire, getInitialAnswers])
 
   const handleInputChange = useCallback((name: string, value: string) => {
-    if (['firstName', 'lastName', 'email'].includes(name)) {
-      setFormData((prev) => ({
-        ...prev,
+    // Only handle questionnaire answers (personal info is handled by profile context)
+    setFormData((prev) => ({
+      ...prev,
+      answers: {
+        ...prev.answers,
         [name]: value,
-      }))
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        answers: {
-          ...prev.answers,
-          [name]: value,
-        },
-      }))
-    }
+      },
+    }))
   }, [])
 
   return {

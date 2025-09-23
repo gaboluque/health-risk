@@ -40,7 +40,7 @@ export default function HomePage() {
         }
       } catch (_error) {
         // Not a client user, continue with normal flow
-        console.log('Not a client user, continuing with regular user flow')
+        console.error('Not a client user, continuing with regular user flow')
       }
     }
 
@@ -79,7 +79,7 @@ export default function HomePage() {
         {/* Health Questionnaires Grid */}
         <section className="pb-16">
           <div className="px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {questionnaires.map((questionnaire) => {
                 const IconComponent =
                   iconMap[questionnaire.icon as keyof typeof iconMap] || Activity

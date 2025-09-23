@@ -2,65 +2,59 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { enrichProfileWithCalculations } from '@/lib/utils/health-calculations'
-import { useClientStorage } from '@/hooks/useClientStorage'
+import { getUserProfile } from '@/lib/actions/get-user-profile'
 import type { UserProfile, UserProfileContextType } from '@/lib/types/user-profile'
 
 export const UserProfileContext = createContext<UserProfileContextType | undefined>(undefined)
 
 export function UserProfileProvider({ children }: { children: React.ReactNode }) {
-  const [storedProfile, setStoredProfile, removeStoredProfile, isHydrated] =
-    useClientStorage<UserProfile | null>('userProfile', null)
   const [profile, setProfileState] = useState<UserProfile | null>(null)
+  const [loadingProfile, setLoadingProfile] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  // Loading state - true until hydration is complete
-  const loadingProfile = !isHydrated
-
-  // Enrich profile when stored profile changes (after hydration)
+  // Fetch profile from server on mount
   useEffect(() => {
-    if (isHydrated && storedProfile) {
+    const fetchProfile = async () => {
       try {
-        // Re-calculate age and BMI in case they've changed since last storage
-        const enrichedProfile = enrichProfileWithCalculations(storedProfile)
-        setProfileState(enrichedProfile)
+        setLoadingProfile(true)
+        const result = await getUserProfile()
+
+        if (result.success && result.profile) {
+          // Re-calculate age and BMI in case they've changed
+          const enrichedProfile = enrichProfileWithCalculations(result.profile)
+          setProfileState(enrichedProfile)
+          setError(null)
+        } else {
+          setError(result.error || 'Error al cargar el perfil')
+          setProfileState(null)
+        }
       } catch (error) {
-        console.error('Error enriching stored profile:', error)
-        // If enrichment fails, clear the stored profile
-        removeStoredProfile()
+        console.error('Error fetching user profile:', error)
+        setError('Error al cargar el perfil')
         setProfileState(null)
+      } finally {
+        setLoadingProfile(false)
       }
-    } else if (isHydrated && !storedProfile) {
-      // No stored profile after hydration
-      setProfileState(null)
     }
-  }, [storedProfile, isHydrated, removeStoredProfile])
+
+    fetchProfile()
+  }, [])
 
   const setProfile = (newProfile: UserProfile) => {
-    const profileWithTimestamp = {
-      ...newProfile,
-      createdAt: new Date().toISOString(),
-    }
     // Ensure calculated values are up to date
-    const enrichedProfile = enrichProfileWithCalculations(profileWithTimestamp)
+    const enrichedProfile = enrichProfileWithCalculations(newProfile)
     setProfileState(enrichedProfile)
-    setStoredProfile(enrichedProfile)
+    // Note: Since users now login with complete profile data,
+    // we don't need to persist to client storage anymore
   }
 
   const clearProfile = () => {
     setProfileState(null)
-    removeStoredProfile()
+    setError(null)
   }
 
-  const isProfileComplete =
-    profile !== null &&
-    profile.firstName.trim() !== '' &&
-    profile.lastName.trim() !== '' &&
-    profile.email.trim() !== '' &&
-    profile.birthDate.trim() !== '' &&
-    profile.height > 0 &&
-    profile.weight > 0 &&
-    profile.sex &&
-    profile.idNumber?.trim() !== '' &&
-    profile.cellphoneNumber?.trim() !== ''
+  // Since users now login with complete profile data, they should always have a complete profile
+  const isProfileComplete = profile !== null && !error
 
   return (
     <UserProfileContext.Provider
@@ -70,7 +64,8 @@ export function UserProfileProvider({ children }: { children: React.ReactNode })
         clearProfile,
         isProfileComplete,
         loadingProfile,
-        isHydrated,
+        isHydrated: true, // Always hydrated since we fetch from server
+        error,
       }}
     >
       {children}

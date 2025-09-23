@@ -80,9 +80,6 @@ export interface QuestionnaireSchema {
 }
 
 export interface FormData {
-  firstName: string
-  lastName: string
-  email: string
   answers: Record<string, string>
 }
 

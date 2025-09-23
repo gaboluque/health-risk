@@ -1,3 +1,4 @@
+import { basePolicy } from '@/lib/policies/basePolicy'
 import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
@@ -7,6 +8,12 @@ export const Users: CollectionConfig = {
     defaultColumns: ['email', 'role', 'createdAt'],
   },
   auth: true,
+  access: {
+    read: basePolicy.adminOrSelf,
+    create: () => true,
+    update: basePolicy.adminOrSelf,
+    delete: basePolicy.onlyAdmin,
+  },
   fields: [
     // Email added by default
     {

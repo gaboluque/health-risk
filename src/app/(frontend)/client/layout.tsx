@@ -1,24 +1,15 @@
-import { redirect } from 'next/navigation'
-import { headers } from 'next/headers'
-import { getPayload } from 'payload'
-import config from '@/payload.config'
-import { AdminSidebar } from '@/components/admin/AdminSidebar'
+import { ClientSidebar } from '@/components/navigation/ClientSidebar'
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
+import { redirect } from 'next/navigation'
+import { User } from '@/payload-types'
+import { getCurrentClientUser } from '@/lib/auth/auth-utils'
 
 export default async function ClientLayout({ children }: { children: React.ReactNode }) {
-  const headersList = await headers()
-  const pathname = headersList.get('x-pathname') || headersList.get('x-invoke-path') || ''
+  const user = await getCurrentClientUser()
 
-  // Skip authentication for login page to prevent infinite redirect
-  if (pathname.includes('/client/login')) {
-    return <>{children}</>
+  if (!user) {
+    redirect('/client-login')
   }
-
-  const payload = await getPayload({ config })
-  // Get the current user from the session
-  const { user } = await payload.auth({ headers: headersList })
-
-  if (!user || user.role !== 'client') redirect('/')
 
   return (
     <SidebarProvider
@@ -29,7 +20,7 @@ export default async function ClientLayout({ children }: { children: React.React
         } as React.CSSProperties
       }
     >
-      <AdminSidebar user={user as { email: string; role: 'admin' | 'client' }} />
+      <ClientSidebar user={user as User} />
       <SidebarInset>
         <main className="flex-1 overflow-auto">
           <div className="container mx-auto p-6">{children}</div>
