@@ -1,0 +1,465 @@
+{
+  "id": "odi",
+  "name": "odi",
+  "description": "Cuestionario de autoevaluación que evalúa el grado de discapacidad y limitación funcional causada por dolor lumbar y dolor de piernas en actividades de la vida diaria",
+  "patientFriendlyName": "Evaluación de Dolor de Espalda",
+  "patientFriendlyDescription": "Ayúdanos a entender cómo el dolor de espalda baja o de piernas está afectando tu capacidad para realizar actividades diarias",
+  "version": "2.1.0",
+  "category": "musculoskeletal",
+  "chartColor": "#f59e0b",
+  "icon": "Shield",
+  "displayCategory": "Manejo del Dolor",
+  "color": "from-green-500 to-emerald-600",
+  "bgColor": "bg-green-50",
+  "textColor": "text-green-700",
+  "questions": [
+    {
+      "id": "pain_intensity",
+      "type": "select",
+      "label": "Intensidad del Dolor",
+      "description": "¿Cómo describirías tu dolor en este momento?",
+      "required": true,
+      "options": [
+        {
+          "value": "no_pain",
+          "label": "No tengo dolor en este momento"
+        },
+        {
+          "value": "mild_pain",
+          "label": "El dolor es muy leve en este momento"
+        },
+        {
+          "value": "moderate_pain",
+          "label": "El dolor es moderado en este momento"
+        },
+        {
+          "value": "fairly_severe",
+          "label": "El dolor es bastante severo en este momento"
+        },
+        {
+          "value": "very_severe",
+          "label": "El dolor es muy severo en este momento"
+        },
+        {
+          "value": "worst_imaginable",
+          "label": "El dolor es el peor imaginable en este momento"
+        }
+      ]
+    },
+    {
+      "id": "personal_care",
+      "type": "select",
+      "label": "Cuidado Personal",
+      "description": "¿Cómo afecta el dolor tu capacidad para lavarte, vestirte, etc.?",
+      "required": true,
+      "options": [
+        {
+          "value": "normal_no_pain",
+          "label": "Puedo cuidarme normalmente sin causar dolor adicional"
+        },
+        {
+          "value": "normal_extra_pain",
+          "label": "Puedo cuidarme normalmente pero me causa dolor adicional"
+        },
+        {
+          "value": "slow_careful",
+          "label": "Es doloroso cuidarme y soy lento y cuidadoso"
+        },
+        {
+          "value": "need_some_help",
+          "label": "Necesito algo de ayuda pero puedo hacer la mayoría de mi cuidado personal"
+        },
+        {
+          "value": "need_daily_help",
+          "label": "Necesito ayuda todos los días en la mayoría de aspectos del cuidado personal"
+        },
+        {
+          "value": "stay_in_bed",
+          "label": "No me visto, me lavo con dificultad y permanezco en cama"
+        }
+      ]
+    },
+    {
+      "id": "lifting",
+      "type": "select",
+      "label": "Levantar Objetos",
+      "description": "¿Cómo afecta el dolor tu capacidad para levantar cosas?",
+      "required": true,
+      "options": [
+        {
+          "value": "heavy_no_pain",
+          "label": "Puedo levantar objetos pesados sin dolor adicional"
+        },
+        {
+          "value": "heavy_extra_pain",
+          "label": "Puedo levantar objetos pesados pero me causa dolor adicional"
+        },
+        {
+          "value": "convenient_position",
+          "label": "El dolor me impide levantar objetos pesados del suelo, pero puedo hacerlo si están en una posición conveniente (ej. sobre una mesa)"
+        },
+        {
+          "value": "light_medium_convenient",
+          "label": "El dolor me impide levantar objetos pesados, pero puedo manejar pesos ligeros a medianos si están convenientemente posicionados"
+        },
+        {
+          "value": "very_light_only",
+          "label": "Solo puedo levantar objetos muy ligeros"
+        },
+        {
+          "value": "cannot_lift",
+          "label": "No puedo levantar o cargar nada en absoluto"
+        }
+      ]
+    },
+    {
+      "id": "walking",
+      "type": "select",
+      "label": "Caminar",
+      "description": "¿Cómo afecta el dolor tu capacidad para caminar?",
+      "required": true,
+      "options": [
+        {
+          "value": "any_distance",
+          "label": "El dolor no me impide caminar cualquier distancia"
+        },
+        {
+          "value": "more_than_2km",
+          "label": "El dolor me impide caminar más de 2 kilómetros"
+        },
+        {
+          "value": "more_than_1km",
+          "label": "El dolor me impide caminar más de 1 kilómetro"
+        },
+        {
+          "value": "more_than_500m",
+          "label": "El dolor me impide caminar más de 500 metros"
+        },
+        {
+          "value": "need_stick_crutches",
+          "label": "Solo puedo caminar usando un bastón o muletas"
+        },
+        {
+          "value": "bed_most_time",
+          "label": "Estoy en cama la mayor parte del tiempo"
+        }
+      ]
+    },
+    {
+      "id": "sitting",
+      "type": "select",
+      "label": "Sentarse",
+      "description": "¿Cómo afecta el dolor tu capacidad para sentarte?",
+      "required": true,
+      "options": [
+        {
+          "value": "any_chair_long",
+          "label": "Puedo sentarme en cualquier silla todo el tiempo que quiera"
+        },
+        {
+          "value": "favorite_chair_long",
+          "label": "Solo puedo sentarme en mi silla favorita todo el tiempo que quiera"
+        },
+        {
+          "value": "more_than_hour",
+          "label": "El dolor me impide sentarme más de una hora"
+        },
+        {
+          "value": "more_than_30min",
+          "label": "El dolor me impide sentarme más de 30 minutos"
+        },
+        {
+          "value": "more_than_10min",
+          "label": "El dolor me impide sentarme más de 10 minutos"
+        },
+        {
+          "value": "cannot_sit",
+          "label": "El dolor me impide sentarme en absoluto"
+        }
+      ]
+    },
+    {
+      "id": "standing",
+      "type": "select",
+      "label": "Estar de Pie",
+      "description": "¿Cómo afecta el dolor tu capacidad para estar de pie?",
+      "required": true,
+      "options": [
+        {
+          "value": "long_no_pain",
+          "label": "Puedo estar de pie todo el tiempo que quiera sin dolor adicional"
+        },
+        {
+          "value": "long_extra_pain",
+          "label": "Puedo estar de pie todo el tiempo que quiera pero me causa dolor adicional"
+        },
+        {
+          "value": "more_than_hour",
+          "label": "El dolor me impide estar de pie más de 1 hora"
+        },
+        {
+          "value": "more_than_30min",
+          "label": "El dolor me impide estar de pie más de 30 minutos"
+        },
+        {
+          "value": "more_than_10min",
+          "label": "El dolor me impide estar de pie más de 10 minutos"
+        },
+        {
+          "value": "cannot_stand",
+          "label": "El dolor me impide estar de pie en absoluto"
+        }
+      ]
+    },
+    {
+      "id": "sleeping",
+      "type": "select",
+      "label": "Dormir",
+      "description": "¿Cómo afecta el dolor tu capacidad para dormir?",
+      "required": true,
+      "options": [
+        {
+          "value": "never_disturbed",
+          "label": "Mi sueño nunca se ve alterado por el dolor"
+        },
+        {
+          "value": "occasionally_disturbed",
+          "label": "Mi sueño se ve alterado ocasionalmente por el dolor"
+        },
+        {
+          "value": "less_than_6hrs",
+          "label": "Debido al dolor duermo menos de 6 horas"
+        },
+        {
+          "value": "less_than_4hrs",
+          "label": "Debido al dolor duermo menos de 4 horas"
+        },
+        {
+          "value": "less_than_2hrs",
+          "label": "Debido al dolor duermo menos de 2 horas"
+        },
+        {
+          "value": "prevents_sleeping",
+          "label": "El dolor me impide dormir en absoluto"
+        }
+      ]
+    },
+    {
+      "id": "sex_life",
+      "type": "select",
+      "label": "Vida Sexual",
+      "description": "¿Cómo afecta el dolor tu vida sexual? (Si no aplica, deja en blanco)",
+      "required": false,
+      "options": [
+        {
+          "value": "normal_no_pain",
+          "label": "Mi vida sexual es normal y no causa dolor adicional"
+        },
+        {
+          "value": "normal_some_pain",
+          "label": "Mi vida sexual es normal pero causa algo de dolor adicional"
+        },
+        {
+          "value": "nearly_normal_painful",
+          "label": "Mi vida sexual es casi normal pero muy dolorosa"
+        },
+        {
+          "value": "severely_restricted",
+          "label": "Mi vida sexual está severamente restringida por el dolor"
+        },
+        {
+          "value": "nearly_absent",
+          "label": "Mi vida sexual está casi ausente debido al dolor"
+        },
+        {
+          "value": "prevents_all",
+          "label": "El dolor impide cualquier vida sexual"
+        }
+      ]
+    },
+    {
+      "id": "social_life",
+      "type": "select",
+      "label": "Vida Social",
+      "description": "¿Cómo afecta el dolor tu vida social?",
+      "required": true,
+      "options": [
+        {
+          "value": "normal_no_pain",
+          "label": "Mi vida social es normal y no me causa dolor adicional"
+        },
+        {
+          "value": "normal_increases_pain",
+          "label": "Mi vida social es normal pero aumenta el grado de dolor"
+        },
+        {
+          "value": "limits_energetic",
+          "label": "El dolor no tiene efecto significativo en mi vida social aparte de limitar mis intereses más enérgicos (ej. deportes)"
+        },
+        {
+          "value": "restricted_less_often",
+          "label": "El dolor ha restringido mi vida social y no salgo tan seguido"
+        },
+        {
+          "value": "restricted_to_home",
+          "label": "El dolor ha restringido mi vida social a mi hogar"
+        },
+        {
+          "value": "no_social_life",
+          "label": "No tengo vida social debido al dolor"
+        }
+      ]
+    },
+    {
+      "id": "travelling",
+      "type": "select",
+      "label": "Viajar",
+      "description": "¿Cómo afecta el dolor tu capacidad para viajar?",
+      "required": true,
+      "options": [
+        {
+          "value": "anywhere_no_pain",
+          "label": "Puedo viajar a cualquier lugar sin dolor"
+        },
+        {
+          "value": "anywhere_extra_pain",
+          "label": "Puedo viajar a cualquier lugar pero me causa dolor adicional"
+        },
+        {
+          "value": "journeys_over_2hrs",
+          "label": "El dolor es malo pero puedo manejar viajes de más de dos horas"
+        },
+        {
+          "value": "less_than_hour",
+          "label": "El dolor me restringe a viajes de menos de una hora"
+        },
+        {
+          "value": "short_necessary_30min",
+          "label": "El dolor me restringe a viajes cortos necesarios de menos de 30 minutos"
+        },
+        {
+          "value": "only_for_treatment",
+          "label": "El dolor me impide viajar excepto para recibir tratamiento"
+        }
+      ]
+    }
+  ],
+  "scoring": {
+    "algorithm": "odi",
+    "output": {
+      "type": "percentage_with_classification",
+      "label": "Porcentaje de Discapacidad ODI",
+      "unit": "%",
+      "precision": 1,
+      "primary": "Porcentaje de Discapacidad",
+      "secondary": "Clasificación de Severidad"
+    },
+    "riskCategories": [
+      {
+        "name": "Impacto Mínimo",
+        "level": 1,
+        "range": {
+          "min": 0,
+          "max": 20
+        },
+        "color": "#10b981",
+        "description": "¡Excelente! Tu dolor de espalda tiene un impacto mínimo en tus actividades diarias. Puedes manejar la mayoría de las tareas sin mayor dificultad. Con algunos cuidados básicos, puedes mantener este buen estado.",
+        "recommendations": [
+          "Mantén tu nivel actual de actividad física - ¡vas por buen camino!",
+          "Aprende la forma correcta de levantar objetos pesados (dobla las rodillas, no la espalda)",
+          "Cuida tu postura cuando estés sentado o de pie por largos períodos",
+          "Fortalece los músculos de tu abdomen y espalda con ejercicios simples",
+          "Si trabajas en escritorio, ajusta tu espacio para una mejor ergonomía",
+          "Continúa con tus actividades normales, escuchando a tu cuerpo"
+        ]
+      },
+      {
+        "name": "Impacto Leve",
+        "level": 2,
+        "range": {
+          "min": 21,
+          "max": 40
+        },
+        "color": "#f59e0b",
+        "description": "Tu dolor de espalda está afectando notablemente tu día a día. Actividades como sentarte, levantar cosas o estar de pie te resultan más difíciles. Es momento de buscar ayuda profesional para mejorar tu calidad de vida.",
+        "recommendations": [
+          "Busca ayuda de un fisioterapeuta que diseñe ejercicios específicos para ti",
+          "Habla con tu empleador sobre ajustes en tu lugar de trabajo si es necesario",
+          "Aprende técnicas para manejar mejor el dolor en tu rutina diaria",
+          "Consulta con tu médico sobre opciones de medicamentos para el dolor",
+          "Toma descansos regulares cuando hagas actividades que requieran estar mucho tiempo en una posición",
+          "Considera terapia psicológica que te ayude a lidiar mejor con el dolor crónico"
+        ]
+      },
+      {
+        "name": "Impacto Moderado",
+        "level": 3,
+        "range": {
+          "min": 41,
+          "max": 60
+        },
+        "color": "#ef4444",
+        "description": "Tu dolor de espalda está impactando significativamente tu vida diaria. Muchas actividades básicas se han vuelto difíciles o imposibles. Es importante que recibas atención médica especializada para encontrar la mejor estrategia de tratamiento.",
+        "recommendations": [
+          "Programa una cita médica completa para evaluar tu condición en detalle",
+          "Es probable que necesites estudios como resonancia magnética o radiografías",
+          "Solicita referencia a un especialista en dolor o reumatólogo",
+          "Busca un programa de rehabilitación que combine diferentes terapias",
+          "Considera apoyo psicológico para manejar el impacto emocional del dolor crónico",
+          "Si los tratamientos conservadores no funcionan, explora opciones de procedimientos mínimamente invasivos"
+        ]
+      },
+      {
+        "name": "Impacto Alto",
+        "level": 4,
+        "range": {
+          "min": 61,
+          "max": 80
+        },
+        "color": "#dc2626",
+        "description": "Tu dolor de espalda está afectando todos los aspectos de tu vida de manera severa. Esta situación requiere atención médica urgente y un plan de tratamiento intensivo. No estás solo en esto - hay opciones de ayuda disponibles.",
+        "recommendations": [
+          "Busca atención urgente de un especialista en columna vertebral",
+          "Discute con tu médico si eres candidato para procedimientos o cirugía",
+          "Ingresa a un programa intensivo de manejo de dolor con múltiples especialistas",
+          "Busca apoyo psicológico y social especializado - tu bienestar mental es igual de importante",
+          "Considera solicitar evaluación para incapacidad laboral si es necesario",
+          "Asegúrate de que todos tus médicos se comuniquen entre sí para coordinar tu cuidado"
+        ]
+      },
+      {
+        "name": "Impacto Severo",
+        "level": 5,
+        "range": {
+          "min": 81,
+          "max": 100
+        },
+        "color": "#991b1b",
+        "description": "Tu dolor de espalda ha llegado a un punto donde interfiere completamente con tu vida diaria. Esta es una situación muy seria que requiere atención médica inmediata y un enfoque integral. Es crucial abordar tanto los aspectos físicos como emocionales.",
+        "recommendations": [
+          "Busca evaluación psiquiátrica o psicológica urgente - tu salud mental es fundamental",
+          "Explora todos los factores que pueden estar contribuyendo a tu condición",
+          "Es importante descartar cualquier factor que pueda estar empeorando tus síntomas",
+          "Considera hospitalización o ingreso a una unidad especializada en dolor",
+          "Involucra a tu familia y seres queridos en tu proceso de recuperación",
+          "Participa en un programa de rehabilitación muy estructurado y gradual"
+        ]
+      }
+    ]
+  },
+  "ui": {
+    "submitButtonText": "Calcular Índice de Discapacidad",
+    "loadingText": "Calculando Puntuación ODI...",
+    "description": "Evalúa el impacto del dolor lumbar en las actividades diarias"
+  },
+  "metadata": {
+    "createdAt": "2025-09-22",
+    "originalAuthors": "Jeremy Fairbank y Graham Pynsent, 1980",
+    "currentVersion": "Fairbank JCT & Pynsent PB (2000). Spine 25(22):2940-2953",
+    "clinicalUse": "Evaluación de discapacidad funcional por dolor lumbar; seguimiento de progreso del tratamiento; investigación clínica",
+    "goldStandard": "Considerado el estándar de oro para herramientas de resultados funcionales lumbares",
+    "completionTime": "3.5-5 minutos para completar, 1 minuto para puntuar",
+    "minimumDetectableChange": "10 puntos porcentuales (cambios menores pueden atribuirse a error de medición)",
+    "reliability": "Excelente confiabilidad test-retest (ICC = 0.94-0.97)"
+  }
+}

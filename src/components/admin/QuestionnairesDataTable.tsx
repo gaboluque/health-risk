@@ -64,7 +64,7 @@ export function QuestionnairesDataTable({ questionnaires }: QuestionnairesDataTa
       FINDRISK: { type: 'Diabetes', color: 'bg-blue-100 text-blue-800' },
       FRAX: { type: 'Bone Health', color: 'bg-green-100 text-green-800' },
       'GAD-7': { type: 'Mental Health', color: 'bg-purple-100 text-purple-800' },
-      STarT: { type: 'Pain', color: 'bg-orange-100 text-orange-800' },
+      ODI: { type: 'Pain', color: 'bg-orange-100 text-orange-800' },
     }
 
     for (const [key, value] of Object.entries(types)) {

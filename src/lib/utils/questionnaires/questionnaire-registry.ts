@@ -7,7 +7,7 @@ import findriskData from '@/lib/data/questionnaires/findrisk.json'
 import fraxData from '@/lib/data/questionnaires/frax.json'
 import gad7Data from '@/lib/data/questionnaires/gad7.json'
 import hcriData from '@/lib/data/questionnaires/hcri.json'
-import startData from '@/lib/data/questionnaires/start.json'
+import odiData from '@/lib/data/questionnaires/odi.json'
 
 // Import all scorer classes
 import { ASCVDScorer } from '@/lib/scorers/ASCVDScorer'
@@ -15,7 +15,7 @@ import { FINDRISKScorer } from '@/lib/scorers/FINDRISKScorer'
 import { FRAXScorer } from '@/lib/scorers/FRAXScorer'
 import { GAD7Scorer } from '@/lib/scorers/GAD7Scorer'
 import { HCRIScorer } from '@/lib/scorers/HCRIScorer'
-import { STarTScorer } from '@/lib/scorers/STarTScorer'
+import { ODIScorer } from '@/lib/scorers/ODIScorer'
 import { BaseScorer } from '@/lib/scorers/BaseScorer'
 
 export const Questionnaires: Record<
@@ -47,10 +47,10 @@ export const Questionnaires: Record<
     data: hcriData,
     scorer: HCRIScorer,
   },
-  start: {
-    name: 'start',
-    data: startData,
-    scorer: STarTScorer,
+  odi: {
+    name: 'odi',
+    data: odiData,
+    scorer: ODIScorer,
   },
 }
 
@@ -115,6 +115,7 @@ export function hexToTailwindColor(hexColor: string): string {
     '#3b82f6': 'blue-500',
     '#2563eb': 'blue-600',
     '#1d4ed8': 'blue-700',
+    '#0369a1': 'blue-700', // ODI chart color
 
     // Purple colors
     '#8b5cf6': 'purple-500',
