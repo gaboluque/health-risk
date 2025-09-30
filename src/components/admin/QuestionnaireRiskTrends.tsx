@@ -4,7 +4,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { TrendingUp, TrendingDown, Minus, BarChart3 } from 'lucide-react'
 import { riskNumberToName } from '@/lib/utils/risk-mapping'
 import { RiskLevel } from '@/lib/types/questionnaire'
-import { getQuestionnaireChartColor } from '@/lib/utils/questionnaires/questionnaire-registry'
+import {
+  getQuestionnaireChartColor,
+  getQuestionnaireImpactArea,
+} from '@/lib/utils/questionnaires/questionnaire-registry'
 
 export interface MonthlyRiskData {
   month: string
@@ -34,10 +37,10 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <BarChart3 className="h-5 w-5" />
-            Tendencias de Riesgo por Cuestionario
+            Tendencias de Riesgo por Área de Impacto
           </CardTitle>
           <CardDescription>
-            Análisis de tendencias de riesgo promedio para cada tipo de evaluación
+            Análisis de tendencias de riesgo promedio para cada área de salud
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -114,10 +117,10 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <BarChart3 className="h-5 w-5" />
-          Tendencias de Riesgo por Cuestionario
+          Tendencias de Riesgo por Área de Impacto
         </CardTitle>
         <CardDescription>
-          Análisis comparativo de tendencias de riesgo promedio (últimos 6 meses)
+          Análisis comparativo de tendencias de riesgo promedio por área de salud (últimos 6 meses)
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -133,30 +136,13 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
                       backgroundColor: getQuestionnaireLineColor(questionnaire.questionnaireName),
                     }}
                   />
-                  <span className="text-sm font-medium">{questionnaire.questionnaireName}</span>
+                  <span className="text-sm font-medium">
+                    {getQuestionnaireImpactArea(questionnaire.questionnaireName)}
+                  </span>
                 </div>
                 <div className="text-lg font-bold">{questionnaire.averageRisk.toFixed(2)}</div>
                 <div className="text-xs text-muted-foreground">
                   {riskNumberToName(Math.round(questionnaire.averageRisk))}
-                </div>
-                <div className="flex items-center justify-center gap-1">
-                  {questionnaire.overallTrend === 'increasing' && (
-                    <TrendingUp className="h-3 w-3 text-red-500" />
-                  )}
-                  {questionnaire.overallTrend === 'decreasing' && (
-                    <TrendingDown className="h-3 w-3 text-green-500" />
-                  )}
-                  {questionnaire.overallTrend === 'stable' && (
-                    <Minus className="h-3 w-3 text-gray-500" />
-                  )}
-                  <span className="text-xs text-muted-foreground">
-                    {questionnaire.trendPercentage !== 0 && (
-                      <>
-                        {questionnaire.trendPercentage > 0 ? '+' : ''}
-                        {questionnaire.trendPercentage.toFixed(1)}%
-                      </>
-                    )}
-                  </span>
                 </div>
               </div>
             ))}
@@ -304,7 +290,9 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
                     backgroundColor: getQuestionnaireLineColor(questionnaire.questionnaireName),
                   }}
                 />
-                <span className="text-sm">{questionnaire.questionnaireName}</span>
+                <span className="text-sm">
+                  {getQuestionnaireImpactArea(questionnaire.questionnaireName)}
+                </span>
                 <span className="text-xs text-muted-foreground">
                   ({questionnaire.totalSubmissions} evaluaciones)
                 </span>

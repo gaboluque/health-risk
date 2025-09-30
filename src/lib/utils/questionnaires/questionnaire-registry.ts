@@ -196,3 +196,13 @@ export function getQuestionnairesForDisplay(): QuestionnaireDisplayData[] {
     })
     .filter((item): item is QuestionnaireDisplayData => item !== null)
 }
+
+/**
+ * Get the impact area (displayCategory) for a questionnaire by name
+ * @param questionnaireName - Name of the questionnaire
+ * @returns The impact area or 'General' as fallback
+ */
+export function getQuestionnaireImpactArea(questionnaireName: string): string {
+  const questionnaire = getQuestionnaireDataByName(questionnaireName)
+  return questionnaire?.displayCategory || questionnaire?.category || 'General'
+}

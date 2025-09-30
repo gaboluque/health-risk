@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/table'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { getQuestionnaireImpactArea } from '@/lib/utils/questionnaires/questionnaire-registry'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -87,14 +88,15 @@ export function SubmissionsDataTable({ submissions, totalCount }: SubmissionsDat
   const columns: ColumnDef<Submission>[] = [
     {
       accessorKey: 'questionnaire',
-      header: 'Assessment',
+      header: 'Área de Impacto',
       cell: ({ row }) => {
         const questionnaire = row.original.questionnaire
         const name = typeof questionnaire === 'string' ? 'Unknown' : questionnaire.name
+        const impactArea = getQuestionnaireImpactArea(name)
 
         return (
           <div>
-            <div className="font-medium">{name}</div>
+            <div className="font-medium">{impactArea}</div>
             <div className="text-sm text-muted-foreground">ID: {row.original.id.slice(-8)}</div>
           </div>
         )

@@ -33,6 +33,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { MoreHorizontal, Search } from 'lucide-react'
+import { getQuestionnaireImpactArea } from '@/lib/utils/questionnaires/questionnaire-registry'
 
 interface Question {
   text: string
@@ -76,16 +77,17 @@ export function QuestionnairesDataTable({ questionnaires }: QuestionnairesDataTa
   const columns: ColumnDef<Questionnaire>[] = [
     {
       accessorKey: 'name',
-      header: 'Questionnaire',
+      header: 'Área de Impacto',
       cell: ({ row }) => {
         const questionnaire = row.original
+        const impactArea = getQuestionnaireImpactArea(questionnaire.name)
         const typeInfo = getQuestionnaireType(questionnaire.name)
 
         return (
           <div className="space-y-1">
-            <div className="font-medium">{questionnaire.name}</div>
+            <div className="font-medium">{impactArea}</div>
             <Badge variant="secondary" className={`text-xs ${typeInfo.color}`}>
-              {typeInfo.type}
+              {questionnaire.name}
             </Badge>
           </div>
         )

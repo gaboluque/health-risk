@@ -1,6 +1,5 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import { AnalyticsOverview } from '@/components/admin/AnalyticsOverview'
 import { RiskTrendsChart } from '@/components/admin/RiskTrendsChart'
 import { QuestionnairePerformance } from '@/components/admin/QuestionnairePerformance'
 import {
@@ -196,8 +195,6 @@ export default async function AnalyticsPage() {
           Información integral y tendencias de las evaluaciones de riesgo de salud
         </p>
       </div>
-
-      <AnalyticsOverview data={analyticsData} />
 
       <div className="grid gap-6 md:grid-cols-2">
         <RiskTrendsChart monthlyData={monthlyData} />

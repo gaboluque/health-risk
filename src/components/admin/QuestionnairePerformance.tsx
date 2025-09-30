@@ -6,6 +6,7 @@ import { FileText, Users } from 'lucide-react'
 import {
   getQuestionnaireTailwindColor,
   getQuestionnaireDataByName,
+  getQuestionnaireImpactArea,
 } from '@/lib/utils/questionnaires/questionnaire-registry'
 
 interface QuestionnairePerformanceProps {
@@ -41,9 +42,9 @@ export function QuestionnairePerformance({
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="h-5 w-5" />
-            Rendimiento de Cuestionarios
+            Rendimiento por Área de Impacto
           </CardTitle>
-          <CardDescription>Estadísticas de uso para cada tipo de evaluación</CardDescription>
+          <CardDescription>Estadísticas de uso para cada área de salud evaluada</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">
@@ -60,9 +61,9 @@ export function QuestionnairePerformance({
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <FileText className="h-5 w-5" />
-          Rendimiento de Cuestionarios
+          Rendimiento por Área de Impacto
         </CardTitle>
-        <CardDescription>Estadísticas de uso y popularidad de cada evaluación</CardDescription>
+        <CardDescription>Estadísticas de uso y popularidad de cada área de salud</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-6">
@@ -88,6 +89,7 @@ export function QuestionnairePerformance({
                 const barPercentage = maxCount > 0 ? (questionnaire.count / maxCount) * 100 : 0
                 const color = getQuestionnaireColor(questionnaire.name)
                 const description = getQuestionnaireDescription(questionnaire.name)
+                const impactArea = getQuestionnaireImpactArea(questionnaire.name)
 
                 return (
                   <div key={questionnaire.name} className="space-y-2">
@@ -95,7 +97,7 @@ export function QuestionnairePerformance({
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
                           <div className={`w-3 h-3 rounded-full ${color}`} />
-                          <span className="font-medium text-sm">{questionnaire.name}</span>
+                          <span className="font-medium text-sm">{impactArea}</span>
                         </div>
                         {index === 0 && (
                           <Badge variant="secondary" className="text-xs">
@@ -130,9 +132,9 @@ export function QuestionnairePerformance({
               <div className="space-y-1">
                 <div className="text-sm font-medium text-blue-900">Perspectivas de Evaluación</div>
                 <div className="text-xs text-blue-700">
-                  {questionnaires[0]?.name} es la evaluación más utilizada con{' '}
-                  {questionnaires[0]?.count} envíos. Considera promover evaluaciones menos
-                  utilizadas para proporcionar un screening de salud integral.
+                  {getQuestionnaireImpactArea(questionnaires[0]?.name || '')} es el área más
+                  evaluada con {questionnaires[0]?.count} envíos. Considera promover evaluaciones
+                  menos utilizadas para proporcionar un screening de salud integral.
                 </div>
               </div>
             </div>

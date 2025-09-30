@@ -3,6 +3,7 @@
 import { formatDistanceToNow } from 'date-fns'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { getQuestionnaireImpactArea } from '@/lib/utils/questionnaires/questionnaire-registry'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Clock } from 'lucide-react'
 import { RiskLevel } from '@/lib/types/questionnaire'
@@ -70,17 +71,18 @@ export function RecentSubmissions({ submissions }: RecentSubmissionsProps) {
               typeof submission.questionnaire === 'string'
                 ? 'Cuestionario Desconocido'
                 : submission.questionnaire.name
+            const impactArea = getQuestionnaireImpactArea(questionnaireName)
 
             return (
               <div key={submission.id} className="flex items-center gap-4 p-4 border rounded-lg">
                 <Avatar className="h-10 w-10">
                   <AvatarFallback className="text-xs">
-                    {questionnaireName.substring(0, 2).toUpperCase()}
+                    {impactArea.substring(0, 2).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
 
                 <div className="flex-1 min-w-0">
-                  <p className="font-medium truncate">{questionnaireName}</p>
+                  <p className="font-medium truncate">{impactArea}</p>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <span>Puntuación: {submission.totalScore}</span>
                     <span>•</span>
