@@ -28,11 +28,13 @@ export function UserProfileProvider({ children }: { children: React.ReactNode })
         } else {
           setError(result.error || 'Error al cargar el perfil')
           setProfileState(null)
+          await clearProfile()
         }
       } catch (error) {
         console.error('Error fetching user profile:', error)
         setError('Error al cargar el perfil')
         setProfileState(null)
+        await clearProfile()
       } finally {
         setLoadingProfile(false)
       }

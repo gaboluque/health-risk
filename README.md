@@ -21,7 +21,7 @@ This platform provides validated health risk assessment questionnaires that help
 - **GAD-7 Anxiety Assessment** - Generalized Anxiety Disorder screening tool
 
 ### Pain Management
-- **STarT Back Tool** - Back pain assessment and treatment stratification
+- **ODI Back Assessment** - Back pain assessment and treatment stratification
 
 ## 🛠 Tech Stack
 

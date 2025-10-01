@@ -4,7 +4,7 @@
   "description": "Cuestionario de autoevaluación que evalúa el grado de discapacidad y limitación funcional causada por dolor lumbar y dolor de piernas en actividades de la vida diaria",
   "patientFriendlyName": "Evaluación de Dolor de Espalda",
   "patientFriendlyDescription": "Ayúdanos a entender cómo el dolor de espalda baja o de piernas está afectando tu capacidad para realizar actividades diarias",
-  "version": "2.1.0",
+  "version": "1.0.0",
   "category": "musculoskeletal",
   "chartColor": "#f59e0b",
   "icon": "Shield",

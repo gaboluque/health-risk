@@ -61,13 +61,13 @@ export function RiskDistributionChart() {
               <div className="text-lg font-bold text-green-700">
                 {riskData[0].percentage.toFixed(0)}%
               </div>
-              <div className="text-xs text-green-600">Riesgo Bajo</div>
+              <div className="text-xs text-green-600">Bajo Riesgo</div>
             </div>
             <div className="text-center p-2 bg-red-50 rounded-lg">
               <div className="text-lg font-bold text-red-700">
                 {(riskData[2].percentage + riskData[3].percentage).toFixed(0)}%
               </div>
-              <div className="text-xs text-red-600">Riesgo Alto+</div>
+              <div className="text-xs text-red-600">Alto Riesgo+</div>
             </div>
           </div>
         </div>

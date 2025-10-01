@@ -1,7 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { TrendingUp, TrendingDown, Minus, BarChart3 } from 'lucide-react'
+import { BarChart3 } from 'lucide-react'
 import { riskNumberToName } from '@/lib/utils/risk-mapping'
 import { RiskLevel } from '@/lib/types/questionnaire'
 import {
@@ -126,10 +126,10 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
       <CardContent>
         <div className="space-y-6">
           {/* Summary Statistics */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-6 text-center">
             {questionnaireRiskData.map((questionnaire) => (
-              <div key={questionnaire.questionnaireId} className="space-y-1">
-                <div className="flex items-center justify-center gap-2">
+              <div key={questionnaire.questionnaireId}>
+                <div className="flex items-center justify-center gap-1">
                   <div
                     className="w-3 h-3 rounded-full"
                     style={{
@@ -139,10 +139,6 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
                   <span className="text-sm font-medium">
                     {getQuestionnaireImpactArea(questionnaire.questionnaireName)}
                   </span>
-                </div>
-                <div className="text-lg font-bold">{questionnaire.averageRisk.toFixed(2)}</div>
-                <div className="text-xs text-muted-foreground">
-                  {riskNumberToName(Math.round(questionnaire.averageRisk))}
                 </div>
               </div>
             ))}
@@ -278,26 +274,6 @@ export function QuestionnaireRiskTrends({ questionnaireRiskData }: Questionnaire
                 </g>
               </svg>
             </div>
-          </div>
-
-          {/* Legend */}
-          <div className="flex flex-wrap items-center justify-center gap-6 pt-4 border-t">
-            {questionnaireRiskData.map((questionnaire) => (
-              <div key={questionnaire.questionnaireId} className="flex items-center gap-2">
-                <div
-                  className="w-4 h-0.5 rounded"
-                  style={{
-                    backgroundColor: getQuestionnaireLineColor(questionnaire.questionnaireName),
-                  }}
-                />
-                <span className="text-sm">
-                  {getQuestionnaireImpactArea(questionnaire.questionnaireName)}
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  ({questionnaire.totalSubmissions} evaluaciones)
-                </span>
-              </div>
-            ))}
           </div>
         </div>
       </CardContent>

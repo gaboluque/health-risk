@@ -1,4 +1,5 @@
 import { ClientSidebar } from '@/components/navigation/ClientSidebar'
+import { MobileHeader } from '@/components/navigation/MobileHeader'
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar'
 import { redirect } from 'next/navigation'
 import { User } from '@/payload-types'
@@ -22,6 +23,7 @@ export default async function ClientLayout({ children }: { children: React.React
     >
       <ClientSidebar user={user as User} />
       <SidebarInset>
+        <MobileHeader />
         <main className="flex-1 overflow-auto">
           <div className="container mx-auto p-6">{children}</div>
         </main>

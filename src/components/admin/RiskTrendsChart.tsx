@@ -3,11 +3,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { TrendingUp, AlertTriangle } from 'lucide-react'
+import { RiskLevel } from '@/lib/types/questionnaire'
+import { riskLevelToName, RISK_CHART_COLORS } from '@/lib/utils/risk-mapping'
+import { useState } from 'react'
 
 interface MonthlyData {
   month: string
   submissions: number
   highRisk: number
+  riskDistribution: Record<RiskLevel, number>
 }
 
 interface RiskTrendsChartProps {
@@ -15,7 +19,13 @@ interface RiskTrendsChartProps {
 }
 
 export function RiskTrendsChart({ monthlyData }: RiskTrendsChartProps) {
-  const maxSubmissions = Math.max(...monthlyData.map((d) => d.submissions))
+  const [hoveredSegment, setHoveredSegment] = useState<{
+    month: string
+    level: RiskLevel
+    count: number
+  } | null>(null)
+
+  const _maxSubmissions = Math.max(...monthlyData.map((d) => d.submissions))
 
   const totalSubmissions = monthlyData.reduce((sum, d) => sum + d.submissions, 0)
   const totalHighRisk = monthlyData.reduce((sum, d) => sum + d.highRisk, 0)
@@ -28,6 +38,17 @@ export function RiskTrendsChart({ monthlyData }: RiskTrendsChartProps) {
   const trendPercentage =
     firstHalf > 0 ? (((secondHalf - firstHalf) / firstHalf) * 100).toFixed(1) : '0'
   const isPositiveTrend = parseFloat(trendPercentage) > 0
+
+  // Calculate total risk distribution across all months
+  const totalRiskDistribution = monthlyData.reduce(
+    (acc, month) => {
+      Object.entries(month.riskDistribution).forEach(([level, count]) => {
+        acc[level as RiskLevel] = (acc[level as RiskLevel] || 0) + count
+      })
+      return acc
+    },
+    {} as Record<RiskLevel, number>,
+  )
 
   return (
     <Card>
@@ -72,38 +93,111 @@ export function RiskTrendsChart({ monthlyData }: RiskTrendsChartProps) {
 
             <div className="space-y-3">
               {monthlyData.map((data, _index) => {
-                const submissionPercentage =
-                  maxSubmissions > 0 ? (data.submissions / maxSubmissions) * 100 : 0
+                // Calculate cumulative percentages for stacked bars (ordered from low to high risk)
+                const riskOrder = [
+                  RiskLevel.MINIMAL,
+                  RiskLevel.LOW,
+                  RiskLevel.MODERATE,
+                  RiskLevel.HIGH,
+                  RiskLevel.SEVERE,
+                  RiskLevel.UNKNOWN,
+                ]
+
+                let cumulativePercentage = 0
+                const riskSegments = riskOrder
+                  .filter((level) => data.riskDistribution[level] > 0)
+                  .map((level) => {
+                    const count = data.riskDistribution[level]
+                    // Calculate percentage relative to this month's total submissions, not global max
+                    const segmentPercentage =
+                      data.submissions > 0 ? (count / data.submissions) * 100 : 0
+                    const segment = {
+                      level,
+                      count,
+                      percentage: segmentPercentage,
+                      startPercentage: cumulativePercentage,
+                    }
+                    cumulativePercentage += segmentPercentage
+                    return segment
+                  })
 
                 return (
                   <div key={data.month} className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
                       <span className="font-medium">{data.month}</span>
                       <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                        <span>{data.submissions} total</span>
-                        {data.highRisk > 0 && (
-                          <div className="flex items-center gap-1 text-red-600">
-                            <AlertTriangle className="h-3 w-3" />
-                            <span>{data.highRisk} alto riesgo</span>
-                          </div>
-                        )}
+                        {(() => {
+                          const moderateCount = data.riskDistribution[RiskLevel.MODERATE] || 0
+                          const highCount =
+                            (data.riskDistribution[RiskLevel.HIGH] || 0) +
+                            (data.riskDistribution[RiskLevel.SEVERE] || 0)
+                          const moderatePercentage =
+                            data.submissions > 0
+                              ? ((moderateCount / data.submissions) * 100).toFixed(0)
+                              : '0'
+                          const highPercentage =
+                            data.submissions > 0
+                              ? ((highCount / data.submissions) * 100).toFixed(0)
+                              : '0'
+
+                          return (
+                            <div className="flex items-center gap-3">
+                              {moderateCount > 0 && (
+                                <div className="flex items-center gap-1 text-amber-600">
+                                  <div className="w-2 h-2 rounded-full bg-amber-500" />
+                                  <span>{moderatePercentage}% moderado</span>
+                                </div>
+                              )}
+                              {highCount > 0 && (
+                                <div className="flex items-center gap-1 text-red-600">
+                                  <AlertTriangle className="h-3 w-3" />
+                                  <span>{highPercentage}% alto riesgo</span>
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })()}
                       </div>
                     </div>
 
-                    {/* Submissions bar */}
+                    {/* Stacked submissions bar */}
                     <div className="relative h-6 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-1000 ease-out"
-                        style={{ width: `${submissionPercentage}%` }}
-                      />
-                      {/* High risk overlay */}
-                      {data.highRisk > 0 && (
-                        <div
-                          className="absolute top-0 right-0 h-full bg-red-500 opacity-75"
-                          style={{ width: `${(data.highRisk / maxSubmissions) * 100}%` }}
-                        />
+                      {data.submissions === 0 ? (
+                        /* Empty state for months with no submissions */
+                        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+                          <span className="text-xs text-muted-foreground/60">Sin datos</span>
+                        </div>
+                      ) : (
+                        /* Normal stacked segments */
+                        riskSegments.map((segment) => (
+                          <div
+                            key={segment.level}
+                            className="absolute top-0 h-full transition-all duration-300 ease-out cursor-pointer hover:opacity-80"
+                            style={{
+                              left: `${segment.startPercentage}%`,
+                              width: `${segment.percentage}%`,
+                              backgroundColor: RISK_CHART_COLORS[segment.level],
+                            }}
+                            onMouseEnter={() =>
+                              setHoveredSegment({
+                                month: data.month,
+                                level: segment.level,
+                                count: segment.count,
+                              })
+                            }
+                            onMouseLeave={() => setHoveredSegment(null)}
+                          />
+                        ))
                       )}
                     </div>
+
+                    {/* Tooltip */}
+                    {hoveredSegment && hoveredSegment.month === data.month && (
+                      <div className="absolute z-10 bg-gray-900 text-white text-xs rounded-md px-2 py-1 mt-1 shadow-lg">
+                        <div className="font-medium">{riskLevelToName(hoveredSegment.level)}</div>
+                        <div>{hoveredSegment.count} envíos</div>
+                      </div>
+                    )}
                   </div>
                 )
               })}
@@ -111,15 +205,25 @@ export function RiskTrendsChart({ monthlyData }: RiskTrendsChartProps) {
           </div>
 
           {/* Legend */}
-          <div className="flex items-center justify-center gap-6 text-sm pt-4 border-t">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-blue-500 rounded-full" />
-              <span>Total de Envíos</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-red-500 rounded-full" />
-              <span>Alto Riesgo</span>
-            </div>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-xs pt-4 border-t">
+            {[
+              RiskLevel.MINIMAL,
+              RiskLevel.LOW,
+              RiskLevel.MODERATE,
+              RiskLevel.HIGH,
+              RiskLevel.SEVERE,
+              RiskLevel.UNKNOWN,
+            ]
+              .filter((level) => totalRiskDistribution[level] > 0)
+              .map((level) => (
+                <div key={level} className="flex items-center gap-2">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: RISK_CHART_COLORS[level] }}
+                  />
+                  <span>{riskLevelToName(level)}</span>
+                </div>
+              ))}
           </div>
         </div>
       </CardContent>

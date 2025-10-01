@@ -51,12 +51,25 @@ export const RISK_LEVEL_COLORS = {
   },
 } as const
 
+export const RISK_CHART_COLORS = {
+  [RiskLevel.MINIMAL]: '#10b981', // emerald-500
+  [RiskLevel.LOW]: '#22c55e', // green-500
+  [RiskLevel.MODERATE]: '#f59e0b', // amber-500
+  [RiskLevel.HIGH]: '#f97316', // orange-500
+  [RiskLevel.SEVERE]: '#ef4444', // red-500
+  [RiskLevel.UNKNOWN]: '#6b7280', // gray-500
+} as const
+
 export function riskLevelToNumber(riskLevel: RiskLevel): number {
   return RISK_LEVEL_MAPPING[riskLevel] || 1
 }
 
 export function riskNumberToName(value: number): string {
   return RISK_VALUE_TO_NAME[value as keyof typeof RISK_VALUE_TO_NAME] || RISK_VALUE_TO_NAME[0]
+}
+
+export function riskLevelToName(riskLevel: RiskLevel): string {
+  return riskNumberToName(riskLevelToNumber(riskLevel))
 }
 
 export function getRiskValueColor(riskLevel: RiskLevel): string {

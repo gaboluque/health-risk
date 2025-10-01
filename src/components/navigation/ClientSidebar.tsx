@@ -15,6 +15,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@/components/ui/sidebar'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
@@ -42,6 +43,13 @@ const navigationItems = [
 
 export function ClientSidebar({ user }: ClientSidebarProps) {
   const pathname = usePathname()
+  const { isMobile, setOpenMobile } = useSidebar()
+
+  const handleLinkClick = () => {
+    if (isMobile) {
+      setOpenMobile(false)
+    }
+  }
 
   if (user?.role !== 'client') return null
 
@@ -65,7 +73,7 @@ export function ClientSidebar({ user }: ClientSidebarProps) {
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton asChild isActive={pathname === item.href} className="w-full">
-                    <Link href={item.href}>
+                    <Link href={item.href} onClick={handleLinkClick}>
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
                       {item.badge && (

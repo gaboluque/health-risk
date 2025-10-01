@@ -61,12 +61,22 @@ export default async function AnalyticsPage() {
       return submissionDate >= monthStart && submissionDate <= monthEnd
     })
 
+    // Calculate risk distribution for this month
+    const riskDistribution = monthSubmissions.reduce(
+      (acc, submission) => {
+        acc[submission.riskLevel] = (acc[submission.riskLevel] || 0) + 1
+        return acc
+      },
+      {} as Record<RiskLevel, number>,
+    )
+
     monthlyData.push({
       month: date.toLocaleDateString('en-US', { month: 'short' }),
       submissions: monthSubmissions.length,
       highRisk: monthSubmissions.filter(
         (s) => s.riskLevel === RiskLevel.HIGH || s.riskLevel === RiskLevel.SEVERE,
       ).length,
+      riskDistribution,
     })
   }
 

@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { FileText, Users } from 'lucide-react'
 import {
-  getQuestionnaireTailwindColor,
+  getQuestionnaireChartColor,
   getQuestionnaireDataByName,
   getQuestionnaireImpactArea,
 } from '@/lib/utils/questionnaires/questionnaire-registry'
@@ -24,7 +24,7 @@ export function QuestionnairePerformance({
   const maxCount = Math.max(...questionnaires.map((q) => q.count))
 
   const getQuestionnaireColor = (name: string) => {
-    return getQuestionnaireTailwindColor(name)
+    return getQuestionnaireChartColor(name)
   }
 
   const getQuestionnaireDescription = (name: string) => {
@@ -96,7 +96,10 @@ export function QuestionnairePerformance({
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
-                          <div className={`w-3 h-3 rounded-full ${color}`} />
+                          <div
+                            className="w-3 h-3 rounded-full"
+                            style={{ backgroundColor: color }}
+                          />
                           <span className="font-medium text-sm">{impactArea}</span>
                         </div>
                         {index === 0 && (
@@ -115,8 +118,11 @@ export function QuestionnairePerformance({
 
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
                       <div
-                        className={`h-full ${color} transition-all duration-1000 ease-out`}
-                        style={{ width: `${barPercentage}%` }}
+                        className="h-full transition-all duration-1000 ease-out"
+                        style={{
+                          width: `${barPercentage}%`,
+                          backgroundColor: color,
+                        }}
                       />
                     </div>
                   </div>
