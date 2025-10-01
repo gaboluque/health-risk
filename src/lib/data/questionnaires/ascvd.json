@@ -3,7 +3,7 @@
   "name": "ascvd",
   "description": "Estima el riesgo a 10 años de enfermedad cardiovascular aterosclerótica usando las Ecuaciones de Cohorte Agrupada",
   "patientFriendlyName": "Evaluación de Salud Cardíaca",
-  "patientFriendlyDescription": "Descubre tu riesgo de una enfermedad cardíaca o accidente cerebrovascular en los próximos 10 años",
+  "patientFriendlyDescription": "Descubre tu riesgo de enfermedad cardíaca o accidente cerebrovascular en los próximos 10 años",
   "version": "1.0.0",
   "category": "cardiovascular",
   "chartColor": "#ef4444",
@@ -92,7 +92,7 @@
         },
         {
           "value": "other",
-          "label": "Otro"
+          "label": "Otro (Hispano, Asiático, Indígena, etc.)"
         }
       ]
     },
@@ -252,14 +252,14 @@
           "max": 1.9
         },
         "color": "#22c55e",
-        "description": "Riesgo muy bajo a 10 años de ASCVD (típicamente menores de 40 años)",
+        "description": "Riesgo muy bajo a 10 años de ASCVD.",
         "recommendations": [
           "Continúa con hábitos de vida saludables",
           "Ejercicio regular (al menos 150 minutos de actividad moderada por semana)",
           "Mantén una dieta saludable para el corazón (dieta mediterránea o DASH)",
           "Exámenes de salud regulares cada 5 años",
           "Evita fumar y limita el consumo de alcohol",
-          "Enfócate en establecer hábitos saludables a largo plazo"
+          "Si eres menor de 40: enfócate en establecer hábitos saludables a largo plazo para mantener este bajo riesgo"
         ]
       },
       {
@@ -270,13 +270,14 @@
           "max": 4.9
         },
         "color": "#10b981",
-        "description": "Riesgo bajo a 10 años de ASCVD",
+        "description": "Riesgo bajo a 10 años de ASCVD.",
         "recommendations": [
           "Continúa con hábitos de vida saludables",
           "Ejercicio regular (al menos 150 minutos de actividad moderada por semana)",
           "Mantén una dieta saludable para el corazón (dieta mediterránea o DASH)",
           "Exámenes de salud regulares cada 3-5 años",
-          "Evita fumar y limita el consumo de alcohol"
+          "Evita fumar y limita el consumo de alcohol",
+          "Si eres menor de 40: este resultado sugiere algunos factores de riesgo. Controlarlos ahora previene problemas futuros"
         ]
       },
       {
@@ -287,13 +288,14 @@
           "max": 7.4
         },
         "color": "#f59e0b",
-        "description": "Riesgo límite a 10 años de ASCVD",
+        "description": "Riesgo límite a 10 años de ASCVD.",
         "recommendations": [
           "Enfócate en modificaciones del estilo de vida para reducir el riesgo",
           "Habla con tu proveedor de atención médica sobre estrategias de reducción de riesgo",
           "Considera factores de riesgo adicionales (historial familiar, puntuación de calcio coronario)",
           "Optimiza el control de la presión arterial, colesterol y azúcar en sangre",
-          "Evaluación anual del riesgo cardiovascular"
+          "Evaluación anual del riesgo cardiovascular",
+          "Si eres menor de 40: este nivel de riesgo es preocupante para tu edad. Evaluación médica recomendada"
         ]
       },
       {
@@ -304,13 +306,14 @@
           "max": 19.9
         },
         "color": "#ef4444",
-        "description": "Riesgo intermedio a 10 años de ASCVD",
+        "description": "Riesgo intermedio a 10 años de ASCVD.",
         "recommendations": [
           "Considera terapia con estatinas para el manejo del colesterol",
           "Habla con tu proveedor de atención médica sobre la terapia con aspirina",
           "Asesoramiento intensivo sobre estilo de vida y apoyo",
           "Monitoreo regular de la presión arterial y colesterol",
-          "Considera la puntuación de calcio coronario para mayor estratificación de riesgo"
+          "Considera la puntuación de calcio coronario para mayor estratificación de riesgo",
+          "Si eres menor de 40: este riesgo es muy alto para tu edad. Busca atención médica de inmediato y considera tratamiento farmacológico"
         ]
       },
       {
@@ -321,13 +324,14 @@
           "max": 100
         },
         "color": "#dc2626",
-        "description": "Riesgo alto a 10 años de ASCVD",
+        "description": "Riesgo alto a 10 años de ASCVD.",
         "recommendations": [
           "Inicia terapia con estatinas a menos que esté contraindicada",
           "Considera terapia con aspirina para prevención primaria",
           "Manejo agresivo de la presión arterial (objetivo <130/80)",
           "Manejo integral del riesgo cardiovascular",
-          "Seguimiento regular con el proveedor de atención médica cada 3-6 meses"
+          "Seguimiento regular con el proveedor de atención médica cada 3-6 meses",
+          "Si eres menor de 40: ⚠️ ATENCIÓN URGENTE - Este nivel de riesgo es extremadamente alto para tu edad. Busca atención médica inmediatamente"
         ]
       }
     ]

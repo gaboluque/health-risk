@@ -16,57 +16,82 @@ export interface ASCVDInputs {
 
 /**
  * ASCVD Risk Calculator - Based on 2013 ACC/AHA Pooled Cohort Equations
- * Calculates 10-year risk of atherosclerotic cardiovascular disease
  */
 export class ASCVDScorer extends BaseScorer {
-  private readonly riskCategories = [
-    {
-      name: RiskLevel.MINIMAL,
-      range: { min: 0, max: 1.9 },
-    },
-    {
-      name: RiskLevel.LOW,
-      range: { min: 2.0, max: 4.9 },
-    },
-    {
-      name: RiskLevel.MODERATE,
-      range: { min: 5.0, max: 7.4 },
-    },
-    {
-      name: RiskLevel.HIGH,
-      range: { min: 7.5, max: 19.9 },
-    },
-    {
-      name: RiskLevel.SEVERE,
-      range: { min: 20, max: 100 },
-    },
+  private readonly standardRiskCategories = [
+    { name: RiskLevel.MINIMAL, range: { min: 0, max: 4.9 } },
+    { name: RiskLevel.LOW, range: { min: 5.0, max: 7.4 } },
+    { name: RiskLevel.MODERATE, range: { min: 7.5, max: 9.9 } },
+    { name: RiskLevel.HIGH, range: { min: 10.0, max: 19.9 } },
+    { name: RiskLevel.SEVERE, range: { min: 20, max: 100 } },
+  ]
+
+  private readonly under40RiskCategories = [
+    { name: RiskLevel.MINIMAL, range: { min: 0, max: 0.9 } },
+    { name: RiskLevel.LOW, range: { min: 1.0, max: 2.4 } },
+    { name: RiskLevel.MODERATE, range: { min: 2.5, max: 4.9 } },
+    { name: RiskLevel.HIGH, range: { min: 5.0, max: 9.9 } },
+    { name: RiskLevel.SEVERE, range: { min: 10, max: 100 } },
   ]
 
   constructor(questionnaireSubmission: QuestionnaireSubmission, formData: FormData) {
     super(questionnaireSubmission, formData)
   }
 
-  /**
-   * Calculate ASCVD risk from questionnaire submission
-   */
   public calculateRisk(): RiskResult {
     const inputs = this.mapSubmissionToInputs()
     this.validateInputs(inputs)
 
+    const isUnder40 = inputs.age < 40
     const riskScore = this.calculateASCVDRisk(inputs)
-    const risk = this.getRiskCategory(riskScore)
 
-    return {
+    const categories = isUnder40 ? this.under40RiskCategories : this.standardRiskCategories
+    const risk = this.getRiskCategory(riskScore, categories)
+
+    let projectedRisk40: number | undefined
+    if (isUnder40) {
+      const inputs40 = { ...inputs, age: 40 }
+      projectedRisk40 = this.calculateASCVDRisk(inputs40)
+    }
+
+    const result: RiskResult = {
       score: riskScore,
       riskLevel: risk,
       riskValue: this.getRiskValue(risk),
       riskDescription: this.getRiskDescription(risk),
     }
+
+    if (isUnder40) {
+      result.riskDescription +=
+        '\n\nEste cálculo está extrapolado para tu edad. Las ecuaciones fueron validadas para edades 40-79.'
+      result.riskDescription += `\n\nSi mantienes estos factores de riesgo, tu riesgo estimado a los 40 años sería: ${projectedRisk40?.toFixed(1)}%`
+    }
+
+    if (inputs.race === 'other') {
+      result.riskDescription +=
+        '\n\nEl cálculo usa coeficientes de población blanca para "Otro". Los resultados pueden variar para algunas poblaciones.'
+    }
+
+    if (isUnder40 && this.hasHighRiskFactors(inputs)) {
+      result.riskDescription +=
+        '\n\nAtención: Tienes factores de riesgo significativos para tu edad.'
+    }
+
+    return result
   }
 
-  /**
-   * Map questionnaire submission to ASCVD inputs
-   */
+  private hasHighRiskFactors(inputs: ASCVDInputs): boolean {
+    const count = [
+      inputs.diabetes,
+      inputs.smoker,
+      inputs.totalCholesterol >= 240,
+      inputs.hdlCholesterol < 40,
+      inputs.systolicBP >= 140,
+      inputs.onBPMeds,
+    ].filter(Boolean).length
+    return count >= 2
+  }
+
   private mapSubmissionToInputs(): ASCVDInputs {
     return {
       age: this.mapAgeToNumber(this.getAnswerValue('age')),
@@ -81,12 +106,9 @@ export class ASCVDScorer extends BaseScorer {
     }
   }
 
-  /**
-   * Map age range to midpoint number
-   */
   private mapAgeToNumber(ageRange: string): number {
     const ageMap: Record<string, number> = {
-      under_40: 35, // Use 35 as representative age for under 40
+      under_40: 37,
       '40-44': 42,
       '45-49': 47,
       '50-54': 52,
@@ -99,9 +121,6 @@ export class ASCVDScorer extends BaseScorer {
     return ageMap[ageRange] || 50
   }
 
-  /**
-   * Map total cholesterol range to midpoint number
-   */
   private mapCholesterolToNumber(cholRange: string): number {
     const cholMap: Record<string, number> = {
       '<160': 150,
@@ -113,9 +132,6 @@ export class ASCVDScorer extends BaseScorer {
     return cholMap[cholRange] || 200
   }
 
-  /**
-   * Map HDL cholesterol range to midpoint number
-   */
   private mapHDLToNumber(hdlRange: string): number {
     const hdlMap: Record<string, number> = {
       '<40': 35,
@@ -126,9 +142,6 @@ export class ASCVDScorer extends BaseScorer {
     return hdlMap[hdlRange] || 50
   }
 
-  /**
-   * Map systolic BP range to midpoint number
-   */
   private mapBPToNumber(bpRange: string): number {
     const bpMap: Record<string, number> = {
       '<120': 110,
@@ -141,26 +154,23 @@ export class ASCVDScorer extends BaseScorer {
     return bpMap[bpRange] || 120
   }
 
-  /**
-   * Validate ASCVD inputs
-   */
   private validateInputs(inputs: ASCVDInputs): void {
-    if (inputs.age < 18 || inputs.age > 79) {
-      throw new Error('Age must be between 18-79 years')
+    if (inputs.age < 20 || inputs.age > 79) {
+      throw new Error('La edad debe estar entre 20-79 años')
     }
     if (inputs.totalCholesterol < 130 || inputs.totalCholesterol > 320) {
-      throw new Error('Total cholesterol must be between 130-320 mg/dL')
+      throw new Error('El colesterol total debe estar entre 130-320 mg/dL')
     }
     if (inputs.hdlCholesterol < 20 || inputs.hdlCholesterol > 100) {
-      throw new Error('HDL cholesterol must be between 20-100 mg/dL')
+      throw new Error('El colesterol HDL debe estar entre 20-100 mg/dL')
     }
     if (inputs.systolicBP < 90 || inputs.systolicBP > 200) {
-      throw new Error('Systolic BP must be between 90-200 mmHg')
+      throw new Error('La presión sistólica debe estar entre 90-200 mmHg')
     }
   }
 
   /**
-   * Calculate ASCVD risk using pooled cohort equations
+   * Calculation using validated coefficients
    */
   private calculateASCVDRisk(inputs: ASCVDInputs): number {
     const {
@@ -175,13 +185,14 @@ export class ASCVDScorer extends BaseScorer {
       smoker,
     } = inputs
 
-    // Coefficients for different demographic groups
+    const effectiveRace = race === 'african_american' ? 'african_american' : 'white'
+
     let coefficients: Record<string, number>
-    let meanCoefficients: number
+    let meanCoeffSum: number
     let baselineSurvival: number
 
     if (sex === 'female') {
-      if (race === 'african_american') {
+      if (effectiveRace === 'african_american') {
         // African American Women
         coefficients = {
           lnAge: 17.1141,
@@ -196,7 +207,7 @@ export class ASCVDScorer extends BaseScorer {
           smoker: 0.6908,
           diabetes: 0.8738,
         }
-        meanCoefficients = -86.6081
+        meanCoeffSum = 86.6081
         baselineSurvival = 0.9533
       } else {
         // White/Other Women
@@ -214,11 +225,11 @@ export class ASCVDScorer extends BaseScorer {
           lnAgeSmoker: -1.665,
           diabetes: 0.661,
         }
-        meanCoefficients = -29.18
+        meanCoeffSum = 29.18
         baselineSurvival = 0.9665
       }
     } else {
-      if (race === 'african_american') {
+      if (effectiveRace === 'african_american') {
         // African American Men
         coefficients = {
           lnAge: 2.469,
@@ -229,23 +240,23 @@ export class ASCVDScorer extends BaseScorer {
           smoker: 0.549,
           diabetes: 0.645,
         }
-        meanCoefficients = 19.54
+        meanCoeffSum = 19.54
         baselineSurvival = 0.8954
       } else {
         // White/Other Men
         coefficients = {
           lnAge: 12.344,
           lnTotalChol: 11.853,
-          lnHDL: -2.664,
-          lnAgeTotalChol: -2.665,
-          lnAgeHDL: 0.677,
-          lnTreatedSysBP: 1.797,
-          lnUntreatedSysBP: 1.764,
+          lnHDL: -7.99,
+          lnAgeTotalChol: -2.664,
+          lnAgeHDL: 0.691,
+          lnTreatedSysBP: 1.916,
+          lnUntreatedSysBP: 1.809,
           smoker: 7.837,
           lnAgeSmoker: -1.795,
           diabetes: 0.658,
         }
-        meanCoefficients = 61.18
+        meanCoeffSum = 61.18
         baselineSurvival = 0.9144
       }
     }
@@ -292,19 +303,16 @@ export class ASCVDScorer extends BaseScorer {
     }
 
     // Calculate 10-year risk
-    const riskScore =
-      (1 - Math.pow(baselineSurvival, Math.exp(individualSum - meanCoefficients))) * 100
+    const riskScore = (1 - Math.pow(baselineSurvival, Math.exp(individualSum - meanCoeffSum))) * 100
 
     return Math.max(0, Math.min(100, Math.round(riskScore * 10) / 10))
   }
 
-  /**
-   * Get risk category based on score
-   */
-  private getRiskCategory(score: number) {
-    return (
-      this.riskCategories.find((cat) => score >= cat.range.min && score <= cat.range.max)?.name ||
-      this.riskCategories[0].name
-    )
+  private getRiskCategory(
+    score: number,
+    categories: Array<{ name: RiskLevel; range: { min: number; max: number } }>,
+  ): RiskLevel {
+    const category = categories.find((cat) => score >= cat.range.min && score <= cat.range.max)
+    return category?.name || RiskLevel.MINIMAL
   }
 }
